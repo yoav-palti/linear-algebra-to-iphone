@@ -337,6 +337,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">אות (סיגנל)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">מערכת</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">מערכת לינארית</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">שרשור מערכות לינאריות <em>(היא מערכת לינארית)</em></a></li>
 </ul>
 </li>
 </ul>
@@ -410,6 +411,21 @@ T:\underset{x\left(t\right)}{\underbrace{\left\{ \alpha x_{1}\left(t\right)+\bet
 <p>חשוב לציין שהתכונה הזו מאוד עוזרת לנו משום שאנחנו יכולים בתקווה לקחת אות
 מורכב <span class="math notranslate nohighlight">\(x\left(t\right)\)</span> ולכתוב אותו כחיבור של אותות פשוטים</p>
 </section>
+<section id="id7">
+<h3>שרשור מערכות לינאריות <em>(היא מערכת לינארית)</em><a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p><img alt="LTI_stack.png" src="../_images/LTI_stack.png" />
+נניח שיש לנו שתי מערכות <span class="math notranslate nohighlight">\(T\)</span> ו<span class="math notranslate nohighlight">\(S\)</span>. האם גם המערכת הכוללת היא לינארית?
+קל לחשב:</p>
+<div class="math notranslate nohighlight">
+\[
+ST:\left\{ x\left(t\right)\right\} =S:\left\{ T:\left\{ \alpha x_{1}\left(t\right)+\beta x_{2}\left(t\right)\right\} \right\} \underset{\text{תיראניל\ }T}{\underbrace{=}}S:\left\{ \alpha T:\left\{ x_{1}\left(t\right)\right\} +\beta T:\left\{ x_{2}\left(t\right)\right\} \right\} 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\underset{\text{תיראניל\ }S}{\underbrace{=}}\alpha S:\left\{ T:\left\{ x_{1}\left(t\right)\right\} \right\} +\beta S:\left\{ T:\left\{ x_{2}\left(t\right)\right\} \right\} =\alpha ST:\left\{ x_{1}\left(t\right)\right\} +\beta ST:\left\{ x_{2}\left(t\right)\right\}  
+\]</div>
+<p><span class="math notranslate nohighlight">\( \blacksquare\)</span></p>
+</section>
 </section>
 </section>
 
@@ -474,6 +490,7 @@ T:\underset{x\left(t\right)}{\underbrace{\left\{ \alpha x_{1}\left(t\right)+\bet
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">אות (סיגנל)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">מערכת</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">מערכת לינארית</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">שרשור מערכות לינאריות <em>(היא מערכת לינארית)</em></a></li>
 </ul>
 </li>
 </ul>

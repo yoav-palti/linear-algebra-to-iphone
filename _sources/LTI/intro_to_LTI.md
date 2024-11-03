@@ -52,3 +52,16 @@ $$
 
 חשוב לציין שהתכונה הזו מאוד עוזרת לנו משום שאנחנו יכולים בתקווה לקחת אות
 מורכב $x\left(t\right)$ ולכתוב אותו כחיבור של אותות פשוטים
+
+### שרשור מערכות לינאריות _(היא מערכת לינארית)_
+![LTI_stack.png](LTI_stack.png)
+נניח שיש לנו שתי מערכות $T$ ו$S$. האם גם המערכת הכוללת היא לינארית?
+קל לחשב:
+
+$$
+ST:\left\{ x\left(t\right)\right\} =S:\left\{ T:\left\{ \alpha x_{1}\left(t\right)+\beta x_{2}\left(t\right)\right\} \right\} \underset{\text{תיראניל\ }T}{\underbrace{=}}S:\left\{ \alpha T:\left\{ x_{1}\left(t\right)\right\} +\beta T:\left\{ x_{2}\left(t\right)\right\} \right\} 
+$$
+$$
+\underset{\text{תיראניל\ }S}{\underbrace{=}}\alpha S:\left\{ T:\left\{ x_{1}\left(t\right)\right\} \right\} +\beta S:\left\{ T:\left\{ x_{2}\left(t\right)\right\} \right\} =\alpha ST:\left\{ x_{1}\left(t\right)\right\} +\beta ST:\left\{ x_{2}\left(t\right)\right\}  
+$$
+$ \blacksquare$
