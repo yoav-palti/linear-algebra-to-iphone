@@ -333,7 +333,12 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">למה</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">הגדרות</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">הגדרות</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">אות (סיגנל)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">מערכת</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">מערכת לינארית</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -358,8 +363,10 @@
 </section>
 <section id="id3">
 <h2>הגדרות<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<section id="id4">
+<h3>אות (סיגנל)<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <ul>
-<li><p><strong>אות (Signal)</strong> - פונקציה מתמטית המעבירה אינפורמציה אודות התנהגות של תופעה מסויימת</p>
+<li><p>פונקציה מתמטית המעבירה אינפורמציה אודות התנהגות של תופעה מסויימת</p>
 <p>דוגמאות:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(p(t)\)</span> לחץ כפונקציה של זמן - כלומר אות אקוסטי
@@ -369,7 +376,12 @@
 <li><p><span class="math notranslate nohighlight">\(T(t)\)</span> טמפרטורה כפונקציה של זמן</p></li>
 </ul>
 </li>
-<li><p><strong>מערכת</strong> - תהליך <span class="math notranslate nohighlight">\(T\)</span> שיוצר טרנפורמציה מאות נתון לאות אחר</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>מערכת<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>תהליך <span class="math notranslate nohighlight">\(T\)</span> שיוצר טרנפורמציה מאות נתון לאות אחר</p></li>
 </ul>
 <p>נסמן:</p>
 <div class="math notranslate nohighlight">
@@ -380,8 +392,24 @@ T:\underset{input}{\left\{ \underbrace{x\left(t\right)}\right\} }=\underset{outp
 למשל: מיקרופון היא מערכת שמירה לחץ למתח/זרם חשמלי</p>
 <div class="math notranslate nohighlight">
 \[
-\underset{\text{ןופורקימה אצומב חתמ}}{\underbrace{V\left(t\right)}}=T:\left\{ p\left(t\right)\right\} 
+\underset{\text{ןופורקימה אצומב חתמ}}{\underbrace{V\left(t\right)}}=T:\left\{ p\left(t\right)\right\}
 \]</div>
+</section>
+<section id="id6">
+<h3>מערכת לינארית<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>מערכת לינארית <span class="math notranslate nohighlight">\(T\)</span> במרחב האותות היא מערכת המקבלת אות <span class="math notranslate nohighlight">\(x\left(t\right)\)</span>
+בכניסה ומחזירה אות ביציאה <span class="math notranslate nohighlight">\(y\left(t\right)=T:\left\{ x\left(t\right)\right\} \)</span>
+כאשר הטרנספורמציה <span class="math notranslate nohighlight">\(T\)</span> מקיינת את עקרון הלינאריות (או סופור פוזיציה)
+כלומר בהינתן אות מהצורה <span class="math notranslate nohighlight">\(x\left(t\right)=\alpha x_{1}\left(t\right)+\beta x_{2}\left(t\right)\)</span>
+האות במוצא המערכת הלינארית יהיה הצירוף הלינארי של מוצא המערכת עבור כל
+אחד מהאותות בנפרד כלומר:</p>
+<div class="math notranslate nohighlight">
+\[
+T:\underset{x\left(t\right)}{\underbrace{\left\{ \alpha x_{1}\left(t\right)+\beta x_{2}\left(t\right)\right\} }}=\alpha\underset{y_{1}\left(t\right)}{\underbrace{T:\left\{ x_{1}\left(t\right)\right\} }}+\beta\underset{y_{2}\left(t\right)}{\underbrace{T:\left\{ x_{2}\left(t\right)\right\} }}
+\]</div>
+<p>חשוב לציין שהתכונה הזו מאוד עוזרת לנו משום שאנחנו יכולים בתקווה לקחת אות
+מורכב <span class="math notranslate nohighlight">\(x\left(t\right)\)</span> ולכתוב אותו כחיבור של אותות פשוטים</p>
+</section>
 </section>
 </section>
 
@@ -442,7 +470,12 @@ T:\underset{input}{\left\{ \underbrace{x\left(t\right)}\right\} }=\underset{outp
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">למה</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">הגדרות</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">הגדרות</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">אות (סיגנל)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">מערכת</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">מערכת לינארית</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
