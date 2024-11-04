@@ -66,6 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'LTI/intro_to_LTI';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="תגובת להלם" href="impulse_response.html" />
     <link rel="prev" title="מה זו הנדסה" href="../intro/why-engineering.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -177,6 +178,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">מבוא למערכות לינאריות</a></li>
+<li class="toctree-l1"><a class="reference internal" href="impulse_response.html">תגובת להלם</a></li>
 </ul>
 
     </div>
@@ -332,12 +334,15 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">למה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">מוטיבציה</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">הגדרות</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">אות (סיגנל)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">מערכת</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">מערכת לינארית</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">שרשור מערכות לינאריות <em>(היא מערכת לינארית)</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">דוגמא למערכת לא לינארית</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">שרשור מערכות לינאריות <em>(היא מערכת לינארית)</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">דוגגמא: ממברנה של מיקרופון</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">דוגמאות נוספות</a></li>
 </ul>
 </li>
 </ul>
@@ -354,7 +359,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>מערכות לינאריות<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="id2">
-<h2>למה<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<h2>מוטיבציה<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>הרבה מערכות פיזיקליות הן לינאריות (לפחות בקירוב טוב)</p></li>
 <li><p>התגובה לאות מורכב ע”י סכום תגובות לאותות פשוטים</p></li>
@@ -412,7 +417,40 @@ T:\underset{x\left(t\right)}{\underbrace{\left\{ \alpha x_{1}\left(t\right)+\bet
 מורכב <span class="math notranslate nohighlight">\(x\left(t\right)\)</span> ולכתוב אותו כחיבור של אותות פשוטים</p>
 </section>
 <section id="id7">
-<h3>שרשור מערכות לינאריות <em>(היא מערכת לינארית)</em><a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<h3>דוגמא למערכת לא לינארית<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>ניקח את המערכת הכי פשוטה שאנחנו יכולים לחשוב עליה. מדידת מטח על נגד שזורם בו זרם
+כמו שנלמד בקורס בחשמל, ניתן לתאר את הנגד באמצעות מספר אחר <span class="math notranslate nohighlight">\(R\)</span>
+שמסמן את ההתנגדות שלו. תחת המודל המקורב הזה ניתן לרשום את חוק
+אוהם:</p>
+<div class="math notranslate nohighlight">
+\[
+V=IR
+\]</div>
+<p>או כמו שמסמנים בקורס:</p>
+<div class="math notranslate nohighlight">
+\[
+V\left(t\right)=R:\left\{ I\left(t\right)\right\} =R\cdot I\left(t\right)
+\]</div>
+<p>כלומר הנגד הוא מערכת לינארית לממירה זרם למתח.</p>
+<p>אבל כמו כל מודל גם חוק אום נכון רק בקירוב. אם לוקחים נגד אמיתי ומודדים
+אותו מגלים שבזרמים גדולים “ההתנגדות” משתנה.
+אנחנו כל כך רגילים לחשוב על נגד בתור רכיב עם התנגדות שאנחנו מוכנים
+לחשוב על מודל בו “ההתנגדות משתנה”. כלומר השיפוע של הגרף <span class="math notranslate nohighlight">\(V\left(I\right)\)</span> משתנה
+הקשר בין הזרם למטח יכול להראות לדוגמא ככה
+<img alt="non_linear_resistor.png" src="../_images/non_linear_resistor.png" />
+מכאן ניתן לראות שאם לדוגמא אנחנו מזרימים זרם <span class="math notranslate nohighlight">\(I_{1}\left(t\right)=1\)</span> וזרם <span class="math notranslate nohighlight">\(I_{2}\left(t\right)=2\)</span> המערכת כבר לא לינארית
+כלומר שאם ניקח לדוגמה את הקומבינציה <span class="math notranslate nohighlight">\(I\left(t\right)=2I_{1}\left(t\right)+I_{2}\left(t\right)=4\)</span> היינו מצפים
+לקבל מטח:</p>
+<div class="math notranslate nohighlight">
+\[
+V\left(t\right)=R:\left\{ I\left(t\right)\right\} =R:\left\{ 2I_{1}\left(t\right)+I_{2}\left(t\right)\right\} =2R:\left\{ I_{1}\left(t\right)\right\} +R:\left\{ I_{2}\left(t\right)\right\} 
+\]</div>
+<p>אך אנחנו רואים מהגרף שהתגובה היא חזקה בהרבה יותר
+למה זה בכל זאת שימושי לנו לדבר על מערכות לינאריות? כי הרבה מערכות הן בקירוב טוב לינאריות
+וגם כאן במערכת של הגנד אם היינו מגבילים את עצמנו לזרמים נמוכים היינו יכולים להתייחס למערכת כלינארית</p>
+</section>
+<section id="id8">
+<h3>שרשור מערכות לינאריות <em>(היא מערכת לינארית)</em><a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p><img alt="LTI_stack.png" src="../_images/LTI_stack.png" />
 נניח שיש לנו שתי מערכות <span class="math notranslate nohighlight">\(T\)</span> ו<span class="math notranslate nohighlight">\(S\)</span>. האם גם המערכת הכוללת היא לינארית?
 קל לחשב:</p>
@@ -425,6 +463,84 @@ ST:\left\{ x\left(t\right)\right\} =S:\left\{ T:\left\{ \alpha x_{1}\left(t\righ
 \underset{\text{תיראניל\ }S}{\underbrace{=}}\alpha S:\left\{ T:\left\{ x_{1}\left(t\right)\right\} \right\} +\beta S:\left\{ T:\left\{ x_{2}\left(t\right)\right\} \right\} =\alpha ST:\left\{ x_{1}\left(t\right)\right\} +\beta ST:\left\{ x_{2}\left(t\right)\right\}  
 \]</div>
 <p><span class="math notranslate nohighlight">\( \blacksquare\)</span></p>
+</section>
+<section id="id9">
+<h3>דוגגמא: ממברנה של מיקרופון<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>בפועל כדי באמת להבין מה קורה צריך לפתור את משוואת הגלים על הממברנה
+ביחד עם תנאי שפה ואילוץ של האוויר. אבל אנחנו ניקח מודל פשטני
+<img alt="membrane.png" src="../_images/membrane.png" />
+כלומר יש גל לחץ שפוגע בממברנה והיא מתחילה להתנדנד
+לממברנה יש “קשיחות” או “מתיחות” שאותה נסמן ב<span class="math notranslate nohighlight">\(k\)</span>
+את שטח הממברנה נסמן ב<span class="math notranslate nohighlight">\(A\)</span> ואת קבוע הדאיכה של התנודות ב<span class="math notranslate nohighlight">\(\gamma\)</span>
+נוכל לרשום את החוק השני של ניוטון:</p>
+<div class="math notranslate nohighlight">
+\[
+F\left(t\right)=ma=m\ddot{x}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+F\left(t\right)=Ap\left(t\right)-\gamma\dot{x}-kx
+\]</div>
+<p>כלומר קיבלנו מערכת
+<img alt="membrane_lti.png" src="../_images/membrane_lti.png" />
+אשר הקלט שלה הוא <span class="math notranslate nohighlight">\(p\left(t\right)\)</span> והפלט שלה הוא <span class="math notranslate nohighlight">\(x\left(t\right)\)</span>
+כדי למצוא את <span class="math notranslate nohighlight">\(x\left(t\right)\)</span> צריך לפתור משוואה דיפרנציאלית. אבל כדי להראות שהיא לינארית אנחנו לא צריכים לדעת לפתור משוואות דיפרנציאליות
+אלא רק להראות שהיא מקיימת את תכונת הלינאריות. נניח שיש לנו שני קלטים <span class="math notranslate nohighlight">\(p_{1}\left(t\right)\)</span> ו<span class="math notranslate nohighlight">\(p_{2}\left(t\right)\)</span>
+עבור <span class="math notranslate nohighlight">\(p_{1}\left(t\right)\)</span> המערכת מוציאה <span class="math notranslate nohighlight">\(x_{1}\left(t\right)\)</span> שמקיים</p>
+<div class="math notranslate nohighlight">
+\[
+Ap_{1}\left(t\right)=m\ddot{x}_{1}+\gamma\dot{x}_{1}+kx_{1}
+\]</div>
+<p>עבור <span class="math notranslate nohighlight">\(p_{2}\left(t\right)\)</span> המערכת מוציאה <span class="math notranslate nohighlight">\(x_{2}\left(t\right)\)</span> שמקיים</p>
+<div class="math notranslate nohighlight">
+\[
+Ap_{2}\left(t\right)=m\ddot{x}_{2}+\gamma\dot{x}_{2}+kx_{2}
+\]</div>
+<p>נניח שתנאי ההתחלה שלנו זה שהממברנה במנוחה כלומר</p>
+<div class="math notranslate nohighlight">
+\[
+x\left(0\right)=\dot{x}\left(0\right)=0
+\]</div>
+<p>זה פתרון שנקרא ZSR (Zero State Response) כלומר שאין אנרגיה אגורה במערכת בזמן ההתחלה
+כעת נציב:</p>
+<div class="math notranslate nohighlight">
+\[
+p\left(t\right)=\alpha p_{1}\left(t\right)+\beta p_{2}\left(t\right)
+\]</div>
+<p>ונקבל:</p>
+<div class="math notranslate nohighlight">
+\[
+Ap\left(t\right)=A\left[\alpha p_{1}\left(t\right)+\beta p_{2}\left(t\right)\right]=\alpha Ap_{1}\left(t\right)+\beta Ap_{2}\left(t\right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\alpha\left(m\ddot{x}_{1}+\gamma\dot{x}_{1}+kx_{1}\right)+\beta\left(m\ddot{x}_{2}+\gamma\dot{x}_{2}+kx_{2}\right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=m\left(\alpha\ddot{x}_{1}+\beta\ddot{x}_{2}\right)+\gamma\left(\alpha\dot{x}_{1}+\beta\dot{x}_{2}\right)+k\left(\alpha x_{1}+\beta x_{2}\right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=m\frac{d^{2}}{dt^{2}}\left(\alpha x_{1}+\beta x_{2}\right)+\gamma\frac{d}{dt}\left(\alpha x_{1}+\beta x_{2}\right)+k\left(\alpha x_{1}+\beta x_{2}\right)
+\]</div>
+<p>כלומר שאם נגדיר אות מהצורה <span class="math notranslate nohighlight">\(\alpha x_{1}+\beta x_{2}\)</span> נגלה שהוא מקיים את המשוואה הדיפרנציאלית עבור קלט של <span class="math notranslate nohighlight">\(p\left(t\right)\)</span>
+זה אומר בשפה שלנו ש:</p>
+<div class="math notranslate nohighlight">
+\[
+T:\underset{p\left(t\right)}{\underbrace{\left\{ \alpha p_{1}\left(t\right)+\beta p_{2}\left(t\right)\right\} }}=\alpha x_{1}+\beta x_{2}=\alpha\underset{x_{1}\left(t\right)}{\underbrace{T:\left\{ p_{1}\left(t\right)\right\} }}+\beta\underset{x_{2}\left(t\right)}{\underbrace{T:\left\{ p_{2}\left(t\right)\right\} }}
+\]</div>
+<p>כלומר המערכת לינארית!</p>
+</section>
+<section id="id10">
+<h3>דוגמאות נוספות<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>מעגלי RLC (נלמד בהמשך הקורס)</p></li>
+<li><p>התפשטות גלים (גם אקוסטים וגם אלקטרומגנטים). טוב לפחות נכון בקירוב</p></li>
+<li><p>אנטנות</p></li>
+<li><p>פילטרים, מגברים</p></li>
+<li><p>בולמי זעזועים</p></li>
+</ol>
 </section>
 </section>
 </section>
@@ -468,6 +584,15 @@ ST:\left\{ x\left(t\right)\right\} =S:\left\{ T:\left\{ \alpha x_{1}\left(t\righ
         <p class="prev-next-title">מה זו הנדסה</p>
       </div>
     </a>
+    <a class="right-next"
+       href="impulse_response.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">תגובת להלם</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -485,12 +610,15 @@ ST:\left\{ x\left(t\right)\right\} =S:\left\{ T:\left\{ \alpha x_{1}\left(t\righ
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">למה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">מוטיבציה</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">הגדרות</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">אות (סיגנל)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">מערכת</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">מערכת לינארית</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">שרשור מערכות לינאריות <em>(היא מערכת לינארית)</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">דוגמא למערכת לא לינארית</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">שרשור מערכות לינאריות <em>(היא מערכת לינארית)</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">דוגגמא: ממברנה של מיקרופון</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">דוגמאות נוספות</a></li>
 </ul>
 </li>
 </ul>
