@@ -4,8 +4,11 @@ parts:
   - caption: "מבוא"
     chapters:
     - file: intro/why-engineering
-      title: "למה ללמוד הנדסה?"
+      title: "מה זו הנדסה"
   - caption: "מערכות לינאריות"
     chapters:
     - file: LTI/intro_to_LTI
       title: "מבוא למערכות לינאריות"
+    - file: LTI/impulse_response
+      title: "תגובת להלם"
+
