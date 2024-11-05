@@ -42,6 +42,7 @@ $$
 $$
 
 כלומא כל אות ניתן לכתוב כצירוף לינארי של פונקציות דלתא מושהות
+![function_delta_decomposition.png](function_delta_decomposition.png)
 
 ```{admonition} חשיבה כמו באלגברה לינארית
 כאן אנחנו מתחילים "להציץ" ללמה מופיעה אלגברה לינארית. אנחנו הולכים לדבר על זה עוד
@@ -74,6 +75,16 @@ $$
 \boxed{T:\left\{ x\left(t\right)\right\} =\intop_{-\infty}^{\infty}\underset{\text{םדקמ}}{\underbrace{x\left(\tau\right)}}\cdot\underset{\text{םלהל}-\text{הבוגת}}{\underbrace{h\left(t,\tau\right)}}d\tau}
 $$
 
+```{admonition} פונקציית התגובה להלם כמטריצה
+
+$$ h\left(\underset{\text{הבוגתה}-\text{תדידמ}-\text{ןמז}}{\underbrace{t}},\underset{\text{םלהה}-\text{ןמז}}{\underbrace{\tau}}\right)$$
+ניתן לחשוב על זה כמו שני אינדקסים של מטריצה ואז הנוסחה שלמעלה היא ממש הגיונית 
+
+$$\overrightarrow{y}_{t}=\left[T:\left\{ \overrightarrow{x}\right\} \right]_{t}=\sum_{\tau}\overrightarrow{x}_{\tau}\cdot h_{t,\tau}$$
+
+כלומר שניתן לחשוב על זה "כאילו" כל מערכת לינארית מיוצגת על ידיד מטריצה $h$ ועכשיו למדנו גם איך לחשב אותה
+```
+
 ### תכונות של פונקציית התגובה להלם
 1. ממשית (האותות פיזיקלים)
 2. סיבתית - $\forall t<\tau:h\left(t,\tau\right)=0$
@@ -81,4 +92,22 @@ $$
 
 ### דוגמאות
 
+#### התקדמות גלים בחלל חופשי עם החזרות
+
+
 #### אוסילטור הרמוני מרוסן
+לדבר מכאן על סיבתיות
+לדבר מכאן על אינווריאנטיות בזמן
+
+### מערכות LTI
+להגדיר קונבולוציה
+להראות מה זה אומר מבחינת מטריצה זה לא אינטואינטיבי
+
+תגובה למדרגה
+![img.png](img.png)
+אינטואיציה גרפית לקונבולוציה (הזזה בזמן)
+![img_2.png](img_2.png)
+קונבולוציה עם מלבן
+![img_1.png](img_1.png)
+
+
