@@ -150,20 +150,11 @@ $$T:\left\{ x\left(t\right)\right\} \underset{Linear}{\underbrace{=}}\intop_{-\i
 נסכם את התוצאה שלנו
 
 ```{admonition} מערכות LTI
+:class: tip
 
 $$T:\left\{ x\left(t\right)\right\} =x\left(t\right)\ast h\left(t\right)$$
 $$x\left(t\right)\ast h\left(t\right)\equiv\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)$$
 
 ```
-
-להגדיר קונבולוציה
-להראות מה זה אומר מבחינת מטריצה זה לא אינטואינטיבי
-
-תגובה למדרגה
-![img.png](img.png)
-אינטואיציה גרפית לקונבולוציה (הזזה בזמן)
-![img_2.png](img_2.png)
-קונבולוציה עם מלבן
-![img_1.png](img_1.png)
 
 

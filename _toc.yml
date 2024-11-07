@@ -1,10 +1,6 @@
 format: jb-book
 root: intro/intro
 parts:
-  - caption: "מבוא"
-    chapters:
-    - file: intro/why-engineering
-      title: "מה זו הנדסה"
   - caption: "מערכות לינאריות"
     chapters:
     - file: LTI/intro_to_LTI
