@@ -93,13 +93,69 @@ $$\overrightarrow{y}_{t}=\left[T:\left\{ \overrightarrow{x}\right\} \right]_{t}=
 ### דוגמאות
 
 #### התקדמות גלים בחלל חופשי עם החזרות
+נניח שיש לנו רמקול בנקודה מסויימת בחדר ובמקום אחר בחדר יש מיקרופון.
+אם הרמקול ישמיע צליל קצר וחזק (דלתא) המיקרופון ישמע את הצליל בדיליי אבל הוא גם ישמע את כל ההחזרות מהקירות של אותו צליל
+כלומר שפונקציית התמסורת תהיה מהצורה הבאה:
 
+$$
+h\left(t,\tau\right)=\sum_{i}\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\right)\right)
+$$
+
+כלומר יגיעו למירופון גם דלתאות אבל בזמנים שונים לפי המרחקים השונים $d_i$ והניחותים השונים $\alpha_i$ כמו בתמונה הבאה:
+![sound_reflections.png](sound_reflections.png)
+
+פונקציית התגובה להלם תיראה ככה:
+![room_impulse_response.png](room_impulse_response.png)
+נשים לב שאם נחשב את פלט המערכת הזו נקבל:
+
+$$T:\left\{ x\left(t\right)\right\} =\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t,\tau\right)d\tau=\intop_{-\infty}^{\infty}x\left(\tau\right)\sum_{i}\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\right)\right)d\tau$$
+$$=\sum_{i}\alpha_{i}\intop_{-\infty}^{\infty}x\left(\tau\right)\delta\left(t-\tau-\frac{d_{i}}{c}\right)d\tau=\sum_{i}\alpha_{i}x\left(t-\frac{d_{i}}{c}\right)$$
+
+כלומר אות משוכפל עם דיליי וניחות. כלומר קיבלנו פשוט הד!
 
 #### אוסילטור הרמוני מרוסן
-לדבר מכאן על סיבתיות
-לדבר מכאן על אינווריאנטיות בזמן
+אנחנו יודעים כבר שמשוואת אוסילטור הרמוני מרוסן היא:
+
+$$F\left(t\right)=m\ddot{x}+\gamma\dot{x}+kx$$
+
+כלומר שכדי לחשב את התדובה להלם כל מה שאנחנו צריכים לעשות היא "להכניס דלתא למערכת" כלומר לםתור את המשוואה:
+
+$$\delta\left(t-\tau\right)=m\ddot{h}+\gamma\dot{h}+kh$$
+
+שימו לב שעכשיו נסמן את הפתרון ב $h$ ולא ב$x$ משום שזה הפלט של המערכת עבור הלם. 
+אנחנו לא נעשה את זה כאן ורק נומר שהפתרון הוא:
+
+$$h\left(t,\tau\right)=\theta\left(t-\tau\right)\frac{1}{m\omega_{D}}e^{-\frac{\gamma}{2m}\left(t-\tau\right)}\sin\left(\omega_{D}\left(t-\tau\right)\right)$$
+$$\omega_{D}=\sqrt{\frac{k}{m}-\left(\frac{\gamma}{2m}\right)^{2}}$$
+
+שזה מה שאנחנו מצפים. נותנים מכה לאוסילטור בזמן $\tau$ והוא מתחיל להתנדנד ולדאוך. לפני זמן המכה הוא כמובן לא זז ולכן פונקציית המדרגה. את תכונה זו של פונקציית התגובה להלם אנחנו פשוט מניחים פיזיקאלית וקוראים לה קוזאליות. כלומר:
+לפני ההלם בזמן $t-\tau$ פונקציית התגובה להלם צריכה להיות $0$. אין תגובה "אחורה בזמן"
+מתמטית נכתוב: 
+
+$$\forall t<\tau:h\left(t,\tau\right)=0$$
+
+נשים לב שבכל מקום בפונקציית התגובה להלם מופיע $t-\tau$. כלומר נוכל לרשום: 
+
+$$ h\left(t,\tau\right)=h\left(t-\tau\right)$$
+ישנן כל כך הרבה מערכות שהדבר הזה נכון להן שיש להן שם מיוחד. LTI!!!
+
+במערכות אלו פונקציית התגובה להלם תלוייה רק בכמות הזמן שחלף מאז שהיה ההלם ולא בזמן של ההלם עצמו.
 
 ### מערכות LTI
+עבור מערכות אלו נרשום:
+
+$$T:\left\{ x\left(t\right)\right\} \underset{Linear}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t,\tau\right)d\tau\underset{Time-Intariant}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau\equiv x\left(t\right)\ast h\left(t\right)$$
+
+המעבר האחרון הוא סימון. לאינטגרל $\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)$ יש שם מיוחד. הוא נקרא קונבולוציה ונסמן אותו ב-$x\left(t\right)\ast h\left(t\right)$
+נסכם את התוצאה שלנו
+
+```{admonition} מערכות LTI
+
+$$T:\left\{ x\left(t\right)\right\} =x\left(t\right)\ast h\left(t\right)$$
+$$x\left(t\right)\ast h\left(t\right)\equiv\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)$$
+
+```
+
 להגדיר קונבולוציה
 להראות מה זה אומר מבחינת מטריצה זה לא אינטואינטיבי
 
