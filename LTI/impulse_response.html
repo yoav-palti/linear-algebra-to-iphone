@@ -170,11 +170,7 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">מבוא</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../intro/why-engineering.html">מה זו הנדסה</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">תגובת להלם</a></li>
@@ -337,9 +333,11 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">פירוק של אות במערכת לינארית</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">תכונות של פונקציית התגובה להלם</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">דוגמאות</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">אוסילטור הרמוני מרוסן</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">התקדמות גלים בחלל חופשי עם החזרות</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">אוסילטור הרמוני מרוסן</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lti">מערכות LTI</a></li>
 </ul>
             </nav>
         </div>
@@ -393,7 +391,8 @@ x\left(t\right)\cdot\delta\left(t-\tau\right)=x\left(\tau\right)\cdot\delta\left
 \[
 \boxed{\underset{\text{תוא}}{\underbrace{x\left(t\right)}}=\intop_{-\infty}^{\infty}\underset{\text{רפסמ}}{\underbrace{x\left(\tau\right)}}\cdot\delta\left(t-\tau\right)d\tau}
 \]</div>
-<p>כלומא כל אות ניתן לכתוב כצירוף לינארי של פונקציות דלתא מושהות</p>
+<p>כלומא כל אות ניתן לכתוב כצירוף לינארי של פונקציות דלתא מושהות
+<img alt="function_delta_decomposition.png" src="../_images/function_delta_decomposition.png" /></p>
 <div class="admonition- admonition">
 <p class="admonition-title">חשיבה כמו באלגברה לינארית</p>
 <p>כאן אנחנו מתחילים “להציץ” ללמה מופיעה אלגברה לינארית. אנחנו הולכים לדבר על זה עוד
@@ -423,6 +422,15 @@ h\left(t,\tau\right)\equiv T:\left\{ \delta\left(t-\tau\right)\right\}
 \[
 \boxed{T:\left\{ x\left(t\right)\right\} =\intop_{-\infty}^{\infty}\underset{\text{םדקמ}}{\underbrace{x\left(\tau\right)}}\cdot\underset{\text{םלהל}-\text{הבוגת}}{\underbrace{h\left(t,\tau\right)}}d\tau}
 \]</div>
+<div class="admonition- admonition">
+<p class="admonition-title">פונקציית התגובה להלם כמטריצה</p>
+<div class="math notranslate nohighlight">
+\[ h\left(\underset{\text{הבוגתה}-\text{תדידמ}-\text{ןמז}}{\underbrace{t}},\underset{\text{םלהה}-\text{ןמז}}{\underbrace{\tau}}\right)\]</div>
+<p>ניתן לחשוב על זה כמו שני אינדקסים של מטריצה ואז הנוסחה שלמעלה היא ממש הגיונית</p>
+<div class="math notranslate nohighlight">
+\[\overrightarrow{y}_{t}=\left[T:\left\{ \overrightarrow{x}\right\} \right]_{t}=\sum_{\tau}\overrightarrow{x}_{\tau}\cdot h_{t,\tau}\]</div>
+<p>כלומר שניתן לחשוב על זה “כאילו” כל מערכת לינארית מיוצגת על ידיד מטריצה <span class="math notranslate nohighlight">\(h\)</span> ועכשיו למדנו גם איך לחשב אותה</p>
+</div>
 </section>
 <section id="id4">
 <h2>תכונות של פונקציית התגובה להלם<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
@@ -435,8 +443,65 @@ h\left(t,\tau\right)\equiv T:\left\{ \delta\left(t-\tau\right)\right\}
 <section id="id5">
 <h2>דוגמאות<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <section id="id6">
-<h3>אוסילטור הרמוני מרוסן<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<h3>התקדמות גלים בחלל חופשי עם החזרות<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>נניח שיש לנו רמקול בנקודה מסויימת בחדר ובמקום אחר בחדר יש מיקרופון.
+אם הרמקול ישמיע צליל קצר וחזק (דלתא) המיקרופון ישמע את הצליל בדיליי אבל הוא גם ישמע את כל ההחזרות מהקירות של אותו צליל
+כלומר שפונקציית התמסורת תהיה מהצורה הבאה:</p>
+<div class="math notranslate nohighlight">
+\[
+h\left(t,\tau\right)=\sum_{i}\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\right)\right)
+\]</div>
+<p>כלומר יגיעו למירופון גם דלתאות אבל בזמנים שונים לפי המרחקים השונים <span class="math notranslate nohighlight">\(d_i\)</span> והניחותים השונים <span class="math notranslate nohighlight">\(\alpha_i\)</span> כמו בתמונה הבאה:
+<img alt="sound_reflections.png" src="../_images/sound_reflections.png" /></p>
+<p>פונקציית התגובה להלם תיראה ככה:
+<img alt="room_impulse_response.png" src="../_images/room_impulse_response.png" />
+נשים לב שאם נחשב את פלט המערכת הזו נקבל:</p>
+<div class="math notranslate nohighlight">
+\[T:\left\{ x\left(t\right)\right\} =\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t,\tau\right)d\tau=\intop_{-\infty}^{\infty}x\left(\tau\right)\sum_{i}\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\right)\right)d\tau\]</div>
+<div class="math notranslate nohighlight">
+\[=\sum_{i}\alpha_{i}\intop_{-\infty}^{\infty}x\left(\tau\right)\delta\left(t-\tau-\frac{d_{i}}{c}\right)d\tau=\sum_{i}\alpha_{i}x\left(t-\frac{d_{i}}{c}\right)\]</div>
+<p>כלומר אות משוכפל עם דיליי וניחות. כלומר קיבלנו פשוט הד!</p>
 </section>
+<section id="id7">
+<h3>אוסילטור הרמוני מרוסן<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>אנחנו יודעים כבר שמשוואת אוסילטור הרמוני מרוסן היא:</p>
+<div class="math notranslate nohighlight">
+\[F\left(t\right)=m\ddot{x}+\gamma\dot{x}+kx\]</div>
+<p>כלומר שכדי לחשב את התדובה להלם כל מה שאנחנו צריכים לעשות היא “להכניס דלתא למערכת” כלומר לםתור את המשוואה:</p>
+<div class="math notranslate nohighlight">
+\[\delta\left(t-\tau\right)=m\ddot{h}+\gamma\dot{h}+kh\]</div>
+<p>שימו לב שעכשיו נסמן את הפתרון ב <span class="math notranslate nohighlight">\(h\)</span> ולא ב<span class="math notranslate nohighlight">\(x\)</span> משום שזה הפלט של המערכת עבור הלם.
+אנחנו לא נעשה את זה כאן ורק נומר שהפתרון הוא:</p>
+<div class="math notranslate nohighlight">
+\[h\left(t,\tau\right)=\theta\left(t-\tau\right)\frac{1}{m\omega_{D}}e^{-\frac{\gamma}{2m}\left(t-\tau\right)}\sin\left(\omega_{D}\left(t-\tau\right)\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\omega_{D}=\sqrt{\frac{k}{m}-\left(\frac{\gamma}{2m}\right)^{2}}\]</div>
+<p>שזה מה שאנחנו מצפים. נותנים מכה לאוסילטור בזמן <span class="math notranslate nohighlight">\(\tau\)</span> והוא מתחיל להתנדנד ולדאוך. לפני זמן המכה הוא כמובן לא זז ולכן פונקציית המדרגה. את תכונה זו של פונקציית התגובה להלם אנחנו פשוט מניחים פיזיקאלית וקוראים לה קוזאליות. כלומר:
+לפני ההלם בזמן <span class="math notranslate nohighlight">\(t-\tau\)</span> פונקציית התגובה להלם צריכה להיות <span class="math notranslate nohighlight">\(0\)</span>. אין תגובה “אחורה בזמן”
+מתמטית נכתוב:</p>
+<div class="math notranslate nohighlight">
+\[\forall t&lt;\tau:h\left(t,\tau\right)=0\]</div>
+<p>נשים לב שבכל מקום בפונקציית התגובה להלם מופיע <span class="math notranslate nohighlight">\(t-\tau\)</span>. כלומר נוכל לרשום:</p>
+<div class="math notranslate nohighlight">
+\[ h\left(t,\tau\right)=h\left(t-\tau\right)\]</div>
+<p>ישנן כל כך הרבה מערכות שהדבר הזה נכון להן שיש להן שם מיוחד. LTI!!!</p>
+<p>במערכות אלו פונקציית התגובה להלם תלוייה רק בכמות הזמן שחלף מאז שהיה ההלם ולא בזמן של ההלם עצמו.</p>
+</section>
+</section>
+<section id="lti">
+<h2>מערכות LTI<a class="headerlink" href="#lti" title="Link to this heading">#</a></h2>
+<p>עבור מערכות אלו נרשום:</p>
+<div class="math notranslate nohighlight">
+\[T:\left\{ x\left(t\right)\right\} \underset{Linear}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t,\tau\right)d\tau\underset{Time-Intariant}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau\equiv x\left(t\right)\ast h\left(t\right)\]</div>
+<p>המעבר האחרון הוא סימון. לאינטגרל <span class="math notranslate nohighlight">\(\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)\)</span> יש שם מיוחד. הוא נקרא קונבולוציה ונסמן אותו ב-<span class="math notranslate nohighlight">\(x\left(t\right)\ast h\left(t\right)\)</span>
+נסכם את התוצאה שלנו</p>
+<div class="tip admonition">
+<p class="admonition-title">מערכות LTI</p>
+<div class="math notranslate nohighlight">
+\[T:\left\{ x\left(t\right)\right\} =x\left(t\right)\ast h\left(t\right)\]</div>
+<div class="math notranslate nohighlight">
+\[x\left(t\right)\ast h\left(t\right)\equiv\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)\]</div>
+</div>
 </section>
 </section>
 
@@ -500,9 +565,11 @@ h\left(t,\tau\right)\equiv T:\left\{ \delta\left(t-\tau\right)\right\}
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">פירוק של אות במערכת לינארית</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">תכונות של פונקציית התגובה להלם</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">דוגמאות</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">אוסילטור הרמוני מרוסן</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">התקדמות גלים בחלל חופשי עם החזרות</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">אוסילטור הרמוני מרוסן</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lti">מערכות LTI</a></li>
 </ul>
   </nav></div>
 
