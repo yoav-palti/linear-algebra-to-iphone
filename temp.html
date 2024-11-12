@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; Linear Algebra to iPhone 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/main_style.css?v=79aa88a7" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'temp';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Linear Algebra to iPhone 1 - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="Linear Algebra to iPhone 1 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro/intro.html">
+                    מאלגברה לינארית לאייפון
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="LTI/intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LTI/impulse_response.html">תגובת להלם</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/yoav-palti/linear-algebra-to-iphone" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/temp.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> widget
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;TkAgg&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pyquibbler</span> <span class="kn">import</span> <span class="n">initialize_quibbler</span><span class="p">,</span> <span class="n">iquib</span>
+<span class="n">initialize_quibbler</span><span class="p">()</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">iquib</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">x</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;TkAgg&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">pyquibbler</span> <span class="kn">import</span> <span class="n">initialize_quibbler</span><span class="p">,</span> <span class="n">iquib</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">initialize_quibbler</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">x</span> <span class="o">=</span> <span class="n">iquib</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="nn">File ~\Documents\projects\python_venvs\jupyter-book\lib\site-packages\pyquibbler\utilities\input_validation_utils.py:56,</span> in <span class="ni">validate_user_input.&lt;locals&gt;._decorator.&lt;locals&gt;._wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span>     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg_values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">var_name</span><span class="p">),</span> <span class="n">expected_types</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span>         <span class="k">raise</span> <span class="n">InvalidArgumentTypeException</span><span class="p">(</span><span class="n">var_name</span><span class="o">=</span><span class="n">var_name</span><span class="p">,</span> <span class="n">expected_type</span><span class="o">=</span><span class="n">expected_types</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">56</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~\Documents\projects\python_venvs\jupyter-book\lib\site-packages\pyquibbler\function_overriding\override_all.py:100,</span> in <span class="ni">initialize_quibbler</span><span class="nt">(draggable_plots, show_quibs_as_widgets, jupyterlab_extension)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span> <span class="k">if</span> <span class="n">is_quibbler_initialized</span><span class="p">():</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>     <span class="k">return</span>
+<span class="ne">--&gt; </span><span class="mi">100</span> <span class="n">within_jupyterlab</span> <span class="o">=</span> <span class="n">jupyterlab_extension</span> <span class="ow">and</span> <span class="n">create_jupyter_project_if_in_jupyter_lab</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span> <span class="n">func_definitions</span> <span class="o">=</span> <span class="n">create_definitions_for_python_functions</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span> <span class="k">for</span> <span class="n">func</span><span class="p">,</span> <span class="n">func_definition</span> <span class="ow">in</span> <span class="n">func_definitions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+<span class="nn">File ~\Documents\projects\python_venvs\jupyter-book\lib\site-packages\pyquibbler\project\jupyer_project\jupyter_project.py:329,</span> in <span class="ni">create_jupyter_project_if_in_jupyter_lab</span><span class="nt">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">327</span> <span class="n">project</span> <span class="o">=</span> <span class="n">JupyterProject</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">328</span> <span class="n">project</span><span class="o">.</span><span class="n">override_quib_persistence_functions</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">329</span> <span class="n">project</span><span class="o">.</span><span class="n">listen_for_events</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">330</span> <span class="n">project</span><span class="o">.</span><span class="n">get_save_within_notebook_state</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">331</span> <span class="n">project</span><span class="o">.</span><span class="n">set_undo_redo_buttons_enable_state</span><span class="p">()</span>
+
+<span class="nn">File ~\Documents\projects\python_venvs\jupyter-book\lib\site-packages\pyquibbler\project\jupyer_project\jupyter_project.py:272,</span> in <span class="ni">JupyterProject.listen_for_events</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">264</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">265</span><span class="sd"> Listen for all events from frontend- this will create a callback for any event coming from the frontend,</span>
+<span class="g g-Whitespace">    </span><span class="mi">266</span><span class="sd"> and will run the relevant method for the event.</span>
+<span class="g g-Whitespace">    </span><span class="mi">267</span><span class="sd"> It will then send BACK the response with the `request_id` specified in the original event</span>
+<span class="g g-Whitespace">    </span><span class="mi">268</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">270</span> <span class="kn">from</span> <span class="nn">pyquibbler.optional_packages.get_IPython</span> <span class="kn">import</span> <span class="n">Comm</span>
+<span class="ne">--&gt; </span><span class="mi">272</span> <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_jupyter_notebook_path</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">273</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comm</span> <span class="o">=</span> <span class="n">Comm</span><span class="p">(</span><span class="n">target_name</span><span class="o">=</span><span class="s1">&#39;pyquibbler&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">274</span> <span class="n">action_names_to_funcs</span> <span class="o">=</span> <span class="p">{</span>
+<span class="g g-Whitespace">    </span><span class="mi">275</span>     <span class="s2">&quot;undo&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">undo</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">276</span>     <span class="s2">&quot;redo&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">redo</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">282</span>     <span class="s2">&quot;cleanup&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">283</span> <span class="p">}</span>
+
+<span class="nn">File ~\Documents\projects\python_venvs\jupyter-book\lib\site-packages\pyquibbler\project\jupyer_project\jupyter_project.py:212,</span> in <span class="ni">JupyterProject._refresh_jupyter_notebook_path</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">210</span> <span class="k">def</span> <span class="nf">_refresh_jupyter_notebook_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">211</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">212</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_jupyter_notebook_path</span> <span class="o">=</span> <span class="n">ipynbname</span><span class="o">.</span><span class="n">path</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">213</span>     <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_jupyter_notebook_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;JUPYTER_NOTEBOOK&quot;</span><span class="p">)</span>
+
+<span class="nn">File ~\Documents\projects\python_venvs\jupyter-book\lib\site-packages\ipynbname\__init__.py:89,</span> in <span class="ni">path</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">85</span> <span class="k">def</span> <span class="nf">path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span><span class="w">     </span><span class="sd">&quot;&quot;&quot; Returns the absolute path of the notebook,</span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span><span class="sd">         or raises a FileNotFoundError exception if it cannot be determined.</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">89</span>     <span class="n">srv</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">_find_nb_path</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span>     <span class="k">if</span> <span class="n">srv</span> <span class="ow">and</span> <span class="n">path</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span>         <span class="n">root_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">srv</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;root_dir&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">srv</span><span class="p">[</span><span class="s1">&#39;notebook_dir&#39;</span><span class="p">])</span>
+
+<span class="nn">File ~\Documents\projects\python_venvs\jupyter-book\lib\site-packages\ipynbname\__init__.py:61,</span> in <span class="ni">_find_nb_path</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span> <span class="k">def</span> <span class="nf">_find_nb_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">PurePath</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]]:</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">61</span>         <span class="n">kernel_id</span> <span class="o">=</span> <span class="n">_get_kernel_id</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>     <span class="k">except</span> <span class="p">(</span><span class="n">MultipleInstanceError</span><span class="p">,</span> <span class="ne">RuntimeError</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span>         <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>  <span class="c1"># Could not determine</span>
+
+<span class="nn">File ~\Documents\projects\python_venvs\jupyter-book\lib\site-packages\ipynbname\__init__.py:37,</span> in <span class="ni">_get_kernel_id</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span><span class="w"> </span><span class="sd">&quot;&quot;&quot; Returns the kernel ID of the ipykernel.</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="n">connection_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">ipykernel</span><span class="o">.</span><span class="n">get_connection_file</span><span class="p">())</span><span class="o">.</span><span class="n">stem</span>
+<span class="ne">---&gt; </span><span class="mi">37</span> <span class="n">kernel_id</span> <span class="o">=</span> <span class="n">connection_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="k">return</span> <span class="n">kernel_id</span>
+
+<span class="ne">IndexError</span>: list index out of range
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yoav Palti
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
