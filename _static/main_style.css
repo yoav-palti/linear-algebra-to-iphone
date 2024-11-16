@@ -18,6 +18,10 @@
     direction: rtl;
 }
 
+.cell_input{
+    direction:ltr;
+}
+
 /*mjx-container {*/
 /*    direction: ltr*/
 /*}*/

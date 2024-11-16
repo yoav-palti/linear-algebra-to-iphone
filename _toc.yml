@@ -7,4 +7,8 @@ parts:
       title: "מבוא למערכות לינאריות"
     - file: LTI/impulse_response
       title: "תגובת להלם"
+    - file: LTI/frequency_response
+      title: "תגובת בתדר"
+    - file: LTI/noise_removal_examples
+      title: "דוגמה לתגובה בתדר בתור מסנן רעשים"
 
