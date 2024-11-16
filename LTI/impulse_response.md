@@ -6,7 +6,7 @@
 שאפשר לחשוב עליו? כנראה שאות קבוע. אבל קצ תקשה להרכיב אותות 
 מחיבור של אותות קבועים. ננסה משהוא אחר. אות שהוא אפס בכל מקום חוץ מבנקודה אחת.
 כן כן, פונקציית דלתא.
-![delta_function.png](delta_function.png)
+![delta_function.png](images/delta_function.png)
 חשוב לחזור קצת על תכונות של פונקציית דלתא.
 נתחיל מזה שלקרוא לה פונקציה זה קצת עקום. פונקציה אמורה להחזיר ערך $x$ על כל
 ערך $t$ שהיא מקבלת. מה $\delta\left(t-\tau\right)$ מחזירה  בנקודה $\tau$?
@@ -42,7 +42,7 @@ $$
 $$
 
 כלומא כל אות ניתן לכתוב כצירוף לינארי של פונקציות דלתא מושהות
-![function_delta_decomposition.png](function_delta_decomposition.png)
+![function_delta_decomposition.png](images/function_delta_decomposition.png)
 
 ```{admonition} חשיבה כמו באלגברה לינארית
 כאן אנחנו מתחילים "להציץ" ללמה מופיעה אלגברה לינארית. אנחנו הולכים לדבר על זה עוד
@@ -102,10 +102,10 @@ h\left(t,\tau\right)=\sum_{i}\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\
 $$
 
 כלומר יגיעו למירופון גם דלתאות אבל בזמנים שונים לפי המרחקים השונים $d_i$ והניחותים השונים $\alpha_i$ כמו בתמונה הבאה:
-![sound_reflections.png](sound_reflections.png)
+![sound_reflections.png](images/sound_reflections.png)
 
 פונקציית התגובה להלם תיראה ככה:
-![room_impulse_response.png](room_impulse_response.png)
+![room_impulse_response.png](images/room_impulse_response.png)
 נשים לב שאם נחשב את פלט המערכת הזו נקבל:
 
 $$T:\left\{ x\left(t\right)\right\} =\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t,\tau\right)d\tau=\intop_{-\infty}^{\infty}x\left(\tau\right)\sum_{i}\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\right)\right)d\tau$$
@@ -157,4 +157,10 @@ $$x\left(t\right)\ast h\left(t\right)\equiv\intop_{-\infty}^{\infty}x\left(\tau\
 
 ```
 
+### הדגמה של קונבולוציה 
+מוזמנים לבדוק את הדברים הבאים:
+- מה קורה כאשר פונקציית תגובה להלם היא מלבן מאוד צר
+- מה קורה כאשר פונקציית תגובה להלם היא מלבן מאוד רחב
+- מה אם גם התגובה להלם וגם הקלט הם גאוסיינים?
 
+(<iframe src="https://phiresky.github.io/convolution-demo/" width="100%" height="1000px" style="border: 1px solid #ccc" frameborder=0></iframe>)
