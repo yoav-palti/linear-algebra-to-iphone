@@ -13,4 +13,10 @@ parts:
       title: "החזרות בחדר"
     - file: LTI/noise_removal_examples
       title: "דוגמה לתגובה בתדר בתור מסנן רעשים"
+  - caption: "מעגלי RLC"
+    chapters:
+    - file: RLC/RC_intro
+      title: "מעגלי RC"
+    - file: RLC/RLC_intro
+      title: "מעגלי RC"
 
