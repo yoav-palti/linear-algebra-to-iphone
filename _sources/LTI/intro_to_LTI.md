@@ -15,7 +15,7 @@
 
   דוגמאות:
     * $p(t)$ לחץ כפונקציה של זמן - כלומר אות אקוסטי
-      ![sound_wave.png](sound_wave.png)
+      ![sound_wave.png](images/sound_wave.png)
     * $V(t)$ מתח כפונקציה של זמן
     * $I(t)$ זרם כפונקציה של זמן
     * $T(t)$ טמפרטורה כפונקציה של זמן
@@ -30,7 +30,7 @@ $$
 T:\underset{input}{\left\{ \underbrace{x\left(t\right)}\right\} }=\underset{output}{\underbrace{y\left(t\right)}}
 $$
 
-![LTI_diagram.png](LTI_diagram.png)
+![LTI_diagram.png](images/LTI_diagram.png)
 למשל: מיקרופון היא מערכת שמירה לחץ למתח/זרם חשמלי
 
 $$
@@ -76,7 +76,7 @@ $$
 אנחנו כל כך רגילים לחשוב על נגד בתור רכיב עם התנגדות שאנחנו מוכנים
 לחשוב על מודל בו "ההתנגדות משתנה". כלומר השיפוע של הגרף $V\left(I\right)$ משתנה
 הקשר בין הזרם למטח יכול להראות לדוגמא ככה
-![non_linear_resistor.png](non_linear_resistor.png)
+![non_linear_resistor.png](images/non_linear_resistor.png)
  מכאן ניתן לראות שאם לדוגמא אנחנו מזרימים זרם $I_{1}\left(t\right)=1$ וזרם $I_{2}\left(t\right)=2$ המערכת כבר לא לינארית
 כלומר שאם ניקח לדוגמה את הקומבינציה $I\left(t\right)=2I_{1}\left(t\right)+I_{2}\left(t\right)=4$ היינו מצפים
 לקבל מטח:
@@ -89,7 +89,7 @@ $$
 וגם כאן במערכת של הגנד אם היינו מגבילים את עצמנו לזרמים נמוכים היינו יכולים להתייחס למערכת כלינארית
 
 ### שרשור מערכות לינאריות _(היא מערכת לינארית)_
-![LTI_stack.png](LTI_stack.png)
+![LTI_stack.png](images/LTI_stack.png)
 נניח שיש לנו שתי מערכות $T$ ו$S$. האם גם המערכת הכוללת היא לינארית?
 קל לחשב:
 
@@ -104,7 +104,7 @@ $ \blacksquare$
 ### דוגגמא: ממברנה של מיקרופון
 בפועל כדי באמת להבין מה קורה צריך לפתור את משוואת הגלים על הממברנה
 ביחד עם תנאי שפה ואילוץ של האוויר. אבל אנחנו ניקח מודל פשטני
-![membrane.png](membrane.png)
+![membrane.png](images/membrane.png)
 כלומר יש גל לחץ שפוגע בממברנה והיא מתחילה להתנדנד
 לממברנה יש "קשיחות" או "מתיחות" שאותה נסמן ב$k$
 את שטח הממברנה נסמן ב$A$ ואת קבוע הדאיכה של התנודות ב$\gamma$
@@ -118,7 +118,7 @@ F\left(t\right)=Ap\left(t\right)-\gamma\dot{x}-kx
 $$
 
 כלומר קיבלנו מערכת
-![membrane_lti.png](membrane_lti.png)
+![membrane_lti.png](images/membrane_lti.png)
 אשר הקלט שלה הוא $p\left(t\right)$ והפלט שלה הוא $x\left(t\right)$
 כדי למצוא את $x\left(t\right)$ צריך לפתור משוואה דיפרנציאלית. אבל כדי להראות שהיא לינארית אנחנו לא צריכים לדעת לפתור משוואות דיפרנציאליות
 אלא רק להראות שהיא מקיימת את תכונת הלינאריות. נניח שיש לנו שני קלטים $p_{1}\left(t\right)$ ו$p_{2}\left(t\right)$

@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=79aa88a7" />
+    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=e249670e" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -66,6 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'LTI/impulse_response';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="תגובת בתדר" href="frequency_response.html" />
     <link rel="prev" title="מערכות לינאריות" href="intro_to_LTI.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -174,6 +175,9 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">תגובת להלם</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frequency_response.html">תגובת בתדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wave_in_a_room.html">החזרות בחדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
 </ul>
 
     </div>
@@ -338,7 +342,7 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lti">מערכות LTI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">הגדמה של קונבולוציה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">הדגמה של קונבולוציה</a></li>
 </ul>
             </nav>
         </div>
@@ -505,7 +509,13 @@ h\left(t,\tau\right)=\sum_{i}\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\
 </div>
 </section>
 <section id="id8">
-<h2>הגדמה של קונבולוציה<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2>הדגמה של קונבולוציה<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>מוזמנים לבדוק את הדברים הבאים:</p>
+<ul class="simple">
+<li><p>מה קורה כאשר פונקציית תגובה להלם היא מלבן מאוד צר</p></li>
+<li><p>מה קורה כאשר פונקציית תגובה להלם היא מלבן מאוד רחב</p></li>
+<li><p>מה אם גם התגובה להלם וגם הקלט הם גאוסיינים?</p></li>
+</ul>
 <p>(<iframe src="https://phiresky.github.io/convolution-demo/" width="100%" height="1000px" style="border: 1px solid #ccc" frameborder=0></iframe>)</p>
 </section>
 </section>
@@ -549,6 +559,15 @@ h\left(t,\tau\right)=\sum_{i}\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\
         <p class="prev-next-title">מערכות לינאריות</p>
       </div>
     </a>
+    <a class="right-next"
+       href="frequency_response.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">תגובת בתדר</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -575,7 +594,7 @@ h\left(t,\tau\right)=\sum_{i}\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lti">מערכות LTI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">הגדמה של קונבולוציה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">הדגמה של קונבולוציה</a></li>
 </ul>
   </nav></div>
 
