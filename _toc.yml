@@ -9,6 +9,8 @@ parts:
       title: "תגובת להלם"
     - file: LTI/frequency_response
       title: "תגובת בתדר"
+    - file: LTI/wave_in_a_room
+      title: "החזרות בחדר"
     - file: LTI/noise_removal_examples
       title: "דוגמה לתגובה בתדר בתור מסנן רעשים"
 
