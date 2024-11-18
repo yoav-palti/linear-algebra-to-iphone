@@ -31,6 +31,7 @@ $$\left|\tilde{H}\left(\omega\right)\right|=\sqrt{\frac{2}{\pi}}\left|\alpha_{1}
 $$\arg\left(\tilde{H}\left(\omega\right)\right)=\arg\left(\alpha_{1}\right)+\omega\frac{\tau_{1}+\tau_{2}}{2}$$
 
 <iframe src="https://www.geogebra.org/material/iframe/id/uxfzrrp5" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
+<a href="https://www.geogebra.org/material/iframe/id/uxfzrrp5" target="_blank">לפתיחה בחלון נפרד</a>
 
 נראה עכשיו איך זה נשמע
 

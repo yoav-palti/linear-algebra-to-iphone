@@ -1,0 +1,722 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>מעגלי RC &#8212; Linear Algebra to iPhone 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=e249670e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'RLC/RC_intro';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="מעגלי RLC" href="RLC_intro.html" />
+    <link rel="prev" title="סינון רעשים" href="../LTI/noise_removal_examples.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Linear Algebra to iPhone 1 - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Linear Algebra to iPhone 1 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/intro.html">
+                    מאלגברה לינארית לאייפון
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../LTI/intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/impulse_response.html">תגובת להלם</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/frequency_response.html">תגובת בתדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/wave_in_a_room.html">החזרות בחדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">מעגלי RLC</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">מעגלי RC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RLC_intro.html">מעגלי RC</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/yoav-palti/linear-algebra-to-iphone" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/RLC/RC_intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>מעגלי RC</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">תזכורת - חוקי קירכהוף</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">דוגמה ראשונה - מעגל RC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#db">הצגה ב-dB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">תכנון מסנן שמע</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rc-lpf">מעגל RC כ-LPF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rc-hpf">מעגל RC כ-HPF</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="rc">
+<h1>מעגלי RC<a class="headerlink" href="#rc" title="Link to this heading">#</a></h1>
+<p>כדוגמה מובילה נתחיל לחקור מעגלי RLC ונבין איך אנחנו יכולים לאפיין אותם עם החוקים שפיתחנו עד עכשיו
+ניקח את החוקים שאנחנו מכירים מחשמל. אם מודדים מתח במקביל לרכיבים מקבלים:</p>
+<ul class="simple">
+<li><p>חוק אוהם - <span class="math notranslate nohighlight">\(V_{R}\left(t\right)=R\cdot I\left(t\right)\)</span></p></li>
+<li><p>קבל - <span class="math notranslate nohighlight">\(V_{C}\left(t\right)=\frac{1}{C}\cdot Q\left(t\right)=\frac{1}{C}\cdot\intop_{-\infty}^{t}I\left(\tau\right)d\tau\)</span></p></li>
+<li><p>חוק לנץ - <span class="math notranslate nohighlight">\(V_{L}\left(t\right)=L\frac{d}{dt}I\left(t\right)\)</span></p></li>
+</ul>
+<p>אפשר להסתכל על הנוסחאות הללו במחרב התדר:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\tilde{V_{R}}\left(\omega\right)=R\cdot\tilde{I}\left(\omega\right)\Rightarrow Z_{R}=R\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\tilde{V_{C}}\left(\omega\right)=\frac{1}{i\omega C}\tilde{I}\left(\omega\right)\Rightarrow Z_{C}=\frac{1}{i\omega C}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\tilde{V_{L}}\left(\omega\right)=i\omega L\tilde{I}\left(\omega\right)\Rightarrow Z_{L}=i\omega L\)</span></p></li>
+</ul>
+<p>קיבלנו שכל אחר מהרכיבים האלו הוא מערכת LTI שממירה זרם למתח
+<img alt="RLC_system.png" src="../_images/RC_system.png" /></p>
+<p>קיבלנו שהעכבה (אימפדנס) <span class="math notranslate nohighlight">\(Z\left(\omega\right)\)</span> היא מקרה פרטי של פונקציית תמסורת ושרכיבי RLC הם מערכות LTI</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>רכיב</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(-h\left(t\right)\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Z\left(\omega\right)=\tilde{H}\left(\omega\right)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>R</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(R\delta\left(t\right)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(R\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>L</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(L\frac{d}{dt}\delta\left(t\right)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(i\omega L\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>C</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{1}{C}\cdot\intop_{-\infty}^{t}\delta\left(\tau\right)d\tau=\frac{1}{C}\theta\left(t\right)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{1}{i\omega C}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="id1">
+<h2>תזכורת - חוקי קירכהוף<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>חוק הצומת - סכום הזרמים בכל צומת הוא 0</p></li>
+<li><p>חוק המתחים - סכום המתחים על פני לולאה הוא 0</p></li>
+</ul>
+<p>כדי להשתמש בחוקים האלו אנו מניחים כי:</p>
+<ul class="simple">
+<li><p>המויכים אידיאליים (חסרי התנגדות)</p></li>
+<li><p>אורך הרכיבים קצר ביחס לאורך הגל של המתח - בקורס הבא לומדים על קוי תמסורת</p></li>
+<li><p>השדה שלנו משמר <span class="math notranslate nohighlight">\(\nabla\times\vec{E}=0\)</span> -כלומר אין שינוי זמני בשדה המגנטי</p></li>
+<li><p>אין אגירת מטען באף צומת במעגל</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>דוגמה ראשונה - מעגל RC<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p><img alt="RC_diagram.png" src="../_images/RC_diagram.png" />
+נשתמש בחוק קירכהוף למתחים ונקבל כי:</p>
+<div class="math notranslate nohighlight">
+\[V_{in}\left(t\right)=V_{R}\left(t\right)+V_{C}\left(t\right)\]</div>
+<p>נעבור למרחב התדר
+$<span class="math notranslate nohighlight">\(\tilde{V_{in}}\left(\omega\right)=R\tilde{I}\left(\omega\right)+\frac{1}{i\omega C}\tilde{I}\left(\omega\right)=\left(R+\frac{1}{i\omega C}\right)\tilde{I}\left(\omega\right)\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\tilde{I}\left(\omega\right)=\frac{1}{R+\frac{1}{i\omega C}}\tilde{V_{in}}\left(\omega\right)\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\tilde{V}_{out}\left(\omega\right)=\tilde{V_{C}}\left(\omega\right)=\frac{1}{i\omega C}\tilde{I}\left(\omega\right)=\frac{1}{i\omega C}\cdot\frac{1}{R+\frac{1}{i\omega C}}\tilde{V_{in}}\left(\omega\right)\)</span>$</p>
+<p>וקיבלנו את פונקציית התמסורת:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{H}\left(\omega\right)=\frac{1}{i\omega C}\cdot\frac{1}{R+\frac{1}{i\omega C}}=\frac{1}{1+i\omega RC}\]</div>
+<p>ואם נסמן את הזמן האופייני <span class="math notranslate nohighlight">\(\tau=RC\)</span> נקבל:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{H}\left(\omega\right)=\frac{1}{1+i\omega\tau}\]</div>
+<iframe src="https://www.geogebra.org/material/iframe/id/ta47hhwh" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
+<a href="https://www.geogebra.org/material/iframe/id/ta47hhwh" target="_blank">לפתיחה בחלון נפרד</a>
+<p>נשים לב שקיבלנו מערכת שמעבירה תדרים נמוכים אבל לא תדרים גבוהים למערכת לינארית כזאת נקרא “מסנן מעביר נמוכים” או בשם המוכר יותר Low Pass Filter (LPF)</p>
+</section>
+<section id="db">
+<h2>הצגה ב-dB<a class="headerlink" href="#db" title="Link to this heading">#</a></h2>
+<p>מעבר למתמטיקה, נוסחאות ואינטואיציה לפעמים צריך למצוא דרך נוחה להציג ולכתוב נתונים. מהנדסים (ואני ממליץ גם לכם) משתמשים ב-dB או בשם היות מוכר שלו דציבל.
+זאת דרך למדוד גדלים בסקאלה לוגריתמית בעלת בסיס 10. באופן כללי כאשר אנו רושמים dB זה לעשות <span class="math notranslate nohighlight">\(10\log_{10}\left(\frac{size}{ref}\right)\)</span> כלומר אנחנו מציגים בסקאלה לוגריתמית את הגודל חסר היחידות שלנו. חשוב תמיד לציין מה הרפרנס שביחס אליו אנחנו מודדים. ולכן הרבה פעמים מציינים את זה מיד אחרי הסימן dB. דוגמאות יעזרו להבין:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(dB=dB_{Watt}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(dBm=dB_{mWatt}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(\frac{P}{1[Watt]}\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(\frac{V}{1[Volt]}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(10\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(40\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(10\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\sqrt{10}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(20\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(50\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(100\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(10\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(30\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(60\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(1000\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\sqrt{1000}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(3\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(33\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(2\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\sqrt{2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(-3\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(27\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{1}{2}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(-10\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(20\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0.1\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\sqrt{0.1}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(-13\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(17\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0.05\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\sqrt{0.05}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(-16\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(14\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0.025\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\sqrt{0.025}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(-120\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(-90\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(10^{-12}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(10^{-6}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>שימו לב שאנחנו תמיד מציינים את הרפרנס ביחס אליו אנחנו מודדים! אם לא מציינים כלום כנראה שמתכוונים ל-Watt ואם רושמים dBm אז כנראה ל-mW
+למה לנו להשתמש בסקאלה הזו?</p>
+<ul class="simple">
+<li><p>ניתן לייצג טווח עוצמות גדול</p></li>
+<li><p>במקום להכפיל אנחנו מחברים</p></li>
+<li><p>כל החושים שלנו הם לוגריתמיים (יחסיים)</p></li>
+</ul>
+<p>לדוגמה בפונקציית התמסורת של מעגל ה-RC שקיבלנו:</p>
+<div class="math notranslate nohighlight">
+\[\left|\tilde{H}\left(\omega\right)\right|^{2}=\left|\frac{1}{1+i\omega\tau}\right|^{2}=\frac{1}{1+\left(\omega\tau\right)^{2}}\]</div>
+<div class="math notranslate nohighlight">
+\[10\log_{10}\left(\left|\tilde{H}\left(\omega\right)\right|^{2}\right)=10\log_{10}\left(\frac{1}{1+\left(\omega\tau\right)^{2}}\right)=-10\log_{10}\left(1+\left(\omega\tau\right)^{2}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[10\log_{10}\left(\left|\tilde{H}\left(\omega\right)\right|^{2}\right)\underset{\omega\tau\gg1}{\underbrace{\approx}}-20\log_{10}\left(\omega\tau\right)\]</div>
+<p>אנחנו מקבלים שעל כל הכפלה של <span class="math notranslate nohighlight">\(\omega\)</span> יש ירידה של 6dB. זה נקרא 6dB לאוקטבה
+אנחנו רוצים פילטר אופטימלי. כלומר אחד שהוא 0dB בתחום מסויים ואז צונח ל-<span class="math notranslate nohighlight">\(-\infty\)</span> בבת אחת. איך נקבל פילטר חד יותר?</p>
+<ul class="simple">
+<li><p>נשרשר כמה פילטרים אחד אחרי השני</p></li>
+<li><p>נבנה פילטר מורכב יותר מלחתחילה</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>תכנון מסנן שמע<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>נרצה לתכנן מעגל RC שמסנן את כל התדרים שאנחנו לא שומעים. כלומר על תדר מעל 20kHz.
+נסו להשתמש ב-applet למעלה כדי לתכנן פילטר כזה.
+<img alt="sound_RC_LPF.png" src="../_images/sound_RC_LPF.png" />
+כמו שרואים בתמונה זה לא מאוד מוצלח. או שאתה מסנן תדרים שאתה רוצה או שאתה נותן לעוד תדרים לעבור</p>
+<p>באופן כללי שמתכננים מסנן (filter) חשוב לשים לב לתכונות הבאות:</p>
+<ul class="simple">
+<li><p>חדות - כמה חד המעבר מ”העברה” ל”ניחות”</p></li>
+<li><p>תדר קטעון <span class="math notranslate nohighlight">\(\omega_{c}\)</span></p></li>
+<li><p>כמה הוא באמת מעביר בחלק שהוא מעביר <span class="math notranslate nohighlight">\(\left|\tilde{H}\left(\omega\right)\right|\approx1\)</span></p></li>
+<li><p>כמה הוא מנחית בתחום תדרי הניחות</p></li>
+</ul>
+</section>
+<section id="rc-lpf">
+<h2>מעגל RC כ-LPF<a class="headerlink" href="#rc-lpf" title="Link to this heading">#</a></h2>
+<p>נרצה להבין קצת יותר טוב מה קורה ובשביל זה נחפש את פונקציית התגובה להלם.
+יש לנו שתי דרכים לעשות את זה:</p>
+<ol class="arabic simple">
+<li><p>לעשות טרנספורם פורייה הפוך ל<span class="math notranslate nohighlight">\(\tilde{H}\left(\omega\right)\)</span> - <span class="math notranslate nohighlight">\(h\left(t\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\tilde{H}\left(\omega\right)e^{i\omega t}dt\)</span></p></li>
+<li><p>לפתור את המשוואה הדיפרנציאלית עבור מתח נכנס בצורת דלתא</p></li>
+</ol>
+<p>נזכיר כי:</p>
+<div class="math notranslate nohighlight">
+\[\delta\left(t\right)=V_{in}\left(t\right)=V_{R}\left(t\right)+V_{C}\left(t\right)=RI\left(t\right)+\frac{1}{C}\intop_{-\infty}^{t}I\left(t^{\prime}\right)dt^{\prime}\]</div>
+<p>וגם:</p>
+<div class="math notranslate nohighlight">
+\[V_{out}\left(t\right)=V_{C}\left(t\right)=\frac{1}{C}\intop_{-\infty}^{t}I\left(t^{\prime}\right)dt^{\prime}\]</div>
+<p>ולכן:</p>
+<div class="math notranslate nohighlight">
+\[I\left(t\right)=C\frac{d}{dt}V_{out}\left(t\right)\]</div>
+<p>ונקבל:</p>
+<div class="math notranslate nohighlight">
+\[\delta\left(t\right)=RC\frac{d}{dt}V_{out}\left(t\right)+V_{out}\left(t\right)\]</div>
+<p>אנחנו מחפשים פתרון קוזאלי ולכן מאוד כדאי שיהיה <span class="math notranslate nohighlight">\(V_{out}\left(t\right)=\theta\left(t\right)\cdot f\left(t\right)\)</span>
+נשתמש ב-<span class="math notranslate nohighlight">\(\frac{d}{dt}V_{out}\left(t\right)=\delta\left(t\right)\cdot f\left(t\right)+\theta\left(t\right)\cdot\frac{d}{dt}f\left(t\right)\)</span>
+ונקבל:</p>
+<div class="math notranslate nohighlight">
+\[\delta\left(t\right)=RC\left[\delta\left(t\right)\cdot f\left(t\right)+\theta\left(t\right)\cdot\frac{d}{dt}f\left(t\right)\right]+\theta\left(t\right)\cdot f\left(t\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\Downarrow\]</div>
+<div class="math notranslate nohighlight">
+\[\delta\left(t\right)=RC\delta\left(t\right)\cdot f\left(t\right)+\theta\left(t\right)\cdot\left[RC\frac{d}{dt}f\left(t\right)+f\left(t\right)\right]\]</div>
+<p>נקבל מזה שני תנאים:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(f\left(0\right)=\frac{1}{RC}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(RC\frac{d}{dt}f\left(t\right)+f\left(t\right)=0\)</span></p></li>
+</ol>
+<p>הפתרון הוא כמובן <span class="math notranslate nohighlight">\(f\left(t\right)=\frac{1}{RC}e^{-\frac{t}{RC}}\)</span>
+ולכן נקבל כי:</p>
+<div class="math notranslate nohighlight">
+\[V_{out}\left(t\right)=h\left(t\right)=\frac{1}{RC}\theta\left(t\right)e^{-\frac{t}{RC}}\]</div>
+<p>נשים לב שגם כאן יש לנו יחסי פורייה יפים. ואם פונקציית התגובה להלם דואכת מהר (צרה) אז רוחב הסרט גבוה (רחב) ולהפך</p>
+<p>נשים לב שעבור תדרים גבוהים:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{H}\left(\omega\right)=\frac{1}{1+i\omega RC}\underset{\frac{1}{RC}\ll\omega}{\underbrace{\approx}}\frac{1}{RC}\frac{1}{i\omega}\]</div>
+<p>נקבל שפונקציית התגובה להלם נראית כמו אינטגרציה בזמן!</p>
+</section>
+<section id="rc-hpf">
+<h2>מעגל RC כ-HPF<a class="headerlink" href="#rc-hpf" title="Link to this heading">#</a></h2>
+<p><img alt="RC_HPF_diagram.png" src="../_images/RC_HPF_diagram.png" />
+הפעם נקבל:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{V}_{out}\left(\omega\right)=\tilde{V}_{R}\left(\omega\right)=\tilde{V}_{in}\left(\omega\right)-\tilde{V}_{C}\left(\omega\right)=\tilde{V}_{in}\left(\omega\right)-\frac{\tilde{V}_{in}\left(\omega\right)}{1+i\omega RC}\]</div>
+<div class="math notranslate nohighlight">
+\[\tilde{V}_{out}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}\cdot\tilde{V}_{in}\left(\omega\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\tilde{H}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}\]</div>
+<p>באופן לא מפתיע קיבלנו 1 מינוס מה שקיבלנו קודם. “המתח מתחלק על הרכיבים”
+גם כאן נין לעשות קירוב לתדרים גבוהים ולקבל:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{H}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}=\frac{1}{1+\frac{1}{i\omega RC}}\underset{\frac{1}{RC}\ll\omega}{\underbrace{\approx}}RC\cdot i\omega\]</div>
+<p>כלומר מעגל גזירה!</p>
+<p>מה היא פונקציית התגובה להלם?</p>
+<div class="math notranslate nohighlight">
+\[\tilde{H}_{HPF}\left(\omega\right)=1-\tilde{H}_{LPF}\left(\omega\right)\]</div>
+<div class="math notranslate nohighlight">
+\[h_{HPF}\left(t\right)=\delta\left(t\right)-h_{LPF}\left(t\right)=\delta\left(t\right)-\frac{1}{RC}\theta\left(t\right)e^{-\frac{t}{RC}}\]</div>
+<p>האינטואיציה של זה היא שאנחנו בהתחלה מודדים את ההלם ואז אחרכך יש זרם שלילי בנגד בגלל הפריקה של הקבל</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./RLC"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../LTI/noise_removal_examples.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">סינון רעשים</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="RLC_intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">מעגלי RLC</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">תזכורת - חוקי קירכהוף</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">דוגמה ראשונה - מעגל RC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#db">הצגה ב-dB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">תכנון מסנן שמע</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rc-lpf">מעגל RC כ-LPF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rc-hpf">מעגל RC כ-HPF</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yoav Palti
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

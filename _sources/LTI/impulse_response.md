@@ -163,4 +163,5 @@ $$x\left(t\right)\ast h\left(t\right)\equiv\intop_{-\infty}^{\infty}x\left(\tau\
 - מה קורה כאשר פונקציית תגובה להלם היא מלבן מאוד רחב
 - מה אם גם התגובה להלם וגם הקלט הם גאוסיינים?
 
-(<iframe src="https://phiresky.github.io/convolution-demo/" width="100%" height="1000px" style="border: 1px solid #ccc" frameborder=0></iframe>)
+<iframe src="https://phiresky.github.io/convolution-demo/" width="100%" height="1000px" style="border: 1px solid #ccc" frameborder=0></iframe>
+<a href="https://phiresky.github.io/convolution-demo/" target="_blank">לפתיחה בחלון נפרד</a>
