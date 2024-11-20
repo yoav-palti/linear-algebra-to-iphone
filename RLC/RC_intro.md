@@ -1,4 +1,4 @@
-# מעגלי RLC
+# מעגלי RC
 
 כדוגמה מובילה נתחיל לחקור מעגלי RLC ונבין איך אנחנו יכולים לאפיין אותם עם החוקים שפיתחנו עד עכשיו
 ניקח את החוקים שאנחנו מכירים מחשמל. אם מודדים מתח במקביל לרכיבים מקבלים:
@@ -38,10 +38,12 @@
 נשתמש בחוק קירכהוף למתחים ונקבל כי:
 
 $$V_{in}\left(t\right)=V_{R}\left(t\right)+V_{C}\left(t\right)$$
+
 נעבור למרחב התדר
+
 $$\tilde{V_{in}}\left(\omega\right)=R\tilde{I}\left(\omega\right)+\frac{1}{i\omega C}\tilde{I}\left(\omega\right)=\left(R+\frac{1}{i\omega C}\right)\tilde{I}\left(\omega\right)$$
 $$\tilde{I}\left(\omega\right)=\frac{1}{R+\frac{1}{i\omega C}}\tilde{V_{in}}\left(\omega\right)$$
-$$\tilde{V}_{out}\left(t\right)=\tilde{V_{C}}\left(\omega\right)=\frac{1}{i\omega C}\tilde{I}\left(\omega\right)=\frac{1}{i\omega C}\cdot\frac{1}{R+\frac{1}{i\omega C}}\tilde{V_{in}}\left(\omega\right)$$
+$$\tilde{V}_{out}\left(\omega\right)=\tilde{V_{C}}\left(\omega\right)=\frac{1}{i\omega C}\tilde{I}\left(\omega\right)=\frac{1}{i\omega C}\cdot\frac{1}{R+\frac{1}{i\omega C}}\tilde{V_{in}}\left(\omega\right)$$
 
 וקיבלנו את פונקציית התמסורת:
 
