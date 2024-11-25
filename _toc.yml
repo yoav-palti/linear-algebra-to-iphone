@@ -21,4 +21,10 @@ parts:
       title: "מעגלי RLC"
     - file: RLC/power_on_load
       title: "הספק על רכיבים"
+  - caption: "שידור אנלוגי"
+    chapters:
+    - file: analog_communication/analog_intro
+      title: "מבוא לתקשורת אנלוגית"
+    - file: analog_communication/AM
+      title: "אפנון AM"
 
