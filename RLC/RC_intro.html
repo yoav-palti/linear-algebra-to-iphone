@@ -182,7 +182,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">מעגלי RLC</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">מעגלי RC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RLC_intro.html">מעגלי RC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RLC_intro.html">מעגלי RLC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_on_load.html">הספק על רכיבים</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור אנלוגי</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/analog_intro.html">מבוא לתקשורת אנלוגית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/AM.html">אפנון AM</a></li>
 </ul>
 
     </div>
@@ -416,10 +422,13 @@
 נשתמש בחוק קירכהוף למתחים ונקבל כי:</p>
 <div class="math notranslate nohighlight">
 \[V_{in}\left(t\right)=V_{R}\left(t\right)+V_{C}\left(t\right)\]</div>
-<p>נעבור למרחב התדר
-$<span class="math notranslate nohighlight">\(\tilde{V_{in}}\left(\omega\right)=R\tilde{I}\left(\omega\right)+\frac{1}{i\omega C}\tilde{I}\left(\omega\right)=\left(R+\frac{1}{i\omega C}\right)\tilde{I}\left(\omega\right)\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(\tilde{I}\left(\omega\right)=\frac{1}{R+\frac{1}{i\omega C}}\tilde{V_{in}}\left(\omega\right)\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(\tilde{V}_{out}\left(\omega\right)=\tilde{V_{C}}\left(\omega\right)=\frac{1}{i\omega C}\tilde{I}\left(\omega\right)=\frac{1}{i\omega C}\cdot\frac{1}{R+\frac{1}{i\omega C}}\tilde{V_{in}}\left(\omega\right)\)</span>$</p>
+<p>נעבור למרחב התדר</p>
+<div class="math notranslate nohighlight">
+\[\tilde{V_{in}}\left(\omega\right)=R\tilde{I}\left(\omega\right)+\frac{1}{i\omega C}\tilde{I}\left(\omega\right)=\left(R+\frac{1}{i\omega C}\right)\tilde{I}\left(\omega\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\tilde{I}\left(\omega\right)=\frac{1}{R+\frac{1}{i\omega C}}\tilde{V_{in}}\left(\omega\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\tilde{V}_{out}\left(\omega\right)=\tilde{V_{C}}\left(\omega\right)=\frac{1}{i\omega C}\tilde{I}\left(\omega\right)=\frac{1}{i\omega C}\cdot\frac{1}{R+\frac{1}{i\omega C}}\tilde{V_{in}}\left(\omega\right)\]</div>
 <p>וקיבלנו את פונקציית התמסורת:</p>
 <div class="math notranslate nohighlight">
 \[\tilde{H}\left(\omega\right)=\frac{1}{i\omega C}\cdot\frac{1}{R+\frac{1}{i\omega C}}=\frac{1}{1+i\omega RC}\]</div>
@@ -564,7 +573,7 @@ $<span class="math notranslate nohighlight">\(\tilde{V_{in}}\left(\omega\right)=
 ולכן נקבל כי:</p>
 <div class="math notranslate nohighlight">
 \[V_{out}\left(t\right)=h\left(t\right)=\frac{1}{RC}\theta\left(t\right)e^{-\frac{t}{RC}}\]</div>
-<p>נשים לב שגם כאן יש לנו יחסי פורייה יפים. ואם פונקציית התגובה להלם דואכת מהר (צרה) אז רוחב הסרט גבוה (רחב) ולהפך</p>
+<p>נשים לב שגם כאן יש לנו יחסי פורייה יפים. ואם פונקציית התגובה להלם דועכת מהר (צרה) אז רוחב הסרט גבוה (רחב) ולהפך</p>
 <p>נשים לב שעבור תדרים גבוהים:</p>
 <div class="math notranslate nohighlight">
 \[\tilde{H}\left(\omega\right)=\frac{1}{1+i\omega RC}\underset{\frac{1}{RC}\ll\omega}{\underbrace{\approx}}\frac{1}{RC}\frac{1}{i\omega}\]</div>
@@ -583,7 +592,7 @@ $<span class="math notranslate nohighlight">\(\tilde{V_{in}}\left(\omega\right)=
 <p>באופן לא מפתיע קיבלנו 1 מינוס מה שקיבלנו קודם. “המתח מתחלק על הרכיבים”
 גם כאן נין לעשות קירוב לתדרים גבוהים ולקבל:</p>
 <div class="math notranslate nohighlight">
-\[\tilde{H}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}=\frac{1}{1+\frac{1}{i\omega RC}}\underset{\frac{1}{RC}\ll\omega}{\underbrace{\approx}}RC\cdot i\omega\]</div>
+\[\tilde{H}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}=\frac{1}{1+\frac{1}{i\omega RC}}\underset{\omega\ll\frac{1}{RC}}{\underbrace{\approx}}RC\cdot i\omega\]</div>
 <p>כלומר מעגל גזירה!</p>
 <p>מה היא פונקציית התגובה להלם?</p>
 <div class="math notranslate nohighlight">

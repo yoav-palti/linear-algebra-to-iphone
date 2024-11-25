@@ -66,6 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'RLC/RLC_intro';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="הספק על רכיב מרוכב" href="power_on_load.html" />
     <link rel="prev" title="מעגלי RC" href="RC_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -181,7 +182,13 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">מעגלי RLC</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="RC_intro.html">מעגלי RC</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">מעגלי RC</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">מעגלי RLC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="power_on_load.html">הספק על רכיבים</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור אנלוגי</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/analog_intro.html">מבוא לתקשורת אנלוגית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/AM.html">אפנון AM</a></li>
 </ul>
 
     </div>
@@ -340,6 +347,8 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">בניית פילטר רדיו</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">הקבלה לאוסילטור הרמוני</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q-factor">Q-factor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">תגובה להלם של מעגל RLC ומספר אוסילציות בזמן מחזור</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">הגדרה אנרגטית ל-Q factor</a></li>
 </ul>
             </nav>
         </div>
@@ -384,7 +393,7 @@
 <a href="https://www.geogebra.org/material/iframe/id/fsmc5gwz" target="_blank">לפתיחה בחלון נפרד</a>
 <p>נסתכל על קצת גבולות של פונקציית התמסורת:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\tilde{H}\left(0\right)=1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\tilde{H}\left(0\right)=0\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\tilde{H}\left(\omega\right)\underset{\omega\ll\frac{R}{L},\frac{1}{RC},}{\underbrace{\approx}}RC\cdot i\omega\)</span> - קיבלנו מעגל גזירה עם הקבל והנגד</p></li>
 <li><p><span class="math notranslate nohighlight">\(\tilde{H}\left(\omega\right)\underset{\frac{1}{RC},\frac{R}{L}\ll\omega}{\underbrace{\approx}}\frac{R}{L}\frac{1}{i\omega}\)</span> - קיבלנו מעגל אינטגרציה עם הסליל והנגד</p></li>
 </ul>
@@ -443,7 +452,72 @@
 <p>במעגל שעושה Band Pass Filter (BPF) יש שני מספרים חשובים <span class="math notranslate nohighlight">\(\omega_{0}\)</span> (לפעמים יסומן כ-<span class="math notranslate nohighlight">\(\omega_{res}\)</span>) ו-<span class="math notranslate nohighlight">\(\Delta\omega\)</span> אשר קובעים את טיב הפילטר
 ליחס בינהם יש שם מיוחד:</p>
 <div class="math notranslate nohighlight">
-\[Q_{factor}=\frac{\omega_{0}}{\Delta\omega}\]</div>
+\[Q=\frac{\omega_{0}}{\Delta\omega}\]</div>
+<p>אתם יכולים לחשוב על זה בתור “צרות יחסית” או תוכלת חלקי סטיית תקן עבור משתנים סטטיסטים.</p>
+<p>לדוגמא עבור רדיו FM נקבל כי:</p>
+<div class="math notranslate nohighlight">
+\[Q=\frac{100\cdot10^{6}}{100\cdot10^{3}}=1000\]</div>
+<p>נשים לב שערך ה-Q חייב להתאים לצורך:</p>
+<ul class="simple">
+<li><p>במקלט רדיו כדי שיהיה לנו <span class="math notranslate nohighlight">\(Q\approx10^{3}\)</span></p></li>
+<li><p>אם אנחנו רוצים מערכת רחבת סרט אנחנו חייבים לקבל  <span class="math notranslate nohighlight">\(Q&lt;1\)</span></p>
+<ul>
+<li><p>למשל ברמקול אנחנו רוצים <span class="math notranslate nohighlight">\(\omega_{0}=2\pi\cdot\underset{10KHz}{\underbrace{10^{4}}},\Delta\omega=2\pi\cdot\underset{20KHz}{\underbrace{20\cdot10^{3}}}\)</span> ולכן נקבל כי <span class="math notranslate nohighlight">\(Q=\frac{1}{2}\)</span></p></li>
+</ul>
+</li>
+</ul>
+<p>במעגל RLC טורי נקבל כי:</p>
+<div class="math notranslate nohighlight">
+\[Q=\frac{1}{R}\sqrt{\frac{L}{C}}\]</div>
+</section>
+<section id="id3">
+<h2>תגובה להלם של מעגל RLC ומספר אוסילציות בזמן מחזור<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>עשינו כבר את ההקבלה לאוסילטור הרמוני ולכן נוכל לנחש יחסית בקלות כי:</p>
+<div class="math notranslate nohighlight">
+\[h\left(t\right)=A\frac{d}{dt}\left(\theta\left(t\right)e^{-\frac{t}{\tau}}\sin\left(\omega_{D}t\right)\right)\]</div>
+<p>ננסה להבין מה הם שלושת הקבועים שלנו:</p>
+<div class="math notranslate nohighlight">
+\[H\left(\omega\right)=iA\omega\left(\mathcal{F}\left[\theta\left(t\right)e^{-\frac{t}{\tau}}\right]\ast\frac{1}{2i}\left(\delta\left(\omega-\omega_{D}\right)-\delta\left(\omega+\omega_{D}\right)\right)\right)\]</div>
+<div class="math notranslate nohighlight">
+\[=iA\omega\left(\frac{1}{\sqrt{2\pi}}\frac{1}{\frac{1}{\tau}+i\omega}\ast\frac{1}{2i}\left(\delta\left(\omega-\omega_{D}\right)-\delta\left(\omega+\omega_{D}\right)\right)\right)\]</div>
+<div class="math notranslate nohighlight">
+\[=\frac{A\omega}{2\sqrt{2\pi}}\left(\frac{1}{\frac{1}{\tau}+i\left(\omega-\omega_{D}\right)}-\frac{1}{\frac{1}{\tau}+i\left(\omega+\omega_{D}\right)}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[=\frac{A\omega}{2\sqrt{2\pi}}\left(\frac{\frac{1}{\tau}+i\left(\omega+\omega_{D}\right)-\frac{1}{\tau}-i\left(\omega-\omega_{D}\right)}{\left(\frac{1}{\tau}+i\left(\omega-\omega_{D}\right)\right)\left(\frac{1}{\tau}+i\left(\omega+\omega_{D}\right)\right)}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[=\frac{A\omega}{2\sqrt{2\pi}}\left(\frac{2i\omega_{D}}{\frac{1}{\tau^{2}}+\frac{i}{\tau}\left[\left(\omega-\omega_{D}\right)+\left(\omega+\omega_{D}\right)\right]-\left(\omega-\omega_{D}\right)\left(\omega+\omega_{D}\right)}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[=\frac{A\omega}{\sqrt{2\pi}}\left(\frac{i\omega_{D}}{\frac{1}{\tau^{2}}+\frac{2i\omega}{\tau}-\omega^{2}+\omega_{D}^{2}}\right)=\frac{A\omega}{\sqrt{2\pi}}\frac{i\omega_{D}\frac{1}{i\omega}}{\frac{2}{\tau}-\frac{\omega^{2}}{i\omega}+\frac{\frac{1}{\tau^{2}}+\omega_{D}^{2}}{i\omega}}\]</div>
+<div class="math notranslate nohighlight">
+\[=\frac{A\omega_{D}}{\sqrt{2\pi}}\frac{1}{\frac{2}{\tau}-\frac{\omega^{2}}{i\omega}+\frac{\frac{1}{\tau^{2}}+\omega_{D}^{2}}{i\omega}}=\frac{AL\omega_{D}}{\sqrt{2\pi}}\frac{1}{\frac{2L}{\tau}+i\omega L+\frac{\left(\frac{1}{\tau^{2}}+\omega_{D}^{2}\right)L}{i\omega}}\]</div>
+<p>נדרוש שהקבועים יתנו לנו את פונקציית התמסורת שאנחנו מכירים ולכן:</p>
+<div class="math notranslate nohighlight">
+\[\frac{2L}{\tau}=R\Rightarrow\boxed{\tau=\frac{2L}{R}}\]</div>
+<div class="math notranslate nohighlight">
+\[\left(\frac{1}{\tau^{2}}+\omega_{D}^{2}\right)L=\frac{1}{C}\Rightarrow\boxed{\omega_{D}=\sqrt{\frac{1}{LC}-\frac{R^{2}}{4L^{2}}}}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{AL\omega_{D}}{\sqrt{2\pi}}=R\Rightarrow\boxed{A=\frac{2\sqrt{2\pi}}{\tau\omega_{D}}}\]</div>
+<p>כלומר קיבלנו שהסינוס לא מתנדנד בדיוק בתדר הרזוננס אבל עבור שיכוך מספיק קטן זה כן נכון. בנוסף קיבלנו כי הפונקצייה דועכת בקצב אופייני של <span class="math notranslate nohighlight">\(\tau=\frac{2L}{R}\)</span>
+נשים לב לעובדה חשובה. בחישוב של פונקציית התמסורת הסינוס רק נתן את שני השכפולים בשני הצדדים בעוד “צורת” הפונקצייה קיבלנו מהפונקצייה <span class="math notranslate nohighlight">\(\theta\left(t\right)e^{-\frac{t}{\tau}}\)</span> שקבעה את הרוחב
+נשים לב שהפורייה שלה בערך מוחלט הוא:</p>
+<div class="math notranslate nohighlight">
+\[\left|\mathcal{F}\left[\theta\left(t\right)e^{-\frac{t}{\tau}}\right]\right|^{2}=\left|\frac{1}{\frac{1}{\tau}+i\omega}\right|^{2}=\frac{1}{\frac{1}{\tau^{2}}+\omega^{2}}\]</div>
+<p>כלומר היא יורדת לחצי גובה עבור: <span class="math notranslate nohighlight">\(\omega_{\pm}=\frac{1}{\tau}\Rightarrow\Delta\omega\approx2\frac{1}{\tau}=\frac{R}{L}\)</span>
+יבלנו בדרך נוספת את העבודה שהרוחב הוא שאנחנו מצפים.</p>
+<p>בנוסף אם יש שיכוך קטן נקבל כי הפונקצייה מתנדנדת בתדר <span class="math notranslate nohighlight">\(\omega_{D}\approx\omega_{0}=\frac{1}{\sqrt{LC}}\)</span>ולכן נקבל כי:</p>
+<div class="math notranslate nohighlight">
+\[Q=\frac{\omega_{0}}{\Delta\omega}\approx\frac{\omega_{D}}{2\frac{1}{\tau}}=\frac{2\pi\frac{1}{T}}{2\frac{1}{\tau}}=\underset{\text{הכיאד}-\text{ןמזב}-\text{תויצליסוא}-\text{תומכ}}{\pi\underbrace{\frac{\tau}{T}}}\]</div>
+<p>קיבלנו עוד “הגדרה” ל-Q אשר אומרת שהוא מתאר (עד כדי פקטור) את מספר האוסילציות שהתגובה להלם עושה לפני שהיא דועכת. אנחנו יכולים לשים לב שאם אנחנו רוצים מערכת “רחבת סרט” אנחנו צריכים Q נמוך כלומר מערכת שנמצאת בריסון משמעותי.</p>
+</section>
+<section id="id4">
+<h2>הגדרה אנרגטית ל-Q factor<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>ישנה הגדרה נוספת ל-Q-factor אשר מגיע מאנרגיה:</p>
+<div class="math notranslate nohighlight">
+\[Q\equiv2\pi\frac{E_{store}}{E_{lost-per-T}}\]</div>
+<p>נסתכל שוב על תגובת המעגל להלם
+נשים לב שבמעגל המתח על הקבל תמיד בהפרש פאזה של <span class="math notranslate nohighlight">\(\frac{\pi}{2}\)</span> ביחס לזרם (רמז - אימפדנס של קבל). ולכן כאשר הזרם מקסימלי המתח הוא אפס וכל האנרגיה אגורה בסליל. לכן נוכל לרשום:</p>
+<div class="math notranslate nohighlight">
+\[Q=2\pi\frac{E_{store}}{E_{lost-per-cycle}}=\frac{2\pi\frac{1}{2}LI_{max}^{2}}{TRI_{rms}^{2}}=\frac{2\pi L}{TR}=\frac{\omega_{0}}{\Delta\omega}\]</div>
 </section>
 </section>
 
@@ -486,6 +560,15 @@
         <p class="prev-next-title">מעגלי RC</p>
       </div>
     </a>
+    <a class="right-next"
+       href="power_on_load.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">הספק על רכיב מרוכב</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -506,6 +589,8 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">בניית פילטר רדיו</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">הקבלה לאוסילטור הרמוני</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q-factor">Q-factor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">תגובה להלם של מעגל RLC ומספר אוסילציות בזמן מחזור</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">הגדרה אנרגטית ל-Q factor</a></li>
 </ul>
   </nav></div>
 

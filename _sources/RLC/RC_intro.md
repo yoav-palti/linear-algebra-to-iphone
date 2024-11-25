@@ -38,7 +38,9 @@
 נשתמש בחוק קירכהוף למתחים ונקבל כי:
 
 $$V_{in}\left(t\right)=V_{R}\left(t\right)+V_{C}\left(t\right)$$
+
 נעבור למרחב התדר
+
 $$\tilde{V_{in}}\left(\omega\right)=R\tilde{I}\left(\omega\right)+\frac{1}{i\omega C}\tilde{I}\left(\omega\right)=\left(R+\frac{1}{i\omega C}\right)\tilde{I}\left(\omega\right)$$
 $$\tilde{I}\left(\omega\right)=\frac{1}{R+\frac{1}{i\omega C}}\tilde{V_{in}}\left(\omega\right)$$
 $$\tilde{V}_{out}\left(\omega\right)=\tilde{V_{C}}\left(\omega\right)=\frac{1}{i\omega C}\tilde{I}\left(\omega\right)=\frac{1}{i\omega C}\cdot\frac{1}{R+\frac{1}{i\omega C}}\tilde{V_{in}}\left(\omega\right)$$
@@ -141,7 +143,7 @@ $$\delta\left(t\right)=RC\delta\left(t\right)\cdot f\left(t\right)+\theta\left(t
 
 $$V_{out}\left(t\right)=h\left(t\right)=\frac{1}{RC}\theta\left(t\right)e^{-\frac{t}{RC}}$$
 
-נשים לב שגם כאן יש לנו יחסי פורייה יפים. ואם פונקציית התגובה להלם דואכת מהר (צרה) אז רוחב הסרט גבוה (רחב) ולהפך
+נשים לב שגם כאן יש לנו יחסי פורייה יפים. ואם פונקציית התגובה להלם דועכת מהר (צרה) אז רוחב הסרט גבוה (רחב) ולהפך
 
 נשים לב שעבור תדרים גבוהים:
 
@@ -160,7 +162,7 @@ $$\tilde{H}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}$$
 באופן לא מפתיע קיבלנו 1 מינוס מה שקיבלנו קודם. "המתח מתחלק על הרכיבים"
 גם כאן נין לעשות קירוב לתדרים גבוהים ולקבל:
 
-$$\tilde{H}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}=\frac{1}{1+\frac{1}{i\omega RC}}\underset{\frac{1}{RC}\ll\omega}{\underbrace{\approx}}RC\cdot i\omega$$
+$$\tilde{H}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}=\frac{1}{1+\frac{1}{i\omega RC}}\underset{\omega\ll\frac{1}{RC}}{\underbrace{\approx}}RC\cdot i\omega$$
 
 כלומר מעגל גזירה!
 
