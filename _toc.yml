@@ -18,5 +18,7 @@ parts:
     - file: RLC/RC_intro
       title: "מעגלי RC"
     - file: RLC/RLC_intro
-      title: "מעגלי RC"
+      title: "מעגלי RLC"
+    - file: RLC/power_on_load
+      title: "הספק על רכיבים"
 
