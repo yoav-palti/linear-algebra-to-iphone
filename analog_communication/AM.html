@@ -66,6 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'analog_communication/AM';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="אפנון פאזה (PM) ואפנון תדר (FM)" href="PM_FM.html" />
     <link rel="prev" title="תקשורת אנלוגית" href="analog_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -188,6 +189,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="analog_intro.html">מבוא לתקשורת אנלוגית</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">אפנון AM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PM_FM.html">אפנון PM ואפנון FM</a></li>
 </ul>
 
     </div>
@@ -345,6 +347,17 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">יצוג בזמן</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">יצוג בתדר</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">משדר AM אנלוגי</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">מימוש מיקסר</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">מימוש מקלט AM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">מימוש מקלט לא קוהרנטי פשוט</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">מקלט הטרודיין</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">מקלט קוהרנטי</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#am-ssb">וריאנטים על שידור AM - SSB</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -405,6 +418,177 @@
 <li><p>נשים לב שאידאלית אנחנו רוצים לשדר “בלי הגל הנושא” כלומר בלי ה-<span class="math notranslate nohighlight">\(+1\)</span> ובנוסף רק עונה אחת מתוך השתיים</p></li>
 </ul>
 </section>
+<section id="id3">
+<h2>משדר AM אנלוגי<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>נרצה לממש את האפנון ברכיבים חשמליים
+<img alt="am_tx.png" src="../_images/am_tx.png" />
+נראה שאת רוב הרכיבים אנחנו לא באמת מכירים אבל יש שני רכיבים שהם מורכבים במיוחד. האוסילטור (LO) והמיקסר.
+ניתן לחשוב על האוסילטור בתור פילטר מאוד מאוד מוצלח. הוא מקבל קלט בהמון תדרים (נגיד הלם - זץ חשמלי) והוא מפלטר את כל התדרים חוץ מתדר מאוד מאוד ספציפי.
+להשיג מבנה כזה זה מורכב ובהמשך נראה שזה אחד הרכיבים הקריטיים במערכות קליטה ושידור
+אבל איך ממשים מיקסר? הוא מייצר תדרים חדשים ולכן הפעולה שלו בהגדרה היא לא לינארית!</p>
+<section id="id4">
+<h3>מימוש מיקסר<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>בפועל נרצה לממש מכפלה של אותות על ידי רכיב לא לינארי. ניקח דיודה כדוגמא.
+להבין איך דיודה בדיוק פועלת זה סיפור ממש ארוך אבל אנחנו לא באמת צריכים כי אנחנו עובדים במודל הרכיבים המקובצים ולכן מספיק שאני אומר לכם את הקשר בין המתח לזרם:</p>
+<div class="math notranslate nohighlight">
+\[I\left(V\right)=I_{0}\left(e^{bV}-1\right)\]</div>
+<p>נניח שהמתח לא משתנה יותר מידי (יהיה לנו יותר קל לחשב) וניקח קירוב טיילור סביב מתח העבודה <span class="math notranslate nohighlight">\(V_{0}\)</span></p>
+<div class="math notranslate nohighlight">
+\[I\left(V\right)\approx I\left(V_{0}\right)+\left(V-V_{0}\right)\left.\frac{dI}{dV}\right|_{V_{0}}+\frac{1}{2}\left(V-V_{0}\right)^{2}\left.\frac{d^{2}I}{dV^{2}}\right|_{V_{0}}\]</div>
+<div class="math notranslate nohighlight">
+\[I\left(V\right)\approx I_{0}+\alpha V+\beta V^{2}\]</div>
+<p>עכשיו נראה מה קורה לזרם בדיודה כאשר המתח עליה הוא <span class="math notranslate nohighlight">\(V=\cos\left(\omega_{0}t\right)+f\left(t\right)\)</span></p>
+<div class="math notranslate nohighlight">
+\[I=I_{0}+\alpha\left[\cos\left(\omega_{0}t\right)+f\left(t\right)\right]+\beta\left[\cos\left(\omega_{0}t\right)+f\left(t\right)\right]^{2}\]</div>
+<div class="math notranslate nohighlight">
+\[=I_{0}+\alpha\cos\left(\omega_{0}t\right)+\alpha f\left(t\right)+\beta\left[\cos^{2}\left(\omega_{0}t\right)+f^{2}\left(t\right)+2f\left(t\right)\cos\left(\omega_{0}t\right)\right]\]</div>
+<p>קיבלנו גם את האיבר שאנחנו רוצים אבל עוד המון איברים אחרים. נסתכל בתדר כדי להבין אם יש לנו יכולת לסנן חלק מהם</p>
+<div class="math notranslate nohighlight">
+\[\tilde{I}\left(\omega\right)=I_{0}\delta\left(\omega\right)+\frac{\alpha}{2}\left[\delta\left(\omega-\omega_{0}\right)+\delta\left(\omega+\omega_{0}\right)\right]+\alpha\tilde{F}\left(\omega\right)+\]</div>
+<div class="math notranslate nohighlight">
+\[+\beta\left[\frac{1}{2}\delta\left(\omega\right)+\frac{1}{4}\left(\delta\left(\omega-2\omega_{0}\right)+\delta\left(\omega+2\omega_{0}\right)\right)+\tilde{F}\left(\omega\right)\ast\tilde{F}\left(\omega\right)+\tilde{F}\left(\omega-\omega_{0}\right)+\tilde{F}\left(\omega+\omega_{0}\right)\right]\]</div>
+<p>ואכן נראה שאנחנו יכולים (במידה ו-<span class="math notranslate nohighlight">\(\omega_{0}\gg\omega_{max}\)</span>) להעביר את כל זה ב-BPF סביב התדר <span class="math notranslate nohighlight">\(\omega_{0}\)</span> ולקבל:</p>
+<div class="math notranslate nohighlight">
+\[BPF_{\omega_{0}}\left[I\right]=\left(2\beta f\left(t\right)+\alpha\right)\cos\left(\omega_{0}t\right)\]</div>
+<p>ואכן קיבלנו מכפלה!</p>
+<p>נשים לב כי:</p>
+<ul class="simple">
+<li><p>אם יש לנו רכיב לא לינארי ריבועי <span class="math notranslate nohighlight">\(V_{out}\propto V_{in}^{2}\)</span> נוכל להשתמש ברכיב הזה על מנת לממש מכפלה</p></li>
+<li><p>אנחנו יכולים לבחור את הרכיב הלא לינארי</p></li>
+<li><p>אנחנו יכלים לבחור את נקודת העבודה <span class="math notranslate nohighlight">\(V_{0}\)</span> על מנת להשפיע על הקבועים <span class="math notranslate nohighlight">\(I_{0},\alpha,\beta\)</span></p></li>
+</ul>
+<p>בפועל המעגל נראה בערך ככה:
+<img alt="mixer_digram.png" src="../_images/mixer_digram.png" /></p>
+</section>
+</section>
+<section id="id5">
+<h2>מימוש מקלט AM<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>נתון לנו הגל הנושא בקליטה (נניח במוצא האנטנה):</p>
+<div class="math notranslate nohighlight">
+\[g_{AM}\left(t\right)=\left[1+mf\left(t\right)\right]\cos\left(\omega{}_{0}t\right)\]</div>
+<p>הבעיה: ואנחנו רוצים לחלץ את האות <span class="math notranslate nohighlight">\(f\left(t\right)\)</span></p>
+<p>שיטות קליטה מתחלקות לשני סוגים:</p>
+<ul class="simple">
+<li><p>שיטות קוהרנטיות - כלומר שרגישות לפאזה של הגל הנושא</p>
+<ul>
+<li><p>בשיטות כאלה נוכל לדעת מתי המעטפת היא “שלילית” כי אנחנו עוקבים אחרי הפאזה</p></li>
+<li><p>נראה עוד יתרון משמעותי של שיטה זו בהמשך (רמז <span class="math notranslate nohighlight">\(\Delta\omega=2\omega_{max}\)</span>)</p></li>
+</ul>
+</li>
+<li><p>שיטות לא קוהרנטיות</p>
+<ul>
+<li><p>לא רגישות לפאזה של הגל הנושא וכל מה שאנחנו נדרשים לדעת הוא התדר של הגל הנושא</p></li>
+<li><p>שיטות לא קוהרנטיות לא יכולות להבדיל בין <span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t\right),\cos\left(\omega_{0}t+\frac{\pi}{2}\right)=\sin\left(\omega_{0}t\right),\cos\left(\omega_{0}t+\pi\right)=-\cos\left(\omega_{0}t\right)\)</span> ולכן לא יכולות להתמודד עם עומק מודולציה גדול מידי</p></li>
+</ul>
+</li>
+</ul>
+<section id="id6">
+<h3>מימוש מקלט לא קוהרנטי פשוט<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>נרצה משהו שעוקב אחרי השיאים של האות שאנחנו מקבלים. כלומר שכל פעם שאנחנו עולים במתח אנחנו רוצים לעקוב אחרי האות שמתקבל וכל פעם שהגל הנושא יורד במהירות (כי הוא מתנדנד מהר) אנחנו רוצים לדאוך לאט ולתפוס אותו בשיא הבא.</p>
+<p>נעשה את זה עם מעגל (לא לינארי כמובן) ונשתמש בדיודה ומעגל RC
+<img alt="RX_diode.png" src="../_images/RX_diode.png" /></p>
+<p>נניח דיודה אידאלית חסרת התנגדות
+ונסתכל על שני מצבים:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(V_{D}&gt;0\)</span> כלומר יש מתח חיובי על הדיודה. במצב הזה נקבל כי המקור מחובר ישירות למוצא וחייב לקיים <span class="math notranslate nohighlight">\(V_{out}=V_{C}=V_{in}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(V_{D}&lt;0\)</span> הדיודה הופכת לנתק והמוצא בכלל לא מחובר למקור אלא למעגל RC שנפרק</p>
+<ul>
+<li><p>מתי המתח על הדיודה יחזור להיות חיובי? כשנגיע לנקודה בה <span class="math notranslate nohighlight">\(V_{C}=V_{out}&lt;V_{in}\)</span></p></li>
+</ul>
+</li>
+</ul>
+<p>איך התוצאה תיראה?
+<img alt="envelope_diode_detection.png" src="../_images/envelope_diode_detection.png" />
+<a class="reference external" href="https://www.winlab.rutgers.edu/~crose/322_html/envelope_detector.html">קרדיט</a></p>
+<p>אנחנו רואים שהדיודה לא נותנת ל-<span class="math notranslate nohighlight">\(V_{out}\)</span> להיות קטן מ-<span class="math notranslate nohighlight">\(V_{in}\)</span>
+נשים לב שכמו בתמונה אם גם המעטפת משתנה מהר אנחנו צריכים מעגל RC שדואך מהר יותר. אבל יש בזה סכנה. שנדאך גם בין שיאים של הפונקציה. כלומר ה-ripples בתמונה יגדלו</p>
+<p>נשאלת השאלה איך לבחור את <span class="math notranslate nohighlight">\(\tau=RC\)</span>? יש לנו שני אילוצים:</p>
+<ul class="simple">
+<li><p>אנחנו רוצים לדאוך לאט יותר מזמן המחזור של האוסילטור <span class="math notranslate nohighlight">\(\frac{2\pi}{\omega_{0}}\ll RC\)</span></p></li>
+<li><p>מעגל ה-RC צריך להיפרק מהר יותר מהקצב הכי מהיר שבו משתנה מעטפת <span class="math notranslate nohighlight">\(RC\ll\frac{2\pi}{\omega_{max}}\)</span></p></li>
+</ul>
+<p>לסיכום נבחר:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{\frac{2\pi}{\omega_{0}}\ll RC\ll\frac{2\pi}{\omega_{max}}}\]</div>
+<p>אנחנו רואים שחבוייה כאן גם ההנחה שלנו כי <span class="math notranslate nohighlight">\(\omega_{max}\ll\omega_{0}\)</span> הנחה זו נכונה ברוחב מערכות התקשורת (כאשר משתמשים בגלים אלקטרומגנטים)</p>
+</section>
+<section id="id7">
+<h3>מקלט הטרודיין<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>במקלט הפשוט שראינו עם גילוי המעטפת אפשר לברור בין תחנות על ידי סינון של האות מראש עם BPF.</p>
+<p>החיסרון הוא כמובן שאנחנו צריכים לדעת לממש BPF איכותי שגם משתנה ומתאים לכלל התחנות</p>
+<p><strong>הפתרון:</strong> במקום להזיז את הפילטר אל תדר התחנה נזיז את תדר התחנה אל הפילטר. מקלט כזה נקרא מקלט הטרודיין</p>
+<p>השלבים בקליטה הם:</p>
+<ul class="simple">
+<li><p>סינון ראשוני ורחב</p></li>
+<li><p>הזזה של התדר לתדר ביניים שיקרא IF כך שהתחנה שאנחנו רוצים לקלוט תהיה בדיוק בתדר IF</p></li>
+<li><p>נעביר את האות ב-BPF שממורכז סביב IF (נשים לב שזה אותו פילטר לא משנה איזה תחנה אנחנו קולטים)</p></li>
+<li><p>נבצע גילוי מעטפת כמו קודם
+<img alt="superheterodyne_receiver.png" src="../_images/superheterodyne_receiver.png" /></p></li>
+</ul>
+<p>איך נזיז בתדר? נרצה להכפיל ב-<span class="math notranslate nohighlight">\(e^{i\omega_{LO}t}\)</span> אבל אנחנו יכולים להכפיל רק במשהו ממשי ולכן נכפיל ב-<span class="math notranslate nohighlight">\(\cos\left(\omega_{LO}t\right)\)</span></p>
+<p>הסרטוט של המקלט בשלבים הראה ככה:
+<img alt="superheterodyne_receiver_diagram.png" src="../_images/superheterodyne_receiver_diagram.png" /></p>
+<p>מה נקבל אחרי המיקסר?</p>
+<div class="math notranslate nohighlight">
+\[A\left(t\right)\cos\left(\omega_{0}t\right)\cos\left(\omega_{LO}t\right)=\frac{A\left(t\right)}{2}\left[\underset{Low-frequency}{\underbrace{\cos\left(\left(\omega_{0}-\omega_{LO}\right)t\right)}}+\underset{high-frequency}{\underbrace{\cos\left(\left(\omega_{0}+\omega_{LO}\right)t\right)}}\right]\]</div>
+<p>את זה כמובן נוכל לסנון עם ה-BPF שלנו ולקבל אות שאנחנו יכולים להכניס לגילוי מעטפת</p>
+<p>יש לנו המון תדרים שמשתתפים בקליטה. נעשה סדר:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\omega_{0}\)</span> תדר הגל הנושא</p></li>
+<li><p><span class="math notranslate nohighlight">\(\omega_{IF}\)</span> תדר הביניים אליו אנחנו מורידים את התחנות שאנחנו רוצים לקלוט</p></li>
+<li><p><span class="math notranslate nohighlight">\(\omega_{LO}\)</span>  תדר האוסילטור אותו אנחנו מכוונים כך ש-<span class="math notranslate nohighlight">\(\omega_{LO}=\omega_{0}-\omega_{IF}\)</span></p></li>
+</ul>
+<div class="tip admonition">
+<p class="admonition-title">הורדת תדר:</p>
+<p>העיקרון החשוב במקלט הוא שאם אנחנו רוצים להזיז תדר נוכל להכפיל אות סביב תדר <span class="math notranslate nohighlight">\(\omega_{0}\)</span> ב-<span class="math notranslate nohighlight">\(\cos\left(\omega_{LO}t\right)\)</span> ולקבל את השידור סביב <span class="math notranslate nohighlight">\(\omega_{0}-\omega_{LO}\)</span> וסביב <span class="math notranslate nohighlight">\(\omega_{0}+\omega_{LO}\)</span></p>
+</div>
+</section>
+<section id="id8">
+<h3>מקלט קוהרנטי<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>עד עכשיו עסקנו במקלטים לא קוהרנטים שלא רגישים לפאזה של הגל הנושא:</p>
+<div class="math notranslate nohighlight">
+\[A\left(t\right)\cos\left(\omega_{0}t+\underset{\text{הזאפ}}{\underbrace{\phi_{0}}}\right)\]</div>
+<p>למה בכלל שלהיות תלוי בפאזה תהיה בעיה? נדמיין שאנחנו זזים לאט ביחס למשדר. נקבל אפקט דופלר ובקירוב נוכל לרשום:</p>
+<div class="math notranslate nohighlight">
+\[r\left(t\right)\approx A\left(t\right)\cos\left(\left(\omega_{0}+\omega_{d}\right)t+\phi_{0}\right)=A\left(t\right)\cos\left(\omega_{0}t+\underset{\omega_{d}t+\phi_{0}}{\underbrace{\phi\left(t\right)}}\right)\]</div>
+<p>כלומר השינוי אולי זניח ביחס לתדר המרכזי ולא מזיז אותו הרבה אבל אנחנו מתחילים לקבל צבירה של פאזה “במהירות” קבועה. אם נהיה רגישים לפאזה זה יכולה להיות בעיה.</p>
+<p>אבל כבר הזכרנו יתרון קטן של מקלט קוהרנטי. אם אנחנו “ריגישים” לפאזה אנחנו יכולים להבין מתי המעטפת שלנו הופכת לשלילית.</p>
+<p>ניקח השראה ממקלט הטרודיין אבל הפעם נוריד נבחר תדר ביניים שהוא תדר ה-0</p>
+<p>נסיון ראשון לבנות סכמה יראה ככה:
+<img alt="coherent_receiver_diagram.png" src="analog_communication/images/Fcoherent_receiver_diagram.png" /></p>
+<p>מה נקבל לפני ה-LPF?</p>
+<div class="math notranslate nohighlight">
+\[A\left(t\right)\cos\left(\omega_{0}t+\phi_{0}\right)\cos\left(\omega_{0}t\right)=\frac{A\left(t\right)}{2}\left[\cos\left(\phi_{0}\right)+\cos\left(2\omega_{0}t+\phi_{0}\right)\right]\]</div>
+<p>איך נתכנן את ה-LPF. כביכול הוא צריך להיות ברוחב של <span class="math notranslate nohighlight">\(2\omega_{max}\)</span> אבל אז שמים לב שאנחנו כבר סביב תדר 0 כלמור שהרוחב “לצד” שמאל היא פשוט התמונה של התדרים השליליים ונרצה כי:</p>
+<div class="math notranslate nohighlight">
+\[\omega_{cutoff}=\omega_{max}\]</div>
+<p>אחרי LPF (אידאלי) נקבל:</p>
+<div class="math notranslate nohighlight">
+\[r\left(t\right)=\frac{A\left(t\right)}{2}\cos\left(\phi_{0}\right)\]</div>
+<p>שזה נראה טוב כי <span class="math notranslate nohighlight">\(\cos\left(\phi_{0}\right)\)</span> הוא רק קבוע אבל מה אם הוא 0? או קרוב ל-0?</p>
+<p>נתמודד עם זה בעזרת זה שגם לאוסילטור שלנו תהיה פאזה אשר שווה לפאזה של האות הנקלט:</p>
+<div class="math notranslate nohighlight">
+\[A\left(t\right)\cos\left(\omega_{0}t+\phi_{0}\right)\cos\left(\omega_{0}t+\phi_{0}\right)=\frac{A\left(t\right)}{2}\left[1+\cos\left(2\left(\omega_{0}t+\phi_{0}\right)\right)\right]\]</div>
+<p>זה מה שזה אומר להיות רגיש לפאזה. אם אנחנו לא מכוונים את הפאזה נכון לא נקלוט כלום.</p>
+<p>באופן כללי אם הפאזה של האוסילטור היא <span class="math notranslate nohighlight">\(\phi_{0}\)</span> והפאזה שאנחנו משערכים היא <span class="math notranslate nohighlight">\(\hat{\phi}_{0}\)</span> נקבל:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{r\left(t\right)=\frac{A\left(t\right)}{2}\cos\left(\phi_{0}-\hat{\phi}_{0}\right)}\]</div>
+<div class="admonition- admonition">
+<p class="admonition-title">שתי תחנות במקביל?</p>
+<p>אנחנו לא מאוד מרוצים אם זה שאנחנו צריכים לקלוע לפאזה הנכונה אבל אולי זה לא באג אלא פיצ’ר.
+מה אם היה לנו שני מקלטים ולכל אחד מהם VLO אבל הפאזה בינהם היא <span class="math notranslate nohighlight">\(\frac{\pi}{2}\)</span>
+כלומר אחד <span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t\right)\)</span> ואחד <span class="math notranslate nohighlight">\(\sin\left(\omega_{0}t\right)\)</span></p>
+<p>נחזור לזה בתקשורת דיגיטלית</p>
+</div>
+</section>
+<section id="am-ssb">
+<h3>וריאנטים על שידור AM - SSB<a class="headerlink" href="#am-ssb" title="Link to this heading">#</a></h3>
+<p>בגלל סימטריה ניתן לוותר לחלוטין על העונה התחתונה בגל שלנו ולא לשדר אותה בכלל. זה מאוד מקל על הגילוי הקוהרנטי והוא נהיה לא רגיש לפאזה (נסו להבין למה)</p>
+<p>יש לשים לב שאפשר לשדר את זה עם ה<span class="math notranslate nohighlight">\(+1\)</span> או בלעדיו</p>
+<p>בסרטוט רואים שידור בלעדיו:
+<img alt="SSB_bandform.svg" src="analog_communication/images%2FSSB_bandform.svg" /></p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -446,6 +630,15 @@
         <p class="prev-next-title">תקשורת אנלוגית</p>
       </div>
     </a>
+    <a class="right-next"
+       href="PM_FM.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">אפנון פאזה (PM) ואפנון תדר (FM)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -465,6 +658,17 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">יצוג בזמן</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">יצוג בתדר</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">משדר AM אנלוגי</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">מימוש מיקסר</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">מימוש מקלט AM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">מימוש מקלט לא קוהרנטי פשוט</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">מקלט הטרודיין</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">מקלט קוהרנטי</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#am-ssb">וריאנטים על שידור AM - SSB</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

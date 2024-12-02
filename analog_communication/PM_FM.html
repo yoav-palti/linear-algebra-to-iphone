@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>תמסורת גלים בחדר &#8212; Linear Algebra to iPhone 1</title>
+    <title>אפנון פאזה (PM) ואפנון תדר (FM) &#8212; Linear Algebra to iPhone 1</title>
   
   
   
@@ -63,11 +63,10 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'LTI/wave_in_a_room';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'analog_communication/PM_FM';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="סינון רעשים" href="noise_removal_examples.html" />
-    <link rel="prev" title="תגובת בתדר" href="frequency_response.html" />
+    <link rel="prev" title="אפנון AM" href="AM.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -172,12 +171,12 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
-<li class="toctree-l1"><a class="reference internal" href="impulse_response.html">תגובת להלם</a></li>
-<li class="toctree-l1"><a class="reference internal" href="frequency_response.html">תגובת בתדר</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">החזרות בחדר</a></li>
-<li class="toctree-l1"><a class="reference internal" href="noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../LTI/intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/impulse_response.html">תגובת להלם</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/frequency_response.html">תגובת בתדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/wave_in_a_room.html">החזרות בחדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">מעגלי RLC</span></p>
 <ul class="nav bd-sidenav">
@@ -186,10 +185,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../RLC/power_on_load.html">הספק על רכיבים</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור אנלוגי</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../analog_communication/analog_intro.html">מבוא לתקשורת אנלוגית</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analog_communication/AM.html">אפנון AM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analog_communication/PM_FM.html">אפנון PM ואפנון FM</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="analog_intro.html">מבוא לתקשורת אנלוגית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AM.html">אפנון AM</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">אפנון PM ואפנון FM</a></li>
 </ul>
 
     </div>
@@ -259,7 +258,7 @@
       
       
       
-      <li><a href="../_sources/LTI/wave_in_a_room.md" target="_blank"
+      <li><a href="../_sources/analog_communication/PM_FM.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -322,7 +321,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -333,11 +334,21 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>תמסורת גלים בחדר</h1>
+    <h1>אפנון פאזה (PM) ואפנון תדר (FM)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pm">אפנון PM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fm">אפנון FM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">האות האנליטי</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -347,45 +358,105 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>תמסורת גלים בחדר<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p>כאשר אנחנו רוצים להבין איך גלים מתפשטים בחלל ניתן להשתמש במשוואת הגלים (פלוס תנאי שפה)</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="pm-fm">
+<h1>אפנון פאזה (PM) ואפנון תדר (FM)<a class="headerlink" href="#pm-fm" title="Link to this heading">#</a></h1>
+<section id="pm">
+<h2>אפנון PM<a class="headerlink" href="#pm" title="Link to this heading">#</a></h2>
+<p>כמו מקודם נתחיל “בנוסחא” של האפנון</p>
 <div class="math notranslate nohighlight">
-\[\frac{\partial^{2}u}{\partial t^{2}}-c^{2}\nabla^{2}u=S\left(\vec{r},t\right)\]</div>
+\[g_{PM}\left(t\right)=\cos\left(\omega_{0}t+\phi_{0}+mf\left(t\right)\right)\]</div>
+<p>זה דיי מתבקש, במקום לאפנן את המידע על האמפליטודה עכשיו נאפנן אותו על הפאזה.</p>
+<p>יתרונות:</p>
 <ul class="simple">
-<li><p>נשים לב כי המשוואה לינארית כי היא מכילה רק נגזרות שהן אופרטור לינארי</p></li>
-<li><p>עבור מרחב סטטי ומדידה של <span class="math notranslate nohighlight">\(u\)</span> בנקודה מסויימת נקבל גם מערכת אינווריאנטית בזמן</p></li>
+<li><p>עוצמת שידור קבועה. גם אם יש רעש חזק וגם אם יש שקט</p></li>
+<li><p>קל יותר לקלוט? תלוי את מי שואלים</p></li>
 </ul>
-<p>פונקציית התגובה להלם בחלל ריק היא:</p>
+<p>בפועל משתמשים כמעט אך ורק ב-FM שנראה עוד מעט שהוא מקביל לחלוטין ל-PM</p>
+</section>
+<section id="fm">
+<h2>אפנון FM<a class="headerlink" href="#fm" title="Link to this heading">#</a></h2>
+<p>על מנת להגדיר שידור FM נשאל את השאלה מה הוא “התדר בכל זמן”.
+השאלה הזו צריכה לצרום לכם מאוד חזק. מה זה תדר בזמן מסויים!?
+תדר הוא משהו לא לוקאלי בזמן. להפך, ככל שמתמקדים יותר בנקודת זמן ספציפית
+(כלומר יש לנו פיסה קצרה יותר מהאות) נוכל לדעת פחות טוב מה הם התדרים שמשתתפים באות</p>
+<p>מכאן מגיעה מסכנה ראשונה:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>תדר רגעי הוא <strong>לא</strong> התדר מפירוק פורייה <span class="math notranslate nohighlight">\(\underset{\text{ןמזב}}{\underbrace{\omega\left(t\right)}}\ne\underset{\text{רדתב}}{\underbrace{\tilde{F}\left(\omega\right)}}\)</span></p>
+</div>
+<p>נשאלת השאלה מה הוא כן? יש לנו אינטואיציה לגבי זה. היינו רוצים לומר שליצור <span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t\right)\)</span> יש תדר קבוע של <span class="math notranslate nohighlight">\(\omega_{0}\)</span>.
+והיינו רוצים שזאת תהיה תכונה לוקאלית. כלומר שאם באזור מסויים של הפונקצייה היא מתנהגת כמו <span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t\right)\)</span> אז נומר שיש לה שם תדר <span class="math notranslate nohighlight">\(\omega_{0}\)</span>.</p>
+<p>נציע הגדרה:</p>
 <div class="math notranslate nohighlight">
-\[h_{\vec{r},\vec{r}^{\prime}}\left(t\right)=\frac{\delta\left(t-\frac{\left|\vec{r}-\vec{r}^{\prime}\right|}{c}\right)}{\left|\vec{r}-\vec{r}^{\prime}\right|}\]</div>
-<p>כלומר מכילה דיליי ודעיכה
-בתדר זה נראה ככה:</p>
+\[\omega\left(t\right)\equiv\frac{d\phi\left(t\right)}{dt}\]</div>
+<p>נחזור עוד מעט להבנה טובה יותר של מאיפה הגיע ההגדרה הזו</p>
+<p>אבל עכשיו נוכל לדרוש:</p>
 <div class="math notranslate nohighlight">
-\[\tilde{H}_{\vec{r},\vec{r}^{\prime}}\left(\omega\right)=\frac{e^{i\omega\frac{\left|\vec{r}-\vec{r}^{\prime}\right|}{c}}}{\left|\vec{r}-\vec{r}^{\prime}\right|}\]</div>
-<p>מה קורה עם החדר לא ריק?
-נקבל שפונקציית התגובה להלם עכשיו מכילה גם החזרות</p>
+\[\omega\left(t\right)=\omega_{0}+mf\left(t\right)\]</div>
 <div class="math notranslate nohighlight">
-\[h\left(t\right)=\alpha_{1}\delta\left(t-\tau_{1}\right)+\alpha_{2}\delta\left(t-\tau_{2}\right)\]</div>
-<p>או במילים אחרות</p>
+\[\phi\left(t\right)=\intop_{0}^{t}\omega_{0}+mf\left(t\right)dt+\phi_{0}\]</div>
+<p>וקיבלנו כי:</p>
 <div class="math notranslate nohighlight">
-\[\tilde{H}\left(\omega\right)=\frac{\alpha_{1}}{\sqrt{2\pi}}e^{i\omega\tau_{1}}+\frac{\alpha_{2}}{\sqrt{2\pi}}e^{i\omega\tau_{2}}\]</div>
-<p>ניקח מקרה פשוט בו <span class="math notranslate nohighlight">\(\alpha_{1}=\alpha_{2}\)</span> נקבל כי:</p>
+\[g_{FM}\left(t\right)=\cos\left(\omega_{0}t+\phi_{0}+\intop_{0}^{t}mf\left(t\right)dt\right)\]</div>
+<div class="tip admonition">
+<p class="admonition-title">הקשר בין PM ל-FM:</p>
+<p>אפנון FM הוא אפנון PM של האות <span class="math notranslate nohighlight">\(\intop_{0}^{t}mf\left(t\right)dt\)</span></p>
+</div>
+<p>נשווה בין שלושת האפנונים האנלוגים
+<img alt="AM_FM_PM_ex.png" src="../_images/AM_FM_PM_ex.png" /></p>
+<p>נשים לב שבנקודות שהאות מקבל מקסימום:</p>
+<ul class="simple">
+<li><p>AM מקבל מקסימום אמפליטודה</p></li>
+<li><p>FM מקבל תדר רגעי מקסימלי</p></li>
+<li><p>PM נמצא בתדר רגעי של הגל הנושא משום שהנגזרת היא 0</p></li>
+</ul>
+</section>
+<section id="id1">
+<h2>האות האנליטי<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>ננסה לחשוב קצת יותר על התדר הרגעי. מאיפה הבאנו אותו. הסתכלנו על הפונקצייה <span class="math notranslate nohighlight">\(\cos\left(\phi\left(t\right)\right)\)</span> שמלבד לעובדה שהיא חסומה בין מינוס 1 ל-1 אין בה משהו מיוחד.
+הסתכלנו על זמן קצר ורשמנו כי:</p>
 <div class="math notranslate nohighlight">
-\[\tilde{H}\left(\omega\right)=\frac{\alpha_{1}}{\sqrt{2\pi}}e^{i\omega\frac{\tau_{1}+\tau_{2}}{2}}\left(e^{i\omega\frac{\tau_{1}-\tau_{2}}{2}}+e^{-i\omega\frac{\tau_{1}-\tau_{2}}{2}}\right)=\sqrt{\frac{2}{\pi}}\alpha_{1}e^{i\omega\frac{\tau_{1}+\tau_{2}}{2}}\cos\left(\omega\frac{\tau_{1}-\tau_{2}}{2}\right)\]</div>
+\[\phi\left(t_{0}+\Delta t\right)=\phi\left(t_{0}\right)+t\left.\frac{d\phi\left(t\right)}{dt}\right|_{t_{0}}\]</div>
+<p>כלומר קירוב סדר ראשון לשינוי בפאזה את מהירות השתנות הפאזה הגדרנו בעזרת התדר הרגעי.
+באיזה עוד דרך ניתן להגיע לזה? אם נוסיף לאות שלנו אות מרוכב <span class="math notranslate nohighlight">\(\sin\left(\phi\left(t\right)\right)\)</span>
+נקבל:</p>
 <div class="math notranslate nohighlight">
-\[\left|\tilde{H}\left(\omega\right)\right|=\sqrt{\frac{2}{\pi}}\left|\alpha_{1}\right|\cos\left(\omega\frac{\tau_{1}-\tau_{2}}{2}\right)\]</div>
+\[\cos\left(\phi\left(t\right)\right)+i\sin\left(\phi\left(t\right)\right)=e^{i\phi\left(t\right)}\]</div>
+<p>היינו רוצים שתדר רגעי תמיד יהיה חיובי משום שאת כל הסימנים ניתן לבלוע בפאזה <span class="math notranslate nohighlight">\(\cos\left(-\omega_{0}t\right)=\cos\left(\omega_{0}t\right),\sin\left(-\omega_{0}t\right)=\sin\left(\omega_{0}t+\pi\right)\)</span>
+כלומר לא נוכל להבדיל בין תדרים רגעיים שליליים וחיוביים. ולכן נוכל להגדיר את <span class="math notranslate nohighlight">\(\phi\left(t\right)\)</span> בתור <strong>פונקציה מונוטונית עולה</strong>
+נקבל כי:</p>
 <div class="math notranslate nohighlight">
-\[\arg\left(\tilde{H}\left(\omega\right)\right)=\arg\left(\alpha_{1}\right)+\omega\frac{\tau_{1}+\tau_{2}}{2}\]</div>
-<iframe src="https://www.geogebra.org/material/iframe/id/uxfzrrp5" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/uxfzrrp5" target="_blank">לפתיחה בחלון נפרד</a>
-<p>נראה עכשיו איך זה נשמע</p>
-<p>הקלטה מקורית:</p>
-<p><a class="reference download internal" download="" href="../_downloads/267bf3a4e2f0434f89bacdf905db440f/bush1-original.wav"><span class="xref download myst">bush1 - original.wav</span></a></p>
-<p>אחרי העברה בפונקציית תמסורת של חדר במימדים 40X40X10</p>
-<p><a class="reference download internal" download="" href="../_downloads/65b7f7c2b60931339fc23c993fe8a96c/bush2-bigroom_40_40_10.wav"><span class="xref download myst">bush2-bigroom_40_40_10.wav</span></a></p>
-<p>אחרי העברה בפונקציית תמסורת של חדר במימדים 300</p>
-<p><a class="reference download internal" download="" href="../_downloads/2a9005801ab70c87cde98002f17bd9fc/bush3-emptygarage_300_130_5.wav"><span class="xref download myst">bush3-emptygarage_300_130_5.wav</span></a></p>
+\[\left|\frac{de^{i\phi\left(t\right)}}{dt}\right|=\left|\frac{d\phi\left(t\right)}{dt}e^{i\phi\left(t\right)}\right|=\left|\frac{d\phi\left(t\right)}{dt}\right|=\frac{d\phi\left(t\right)}{dt}\]</div>
+<p>באופן כללי עבור האות:</p>
+<div class="math notranslate nohighlight">
+\[f_{a}\left(t\right)=\left|A\left(t\right)\right|e^{i\phi\left(t\right)}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{d\phi\left(t\right)}{dt}=\left|\frac{d}{dt}\left(\frac{f_{a}\left(t\right)}{\left|f_{a}\left(t\right)\right|}\right)\right|\]</div>
+<p>מה שדרוש לנו היא דרך לקחת אותות מהצורה <span class="math notranslate nohighlight">\(f\left(t\right)=\Re\left[\left|A\left(t\right)\right|e^{i\phi\left(t\right)}\right]\)</span>
+ולהפוך אותם ל-<span class="math notranslate nohighlight">\(f_{a}\left(t\right)=\left|A\left(t\right)\right|e^{i\phi\left(t\right)}\)</span></p>
+<p>האות המרוכב <span class="math notranslate nohighlight">\(f_{a}\left(t\right)\)</span> נקרא האות האנליטי של <span class="math notranslate nohighlight">\(f\left(t\right)\)</span>. זה נראה שאנחנו “מוסיפים” מידע שאין לנו אבל האמת היא הפוכה. נסתכל על האות במרחב התדר</p>
+<div class="math notranslate nohighlight">
+\[\tilde{F}_{a}\left(\omega\right)=\mathcal{F}\left[f_{a}\left(t\right)\right]\]</div>
+<div class="math notranslate nohighlight">
+\[\Downarrow\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\tilde{F}\left(\omega\right)=\mathcal{F}\left[\Re\left[f_{a}\left(t\right)\right]\right]=\begin{cases}
+\tilde{F}_{a}\left(\omega\right) &amp; \omega&gt;0\\
+\tilde{F}_{a}^{\ast}\left(\omega\right) &amp; \omega&lt;0
+\end{cases}\end{split}\]</div>
+<p>אבל בגלל שהגדרנו מראש שבפונקציה האנליטית יש רק תדרים חיוביים ברור שאפשר להשיג את הפנוקצייה האנליטית מהפונקציה הממשית.
+כל מה שצריך לעשות הוא לרשום כי:</p>
+<div class="math notranslate nohighlight">
+\[f_{a}\left(t\right)=\frac{1}{2}\left[f\left(t\right)+i\mathcal{H}\left[f\left(t\right)\right]\right]\]</div>
+<p>כאשר</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathcal{F}\left[\mathcal{H}\left[f\left(t\right)\right]\right]=\begin{cases}
+\tilde{F}_{a}\left(\omega\right) &amp; \omega&gt;0\\
+-\tilde{F}_{a}^{\ast}\left(\omega\right) &amp; \omega&lt;0
+\end{cases}=sgn\left(\omega\right)\cdot\tilde{F}\left(\omega\right)\end{split}\]</div>
+<p>קיבלנו שהטרנספורם הזה הוא לכפול כל תדר או ב1 או במינוס 1 ולכן זו פעולה שניתן לממש בעזרת מערכת LTI!</p>
+<p>נשים לב שלא צריך במציאות אות מרוכב אלא שני ערוצים. אחד שהאות בו הוא החלק הממשי והשני שהאות בו הוא החלק המדומה. את כל הנגזרות והנרמולים אפשר לעשות עם שני החלקים האלו!</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -401,7 +472,7 @@
         },
         kernelOptions: {
             name: "python3",
-            path: "./LTI"
+            path: "./analog_communication"
         },
         predefinedOutput: true
     }
@@ -419,22 +490,13 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="frequency_response.html"
+       href="AM.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">תגובת בתדר</p>
+        <p class="prev-next-title">אפנון AM</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="noise_removal_examples.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">סינון רעשים</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -442,6 +504,24 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pm">אפנון PM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fm">אפנון FM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">האות האנליטי</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
