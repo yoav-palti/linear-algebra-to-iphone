@@ -18,7 +18,7 @@ $$I\left(t\right)=\frac{1}{\left|Z\left(\omega_{0}\right)\right|}V_{0}\cos\left(
 
 נשתמש במשוואה להספק ונקבל:
 
-$$\boxed{P\left(t\right)=\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|}\left[\cos\left(2\omega_{0}t-\phi\left(\omega_{0}\right)\right)+\cos\left(\phi\left(\omega_{0}\right)\right)\right]}$$
+$$P\left(t\right)=\frac{V_{0}^{2}}{\left|Z\left(\omega_{0}\right)\right|}\cos\left(\omega_{0}t\right)\cos\left(\omega_{0}t-\phi\left(\omega_{0}\right)\right)$$
 
 או עם שימוש בזהויות טריגונומטריות:
 
@@ -33,7 +33,7 @@ $$P_{avg}\equiv\left\langle P\left(t\right)\right\rangle \equiv\overline{P\left(
 
 עבור אות מחזורי נקבל
 
-$$\left\langle P\left(t\right)\right\rangle =\frac{1}{T}\intop_{0}^{T}P\left(t\right)dt=\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|}\frac{\omega_{0}}{2\pi}\intop_{0}^{\frac{2\pi}{\omega_{0}}}\underset{0}{\underbrace{\cos\left(2\omega_{0}t-\phi\left(\omega_{0}\right)\right)}}+\cos\left(\phi\left(\omega_{0}\right)\right)dt$$
+$$\left\langle P\left(t\right)\right\rangle =\frac{1}{T}\intop_{0}^{T}P\left(t\right)dt=\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|}\underset{\frac{1}{T}}{\underbrace{\frac{\omega_{0}}{2\pi}}}\intop_{0}^{\frac{2\pi}{\omega_{0}}}\underset{0}{\underbrace{\cos\left(2\omega_{0}t-\phi\left(\omega_{0}\right)\right)}}+\cos\left(\phi\left(\omega_{0}\right)\right)dt$$
 $$\left\langle P\left(t\right)\right\rangle =\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|}\cos\left(\phi\left(\omega_{0}\right)\right)$$
 
 כדי לדעת כמה הספק רכיב חשמלי צורך חשוב לדעת מה הפאזה שלו. מתח קיר הוא בתדר קבוע של 50Hz ולכן להרבה רכיבים בבית תוכלו למצוא

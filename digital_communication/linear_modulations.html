@@ -1,0 +1,698 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>אפנונים לינארים &#8212; Linear Algebra to iPhone 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=2c8ff626" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'digital_communication/linear_modulations';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="תקשורת דיגיטלית" href="digital_intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Linear Algebra to iPhone 1 - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Linear Algebra to iPhone 1 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/intro.html">
+                    מאלגברה לינארית לאייפון
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../LTI/intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/impulse_response.html">תגובת להלם</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/frequency_response.html">תגובת בתדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/wave_in_a_room.html">החזרות בחדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">מעגלי RLC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RLC/RC_intro.html">מעגלי RC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RLC/RLC_intro.html">מעגלי RLC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RLC/power_on_load.html">הספק על רכיבים</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור אנלוגי</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/analog_intro.html">מבוא לתקשורת אנלוגית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/AM.html">אפנון AM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/PM_FM.html">אפנון PM ואפנון FM</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור דיגיטלי</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="digital_intro.html">מבוא לתקשורת דיגיטלית</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">אפנונים לינארים</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/yoav-palti/linear-algebra-to-iphone" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/digital_communication/linear_modulations.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>אפנונים לינארים</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bask">BASK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baseband">מרחב הסמלים ואות ה-baseband</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>אפנונים לינארים<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<details>
+  <summary>אמלק</summary>
+<p>ניתן לשדר כל אפנון לינארי בעזרת האות <strong>המרוכב</strong></p>
+<div class="math notranslate nohighlight">
+\[z\left(t\right)=\left[\sum_{n}s_{n}\delta\left(t-nT_{s}\right)\right]\ast Rect\left(\frac{t}{T_{s}}\right)\]</div>
+<p>כאשר המספרים <strong>המרוכבים</strong> <span class="math notranslate nohighlight">\(s_{n}\)</span> נקראים סמלים (או symbols) ומייצגים את המידע שאנחנו רוצים לשלוח</p>
+<p>בפועל נשדר באוויר את האות <strong>הממשי</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\Re\left[z\left(t\right)e^{i\omega_{0}t}\right]=I\left(t\right)\cos\left(\omega_{0}t\right)-Q\left(t\right)\sin\left(\omega_{0}t\right)\]</div>
+<div class="math notranslate nohighlight">
+\[I\left(t\right)\equiv\Re\left[z\left(t\right)\right],Q\left(t\right)\equiv\Im\left[z\left(t\right)\right]\]</div>
+<p>ונוכל לקבל את <span class="math notranslate nohighlight">\(I\left(t\right)\)</span> ואת <span class="math notranslate nohighlight">\(Q\left(t\right)\)</span> בעזרת מקלט קוהרנטי</p>
+<p>רוחב הסרט של השידור תמיד יהיה:</p>
+<div class="math notranslate nohighlight">
+\[\Delta f=\frac{2}{T_{s}}\]</div>
+<p>ואם אנחנו משדרים <span class="math notranslate nohighlight">\(M\)</span> סמלים נקבל כי קצב העברת הביטים הוא:</p>
+<div class="math notranslate nohighlight">
+\[bps=\frac{1}{T_{s}}\log_{2}M=\frac{\Delta f}{2}\log_{2}M\]</div>
+</details>
+<p>בהמשך נראה למה הכותרת נקראת אפנונים לינארים
+בינתיים נתחיל בלחשוב על הדרך הפשוטה והאינטואיטיבת ביותר לשדר מידע
+בינארי. למרות השם המוזר BASK הוא מה שעולה לכם בטח בראש</p>
+<section id="bask">
+<h2>BASK<a class="headerlink" href="#bask" title="Link to this heading">#</a></h2>
+<p>השם הוא Binary Amplitude Shift Keying</p>
+<ul class="simple">
+<li><p>Binary - כי הולכים להיות לנו שני סמלים</p></li>
+<li><p>Amplitude - כי הסמלים הולכים להיות שונים זה מזה בעוצמה</p></li>
+<li><p>Shift Keying - כי אנחנו נאפנן בכך שנעבור בין שני הסמלים השונים</p></li>
+</ul>
+<p>בגדול הרעיון פשוט. נגדיר שני סמלים, נגדיר עוצמה של כל אחד מהם ונקבע כי כאשר אנחנו רוצים לשדר
+את הסמל הראשון נשדר בעוצמה שלו וכאשר אנחנו רוצים לשדר את הסמל השני נשדר בעוצמה שלו.
+כלומר נשדר בעוצמה גבוהה כאשר אנחנו רוצים לשדר את הסמל הראשון ובעוצמה נמוכה כאשר אנחנו רוצים לשדר את הסמל השני.
+המיפוי בין סמלים לביטים גם הוא פשוט. החזק יהיה 1 והחלש יהיה 0 (או הפוך)
+הרבה פעמים החלש יהיה בעוצמה 0 מה שנותן את התמונה הבאה
+<img alt="BASK.gif" src="../_images/BASK.gif" />
+נשים לב שאנחנו תמיד נשדר על תדר נושא ולכן הכל יהיה כפור קוסינוס
+לרוב נהוג לרשים את האפנון בצורה הבאה:</p>
+<div class="math notranslate nohighlight">
+\[g\left(t\right)=s\left(t\right)\cos\left(\omega_{0}t\right)\]</div>
+<div class="math notranslate nohighlight">
+\[s\left(t\right)=\sum_{n}a_{n}Rect\left(\frac{t-nT_{s}}{T_{s}}\right)=\left[\sum_{n}a_{n}\delta\left(t-nT_{s}\right)\right]\ast Rect\left(\frac{t}{T_{s}}\right)\]</div>
+<p>כלומר סימבולים כפול גל נושא</p>
+<p>איך נראה הספקטרום של שידור כזה?</p>
+<div class="math notranslate nohighlight">
+\[\tilde{G}\left(\omega\right)=\underset{\text{ליגרכ}}{\underbrace{\left[\frac{\delta\left(\omega-\omega_{0}\right)+\delta\left(\omega+\omega_{0}\right)}{2}\right]}}\ast\left[\mathcal{F}\left[\sum_{n}a_{n}\delta\left(t-nT_{s}\right)\right]\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)\right]\]</div>
+<p>כאשר השתמשנו בהגדרה המנורמלת של SINC <span class="math notranslate nohighlight">\(sinc\left(x\right)=\frac{\sin\left(\pi x\right)}{\pi x}\)</span></p>
+<p>קיבלנו שהאפנון הוא בצורת <span class="math notranslate nohighlight">\(sinc\)</span> כפול פורייה של רכבת הלמים עם מקדמים של 0 או 1</p>
+<p>רוחב הסרט וקצב העברת המידע הם:</p>
+<div class="math notranslate nohighlight">
+\[\Delta\omega=\frac{4\pi}{T_{s}}\Rightarrow\Delta f=\frac{2}{T_{s}}=2bps\]</div>
+<p>כלומר ככל שאנחנו שולחים יותר ביטים בשניה כך הרוחב יהיה גדול יותר</p>
+<p>זה  אומר שממש קל לזכור! אם רוצים שידור שיעביר <span class="math notranslate nohighlight">\(1M\frac{bit}{sec}\)</span> נצטרך רוחב
+של 2MHZ וכו. (חשוב לזכור שלרוב כשרושמים  <span class="math notranslate nohighlight">\(1\frac{Mb}{sec}\)</span> מתכוונים ל-byte)</p>
+<p>לדוגמא שידור של GPS (ממש דומה ונגיע לBPSK עוד רגע) הוא בקצב של <span class="math notranslate nohighlight">\(T_{s}=\frac{1ms}{1023}\approx10^{-6}s\)</span>
+ולכן רוחב הסרט שלו הוא בערך 2MHZ</p>
+<p>###MASK
+נית ן לא לשנות את קצב הסימבולים בכלל אבל לשדר יותר ביטים. איך?
+אם יהיו לנו יותר סימבולים לשדר נגיד 4 במקום 2 נוכל שכל אחד מהם
+ייצג יותר מביט בודד.</p>
+<p>לדוגמא:</p>
+<div class="math notranslate nohighlight">
+\[\underset{s_{1}}{\underbrace{00}}\underset{s_{2}}{\underbrace{01}}\underset{s_{3}}{\underbrace{10}}\underset{s_{4}}{\underbrace{11}}\]</div>
+<p>כאן בעזרת 4 סימבולים אנחנו משדרים 2 ביט לכל סימבול
+עכשיו במקום 2 רמות של אמפליטודה נשתמש ב-4 כמו בתמונה:
+<img alt="4-ASK-Signal.png" src="../_images/4-ASK-Signal.png" /></p>
+<p>ובאופן כללי יותר ניתן לחלק את טווח האמפליטודות שאנחנו יודעים
+לשדר ל-<span class="math notranslate nohighlight">\(M\)</span> רמות שונות. כל רמה (או סימבול) ייצג <span class="math notranslate nohighlight">\(\log_{2}M\)</span> ביטים נקבל
+קצב השידור הוא:</p>
+<div class="math notranslate nohighlight">
+\[bps=\frac{1}{T_{s}}\log_{2}M=\frac{\Delta f}{2}\log_{2}M\]</div>
+<p>איך האות יראה בתדר? תכלס אותו הדבר… מה ששונה הם רק המקדמים של
+הדלתאות</p>
+<p>אז למה לא להשתמש באינסוף רמות? כי במציאות יש רעש ונוכל בהמשך לחשב
+את כמות השגיאות שנקבל כשננסה לקלוט את האות</p>
+<p>###BPSK
+אם עד עכשיו דיברנו על לאפנן ASK כלומר על האמפליטודה עכשיו נאפנן
+על הפאזה. אני רוצה אבל שהחלוקה הזאת לא תהיה לכם בראש.
+באפנון אנלוגי יש הרבה שוני בין AM ל-PM ו-FM באיך הם נראים בתדר
+באיך בונים משדר ומקלט. באופן כללי הם שונים גם בהתנהגות שלהם בשידור.
+באפנונים אנלוגים שנראה היום אין את ההבדל הזה. הסיבה היא שהבחירה המרכזית
+שלנו הייתה לשדר “מלבנים” שלכל אחד מהם יש פקטור שמייצג את המידע.</p>
+<p>ניקח את הדוגמא הבאה בתור שבאה לראש, למה לא לשדר אמפליטודות של <span class="math notranslate nohighlight">\(\pm1\)</span>?</p>
+<p>אז האמת שאפשר. זה יקרא BPSK כי נתייחס לשידור הזה בתור שידור של שתי פאזות שונות <span class="math notranslate nohighlight">\(1=e^{i\cdot0},-1=e^{i\pi}\)</span>
+כלומר שתי פאזות בהפרש של <span class="math notranslate nohighlight">\(\pi\)</span>. למה אנחנו מסתכלים על זה ככה?
+משום שאחרי שמכפילים בגל הנושא מקבלים משהו שנראה ככה:
+<img alt="BPSK-Signal.png" src="../_images/BPSK-Signal.png" /></p>
+<p>כלומר הפאזה של התדר הנושא מתהפכת ב-<span class="math notranslate nohighlight">\(\pi\)</span> כל שינוי של ביט מ0 ל1 או להפך</p>
+<p>חשוב לשים לב שהנוסחא <span class="math notranslate nohighlight">\(s\left(t\right)=\left[\sum_{n}s_{n}\delta\left(t-nT_{s}\right)\right]\ast Rect\left(\frac{t}{T_{s}}\right)\)</span>
+עדיין נכונה (נעבור לסמן את המקדמים ב-<span class="math notranslate nohighlight">\(s_{n}\)</span> כי אלו בעצם הסימבולים שלנו)</p>
+<p>מה בפועל משודר?</p>
+<p>נשים לב שאם נייצג את הביטים בתור <span class="math notranslate nohighlight">\(b_{n}\)</span> נוכל לרשום:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}s_{n}=\begin{cases}
+1 &amp; b_{n}=1\\
+-1 &amp; b_{n}=0
+\end{cases}=2b_{n}-1\end{split}\]</div>
+<p>כלומר:</p>
+<div class="math notranslate nohighlight">
+\[b\left(t\right)\equiv\frac{s\left(t\right)+1}{2}=\left[\sum_{n}b_{n}\delta\left(t-nT_{s}\right)\right]\ast Rect\left(\frac{t}{T_{s}}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[g_{BPSK}\left(t\right)=s\left(t\right)\cos\left(\omega_{0}t\right)=\left(2b\left(t\right)-1\right)\cos\left(\omega_{0}t\right)\]</div>
+<p>וקיבלנו שוב משהו שמאוד דומה לאפנון מעטפת. חשוב אבל לשים לב שגודל
+האמפליטודה בזמן לא משתנה ולכן לא נוכל לבצע גילוי לא קוהרנטי!</p>
+<p>כמו בשידור BASK נקבל כי:</p>
+<div class="math notranslate nohighlight">
+\[bps=\frac{1}{T_{s}}=\frac{\Delta f}{2}\]</div>
+<p>האם נוכל להכליל את הרעיון של MASK לBPSK? והפעם לבחור:</p>
+<div class="math notranslate nohighlight">
+\[s_{n}\in\left\{ e^{2\pi i\frac{m}{M}}\right\} _{m=0}^{M-1}\]</div>
+<p>כלומר לא 2 פאזות אלא <span class="math notranslate nohighlight">\(M\)</span>. בלי התדר הנושא לא ברור איך עושים את זה
+אבל עם התדר הנושא זה קצת יותר ברור. נשדר:</p>
+<div class="math notranslate nohighlight">
+\[\cos\left(\omega_{0}t+\arg\left(s_{n}\right)\right)\cdot Rect\left(\frac{t}{T_{s}}\right)\]</div>
+<p>לדוגמא עבור <span class="math notranslate nohighlight">\(M=4\)</span> נקבל:</p>
+<ul class="simple">
+<li><p>00: <span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t\right)\)</span></p></li>
+<li><p>01: <span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t+\frac{\pi}{2}\right)=-\sin\left(\omega_{0}t\right)\)</span></p></li>
+<li><p>10: <span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t+\pi\right)=-\cos\left(\omega_{0}t\right)\)</span></p></li>
+<li><p>11: <span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t+\frac{3\pi}{2}\right)=-\sin\left(\omega_{0}t\right)\)</span></p></li>
+</ul>
+<p>אבל זה לא נראה כמו מקודם. היינו רוצים להישאר עם הנוסחה שלנו של <span class="math notranslate nohighlight">\(s\left(t\right)=\left[\sum_{n}s_{n}\delta\left(t-nT_{s}\right)\right]\ast Rect\left(\frac{t}{T_{s}}\right)\)</span>
+אבל לשים בתוכה את המספרים המרוכבים. בשביל זה יש לנו “טריק” מתמטי מאוד נוח</p>
+</section>
+<section id="baseband">
+<h2>מרחב הסמלים ואות ה-baseband<a class="headerlink" href="#baseband" title="Link to this heading">#</a></h2>
+<p>האות שאנחנו משדרים בסוף הוא סימטרי סביב 0 אבל הוא מאופנן בתדר גבוה <span class="math notranslate nohighlight">\(\omega_{0}\)</span>.
+אין שום דבר שמכריח אותו להיות סימטרי (עם הצמדה כמובן) סביב <span class="math notranslate nohighlight">\(\omega_{0}\)</span>
+אבל כל פעם ששידרנו אות מהצורה <span class="math notranslate nohighlight">\(g\left(t\right)=s\left(t\right)\cos\left(\omega_{0}t\right)\)</span>
+זה מה שקיבלנו כי <span class="math notranslate nohighlight">\(s\left(t\right)\)</span> חייב להיות ממשי! איך נתחמק מזה?</p>
+<p>נניח שאנחנו רוצים לייצר אות שממורכז סביב <span class="math notranslate nohighlight">\(\omega_{0}\)</span> אבל הוא לא סימטרי
+איזה אות נבחר?</p>
+<p>נכול לבחור אות מהצורה:</p>
+<div class="math notranslate nohighlight">
+\[z\left(t\right)e^{i\omega_{0}t}\]</div>
+<p>כאשר כמובן ש<span class="math notranslate nohighlight">\(z\left(t\right)\)</span> מרוכב. איך זה יראה?
+האות יראה כמו בתמונה:</p>
+<p><img alt="passband_signal.png" src="../_images/passband_signal.png" /></p>
+<p>אנחנו לא יכולים לשדר אות כזה. נצטרך לשדר אות שמכיל גם שיקוף של האות הזה לתדרים השליליים
+על מנת לדאוג שמה שאנחנו משדרים יהיה ממשי. איך נעשה את זה?
+פשוט נשדר את <span class="math notranslate nohighlight">\(\Re\left[z\left(t\right)e^{i\omega_{0}t}\right]\)</span></p>
+<p>איך הוא יראה? פשוט עם שיקוף!
+<img alt="transmited_signal.png" src="../_images/transmited_signal.png" /></p>
+<p>ומה תהיה הנוסחא שלו?</p>
+<div class="math notranslate nohighlight">
+\[\Re\left[z\left(t\right)e^{i\omega_{0}t}\right]=\Re\left[\left(\Re\left[z\left(t\right)\right]+i\Im\left[z\left(t\right)\right]\right)\left(\cos\left(\omega_{0}t\right)+i\sin\left(\omega_{0}t\right)\right)\right]\]</div>
+<div class="math notranslate nohighlight">
+\[=\Re\left[z\left(t\right)\right]\cos\left(\omega_{0}t\right)-\Im\left[z\left(t\right)\right]\sin\left(\omega_{0}t\right)\]</div>
+<p>נסמן <span class="math notranslate nohighlight">\(I\left(t\right)\equiv\Re\left[z\left(t\right)\right],Q\left(t\right)\equiv\Im\left[z\left(t\right)\right]\)</span> ונקבל כי:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{\Re\left[z\left(t\right)e^{i\omega_{0}t}\right]=I\left(t\right)\cos\left(\omega_{0}t\right)-Q\left(t\right)\sin\left(\omega_{0}t\right)}\]</div>
+<p>כלומר אם אנחנו רוצים לשדר אות לא סימטרי סביב <span class="math notranslate nohighlight">\(i\omega_{0}\)</span> נצטרך
+להשתמש גם ב-<span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t\right)\)</span> וגם ב-<span class="math notranslate nohighlight">\(\sin\left(\omega_{0}t\right)\)</span>
+כדי לשדר.</p>
+<p>הרבה פעמים אנחנו נקצר את התהליך ופשוט נומר שאנחנו רוצים לשדר את האות
+<span class="math notranslate nohighlight">\(z\left(t\right)=I\left(t\right)+iQ\left(t\right)\)</span> בתדר הנושא <span class="math notranslate nohighlight">\(\omega_{0}\)</span></p>
+<p>האות  <span class="math notranslate nohighlight">\(z\left(t\right)=I\left(t\right)+iQ\left(t\right)\)</span> יקרא האות ב-baseband ובדוגמא שלנו
+הוא יראה ככה:</p>
+<p><img alt="baseband_signal.png" src="../_images/baseband_signal.png" /></p>
+<p>אז הסכמה מעכשיו הולכת ככה:</p>
+<ol class="arabic simple">
+<li><p>מייצרים אות מרוכב <span class="math notranslate nohighlight">\(z\left(t\right)=I\left(t\right)+iQ\left(t\right)\)</span> סביב תדר 0</p></li>
+<li><p>מעלים אותו לתדר הנושא על ידי הכפלה ב<span class="math notranslate nohighlight">\(e^{i\omega_{0}t}\)</span></p></li>
+<li><p>משדרים את <span class="math notranslate nohighlight">\(\Re\left[z\left(t\right)e^{i\omega_{0}t}\right]=I\left(t\right)\cos\left(\omega_{0}t\right)-Q\left(t\right)\sin\left(\omega_{0}t\right)\)</span></p></li>
+</ol>
+<p>ומה בקליטה? למה לנו בכלל לדבר על האות המרוכב? נחזור להסתכל על המקלט הקוהרנטי שלנו
+אבל הפעם נוסיף לו עוד ערוץ:</p>
+<p><img alt="coherent_IQ_reciver.png" src="../_images/coherent_IQ_reciver.png" />
+כלומר אנחנו מקבלים שני פלטים אחד של <span class="math notranslate nohighlight">\(I\left(t\right)\)</span> והשני של <span class="math notranslate nohighlight">\(Q\left(t\right)\)</span></p>
+<div class="admonition-iq admonition">
+<p class="admonition-title">IQ:</p>
+<p>מעכשיו במקום לחשוב על זה שאנחנו מוגבלים לשידור של אותות ממשיים אנחנו יכולים לחשוב
+על שידור וקליטה של שידורים מרוכבים <span class="math notranslate nohighlight">\(z\left(t\right)=I\left(t\right)+iQ\left(t\right)\)</span></p>
+<p>איך נעשה את זה? נשדר באוויר <span class="math notranslate nohighlight">\(I\left(t\right)\cos\left(\omega_{0}t\right)-Q\left(t\right)\sin\left(\omega_{0}t\right)\)</span> ובעזרת
+מקלט קוהרנטי נקבל את <span class="math notranslate nohighlight">\(I\left(t\right)\)</span> ואת <span class="math notranslate nohighlight">\(Q\left(t\right)\)</span></p>
+</div>
+<p>נוכל להציג את מה שאנחנו קולטים בכל נקודת זמן במישור כאשר ציר ה-x  הוא <span class="math notranslate nohighlight">\(I\left(t\right)\)</span>
+וציר ה-y הוא <span class="math notranslate nohighlight">\(Q\left(t\right)\)</span> תרשים זה יקרא <strong>מרחב הסמלים</strong></p>
+<p>נחזור לשידור של MPSK. איך הוא נראה השידור ב-baseband?</p>
+<div class="math notranslate nohighlight">
+\[z\left(t\right)=\left[\sum_{n}s_{n}\delta\left(t-nT_{s}\right)\right]\ast Rect\left(\frac{t}{T_{s}}\right),s_{n}\in\left\{ e^{2\pi i\frac{m}{M}}\right\} _{m=0}^{M-1}\]</div>
+<p>כלומר אות מרוכב! אותו נשדר כמו שאמרנו לפני רגע. זה אומר שכאשר אנחנו שואלים מה הקלט בזמן כלשהו <span class="math notranslate nohighlight">\(t_{n}=n\cdot T_{s}+\varepsilon\)</span> כלומר במהלך הסימבול ה-<span class="math notranslate nohighlight">\(n\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}r\left(t_{n}\right)=\begin{pmatrix}I\left(t_{n}\right)\\
+Q\left(t_{n}\right)
+\end{pmatrix}=\begin{pmatrix}\Re\left[z\left(t_{n}\right)\right]\\
+\Im\left[z\left(t_{n}\right)\right]
+\end{pmatrix}=\begin{pmatrix}\Re\left[s_{n}\right]\\
+\Im\left[s_{n}\right]
+\end{pmatrix}=\begin{pmatrix}\cos\left(2\pi\frac{m}{M}\right)\\
+\sin\left(2\pi\frac{m}{M}\right)
+\end{pmatrix}\end{split}\]</div>
+<p>תכלס עכשיו אתם אמורים להבין שכל האפנונים הלינארים “הם אותו הדבר” פשוט בוחרים סמלים שונים
+וזה לא באמת משנה אם מאפננים באמפליטודה או בפאזה או בשניים יחד</p>
+<p>לכל אפנון נעשה תרשים של הסמלים השונים (נקרא גם תרשים קונסטלציה)
+<img alt="4ASK.png" src="../_images/4ASK.png" /><img alt="BPSK.png" src="../_images/BPSK.png" />
+<img alt="8PSK.png" src="../_images/8PSK.png" /><img alt="QAM16.png" src="../_images/QAM16.png" /></p>
+<p>משהו חמוד לחשוב עליו: כמה ביטים שונים בין שני סימבולים צמודים בכל אחת מהקונסטליות האלו?
+מה היינו רוצים?</p>
+<p>עכשיו אתם גם מוזמנים לחשוב על השאלה למה האפנונים האלו נקראים לינארים?
+מה לינארי בהם? מה קורה אם שאני אנשים משדרים באותו תדר נושא?</p>
+<details>
+  <summary>למתקדמים, טעויות פאזה</summary>
+בפועל האות שאנחנו הולכים לקלוט לא יהיה מסונכרן בפאזה עם המקלט הקוהרנטי ולכן
+אנחנו קולטים אות מהצורה:
+<div class="math notranslate nohighlight">
+\[I\left(t\right)\cos\left(\omega_{0}t+\phi_{0}\right)-Q\left(t\right)\sin\left(\omega_{0}t+\phi_{0}\right)\]</div>
+<p>במוצא המקלט נקבל:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}r\left(t\right)=\begin{pmatrix}I\left(t\right)\cos\left(\phi_{0}\right)\\
+Q\left(t\right)\sin\left(\phi_{0}\right)
+\end{pmatrix}\Rightarrow r_{c}\left(t\right)=z\left(t\right)e^{i\phi_{0}}\end{split}\]</div>
+<p>שזה בעצם אומר שכל הקונסטלציות מסתובבות!</p>
+<p><img alt="QAM16_phase.png" src="../_images/QAM16_phase.png" /></p>
+<p>איך נתקן את זה? מה אם פעם בכמה סימבולים נדע איזה סימבול אנחנו משדרים?</p>
+</details>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./digital_communication"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="digital_intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">תקשורת דיגיטלית</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bask">BASK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baseband">מרחב הסמלים ואות ה-baseband</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yoav Palti
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

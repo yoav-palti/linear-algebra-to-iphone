@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=e249670e" />
+    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=2c8ff626" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -190,6 +190,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../analog_communication/analog_intro.html">מבוא לתקשורת אנלוגית</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../analog_communication/AM.html">אפנון AM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../analog_communication/PM_FM.html">אפנון PM ואפנון FM</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור דיגיטלי</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/digital_intro.html">מבוא לתקשורת דיגיטלית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/linear_modulations.html">אפנונים לינארים</a></li>
 </ul>
 
     </div>
@@ -380,7 +385,7 @@
 \[I\left(t\right)=\frac{1}{\left|Z\left(\omega_{0}\right)\right|}V_{0}\cos\left(\omega_{0}t-\phi\left(\omega_{0}\right)\right)\]</div>
 <p>נשתמש במשוואה להספק ונקבל:</p>
 <div class="math notranslate nohighlight">
-\[\boxed{P\left(t\right)=\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|}\left[\cos\left(2\omega_{0}t-\phi\left(\omega_{0}\right)\right)+\cos\left(\phi\left(\omega_{0}\right)\right)\right]}\]</div>
+\[P\left(t\right)=\frac{V_{0}^{2}}{\left|Z\left(\omega_{0}\right)\right|}\cos\left(\omega_{0}t\right)\cos\left(\omega_{0}t-\phi\left(\omega_{0}\right)\right)\]</div>
 <p>או עם שימוש בזהויות טריגונומטריות:</p>
 <div class="math notranslate nohighlight">
 \[\boxed{P\left(t\right)=\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|}\left[\cos\left(2\omega_{0}t-\phi\left(\omega_{0}\right)\right)+\cos\left(\phi\left(\omega_{0}\right)\right)\right]}\]</div>
@@ -391,7 +396,7 @@
 \[P_{avg}\equiv\left\langle P\left(t\right)\right\rangle \equiv\overline{P\left(t\right)}=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}P\left(t\right)dt\]</div>
 <p>עבור אות מחזורי נקבל</p>
 <div class="math notranslate nohighlight">
-\[\left\langle P\left(t\right)\right\rangle =\frac{1}{T}\intop_{0}^{T}P\left(t\right)dt=\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|}\frac{\omega_{0}}{2\pi}\intop_{0}^{\frac{2\pi}{\omega_{0}}}\underset{0}{\underbrace{\cos\left(2\omega_{0}t-\phi\left(\omega_{0}\right)\right)}}+\cos\left(\phi\left(\omega_{0}\right)\right)dt\]</div>
+\[\left\langle P\left(t\right)\right\rangle =\frac{1}{T}\intop_{0}^{T}P\left(t\right)dt=\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|}\underset{\frac{1}{T}}{\underbrace{\frac{\omega_{0}}{2\pi}}}\intop_{0}^{\frac{2\pi}{\omega_{0}}}\underset{0}{\underbrace{\cos\left(2\omega_{0}t-\phi\left(\omega_{0}\right)\right)}}+\cos\left(\phi\left(\omega_{0}\right)\right)dt\]</div>
 <div class="math notranslate nohighlight">
 \[\left\langle P\left(t\right)\right\rangle =\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|}\cos\left(\phi\left(\omega_{0}\right)\right)\]</div>
 <p>כדי לדעת כמה הספק רכיב חשמלי צורך חשוב לדעת מה הפאזה שלו. מתח קיר הוא בתדר קבוע של 50Hz ולכן להרבה רכיבים בבית תוכלו למצוא

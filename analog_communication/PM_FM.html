@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=e249670e" />
+    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=2c8ff626" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -66,6 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'analog_communication/PM_FM';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="תקשורת דיגיטלית" href="../digital_communication/digital_intro.html" />
     <link rel="prev" title="אפנון AM" href="AM.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -189,6 +190,11 @@
 <li class="toctree-l1"><a class="reference internal" href="analog_intro.html">מבוא לתקשורת אנלוגית</a></li>
 <li class="toctree-l1"><a class="reference internal" href="AM.html">אפנון AM</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">אפנון PM ואפנון FM</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור דיגיטלי</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/digital_intro.html">מבוא לתקשורת דיגיטלית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/linear_modulations.html">אפנונים לינארים</a></li>
 </ul>
 
     </div>
@@ -347,6 +353,9 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pm">אפנון PM</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fm">אפנון FM</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">האות האנליטי</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">הגדרות לתדר</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">גילוי FM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">רוחב סרט של אפנון PM</a></li>
 </ul>
             </nav>
         </div>
@@ -422,9 +431,19 @@
 נקבל:</p>
 <div class="math notranslate nohighlight">
 \[\cos\left(\phi\left(t\right)\right)+i\sin\left(\phi\left(t\right)\right)=e^{i\phi\left(t\right)}\]</div>
-<p>היינו רוצים שתדר רגעי תמיד יהיה חיובי משום שאת כל הסימנים ניתן לבלוע בפאזה <span class="math notranslate nohighlight">\(\cos\left(-\omega_{0}t\right)=\cos\left(\omega_{0}t\right),\sin\left(-\omega_{0}t\right)=\sin\left(\omega_{0}t+\pi\right)\)</span>
-כלומר לא נוכל להבדיל בין תדרים רגעיים שליליים וחיוביים. ולכן נוכל להגדיר את <span class="math notranslate nohighlight">\(\phi\left(t\right)\)</span> בתור <strong>פונקציה מונוטונית עולה</strong>
-נקבל כי:</p>
+<p>היינו רוצים שתדר רגעי תמיד יהיה חיובי. נציין כאן שזה לא תמיד אפשרי אם אנחנו רוצים שהפאזה תהיה רציפה. אבל משום שאת כל הסימנים
+ניתן לבלוע בפאזה <span class="math notranslate nohighlight">\(\cos\left(-\omega_{0}t\right)=\cos\left(\omega_{0}t\right),\sin\left(-\omega_{0}t\right)=\sin\left(\omega_{0}t+\pi\right)\)</span>
+כלומר לא נוכל להבדיל בין תדרים רגעיים שליליים וחיוביים (אם יש לנו רק את החלק הממשי). ולכן נרצה שהפונקציה <span class="math notranslate nohighlight">\(\phi\left(t\right)\)</span> תהיה <strong>פונקציה מונוטונית עולה</strong></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>האם שהמתמטיקה כאן היא טיפה טריקית משום שאנחנו מניחים מלחתחילה שנתון לנו האות <span class="math notranslate nohighlight">\(e^{i\phi\left(t\right)}\)</span> כאשר
+מה שבאמת יש לנו הוא האות <span class="math notranslate nohighlight">\(\cos\left(\phi\left(t\right)\right)\)</span>. אנחנו צריכים תהליך לקבל אות
+מרוכב מאות ממשי ויש לתהליך הזה אינסוף אופציות כאשר מייצגים את האות בתור מעטפת כפול פאזה
+<span class="math notranslate nohighlight">\(A\left(t\right)\cos\left(\phi\left(t\right)\right)\)</span>אנחנו לא ניכנס לדיון הארוך הזה אבל כן
+נשאיר לקורא הסקרן קישור למאמר מקיף על הנושא שעושה קצת סדר במתמטיקה ובהגדרות:
+<a class="reference external" href="https://doi.org/10.1109/5.135376">Estimating and interpreting the instantaneous frequency of a signal. I. Fundamentals</a></p>
+</div>
+<p>נקבל כי:</p>
 <div class="math notranslate nohighlight">
 \[\left|\frac{de^{i\phi\left(t\right)}}{dt}\right|=\left|\frac{d\phi\left(t\right)}{dt}e^{i\phi\left(t\right)}\right|=\left|\frac{d\phi\left(t\right)}{dt}\right|=\frac{d\phi\left(t\right)}{dt}\]</div>
 <p>באופן כללי עבור האות:</p>
@@ -447,7 +466,7 @@
 <p>אבל בגלל שהגדרנו מראש שבפונקציה האנליטית יש רק תדרים חיוביים ברור שאפשר להשיג את הפנוקצייה האנליטית מהפונקציה הממשית.
 כל מה שצריך לעשות הוא לרשום כי:</p>
 <div class="math notranslate nohighlight">
-\[f_{a}\left(t\right)=\frac{1}{2}\left[f\left(t\right)+i\mathcal{H}\left[f\left(t\right)\right]\right]\]</div>
+\[f_{a}\left(t\right)=f\left(t\right)+i\mathcal{H}\left[f\left(t\right)\right]\]</div>
 <p>כאשר</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\mathcal{F}\left[\mathcal{H}\left[f\left(t\right)\right]\right]=\begin{cases}
@@ -456,6 +475,106 @@
 \end{cases}=sgn\left(\omega\right)\cdot\tilde{F}\left(\omega\right)\end{split}\]</div>
 <p>קיבלנו שהטרנספורם הזה הוא לכפול כל תדר או ב1 או במינוס 1 ולכן זו פעולה שניתן לממש בעזרת מערכת LTI!</p>
 <p>נשים לב שלא צריך במציאות אות מרוכב אלא שני ערוצים. אחד שהאות בו הוא החלק הממשי והשני שהאות בו הוא החלק המדומה. את כל הנגזרות והנרמולים אפשר לעשות עם שני החלקים האלו!</p>
+<div class="tip admonition">
+<p class="admonition-title">פאזה רגעית:</p>
+<p>הפאזה הרגעית היא הפאזה של האות האנליטי</p>
+<p>טרנספורם הילברט הוא פעולת LTI אשר נותנת את החלק המדומה של האות האנליטי בהינתן החלק הממשי</p>
+</div>
+<details>
+  <summary>דוגמה לשוני בין תדר רגעי לתדר פורייה</summary>
+<p>ניקח את הדוגמא הבאה:</p>
+<div class="math notranslate nohighlight">
+\[f\left(t\right)=\cos\left(\omega_{0}t\right)\left[Rect\left(\frac{t+T}{T}\right)-Rect\left(\frac{t-T}{T}\right)\right]\]</div>
+<p>ניתן לראות אותה בסרטוט:
+<img alt="two_rects_t.png" src="../_images/two_rects_t.png" /></p>
+<p>נשים לב שבזמנים של הפולסים התדר הרגעי הוא בבירור <span class="math notranslate nohighlight">\(\omega_{0}\)</span>
+בעוד עם עושים פורייה של האות הזה מקבלים:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{F}\left(\omega\right)=\left[\frac{\delta\left(\omega-\omega_{0}\right)+\delta\left(\omega+\omega_{0}\right)}{2}\right]\ast\left[\frac{\left(e^{i\omega T}-e^{-i\omega T}\right)}{\sqrt{2\pi}}Tsinc\left(\omega\frac{T}{2\pi}\right)\right]\]</div>
+<div class="math notranslate nohighlight">
+\[=\left[\frac{\delta\left(\omega-\omega_{0}\right)+\delta\left(\omega+\omega_{0}\right)}{2}\right]\ast\left[2\frac{\sin\left(\omega T\right)}{\sqrt{2\pi}}Tsinc\left(\omega\frac{T}{2\pi}\right)\right]\]</div>
+<p>או בסרטוט:
+<img alt="two_rects_f.png" src="../_images/two_rects_f.png" /></p>
+<p>בקצרה מקבלים כי:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{\tilde{F}\left(\omega_{0}\right)=0}\]</div>
+<p>כלומר שהתדר הזה בכלל לא נמצא בפורייה של האות!</p>
+</details>
+</section>
+<section id="id2">
+<h2>הגדרות לתדר<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>עד עכשיו נתקלנו בשתי הגדרות לתדר. אני רוצה להוסיף אחת שלישית</p>
+<ul class="simple">
+<li><p>המקדם <span class="math notranslate nohighlight">\(\tilde{F}\left(\omega\right)\)</span> של הרכיב <span class="math notranslate nohighlight">\(e^{i\omega t}\)</span> בטרנספורם פורייה</p></li>
+<li><p>תדר רגעי - <span class="math notranslate nohighlight">\(\omega\left(t\right)\equiv\frac{d\phi\left(t\right)}{dt}\)</span></p></li>
+<li><p>נגדיר משהו שיותר קרוב לאיך שאנחנו שומעים, טרנספורם פורייה עם הפרדה בזמן <span class="math notranslate nohighlight">\(X_{STFT}\left(\omega,t\right)=\intop_{t-T}^{t}f\left(t\right)e^{-i\omega t^{\prime}}dt^{\prime}\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[X_{STFT}\left(\omega,t\right)=\intop_{t-T}^{t}f\left(t\right)e^{-i\omega t^{\prime}}dt^{\prime}=\intop_{-\infty}^{\infty}Rect_{T}\left(t^{\prime}-t\right)f\left(t\right)e^{-i\omega t^{\prime}}dt^{\prime}=\]</div>
+<div class="math notranslate nohighlight">
+\[=\mathcal{F}\left[Rect_{T}\left(t^{\prime}-t\right)\right]\ast F\left(\omega\right)=e^{i\omega t}sinc\left(T\omega\right)\ast F\left(\omega\right)\]</div>
+<p>קיבלנו שהספקטרוגרמה היא הפורייה של האות מרוחה בתדר. נשים לב שיש לנו טריידאוף בין רזולוציה תדרית לרזולוציה זמנית
+בעזרת שינוי של הפרמטר <span class="math notranslate nohighlight">\(T\)</span>. נקבל כי:</p>
+<ul class="simple">
+<li><p>ברזולוציה בתדר - <span class="math notranslate nohighlight">\(\Delta\omega=\frac{2\pi}{T}\)</span></p></li>
+<li><p>ברזולוציה בזמן - <span class="math notranslate nohighlight">\(\Delta t=T\)</span>
+נקבל שוב תוצאה חשובה:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Delta t\cdot\Delta f=1\]</div>
+<p>אני מזמין אתכם לשחק קצת עם ספקטרוגרמות ואיך הן נראות באתר הזה:
+<a class="reference external" href="https://spectrogram.sciencemusic.org/">ספקטרוגרמה</a></p>
+<p>עד כאן הסקירה של “ההגדרות” השונות לתדר</p>
+</section>
+<section id="id3">
+<h2>גילוי FM<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>כבר יש לנו רמז לאיך נבצע גילוי. מה יקרה אם נבצעה גזירה?</p>
+<div class="math notranslate nohighlight">
+\[\frac{d}{dt}g_{FM}\left(t\right)=\frac{d}{dt}\cos\left(\omega_{0}t+\phi_{0}+\intop_{0}^{t}mf\left(t\right)dt\right)\]</div>
+<div class="math notranslate nohighlight">
+\[=\frac{d}{dt}\left(\omega_{0}t+\phi_{0}+\intop_{0}^{t}mf\left(t\right)dt\right)\sin\left(\omega_{0}t+\phi_{0}+\intop_{0}^{t}mf\left(t\right)dt\right)\]</div>
+<div class="math notranslate nohighlight">
+\[=\underset{A\left(t\right)}{\underbrace{\left(\omega_{0}+mf\left(t\right)\right)}}\sin\left(\omega_{0}t+\phi_{0}+\intop_{0}^{t}mf\left(t\right)dt\right)\]</div>
+<p>מה קיבלנו? אם נניח כי התדר הרגעי קטן מהתדר הנושא <span class="math notranslate nohighlight">\(\frac{d\phi\left(t\right)}{dt}\ll\omega_{0}\)</span> נקבל כי הגל
+הזה הוא פשוט אפנון AM. כלומר נוכל להשתמש בשיטות הקודמות על מנת לקלוט אותו.</p>
+<div class="admonition-fm admonition">
+<p class="admonition-title">קליטת FM:</p>
+<p>על מנת לקלוט FM ניתן להעביר אותו במעגל גזירה ואז לבצע גילוי AM</p>
+</div>
+<p>חשוב לציין שצריך לעשות גילוי לא קוהרנטי משום שהאות הוא לא בדיוק אפנון
+AM אלא אפנון AM עם רעש פאזה משמעותי (כלומר הגל הנושא משנה את התדר שלו לפי המידע) ולכן
+צריך להשתמש בגילוי לא קוהרנטי אשר לא רגיש לפאזה!</p>
+</section>
+<section id="id4">
+<h2>רוחב סרט של אפנון PM<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>נציין שהניתוח עבור אות כללי הוא מורכב אנליטית. ננסה לקחת אות פשוט
+ולנתח אותו. ניקח:</p>
+<div class="math notranslate nohighlight">
+\[\phi\left(t\right)=\sin\left(\omega_{m}t\right)\]</div>
+<div class="math notranslate nohighlight">
+\[g_{PM}\left(t\right)=\cos\left(\omega_{0}t+\beta\sin\left(\omega_{m}t\right)\right)\]</div>
+<p>חשוב לדעת איך האות נראה בתדר כדי להבין איך הוא יראה במוצא של כל מערכת LTI
+כמו כל פילטר שנשים במקלט או באנטנת השידור</p>
+<p>נשתמש בנוסחה טריגונומטרית:
+$<span class="math notranslate nohighlight">\(g_{PM}\left(t\right)=\cos\left(\omega_{0}t\right)\cos\left(\beta\sin\left(\omega_{m}t\right)\right)+\sin\left(\omega_{0}t\right)\sin\left(\beta\sin\left(\omega_{m}t\right)\right)\)</span>$</p>
+<p>נחקור רק את החלק הראשון משום שהשני יהיה דומה:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}\left[\cos\left(\omega_{0}t\right)\cos\left(\beta\sin\left(\omega_{m}t\right)\right)\right]=\left[\frac{\delta\left(\omega-\omega_{0}\right)+\delta\left(\omega+\omega_{0}\right)}{2}\right]\ast\mathcal{F}\left[\underset{\text{ירוזחמ}}{\underbrace{\cos\left(\beta\sin\left(\omega_{m}t\right)\right)}}\right]\]</div>
+<div class="math notranslate nohighlight">
+\[=\left[\frac{\delta\left(\omega-\omega_{0}\right)+\delta\left(\omega+\omega_{0}\right)}{2}\right]\ast\left(\sum_{n=-\infty}^{\infty}J_{n}\delta\left(\omega-n\cdot\omega_{m}\right)\right)\]</div>
+<p>כלומר מה שמשנה הם הקבועים <span class="math notranslate nohighlight">\(J_{n}\left(\beta\right)\)</span> החישוב המדוייק לא מאוד משנה (רמז פונקציות בסל)
+אבל העיקר הוא לראות שאנחנו מקבלים המון “הרמוניות” כלומר רוחב סרט
+שהוא אפקטיבית מאוד מאוד גדול
+למזלנו יש כלל אצבע שאומר כמה האות באמת דואך (כלומר מה הדאיכה של המקדמים)</p>
+<div class="math notranslate nohighlight">
+\[\Delta\omega=2\omega_{max}\left(\beta+1\right)\]</div>
+<p>וגם כאן נשים לב שעבור <span class="math notranslate nohighlight">\(\beta\ll1\)</span> נקבל רוחב סרט “כפול” ממה שרצינו</p>
+<p>איך נראה אות FM בפועל? אפשר פשוט לבדוק :) מזל שיש מספיק חובבים של רדיו ברחבי העולם
+נבדוק מה קורה
+<a class="reference external" href="https://openwebrx.zl3bcj.duckdns.org/#freq=106500000,mod=wfm,sql=-150">בניוזילנד</a>
+שימו לב שאתם צריכים לבחור את התדר Clone RTL: Hauraki</p>
+<p>אם הקישור הזה כבר לא עובד מוזמנים לחפש בעצמכם כאן על המפה מקלטים אחרים:
+<a class="reference external" href="https://rx-tx.info/map-sdr-points">OpenWebRX</a></p>
 </section>
 </section>
 
@@ -498,6 +617,15 @@
         <p class="prev-next-title">אפנון AM</p>
       </div>
     </a>
+    <a class="right-next"
+       href="../digital_communication/digital_intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">תקשורת דיגיטלית</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -518,6 +646,9 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pm">אפנון PM</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fm">אפנון FM</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">האות האנליטי</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">הגדרות לתדר</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">גילוי FM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">רוחב סרט של אפנון PM</a></li>
 </ul>
   </nav></div>
 

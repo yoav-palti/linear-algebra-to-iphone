@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=e249670e" />
+    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=2c8ff626" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -190,6 +190,11 @@
 <li class="toctree-l1"><a class="reference internal" href="analog_intro.html">מבוא לתקשורת אנלוגית</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">אפנון AM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PM_FM.html">אפנון PM ואפנון FM</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור דיגיטלי</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/digital_intro.html">מבוא לתקשורת דיגיטלית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/linear_modulations.html">אפנונים לינארים</a></li>
 </ul>
 
     </div>
@@ -415,7 +420,7 @@
 <ul class="simple">
 <li><p>רוחב הסרט (רוחב הפס) של שידור AM הוא <span class="math notranslate nohighlight">\(\Delta\omega=2\omega_{max}\)</span></p></li>
 <li><p>עומק המודולציה משפיע על <strong>יעילות השידור</strong> כלומר כמה מהסספק הוא המידע ואיזה הוא רק הגל הנושא</p></li>
-<li><p>נשים לב שאידאלית אנחנו רוצים לשדר “בלי הגל הנושא” כלומר בלי ה-<span class="math notranslate nohighlight">\(+1\)</span> ובנוסף רק עונה אחת מתוך השתיים</p></li>
+<li><p>נשים לב שאידאלית אנחנו רוצים לשדר “בלי הגל הנושא” כלומר בלי ה-<span class="math notranslate nohighlight">\(+1\)</span> ובנוסף רק אונה אחת מתוך השתיים</p></li>
 </ul>
 </section>
 <section id="id3">
@@ -555,7 +560,7 @@
 <p>אבל כבר הזכרנו יתרון קטן של מקלט קוהרנטי. אם אנחנו “ריגישים” לפאזה אנחנו יכולים להבין מתי המעטפת שלנו הופכת לשלילית.</p>
 <p>ניקח השראה ממקלט הטרודיין אבל הפעם נוריד נבחר תדר ביניים שהוא תדר ה-0</p>
 <p>נסיון ראשון לבנות סכמה יראה ככה:
-<img alt="coherent_receiver_diagram.png" src="analog_communication/images/Fcoherent_receiver_diagram.png" /></p>
+<img alt="coherent_receiver_diagram.png" src="../_images/coherent_receiver_diagram.png" /></p>
 <p>מה נקבל לפני ה-LPF?</p>
 <div class="math notranslate nohighlight">
 \[A\left(t\right)\cos\left(\omega_{0}t+\phi_{0}\right)\cos\left(\omega_{0}t\right)=\frac{A\left(t\right)}{2}\left[\cos\left(\phi_{0}\right)+\cos\left(2\omega_{0}t+\phi_{0}\right)\right]\]</div>
@@ -583,10 +588,10 @@
 </section>
 <section id="am-ssb">
 <h3>וריאנטים על שידור AM - SSB<a class="headerlink" href="#am-ssb" title="Link to this heading">#</a></h3>
-<p>בגלל סימטריה ניתן לוותר לחלוטין על העונה התחתונה בגל שלנו ולא לשדר אותה בכלל. זה מאוד מקל על הגילוי הקוהרנטי והוא נהיה לא רגיש לפאזה (נסו להבין למה)</p>
+<p>בגלל סימטריה ניתן לוותר לחלוטין על האונה התחתונה בגל שלנו ולא לשדר אותה בכלל. זה מאוד מקל על הגילוי הקוהרנטי והוא נהיה לא רגיש לפאזה (נסו להבין למה)</p>
 <p>יש לשים לב שאפשר לשדר את זה עם ה<span class="math notranslate nohighlight">\(+1\)</span> או בלעדיו</p>
 <p>בסרטוט רואים שידור בלעדיו:
-<img alt="SSB_bandform.svg" src="analog_communication/images%2FSSB_bandform.svg" /></p>
+<img alt="SSB_bandform.svg" src="../_images/SSB_bandform.svg" /></p>
 </section>
 </section>
 </section>
