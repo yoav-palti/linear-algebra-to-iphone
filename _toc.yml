@@ -29,4 +29,11 @@ parts:
       title: "אפנון AM"
     - file: analog_communication/PM_FM
       title: "אפנון PM ואפנון FM"
+  - caption: "שידור דיגיטלי"
+    chapters:
+    - file: digital_communication/digital_intro
+      title: "מבוא לתקשורת דיגיטלית"
+    - file: digital_communication/linear_modulations
+      title: "אפנונים לינארים"
+
 
