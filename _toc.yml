@@ -35,5 +35,11 @@ parts:
       title: "מבוא לתקשורת דיגיטלית"
     - file: digital_communication/linear_modulations
       title: "אפנונים לינארים"
+    - file: digital_communication/more_modulations
+      title: "בעיות שלא הכרתם - עוד אפנונים"
+    - file: digital_communication/FSK
+      title: "אפנון תדר - FSK"
+    - file: digital_communication/orthogonality
+      title: "אורתוגונליות"
 
 
