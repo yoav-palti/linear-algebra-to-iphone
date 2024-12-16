@@ -1,0 +1,607 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>פתרון בעיות שלא ידעתם שקיימות &#8212; Linear Algebra to iPhone 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=2c8ff626" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'digital_communication/more_modulations';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="FSK - Frequency Shift Keying" href="FSK.html" />
+    <link rel="prev" title="אפנונים לינארים" href="linear_modulations.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Linear Algebra to iPhone 1 - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Linear Algebra to iPhone 1 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/intro.html">
+                    מאלגברה לינארית לאייפון
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../LTI/intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/impulse_response.html">תגובת להלם</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/frequency_response.html">תגובת בתדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/wave_in_a_room.html">החזרות בחדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">מעגלי RLC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RLC/RC_intro.html">מעגלי RC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RLC/RLC_intro.html">מעגלי RLC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RLC/power_on_load.html">הספק על רכיבים</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור אנלוגי</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/analog_intro.html">מבוא לתקשורת אנלוגית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/AM.html">אפנון AM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/PM_FM.html">אפנון PM ואפנון FM</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור דיגיטלי</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="digital_intro.html">מבוא לתקשורת דיגיטלית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linear_modulations.html">אפנונים לינארים</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">בעיות שלא הכרתם - עוד אפנונים</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FSK.html">אפנון תדר - FSK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orthogonality.html">אורתוגונליות</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">דיגיטציה</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/digitation_intro.html">מה זה לדיגיטציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/sampling.html">דגימה</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/yoav-palti/linear-algebra-to-iphone" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/digital_communication/more_modulations.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>פתרון בעיות שלא ידעתם שקיימות</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-crossing">zero crossing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">סנכרון פאזה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#isi-inter-symbol-interference">ISI - Inter Symbol Interference</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>פתרון בעיות שלא ידעתם שקיימות<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>הרבה מאוד מההבנה באיזה אפנון להשתמש בכל מערכת ולמה מהנדסים עבדו קשה
+כדי למצוא אפנונים חדשים ולהמציא דברים חדשים קשור לבעיות בעולם
+התקשורת שקצת קשה לשים לב אליהן מהתבוננות במשוואות. אני
+אתן כאן כמה דוגמאות לבעיות שיכולות לצוץ ואיך פתרו אותן</p>
+<section id="zero-crossing">
+<h2>zero crossing<a class="headerlink" href="#zero-crossing" title="Link to this heading">#</a></h2>
+<p>כאשר משדרים בשידור QPSK ניתן לראות מה שנקרא zero crossing
+כלומר ששני סימבולים שקופצים בינהם נמצאים בפאזה של <span class="math notranslate nohighlight">\(\pi\)</span> זה מזה
+הגל שלנו הוא רציף ולא באמת “מדלג” בין הסימבולים. זה אומר שבדרך
+אנחנו אמורים לעבור דרך ה-0.</p>
+<p>אם נצייר את הקונסטלציה של QPSK כולל המעברים:
+<img alt="QPSK_transitions.png" src="../_images/QPSK_transitions.png" /></p>
+<p>אבל למה זאת בעיה? הסיבה היא שהמטרה באפנון PSK על צורותיו השונות היא
+ליצור אפנון שבו המעטפת כלומר האמפליטודה כמעט ולא משתנה.
+בטח ובטח שלא מתהפכת דרך ה-0.</p>
+<p>כדי לפתור את זה נשתמש בטריק כמובן. אפשר לחשוב על אפנון QPSK
+בתור שני אפנוני BASK. אבל אחד משדר על I אחד על Q.
+כל אחד מהם מחליף סימן כל <span class="math notranslate nohighlight">\(T_{S}=2T_{b}\)</span> וכמובן הם מתחלפים ביחד
+מה עם נזיז את הערוץ של Q <span class="math notranslate nohighlight">\(T_{b}\)</span> קדימה בזמן? עכשיו הם אף פעם
+לא מתחלפים ביחד. אם מסתכלים כל התוצאה מקבלים משהו כזה:</p>
+<p><img alt="OQPSK_vs_QPSK.png" src="../_images/OQPSK_vs_QPSK.png" /></p>
+<p>אוקי אפשר לבדוק שוב את המעברים:</p>
+<p><img alt="OQPSK_transitions.png" src="../_images/OQPSK_transitions.png" /></p>
+<p>נראה שטיפלנו בבעיה. אבל מרגיש שבגלל שעכשיו אנחנו מחליפים פאזה
+כל <span class="math notranslate nohighlight">\(T_{b}\)</span> יש סיכון שהגדלנו את רוחב הסרט של השידור.</p>
+<p>האמת שזה לא קורה. קל לראות את זה מלינאריות של פורייה והזזה בזמן. עבור QPSK רגיל:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}\left[z_{QPSK}\left(t\right)\right]=\mathcal{F}\left[\sum_{n}e^{i\phi_{n}}Rect\left(\frac{t-nT_{s}}{T_{s}}\right)\right]=\mathcal{F}\left[\sum_{n}e^{i\phi_{n}}\delta\left(t-nT_{s}\right)\right]\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[=\left(\mathcal{F}\left[\sum_{n}\cos\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]+i\mathcal{F}\left[\sum_{n}\sin\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]\right)\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)\]</div>
+<p>ועבור OQPSK רק נזיז את הערוץ המדומה:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}\left[z_{OQPSK}\left(t\right)\right]=\left(\mathcal{F}\left[\sum_{n}\cos\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]+i\mathcal{F}\left[\sum_{n}\sin\left(\phi_{n}\right)\delta\left(t-n\left(T_{s}-\frac{T_{s}}{2}\right)\right)\right]\right)\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[=\left(\mathcal{F}\left[\sum_{n}\cos\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]+ie^{i\omega\frac{T_{s}}{2}}\mathcal{F}\left[\sum_{n}\sin\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]\right)\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)\]</div>
+<p>וכמו שראינו עד עכשיו ה-<span class="math notranslate nohighlight">\(sinc\)</span> נשאר אותו הדבר ורוחב הסרט נשאר כמו שהוא.</p>
+</section>
+<section id="id2">
+<h2>סנכרון פאזה<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>כמו שראיתם בפרק הקודם שום דבר לא מבטיח שלנו שהמקלט הקוהרנטי שלנו יהיה בסנכרון
+עם האות שמשודר. באופן כללי יש בינהם הפרש פאזה <span class="math notranslate nohighlight">\(\Delta\phi\)</span></p>
+<p>זה אומר שהסימבולים שנקלוט יהיו:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}r\left(t\right)=\begin{pmatrix}I\left(t\right)\cos\left(\Delta\phi\right)\\
+Q\left(t\right)\sin\left(\Delta\phi\right)
+\end{pmatrix}\end{split}\]</div>
+<p>או בסימונים אחרים:</p>
+<div class="math notranslate nohighlight">
+\[r\left(t\right)=z\left(t\right)e^{i\Delta\phi}\]</div>
+<p>יש לנו שתי בעיות. הראשונה היא שהערוצים מעורבבים. את זה אפשר לפתור בדרכים שונות
+לדוגמא עבור BPSK נסתכל על:</p>
+<div class="math notranslate nohighlight">
+\[\left(r\left(t\right)\right)^{2}=\left(z\left(t\right)\right)^{2}e^{2i\Delta\phi}\]</div>
+<p>בגלל שהסימבולים <span class="math notranslate nohighlight">\(z\left(t\right)\)</span> הם או אחד או מינוס 1 קיבלנו כי <span class="math notranslate nohighlight">\(\left(z\left(t\right)\right)^{2}=1\)</span>
+ולכן נוכל לרשום:</p>
+<div class="math notranslate nohighlight">
+\[\Delta\phi=\frac{1}{2}\arg\left(\left(r\left(t\right)\right)^{2}\right)\]</div>
+<p>הכל טוב ויפה עד שמבינים שהפונקציה <span class="math notranslate nohighlight">\(arg\)</span> מחזירה תשובה עד כדי <span class="math notranslate nohighlight">\(2\pi\)</span> וזה אומר שאנחנו
+יכולים לדעת את הפרש הפאזות עד כדי <span class="math notranslate nohighlight">\(\pi\)</span>. אז פתרנו את ערבוב הערוצים אבל
+אנחנו לא יכולים לדעת איזה סימבול הוא 0 ואיזה הוא 1. מה אפשר לעשות?</p>
+<p>אחד הפתרונות שמשתמשים בהם הוא אפנון שנקרא DBPSK. באפנון הזה
+המידע הוא לא הסימבולים אלא המעברים בינהם. אם רוצים לשלוח את הביט 0 נשארים
+באותו סימבול. אם רוצים לשלוח את הביט 1 מחליפים.
+אפנון כזה לא דורש סנכרון פאזה משום שאנחנו מעוניינים רק בהפרשי פאזות.
+כמובן שניתן להכליל את זה לאפנון DPSK שבו יש יותר ממעבר אחד אפשרי.</p>
+</section>
+<section id="isi-inter-symbol-interference">
+<h2>ISI - Inter Symbol Interference<a class="headerlink" href="#isi-inter-symbol-interference" title="Link to this heading">#</a></h2>
+<p>בכל החלק על תקשורת עד עכשיו דיברנו על מקלטים כאילו לא למדנו את כל החלק
+מערכות לינאריות. במציאות האות עובר החזרים ועובר דרך האוויר. כלומר הוא
+מועבר בפונקציית תמסורת!
+זה הרבה הרבה יותר גרוע מאשר רק הכפלה בפאזה. כל תדר מוכפל באפליטודה ופאזה משלו.
+מה עושים?</p>
+<p>נתחיל ממודל “פשוט” (האמת שלא צריך מודל יותר מסובך אבל יהיה קל יותר להבין את זה
+אחרי שנדבר על דגימה של אותות)</p>
+<p>המודל אומר שכל דגימה שאנחנו מקבלים היא סכום של הדגימה הנוכחית ועוד
+החזרות (כל אחת עם פאזה ואפליטודה) כלומר:</p>
+<div class="math notranslate nohighlight">
+\[r_{n}=\sum_{k=0}^{\infty}h_{k}s_{n-k}\]</div>
+<p>שימו לב שזה ממש נראה כמו קונבולוציה רק עבור אותות דגומים (או וקטורים אינסופיים)</p>
+<p>אנחנו רוצים לקבל את הסימבולים שלנו. איך נעשה את זה?
+נתחיל בלהניח הנחה (יחסית טובה) שפונקציית התגובה להלם דואכת בזמן
+ואחרי זמן מספיק ארוך היא זניחה. נקבל כי:</p>
+<div class="math notranslate nohighlight">
+\[r_{n}\approx\sum_{k=0}^{K-1}h_{k}s_{n-k}\]</div>
+<p>אוקי מה עושים מכאן? אנחנו רוצים לשערך את המספרים <span class="math notranslate nohighlight">\(h_{k}\)</span> ויש לנו <span class="math notranslate nohighlight">\(K\)</span> כאלו.
+מה אם נתחיל כל שידור (או פעם בכמה שניות) נשלח <span class="math notranslate nohighlight">\(2K\)</span> סימבולים שאנחנו יודעים מה הם
+נתחיל מדוגמה פשוטה בה אנחנו שולחים תמיד רצף של 0 באורך <span class="math notranslate nohighlight">\(K\)</span> ואז רצף של 1 באורך <span class="math notranslate nohighlight">\(K\)</span> כלומר:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}s_{n}=\begin{cases}
+0 &amp; 0\le n\le K-1\\
+1 &amp; K\le n\le2K-1
+\end{cases}\end{split}\]</div>
+<p>נקבל  כי:</p>
+<div class="math notranslate nohighlight">
+\[r_{K+l}=\sum_{k=0}^{K-1}h_{k}s_{K+l-k}=\sum_{k=l+1}^{K-1}h_{k}\underset{0}{\underbrace{s_{K+l-k}}}+\sum_{k=0}^{l}h_{k}\underset{1}{\underbrace{s_{K+l-k}}}\]</div>
+<div class="math notranslate nohighlight">
+\[r_{K+l}-r_{K+l-1}=\sum_{k=0}^{l}h_{k}-\sum_{k=0}^{l-1}h_{k}=h_{l}\]</div>
+<p>שימו לב שסתם הינדסתי דוגמה קלה, באופן כללי זה פשוט לפתור K משוואות ב-K נעלמים. כלומר פשוט להפוך מטריצה
+(האם היא הפיכה? כל עוד אין תדר שהיא מאפסת היא הפיכה)</p>
+<p>התהליך הזה של שערוך של פונקציית התגובה לתדר נקרא שערוך ערוץ
+ואחריו צריך לבוא תהליך של “ביטול” ערוץ או חלוקה בפונקציית התמסורת.
+תהליך זה נקרא equalization.</p>
+<p>ראינו כאן שאחת הדרכים לבצע אותו הוא לשלוח כמות מסויימת של סימבולים ידועים
+ולפתור סט של משוואות לינאריות</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./digital_communication"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="linear_modulations.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">אפנונים לינארים</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="FSK.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">FSK - Frequency Shift Keying</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-crossing">zero crossing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">סנכרון פאזה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#isi-inter-symbol-interference">ISI - Inter Symbol Interference</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yoav Palti
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
