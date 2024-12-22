@@ -14,19 +14,22 @@
 נרצה להרכיב $M$ אותות שונים $s_{m}\left(t\right)$ שיהיו אורתוגונלים זה לזה
 מה שחשוב לנו הוא שבסוף עבור שני אותות שמשודרים $g_{m}\left(t\right),g_{n}\left(t\right)$ נקבל:
 
-$$\left\langle g_{m}\left(t\right),g_{n}\left(t\right)\right\rangle =\intop_{0}^{T}g_{m}\left(t\right)\cdot g_{n}\left(t\right)dt=0$$
+$$\left\langle g_{m}\left(t\right),g_{n}\left(t\right)\right\rangle =\intop_{-\infty}^{\infty}g_{m}\left(t\right)\cdot g_{n}\left(t\right)dt=0$$
 
 אבל נזכיר שאנחנו מעדיפים לעבוד עם אותות ב-baseband. נחשב כמה חישובים שיעזרו לנו:
 
-$$\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)\right]=\Re\left[\intop_{-\infty}^{\infty}\left[g_{m}\left(t\right)+i\hat{g}_{m}\left(t\right)\right]\cdot\left[g_{n}\left(t\right)-i\hat{g}_{n}\left(t\right)\right]\right]$$
+$$\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)dt\right]=\Re\left[\intop_{-\infty}^{\infty}\left[g_{m}\left(t\right)+i\hat{g}_{m}\left(t\right)\right]\cdot\left[g_{n}\left(t\right)-i\hat{g}_{n}\left(t\right)\right]dt\right]$$
 $$=\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt+\intop_{-\infty}^{\infty}\hat{g}_{m}\left(t\right)\hat{g}_{n}\left(t\right)dt$$
 
 בנוסף:
 
-$$\intop_{-\infty}^{\infty}\hat{g}_{m}\left(t\right)\hat{g}_{n}\left(t\right)dt=\intop_{-\infty}^{\infty}\mathcal{H}\left[g_{m}\left(t\right)\right]\mathcal{H}\left[g_{n}\left(t\right)\right]dt\underset{parseval}{\underbrace{=}}\intop_{-\infty}^{\infty}\underset{1}{\underbrace{\left|isgn\left(\omega\right)\right|^{2}}}G_{m}\left(\omega\right)G_{n}^{\ast}\left(\omega\right)d\omega=\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt$$
+$$\intop_{-\infty}^{\infty}\hat{g}_{m}\left(t\right)\hat{g}_{n}\left(t\right)dt=\intop_{-\infty}^{\infty}\mathcal{H}\left[g_{m}\left(t\right)\right]\mathcal{H}\left[g_{n}\left(t\right)\right]dt\underset{parseval}{\underbrace{=}}$$
+$$=\intop_{-\infty}^{\infty}\underset{1}{\underbrace{\left|isgn\left(\omega\right)\right|^{2}}}G_{m}\left(\omega\right)G_{n}^{\ast}\left(\omega\right)d\omega=\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt$$
 
 כאשר השתמשנו בזה שהחלק המדומה הוא הילברט טרנספורם של החלק הממשי ושפונקציית התמסורת של הילברט היא פשוט $isgn\left(\omega\right)$
 
+נזכיר איך זה נראה:
+![baseband-passband-anlytic.png](images/baseband-passband-anlytic.png)
 בסך הכל קיבלנו כי:
 
 $$\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt=\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)\right]$$

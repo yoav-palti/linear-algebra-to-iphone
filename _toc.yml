@@ -41,5 +41,13 @@ parts:
       title: "אפנון תדר - FSK"
     - file: digital_communication/orthogonality
       title: "אורתוגונליות"
+  - caption: "דיגיטציה"
+    chapters:
+    - file: digitation_and_reconstruction/digitation_intro
+      title: "מה זה לדיגיטציה"
+    - file: digitation_and_reconstruction/sampling
+      title: "דגימה"
+    - file: digitation_and_reconstruction/intepolation
+      title: "שחזור באינטרפולציה"
 
 
