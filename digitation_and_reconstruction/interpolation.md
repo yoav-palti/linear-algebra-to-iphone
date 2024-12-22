@@ -2,6 +2,10 @@
 
 <details>
   <summary>אמ;לק</summary>
+    ניתן לייצג אינטרפולציה מסדר 0 ומסדר 1 כקונבולוציה ולראות מה האינטרפולציה עושה בתדר:
+
+    $$V_{0}\left(\omega\right)=\Delta te^{-i\omega\frac{\Delta t}{2}}sinc\left(\frac{\omega}{2\pi}\Delta t\right)\cdot V_{s}\left(\omega\right)$$
+    $$V_{1}\left(\omega\right)=\Delta t\left[sinc\left(\frac{\omega}{2\pi}\Delta t\right)\right]^{2}\cdot V_{s}\left(\omega\right)$$
 
 </details>
 

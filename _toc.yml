@@ -47,7 +47,7 @@ parts:
       title: "מה זה לדיגיטציה"
     - file: digitation_and_reconstruction/sampling
       title: "דגימה"
-    - file: digitation_and_reconstruction/intepolation
+    - file: digitation_and_reconstruction/interpolation
       title: "שחזור באינטרפולציה"
 
 
