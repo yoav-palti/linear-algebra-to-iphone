@@ -49,5 +49,7 @@ parts:
       title: "דגימה"
     - file: digitation_and_reconstruction/interpolation
       title: "שחזור באינטרפולציה"
+    - file: digitation_and_reconstruction/quantization
+      title: "קוונטיזציה"
 
 

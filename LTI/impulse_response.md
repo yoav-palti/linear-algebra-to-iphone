@@ -123,7 +123,7 @@ $$F\left(t\right)=m\ddot{x}+\gamma\dot{x}+kx$$
 $$\delta\left(t-\tau\right)=m\ddot{h}+\gamma\dot{h}+kh$$
 
 שימו לב שעכשיו נסמן את הפתרון ב $h$ ולא ב$x$ משום שזה הפלט של המערכת עבור הלם. 
-אנחנו לא נעשה את זה כאן ורק נומר שהפתרון הוא:
+אנחנו לא נעשה את זה כאן ורק נאמר שהפתרון הוא:
 
 $$h\left(t,\tau\right)=\theta\left(t-\tau\right)\frac{1}{m\omega_{D}}e^{-\frac{\gamma}{2m}\left(t-\tau\right)}\sin\left(\omega_{D}\left(t-\tau\right)\right)$$
 $$\omega_{D}=\sqrt{\frac{k}{m}-\left(\frac{\gamma}{2m}\right)^{2}}$$
