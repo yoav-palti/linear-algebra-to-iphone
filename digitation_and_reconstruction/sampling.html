@@ -66,6 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'digitation_and_reconstruction/sampling';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="שחזור (בעזרת אינטרפולציה)" href="interpolation.html" />
     <link rel="prev" title="דיגיטציה" href="digitation_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -202,6 +203,9 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="digitation_intro.html">מה זה לדיגיטציה</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">דגימה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolation.html">שחזור באינטרפולציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quantization.html">קוונטיזציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quantization_example.html">קוונטיזציה לדוגמא</a></li>
 </ul>
 
     </div>
@@ -359,6 +363,11 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">משפט הדגימה של נייקוויסט-שאנון</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">“הוכחה”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tilde-v-left-theta-right">הפונקציה <span class="math notranslate nohighlight">\(\tilde{V}\left(\theta\right)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alias">Alias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anti-alias-filter">Anti Alias Filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">העלאה של תדר הדגימה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">מספר דגימות סופי</a></li>
 </ul>
             </nav>
         </div>
@@ -373,7 +382,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>דגימה<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <details>
-  <summary>אמלק</summary>
+  <summary>אמ;לק</summary>
 <p>ניתן לשחזר את האות <span class="math notranslate nohighlight">\(V\left(t\right)\)</span> באופן מושלם מתוך הדגימות <span class="math notranslate nohighlight">\(V_{n}\)</span> על ידי
 הגדרה של האות הדגום</p>
 <div class="math notranslate nohighlight">
@@ -383,6 +392,23 @@
 <p>כלומר</p>
 <div class="math notranslate nohighlight">
 \[\underset{\text{ירוקמה}-\text{תואה}}{\underbrace{V\left(t\right)}}=\sum_{n=-\infty}^{\infty}\underset{\text{תומיגדה}}{\underbrace{V_{n}}}\underset{sinc\left(f_{s}\left(t-n\Delta t\right)\right)}{\underbrace{\frac{\sin\left(\pi f_{s}\left(t-n\Delta t\right)\right)}{\pi f_{s}\left(t-n\Delta t\right)}}}\]</div>
+<p>בנוסף נקבל כי האות <span class="math notranslate nohighlight">\(\tilde{V}_{s}\left(\omega\right)\)</span> הוא מחזורי. בשביל הנוחות נגדיר את האות:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{V}\left(\theta\right)\equiv\tilde{V}_{s}\left(\omega=\frac{\theta}{\Delta t}\right)=\frac{1}{\sqrt{2\pi}}\sum_{n=-\infty}^{\infty}V_{n}e^{-i\theta n}\]</div>
+<p>אם נגביל את כמות הדגימות ל-<span class="math notranslate nohighlight">\(N\)</span> דגימות (כלומר אורך האות שלנו הוא <span class="math notranslate nohighlight">\(n\Delta t\)</span>)
+נקבל כי האות <span class="math notranslate nohighlight">\(\tilde{V}\left(\theta\right)\)</span> יהיה דגום <span class="math notranslate nohighlight">\(N\)</span> פעמים.
+הקשר בין הדגימות בזמן לדגימות בתדר הוא:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{V}_{k}=\sum_{n=0}^{N-1}V_{n}e^{-i\frac{2\pi k}{N}n}\]</div>
+<ul class="simple">
+<li><p>מרחק בין שתי דגימות בזמן - <span class="math notranslate nohighlight">\(\Delta t=\frac{1}{f_{s}}\)</span></p></li>
+<li><p>מרחק בין שתי דגימות בתדר - <span class="math notranslate nohighlight">\(\Delta\omega=\frac{2\pi}{N\Delta t}=\frac{2\pi}{T}\)</span></p></li>
+<li><p>תחום הזמן - <span class="math notranslate nohighlight">\(t\in\left[0,T\right]\)</span></p></li>
+<li><p>תחום התדרים - <span class="math notranslate nohighlight">\(\omega\in\left[-\pi f_{s},\pi f_{s}\right]\)</span></p></li>
+</ul>
+<p>קיבלנו מסקנה חשובה:</p>
+<p><strong>דגימה מהירה יותר משפרת רזולוציה בזמן ואת טווח התדרים</strong>
+<strong>דגימה ארוכה יותר משפרת את רזולוציית התדרים ואת טווח הזמנים</strong></p>
 </details>
 <p>נתחיל מהתהליך של הדגימה וניתן על ההתחלה את התוצאה הכי חשובה בתחום</p>
 <section id="id2">
@@ -427,31 +453,211 @@
 \[V_{s}\left(t\right)=\sum_{n=-\infty}^{\infty}V_{n}\delta\left(t-n\Delta t\right)=V\left(t\right)\cdot comb\left(\frac{t}{\Delta t}\right)\]</div>
 <p>ונעשה לו טרנספורם פורייה</p>
 <div class="math notranslate nohighlight">
-\[\tilde{V}_{s}\left(\omega\right)=\tilde{V}\left(\omega\right)\ast comb\left(\frac{\omega}{2\pi}\Delta t\right)=\tilde{V}\left(\omega\right)\ast comb\left(\frac{\omega}{2\pi f_{s}}\right)\]</div>
+\[\tilde{V}_{s}\left(\omega\right)=\frac{1}{\sqrt{2\pi}}\tilde{V}\left(\omega\right)\ast\frac{\sqrt{2\pi}}{\Delta t}comb\left(\frac{\omega}{2\pi}\Delta t\right)=f_{s}\tilde{V}\left(\omega\right)\ast comb\left(\frac{\omega}{2\pi f_{s}}\right)\]</div>
 <p>האם ניתן לשחזר את <span class="math notranslate nohighlight">\(\tilde{V}\left(\omega\right)\)</span> מתוך <span class="math notranslate nohighlight">\(\tilde{V}_{s}\left(\omega\right)\)</span>?</p>
 <p>כן אבל רק אם <span class="math notranslate nohighlight">\(f_{max}&lt;\frac{f_{s}}{2}\)</span> למה? נסתכל בתמונה:</p>
 <p><img alt="AliasedSpectrum.png" src="../_images/AliasedSpectrum.png" /></p>
-<p>האות הכחול הוא מה שאנחנו רוצים. מה שיש לנו זה את האות הכחול קונבולוציה עם מסרק (רכבת הלמים). שזה האות בירוק
+<p>האות הכחול הוא מה שאנחנו רוצים. מה שיש לנו זה את האות הכחול קונבולוציה עם מסרק (רכבת הלמים). שזה האות בירוק.
 נוכל לשחזר את האות הכחול רק אם לא תהיה חפיפה בין השכפולים. נשים לב שהמרחק בין שכפולים
 הוא <span class="math notranslate nohighlight">\(2\pi f_{s}\)</span> בעוד הרוחב של האות שלנו הוא <span class="math notranslate nohighlight">\(2\pi\cdot\left(2f_{max}\right)\)</span>
 ולכן אנחנו חייבים לעמוד בתנאי <span class="math notranslate nohighlight">\(f_{max}&lt;\frac{f_{s}}{2}\)</span></p>
-<p>איך נשחזר את האות? על ידי LPF מלבני. מכפלה בחלון בתדר היא קונבולוציה עם sinc בזמן.
+<p>איך נשחזר את האות? על ידי LPF מלבני.
 קיבלנו כי:</p>
 <div class="math notranslate nohighlight">
-\[\tilde{V}\left(\omega\right)=\tilde{V}_{s}\left(\omega\right)\cdot Rect\left(\frac{\omega}{2\pi f_{s}}\right)\]</div>
-<p>נעשה פורייה הפוך:</p>
+\[\tilde{V}\left(\omega\right)=\tilde{V}_{s}\left(\omega\right)\cdot\frac{1}{f_{s}}Rect\left(\frac{\omega}{2\pi f_{s}}\right)=\sqrt{2\pi}\tilde{V}_{s}\left(\omega\right)\cdot\frac{1}{\sqrt{2\pi}f_{s}}Rect\left(\frac{\omega}{2\pi f_{s}}\right)\]</div>
+<p>נוח לראות כאן כי:</p>
+<div class="math notranslate nohighlight">
+\[\forall\omega\in\left[-\pi f_{s},\pi f_{s}\right]:\tilde{V}\left(\omega\right)=\Delta t\tilde{V}_{s}\left(\omega\right)\]</div>
+<p>מכפלה בחלון בתדר היא קונבולוציה עם sinc בזמן. נעשה פורייה הפוך:</p>
 <div class="math notranslate nohighlight">
 \[V\left(t\right)=V_{s}\left(t\right)\ast sinc\left(f_{s}\cdot t\right)=\sum_{n=-\infty}^{\infty}V_{n}\delta\left(t-n\Delta t\right)\ast sinc\left(f_{s}\cdot t\right)\]</div>
 <p>ושוב קיבלנו:</p>
 <div class="math notranslate nohighlight">
 \[V\left(t\right)=\sum_{n=-\infty}^{\infty}V_{n}sinc\left(f_{s}\left(t-n\Delta t\right)\right)\]</div>
 <div class="admonition- admonition">
-<p class="admonition-title">שחזור אידאלי</p>
+<p class="admonition-title">שחזור אידאלי - סיכום</p>
 <p>ניתן לשחזר את האות <span class="math notranslate nohighlight">\(V\left(t\right)\)</span> באופן מושלם מתוך הדגימות <span class="math notranslate nohighlight">\(V_{n}\)</span> על ידי
 הגדרה של האות הדגום <span class="math notranslate nohighlight">\(V_{s}\left(t\right)=\sum_{n=-\infty}^{\infty}V_{n}\delta\left(t-n\Delta t\right)\)</span>
 וקונבולוציה שלו (אינטרפולציה) עם הפונקצייה <span class="math notranslate nohighlight">\(sinc\left(f_{s}t\right)=\frac{\sin\left(\pi f_{s}t\right)}{\pi f_{s}t}\)</span>
 במידה ותדר הדגימה מקיים <span class="math notranslate nohighlight">\(f_{max}&lt;\frac{f_{s}}{2}\)</span></p>
 </div>
+</section>
+<section id="tilde-v-left-theta-right">
+<h2>הפונקציה <span class="math notranslate nohighlight">\(\tilde{V}\left(\theta\right)\)</span><a class="headerlink" href="#tilde-v-left-theta-right" title="Link to this heading">#</a></h2>
+<p>ראינו כי הפונקציה עבור הפונקציה <span class="math notranslate nohighlight">\(V_{s}\left(t\right)=\sum_{n=-\infty}^{\infty}V_{n}\delta\left(t-n\Delta t\right)\)</span> נקבל פונקציה מחזורית בתדר <span class="math notranslate nohighlight">\(\tilde{V}_{s}\left(\omega\right)=f_{s}\tilde{V}\left(\omega\right)\ast comb\left(\frac{\omega}{2\pi f_{s}}\right)\)</span></p>
+<p>על מנת שיהיה לנו נוח ועל מנת להדגיש שהפונקציה <span class="math notranslate nohighlight">\(\tilde{V}_{s}\left(\omega\right)\)</span> היא מחזורית נגדיר:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{\tilde{V}\left(\theta\right)\equiv\tilde{V}_{s}\left(\omega=\frac{\theta}{\Delta t}\right)=\frac{1}{\Delta t}\tilde{V}\left(\omega=\frac{\theta}{\Delta t}\right)}\]</div>
+<p>מה הפונקציה הזו שווה? נוכל לעשות פורייה ישירות ולקבל:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{V}_{s}\left(\theta\right)=\mathcal{F}\left[\sum_{n=-\infty}^{\infty}V_{n}\delta\left(t-n\Delta t\right)\right]=\frac{1}{\sqrt{2\pi}}\sum_{n=-\infty}^{\infty}V_{n}e^{i\omega n\Delta t}\underset{\omega=\frac{\theta}{\Delta t}}{\underbrace{=}}\frac{1}{\sqrt{2\pi}}\sum_{n=-\infty}^{\infty}V_{n}e^{i\theta n}\]</div>
+<p>כלומר:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{\tilde{V}\left(\theta\right)=\frac{1}{\sqrt{2\pi}}\sum_{n=-\infty}^{\infty}V_{n}e^{-i\theta n}}\]</div>
+<p>הפונקציה <span class="math notranslate nohighlight">\(\tilde{V}\left(\theta\right)\)</span> מוגדרת על טבעת.
+בקלות רואים כי <span class="math notranslate nohighlight">\(\tilde{V}\left(\theta+2\pi\right)=\tilde{V}\left(\theta\right)\)</span></p>
+</section>
+<section id="alias">
+<h2>Alias<a class="headerlink" href="#alias" title="Link to this heading">#</a></h2>
+<p>מה קורה אם אנחנו דוגמים אות אשר לא עומד בתנאי שלנו? כלומר שיש לו תדרים גבוהים יותר מ-<span class="math notranslate nohighlight">\(\frac{f_{s}}{2}\)</span>.
+עכשיו יש לנו ממש דרך מתמטית לחשוב על תהליך הגדימה. <strong>דגימה היא הכפלה ברכבת הלמים</strong>.
+זה אומר שבתדר זה קונבולוציה עם רכבת הלמים.</p>
+<p>איך זה נראה?
+<img alt="spectral_folding.png" src="../_images/spectral_folding.png" />
+קרדיט <a class="footnote-reference brackets" href="#spectral-folding" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+<p>מה שאנחנו רואים בתמונה הוא שהתדרים מעל התדר <span class="math notranslate nohighlight">\(\frac{f_{s}}{2}\)</span> התקפלו
+בחזרה. על מנת להבין את זה קצת יותר טוב נתחיל מדוגמה פשוטה:</p>
+<div class="math notranslate nohighlight">
+\[V\left(t\right)=\cos\left(2\pi f_{0}t\right)\]</div>
+<p>בתדר כמובן שכל מה שיש לנו הוא שתי דלתאות. איך נראה האות הדגום?</p>
+<div class="math notranslate nohighlight">
+\[V_{s}\left(t\right)\equiv V\left(t\right)\cdot comb\left(\frac{t}{\Delta t}\right)=\cos\left(2\pi f_{0}t\right)\cdot comb\left(\frac{t}{\Delta t}\right)\]</div>
+<p>ולכן בתדר:</p>
+<div class="math notranslate nohighlight">
+\[V_{s}\left(\omega\right)=\frac{1}{\sqrt{2\pi}}\frac{1}{2}\left(\delta\left(\omega-2\pi f_{0}\right)+\delta\left(\omega+2\pi f_{0}\right)\right)\ast\sqrt{2\pi}f_{s}comb\left(\frac{\omega}{2\pi f_{s}}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[V_{s}\left(\omega\right)=\frac{f_{s}}{2}\left(\delta\left(\omega-2\pi f_{0}\right)+\delta\left(\omega+2\pi f_{0}\right)\right)\ast comb\left(\frac{\omega}{2\pi f_{s}}\right)\]</div>
+<p>נסתכל רק על התחום  <span class="math notranslate nohighlight">\(\left[-\frac{f_{s}}{2},\frac{f_{s}}{2}\right]\)</span></p>
+<p>במידה ו-<span class="math notranslate nohighlight">\(f_{0}&lt;\frac{f_{s}}{2}\)</span> אז אין משהו מיוחד ונקבל כי:</p>
+<div class="math notranslate nohighlight">
+\[\omega\in\left[-\frac{2\pi f_{s}}{2},\frac{2\pi f_{s}}{2}\right]\Rightarrow V_{s}\left(\omega\right)=\frac{f_{s}}{2}\left(\delta\left(\omega-2\pi f_{0}\right)+\delta\left(\omega+2\pi f_{0}\right)\right)\]</div>
+<p>כלומר שאנחנו יכולים לשחזר את האות שלנו על ידי LPF (בתדר).</p>
+<p>אבל מה אם לדוגמה <span class="math notranslate nohighlight">\(f_{0}=\frac{f_{s}}{2}+\Delta f\)</span></p>
+<p>במקרה הזה מה שיהיה בתחום שאנחנו מסתכלים עליו הוא אחד מההעתקים שמגיע מהקונבולוציה בפונקציית המסרק
+איפה בדיוק הוא יהיה? פונקציית המסרק בתדר היא במרווחים של <span class="math notranslate nohighlight">\(2\pi f_{s}\)</span>.</p>
+<p>מקודם היו לנו שני תדרים <span class="math notranslate nohighlight">\(\pm\omega_{0}=\pm\left(2\pi\frac{f_{s}}{2}+2\pi\Delta f\right)\)</span></p>
+<p>כל אחד מהם הולך להיות משוכפל אינסוף פעמים בקפיצות של <span class="math notranslate nohighlight">\(2\pi f_{s}\)</span>.
+איזה מהשכפולים הולך להיות בתוך הקטע שאנחנו מסתכלים עליו? זה תלוי בגודל של <span class="math notranslate nohighlight">\(\Delta f\)</span> כמובן.
+נניח לרגע שהוא קטן ונקבל:</p>
+<div class="math notranslate nohighlight">
+\[\omega_{0}-2\pi f_{s}=2\pi\left(-\frac{f_{s}}{2}+\Delta f\right)\]</div>
+<div class="math notranslate nohighlight">
+\[-\omega_{0}+2\pi f_{s}=2\pi\left(\frac{f_{s}}{2}-\Delta f\right)\]</div>
+<p>כלומר דווקא התדר השלילי נמצא עכשיו בתחום החיובי של הטווח שלנו והתדר החיובי הוא בתחום השלילי.
+התוצאה היא:</p>
+<div class="math notranslate nohighlight">
+\[\omega\in\left[-\frac{2\pi f_{s}}{2},\frac{2\pi f_{s}}{2}\right]\Rightarrow V_{s}\left(\omega\right)=\frac{f_{s}}{2}\left(\delta\left(\omega-2\pi\left(\frac{f_{s}}{2}-\Delta f\right)\right)+\delta\left(\omega+2\pi\left(\frac{f_{s}}{2}-\Delta f\right)\right)\right)\]</div>
+<p>שימו לב שקיבלנו שהתדר “התקפל” סביב קצה התחום שלנו.</p>
+<p>יהיה יותר קל להבין בסרטוט</p>
+<p><img alt="cos_before_sampeling.png" src="../_images/cos_before_sampeling.png" />
+<img alt="cos_after_sampeling.png" src="../_images/cos_after_sampeling.png" /></p>
+<p>אתם יכולים לראות שקיבלנו קיפול של התדרים.
+למה הציר נראה כמו שהוא נראה?</p>
+<p>בשביל נוחות נהוג להציג את הפונקציה הדגומה כ-<span class="math notranslate nohighlight">\(\tilde{V}\left(\theta\right)\equiv\tilde{V}_{s}\left(\omega=\frac{\theta}{\Delta t}\right)\)</span> כמו מקודם</p>
+<p>את התופעה של קיפול תדרים אנחנו רואים גם במרחב הזמן:</p>
+<p><img alt="alias_t.png" src="../_images/alias_t.png" /></p>
+<p>שימו לב שזה לא באמת שקיבלנו את התדר הנמוך אחרי הדגימה.
+כל מה שיש לנו זה את הדגימות. אבל זה אומר שלדגום את שני
+גלי הקוסינוס האלו נותן את אותה תוצאה בדיוק. ולא ניתן להבחין בינהם אחרי הדגימה.
+זה בגלל שהקוסינוס בתדר הגבוה (מעל <span class="math notranslate nohighlight">\(\frac{f_{s}}{2}\)</span>) יתקפל לתדר של הקוסינוס בתדר הנמוך.</p>
+<p>דוגמה יחסית נפוצה לתופעה היא בסרטוני ווידאו.
+אם מצלמים משהו שמסתובב בתדר מסויים אבל דוגמים אותו ב-30FPS.
+מה יקרה אם הוא מסתובב ב3000RPS?
+זה אומר שכל פעם שאנחנו מצלמים הוא עושה מספר שלם של סיבובים וזה יראה כאילו הוא לא זז!</p>
+<p>דוגמה מגניבה לזה אפשר לראות ב-GIF הבא:
+<img alt="hlycopter_nyq.gif" src="../_images/hlycopter_nyq.gif" /></p>
+<p>זה בדיוק קיפול תדרים רק שהתדר שלנו מתקפל לתדר 0.</p>
+</section>
+<section id="anti-alias-filter">
+<h2>Anti Alias Filter<a class="headerlink" href="#anti-alias-filter" title="Link to this heading">#</a></h2>
+<p>מה אם יש לנו אות שכן עומד בתנאי הדגימה שלנו אבל יש לנו רעש או אותות אחרים בתדרים גבוהים יותר?</p>
+<p>נבצע קודם LPF כך שכל התדרים שלא בתחום של <span class="math notranslate nohighlight">\(\left[-\frac{f_{s}}{2},\frac{f_{s}}{2}\right]\)</span> יתאפסו ואז נדגום.
+הפילטר הזה נקרא anti alias כי הוא דואג לנו שלא יהיו לנו קיפולים לא רצויים בדגימה.</p>
+<p>שימו לב שלמעשה במקלט קוהרנטי כבר יש לנו LPF לכל אחד מהערוצים I ו-Q.
+נוכל להשתמש בו בתור ה-anti alias filter. לפני שאנחנו מעבירים את הערוצים לדוגם.</p>
+</section>
+<section id="id5">
+<h2>העלאה של תדר הדגימה<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>נניח שיש לנו אות חסום בתדר. כלומר יש לו תדר מקסימלי <span class="math notranslate nohighlight">\(f_{max}\)</span>.
+איך נראה האות בתדר אחרי שדוגמים אותו בשני תדרי דגימה שונים <span class="math notranslate nohighlight">\(f_{s}^{1},f_{s}^{2}\)</span>. נניח שמתקיים:</p>
+<div class="math notranslate nohighlight">
+\[f_{max}&lt;\frac{f_{s}^{1}}{2}&lt;\frac{f_{s}^{2}}{2}\]</div>
+<p>איך יראו הפונקציות <span class="math notranslate nohighlight">\(\tilde{V}\left(\theta\right)\)</span> עבור שני תדרי הדגימה</p>
+<p><img alt="upsample.png" src="../_images/upsample.png" /></p>
+<p>מה שקורה הוא שלקחנו את הפונקציה הכחולה והוספנו לה אפסים משני הצדדים. משום שכשעלינו
+בתדר הדגימה אנחנו “רואים” תדרים יותר גבוהים. הפונקציה הירוקה צרה יותר משום שאת שתיהן אנחנו מציירים
+בעזרת הפרמטר <span class="math notranslate nohighlight">\(\theta\equiv\frac{\omega}{f_{s}}\)</span> רק שלכל פונקציה יש תדר דגימה שונה.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>דיגמה בתדר גבוה יותר <span class="math notranslate nohighlight">\(\Longleftrightarrow\)</span> לרפד באפסים בתדר</p>
+</div>
+<p>זה לקח חשוב לזכור ונחזור אליו בהמשך</p>
+</section>
+<section id="id6">
+<h2>מספר דגימות סופי<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>אנחנו כבר מתחילים להריח משהו שאנחנו יכולים לעשות איתו משהו במחשב. אבל עם כל הכבוד לדגימות, כדאי שגם המספר שלהן יהיה סופי.
+החוק הפשוט יהיה כזה. במקום לומר שכמות הדגימות שלנו היא סופית נאמר שיש לנו כמות סופית של דגימות שהן לא 0.
+כלומר אם קיבלנו דגימה באורך <span class="math notranslate nohighlight">\(N\)</span> נחשוב עליה בתור דגימה אינסופית מרופדת באפסים לשני הכיוונים.</p>
+<p>למה בכלל לעשות את זה? התשובה היא שכבר פיתחנו כלים לעבוד עם אות דגום אינסופי.</p>
+<p>זאת תכונה שחשוב לזכור. גם כשיש לנו דגימה סופית בזמן אנחנו יכולים לייצג אותה בתור דגימה אינסופית בזמן.</p>
+<p>נשאל את עצמנו מה זה אומר שהדגימה היא סופית בזמן (או חסומה בזמן) עבור התדר? כבר נתקלנו לפני דקה במקרה כזה. זה אומר
+שאם דוגמים אותה (הפעם במרחב התדר) בקצב מספק נוכל לשחזר אותה במרחב הזמן.</p>
+<p>הפעם נעשה את זה הפוך. נסתכל על אות:</p>
+<div class="math notranslate nohighlight">
+\[V\left[n\right]\ast comb\left[\frac{n}{N}\right]\]</div>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}\left[V\left[n\right]\ast comb\left[\frac{n}{N}\right]\right]=\sqrt{2\pi}N\cdot V\left(\theta\right)\cdot comb\left[\frac{\theta}{2\pi}N\right]\]</div>
+<p>זה אומר שיש לנו <span class="math notranslate nohighlight">\(N\)</span> ערכים של <span class="math notranslate nohighlight">\(\theta\)</span> שהם לא 0. זה אומר שאנחנו יכולים להציג את האות שלנו במרחב התדר בתור <span class="math notranslate nohighlight">\(N\)</span> דגימות (או יותר)</p>
+<p>נוכל לסכם את החישוב בצורה הבאה. נניח שיש לנו פונקציה דגומה אשר מכילה
+רק <span class="math notranslate nohighlight">\(N\)</span> דגימות במרווחים של <span class="math notranslate nohighlight">\(\Delta t\)</span>. אם נמשיך אותה בצורה מחזורית
+.כך שיהיו לנו אינסוף דגימות אשר חוזרות על עצמן אז  נקבל פונקציה
+דגומה ומחזורית עם מחזוריות של <span class="math notranslate nohighlight">\(N\Delta t\)</span>.</p>
+<p>נוכל לרשום פונקציה כזו באופן הבא:</p>
+<div class="math notranslate nohighlight">
+\[V_{s}\left(t\right)=\left[\sum_{n=0}^{N-1}V_{n}\delta\left(t-n\Delta t\right)\right]\ast comb\left(\frac{t}{N\Delta t}\right)\]</div>
+<p>איך יראה הפורייה שלה? מצד אחד היא דגומה ולכן נצפה לפורייה מחזורי עם מחזור <span class="math notranslate nohighlight">\(\frac{2\pi}{\Delta t}=2\pi f_{s}\)</span> מצד שני הפונקציה שלנו
+מחזורית עם מחזור של <span class="math notranslate nohighlight">\(N\Delta t\)</span> ולכן נצפה לפורייה דגום עם מרחק של <span class="math notranslate nohighlight">\(\Delta\omega=\frac{2\pi}{N\Delta t}\)</span> בין דגימות.</p>
+<p>נחשב ונראה:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{V}_{s}\left(\omega\right)=\sqrt{2\pi}\left[\frac{1}{\sqrt{2\pi}}\sum_{n=0}^{N-1}V_{n}e^{-i\omega n\Delta t}\right]\cdot\left[\frac{\sqrt{2\pi}}{N\Delta t}comb\left(\frac{\omega N\Delta t}{2\pi}\right)\right]\]</div>
+<div class="math notranslate nohighlight">
+\[=\left[\sum_{n=0}^{N-1}V_{n}e^{-i\omega n\Delta t}\right]\cdot\left[\frac{\sqrt{2\pi}}{N\Delta t}comb\left(\frac{\omega N\Delta t}{2\pi}\right)\right]\]</div>
+<p>קודם נראה שהפונקציה הזו באמת מחזורית עם מחזור של <span class="math notranslate nohighlight">\(\frac{2\pi}{\Delta t}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{V}_{s}\left(\omega+\frac{2\pi}{\Delta t}\right)=\sum_{n=0}^{N-1}V_{n}e^{-i\left(\omega+\frac{2\pi}{\Delta t}\right)n\Delta t}\cdot\frac{\sqrt{2\pi}}{N\Delta t}comb\left(\frac{\left(\omega+\frac{2\pi}{\Delta t}\right)N\Delta t}{2\pi}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[=\left[\sum_{n=0}^{N}V_{n}e^{-i\omega n\Delta t}\underset{1}{\underbrace{e^{-2\pi in}}}\right]\cdot\frac{\sqrt{2\pi}}{N\Delta t}comb\left(\frac{\omega N\Delta t}{2\pi}+N\right)\]</div>
+<div class="math notranslate nohighlight">
+\[=\left[\sum_{n=0}^{N}V_{n}e^{-i\omega n\Delta t}\right]\cdot\frac{\sqrt{2\pi}}{N\Delta t}comb\left(\frac{\omega N\Delta t}{2\pi}\right)=\tilde{V}_{s}\left(\omega\right)\]</div>
+<p>מעולה. זה אומר שאנחנו יכולים להגדיר פונקציה מחזורית על טבעת בעזרת
+המשתנה <span class="math notranslate nohighlight">\(\theta\equiv\frac{\omega}{f_{s}}=\omega\Delta t\in\left[-\pi,\pi\right]\)</span></p>
+<div class="math notranslate nohighlight">
+\[\tilde{V}\left(\theta\right)\equiv\tilde{V}_{s}\left(\omega=\frac{\theta}{\Delta t}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\tilde{V}\left(\theta\right)=\left[\sum_{n=0}^{N-1}V_{n}e^{-i\theta n}\right]\cdot\frac{\sqrt{2\pi}}{N\Delta t}comb\left(\frac{\theta}{2\pi}N\right)\]</div>
+<p>עכשיו כמו מקודם נגדיר את הפונקציה הדגומה (הפעם בתדר) בתור:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{V}_{k}\equiv\frac{N\Delta t}{\sqrt{2\pi}}\tilde{V}\left(\theta=\frac{2\pi}{N}k\right)\]</div>
+<p>ועכשיו רואים בבירור שהאות דגום ויש <span class="math notranslate nohighlight">\(N\)</span> ערכים שהם לא 0. הערכים האלו הם:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{V}_{k}=\sum_{n=0}^{N-1}V_{n}e^{-i\frac{2\pi k}{N}n}\]</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>אם יש לנו אות של <span class="math notranslate nohighlight">\(N\)</span> דגימות במרחב הזמן אשר חוזרות במחזוריות עד אינסוף נקבל שהייצוג שלו
+במרחב התדר הוא אות של <span class="math notranslate nohighlight">\(N\)</span> דגימות אשר חוזרות במחזוריות עד אינסוף!</p>
+<p>אם ערך הדגימות בזמן הן <span class="math notranslate nohighlight">\(\forall n\in\left[0,N-1\right]:V_{n}\)</span> אז הערך של הדגימות במרחב התדר הוא <span class="math notranslate nohighlight">\(\forall k\in\left[0,N-1\right]:\tilde{V}_{k}\equiv\frac{1}{N}\sum_{n=0}^{N-1}V_{n}e^{-i\frac{2\pi k}{N}n}\)</span></p>
+<p>נסכם כי:</p>
+<div class="math notranslate nohighlight">
+\[V_{n}=\frac{1}{N}\sum_{k=0}^{N-1}V_{k}e^{i\frac{2\pi n}{N}k}\leftrightarrows\tilde{V}_{k}=\sum_{n=0}^{N-1}V_{n}e^{-i\frac{2\pi k}{N}n}\]</div>
+<p>הפעולה שלוקחת <span class="math notranslate nohighlight">\(N\)</span> מספרים <span class="math notranslate nohighlight">\(V_{n}\)</span> ומחשבלת עבורם את <span class="math notranslate nohighlight">\(N\)</span> המספרים <span class="math notranslate nohighlight">\(\tilde{V}_{k}\)</span> נקראת DFT</p>
+<div class="math notranslate nohighlight">
+\[\]</div>
+</div>
+<p>מה שאנחנו רואים זה שהכרנו עד עכשיו ארבע דרכים שונות לייצג את מרחב התדר בארבעה מצבים שונים. נסכם:
+<img alt="FT_shapes.png" src="../_images/FT_shapes.png" /></p>
+<p>נחזור לDFT בהמשך אבל נציין כבר עכשיו שאנחנו רואים “בעיה” פטולוגית ראשונה.
+כדי להסתכל על זמן סופי ולהגיע למרחב תדר דגום היינו צריכים להתייחס למרחב הזמן
+ככזה שמוגדר גם הוא על טבעת. כלומר הדגימה הראשונה מגיעה מייד אחרי הדגימה האחרונה.
+מאוד קל לשכוח את העובדה הזו אבל היא עושה המון צרות באיבוד אות דיגיטלי אם היא לא יושבת בראש.</p>
+<p>שאלה למחשבה: אמרנו שקפיצות חדות בזמן מייצרות המון תדרים. כלומר שצריך הרבה תדרים גבוהים כדי ליצור קפיצה חדה.
+מה קורה לגל סינוס עם תדר יחיד שלא מסיים בדיוק כמות שלמה של זמני מחזור מהדגימה הראשונה לאחרונה?</p>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="spectral-folding" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">1</a><span class="fn-bracket">]</span></span>
+<p>Boaz Porat. 1996. A Course in Digital Signal Processing (1st. ed.). John Wiley &amp; Sons, Inc., USA.</p>
+</aside>
+</aside>
 </section>
 </section>
 
@@ -494,6 +700,15 @@
         <p class="prev-next-title">דיגיטציה</p>
       </div>
     </a>
+    <a class="right-next"
+       href="interpolation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">שחזור (בעזרת אינטרפולציה)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -513,6 +728,11 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">משפט הדגימה של נייקוויסט-שאנון</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">“הוכחה”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tilde-v-left-theta-right">הפונקציה <span class="math notranslate nohighlight">\(\tilde{V}\left(\theta\right)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alias">Alias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anti-alias-filter">Anti Alias Filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">העלאה של תדר הדגימה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">מספר דגימות סופי</a></li>
 </ul>
   </nav></div>
 

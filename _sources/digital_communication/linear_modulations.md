@@ -195,7 +195,7 @@ $$\boxed{\Re\left[z\left(t\right)e^{i\omega_{0}t}\right]=I\left(t\right)\cos\lef
 להשתמש גם ב-$\cos\left(\omega_{0}t\right)$ וגם ב-$\sin\left(\omega_{0}t\right)$
 כדי לשדר.
 
-הרבה פעמים אנחנו נקצר את התהליך ופשוט נומר שאנחנו רוצים לשדר את האות
+הרבה פעמים אנחנו נקצר את התהליך ופשוט נאמר שאנחנו רוצים לשדר את האות
 $z\left(t\right)=I\left(t\right)+iQ\left(t\right)$ בתדר הנושא $\omega_{0}$
 
 האות  $z\left(t\right)=I\left(t\right)+iQ\left(t\right)$ יקרא האות ב-baseband ובדוגמא שלנו

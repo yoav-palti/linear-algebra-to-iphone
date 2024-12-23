@@ -1,0 +1,654 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>קוונטיזציה &#8212; Linear Algebra to iPhone 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=2c8ff626" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'digitation_and_reconstruction/quantization';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="כמה אפשר לקוונטט ?" href="quantization_example.html" />
+    <link rel="prev" title="שחזור (בעזרת אינטרפולציה)" href="interpolation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Linear Algebra to iPhone 1 - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Linear Algebra to iPhone 1 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/intro.html">
+                    מאלגברה לינארית לאייפון
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../LTI/intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/impulse_response.html">תגובת להלם</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/frequency_response.html">תגובת בתדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/wave_in_a_room.html">החזרות בחדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">מעגלי RLC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RLC/RC_intro.html">מעגלי RC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RLC/RLC_intro.html">מעגלי RLC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RLC/power_on_load.html">הספק על רכיבים</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור אנלוגי</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/analog_intro.html">מבוא לתקשורת אנלוגית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/AM.html">אפנון AM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/PM_FM.html">אפנון PM ואפנון FM</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור דיגיטלי</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/digital_intro.html">מבוא לתקשורת דיגיטלית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/linear_modulations.html">אפנונים לינארים</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/more_modulations.html">בעיות שלא הכרתם - עוד אפנונים</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/FSK.html">אפנון תדר - FSK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/orthogonality.html">אורתוגונליות</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">דיגיטציה</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="digitation_intro.html">מה זה לדיגיטציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sampling.html">דגימה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interpolation.html">שחזור באינטרפולציה</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">קוונטיזציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quantization_example.html">קוונטיזציה לדוגמא</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/yoav-palti/linear-algebra-to-iphone" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/digitation_and_reconstruction/quantization.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>קוונטיזציה</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">קוונטיזציה לינארית</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">קביעת עומק הקוונטיזציה</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>קוונטיזציה<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<details>
+  <summary>אמ;לק</summary>
+</details>
+<p>נעבור עכשיו לשלב השני של תהליך הדיגיטציה, הקוונטיזציה.</p>
+<p>יש לנו כבר אוסף של דגימות <span class="math notranslate nohighlight">\(V_{n}\)</span> ואנחנו רוצים לשמור אותן במחשב.
+למה לא פשוט לשמור את הערך עצמו? הסיבה היא שזה ערך רציף וכל מספר שאנחנו שומרים
+במחשב צריך להיות סופי. אנחנו רוצים גם להשתמש בכל “טווח” הערכים בזיכרון שלנו.</p>
+<p>נניח שהאות שלנו מתנדנד בין -1 וולט ל1. כלומר <span class="math notranslate nohighlight">\(V_{n}\in\left[-1,1\right]\)</span>. אבל אנחנו שומרים את המספרים בפורמט של int8 (לדוגמא).
+המספר הכי גדול שאנחנו יכולים לייצג הוא 127 בעוד המספר הכי קטן הוא -128</p>
+<p>נרצה להצמיד לערך 1 וולט את המספר 127 ולערך מינוס 1 וולט את -127 או משהו בסגנון.</p>
+<section id="id2">
+<h2>קוונטיזציה לינארית<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>זה השיטה הנפוצה ביותר והיא עושה בדיוק מה שאמרנו לפני רגע.
+נחלק את התחום <span class="math notranslate nohighlight">\(\left[V_{min},V_{max}\right]\)</span> ל-<span class="math notranslate nohighlight">\(2^{N_{bits}}\)</span> רמות שוות מרווחים.</p>
+<ul class="simple">
+<li><p>המספר <span class="math notranslate nohighlight">\(N_{bits}\)</span> נקרא עומק הקוונטיזציה</p></li>
+<li><p>גודל כל מדרגה יהיה <span class="math notranslate nohighlight">\(\Delta=\frac{V_{max}-V_{min}}{2^{N_{bits}}}\)</span></p></li>
+</ul>
+<p>למה שלא ניקח עומק דגימה מאוד גדול?</p>
+<ol class="arabic simple">
+<li><p>זה קשה לעצב מקלט עם רגישות מאוד גדולה</p></li>
+<li><p>לפעמים יהיו לנו מקורות הרבה יותר משמעותיים לאי דיוקים</p></li>
+<li><p>זה תופס יותר זיכרון (כמובן)</p></li>
+</ol>
+<p>בכמה זיכרון בדיוק אנחנו משתמשים? (נניח לרגע שאנחנו לא דוחסים)
+אנחנו עושים <span class="math notranslate nohighlight">\(f_{s}\)</span> דגימות בשנייה וכל אחת היא <span class="math notranslate nohighlight">\(N_{bits}\)</span> ביטים. כלומר:</p>
+<div class="math notranslate nohighlight">
+\[bps=f_{s}N_{bits}\]</div>
+<p>איך נראית קוונטיזציה?</p>
+<p><img alt="linear_quantization.png" src="../_images/linear_quantization.png" /></p>
+</section>
+<section id="id3">
+<h2>קביעת עומק הקוונטיזציה<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>נרצה למדל את גודל השגיאות שלנו בתהליך הקוונטיזציה. הזכרנו כבר את גודל המדרגות <span class="math notranslate nohighlight">\(\Delta=LSB\)</span>
+שמייצג את גודל השינויי מההפיכה של הביט הכי פחות משמעותי (LSB)</p>
+<p>בכמה אנחנו יכולים לטעות? אם נסמן את האות אחרי הקוונטיזציה
+ב-<span class="math notranslate nohighlight">\(V_{q}\left[n\right]\)</span> ut ואת האות לפני ב-<span class="math notranslate nohighlight">\(V\left[n\right]\)</span>
+נוכל לרשום:</p>
+<div class="math notranslate nohighlight">
+\[e\left[n\right]\equiv V_{q}\left[n\right]-V\left[n\right]\]</div>
+<div class="math notranslate nohighlight">
+\[\left|e\left[n\right]\right|\le\frac{\Delta}{2}\]</div>
+<p>כמובן שנוכל לרשום את האות שקיבלנו בצורה הבאה:</p>
+<div class="math notranslate nohighlight">
+\[V_{q}\left[n\right]=V\left[n\right]+e\left[n\right]\]</div>
+<p>זה אומר שהאות שקיבלנו הוא האות המקורי ועוד סיגנל של שגיאה.
+.השגיאה הזו כיביכול אקראית ולכן נקרא לה <strong>רעש הקוונטיזציה</strong></p>
+<p>אבל כיצד נדע כמה חזק אנחנו מוכנים שיהיה רעש הקוונטיזציה?</p>
+<p>המדד הס=בסיסי (והחשוב ביותר) שמשתמשים בו הוא <strong>SNR</strong> (Signal to Noise Ratio)
+או במילים אחרות כמה חזק האות חלקי כמה חזק הרעש. חזק אנחנו מודדים באנרגיה לשנייה
+או במילים אחרות בהספק. ולכן נרשום:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{SNR\equiv\frac{P_{signal}}{P_{noise}}}\]</div>
+<p>כמה דגשים:</p>
+<ul class="simple">
+<li><p>לרוב נמדוד הספק ממוצע ולא הספק רגעי ככה ש-SNR יהיה מספר בודד</p></li>
+<li><p>SNR הוא חסר יחידות ולכן שימושי מאוד</p></li>
+<li><p>לרוב נהוג למדוד SNR ב-dB <span class="math notranslate nohighlight">\(SNR_{dB}\equiv10\log_{10}\frac{P_{signal}}{P_{noise}}\)</span></p></li>
+</ul>
+<p>נחשב את ה-SNR בין הסיגנל לרעש הקוונטיזציה:</p>
+<div class="math notranslate nohighlight">
+\[SNR\equiv\frac{\left\langle P_{signal}\right\rangle }{\left\langle P_{noise}\right\rangle }=\frac{\frac{1}{N}\sum_{n=0}^{N}\left(V\left[n\right]\right)^{2}}{\frac{1}{N}\sum_{n=0}^{N}\left(e\left[n\right]\right)^{2}}\]</div>
+<p>נסתכל על הביטוי התחתון. ממש מתחשק להתחיל להניח כל מיני הנחות על איך הוא מתפלג (נניח אחיד) אבל האמת שזה לא
+מאוד משנה. אם נסכום לאורך מספיק דגימות נוכל להשתמש במשפט הגבול המרכזי.
+לפי המשפט הזה הממוצע של <span class="math notranslate nohighlight">\(N\)</span> משתנים מקריים (במקרה שלנו <span class="math notranslate nohighlight">\(\left(e\left[n\right]\right)^{2}\)</span>)
+עבור <span class="math notranslate nohighlight">\(N\)</span> מספיק גדול מתפלג נורמלית עם ממוצע זהה לזה של משתנה יחיד וסטיית תקן הקטנה בפקטור של <span class="math notranslate nohighlight">\(\sqrt{N}\)</span>
+לצורך הדיון שלנו זה לא מאוד מעניין כי משנה לנו רק הממוצע.</p>
+<p>נקבל כי:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=0}^{N}\left(e\left[n\right]\right)^{2}=\mathbb{E}\left[\left(e\left[n\right]\right)^{2}\right]=\mathbb{V}\left[e\left[n\right]\right]+\mathbb{E}\left[e\left[n\right]\right]^{2}\]</div>
+<p>כן כן הנחנו אי תלות בין שגיאות עוקבות אבל זו הנחה יחסית סבירה. ואם הן תלויות אז ניתן אפילו להקטין את הרעש ככה שאנחנו מחמירים.</p>
+<p>עכשיו נוכל לקחת לדוגמא את המצב בו <span class="math notranslate nohighlight">\(e\left[n\right]\sim U\left[-\frac{\Delta}{2},\frac{\Delta}{2}\right]\)</span>
+(כלומר אחיד על הקטע <span class="math notranslate nohighlight">\(\left[-\frac{\Delta}{2},\frac{\Delta}{2}\right]\)</span>)</p>
+<p>נקבל כי <span class="math notranslate nohighlight">\(\mathbb{E}\left[e\left[n\right]\right]=0,\mathbb{V}\left[e\left[n\right]\right]=\frac{\Delta^{2}}{12}\)</span> ולכן</p>
+<div class="math notranslate nohighlight">
+\[\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=0}^{N}\left(e\left[n\right]\right)^{2}=\frac{\Delta^{2}}{12}\]</div>
+<p>משהו מעודד הוא שאנחנו יכולים גם לקבל חסם עליון. הכי גרוע יהיה אם השגיאה תמיד אחד משני הערכים  <span class="math notranslate nohighlight">\(\pm\frac{\Delta}{2}\)</span>
+במצב כזה נקבל:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=0}^{N}\left(e\left[n\right]\right)^{2}=\mathbb{E}\left[\left(e\left[n\right]\right)^{2}\right]=\frac{\Delta^{2}}{4}\]</div>
+<p>ברור שהסיפור עבור האות יהיה זהה לחלוטין אבל אם לוקחים אות פשוט אפשר גם לחשב ישירות:</p>
+<div class="math notranslate nohighlight">
+\[V\left[n\right]=A\cos\left(\frac{\omega_{0}}{f_{s}}n\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{1}{N}\sum_{n=0}^{N}\left(V\left[n\right]\right)^{2}\approx\frac{1}{T}\intop_{0}^{T}\left(A\cos\left(\omega_{0}t\right)\right)^{2}dt=\frac{A^{2}}{2}\]</div>
+<p>כלומר קיבלנו כי:</p>
+<div class="math notranslate nohighlight">
+\[SNR=\frac{A^{2}}{6\Delta^{2}}\]</div>
+<p>או ביחידות יותר מוצלחות:</p>
+<div class="math notranslate nohighlight">
+\[SNR_{dB}=20\log_{10}\left(\frac{A}{\sqrt{6}\Delta}\right)\]</div>
+<p>נזכור כי:</p>
+<div class="math notranslate nohighlight">
+\[\Delta=\frac{A_{max}-A_{min}}{2^{N_{bits}}}=\frac{2A_{max}}{2^{N_{bits}}}\]</div>
+<p>המעבר האחרון הוא כי הרבה פעמים צריך לבחור את <span class="math notranslate nohighlight">\(A_{max},A_{min}\)</span> מראש או אחרי קצת דגימות
+לרוב אותות הם סימטרים סביב 0 (חסרי DC) ולכן נבחר <span class="math notranslate nohighlight">\(A_{max}=A_{min}\)</span></p>
+<p>ולכן:</p>
+<div class="math notranslate nohighlight">
+\[SNR_{dB}=20\log_{10}\left(\frac{\sqrt{6}A}{\frac{2A_{max}}{2^{N_{bits}}}}\right)=20\log_{10}\left(\frac{\sqrt{6}2^{N_{bits}}}{2}\right)+20\log_{10}\left(\frac{A}{A_{max}}\right)=N_{bits}20\log_{10}\left(2\right)-10\log_{10}\left(\frac{4}{6}\right)-20\log_{10}\left(\frac{A_{max}}{A}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[SNR_{dB}=6N_{bits}+1.76-20\log_{10}\left(\frac{A_{max}}{A}\right)\]</div>
+<p>כמה מסקנות חשובות:</p>
+<ul class="simple">
+<li><p>כל ביט נוסף שנוסיף לעומק הקוונטיזציה יתן לנו 6bB זה ממש טוב</p></li>
+<li><p>אנחנו נענשים אם אנחנו לא מנצלים את כל הטווח הדינמי. על כל סדר גודל אנחנו נענשים ב20dB</p></li>
+<li><p>אנחנו מתחילים ממספר חיובי שמגיע מכלל הפקטורים של ההתפלגות של הרעש. במקרה שלנו 1.76dB</p>
+<ul>
+<li><p>אם היינו לוקחים את המקרה הממש מחמיר שלנו (<span class="math notranslate nohighlight">\(\mathbb{E}\left[\left(e\left[n\right]\right)^{2}\right]=\frac{\Delta^{2}}{4}\)</span>) האיבר הזה  יקטן ל-3.01- לא זניח אבל לא נורא</p></li>
+</ul>
+</li>
+</ul>
+<p>נסרטט את רעש הקוונטיזציה בצורה גרפית</p>
+<p><img alt="bits_snr.png" src="../_images/bits_snr.png" /></p>
+<p>למה זה חשוב? נניח שאנחנו קולטים שני אותות במקביל על אותו
+תחום תדר. אין לנו ברירה אלא לקבוע את <span class="math notranslate nohighlight">\(A_{max}\)</span> לפי החזק מבינהם.
+מה שיקרה אחרת זה שנגיע למה שנקרא דחיסה של המקלט. כל עוצמה מעל <span class="math notranslate nohighlight">\(A_{max}\)</span>
+שנבחר תמיד תקבל פשוט את הערך <span class="math notranslate nohighlight">\(A_{max}\)</span>.
+במקרה כזה נוכל לשאול את עצמנו האם יש לנו סיכוי לקלוט גם את האות החלש?
+נניח שהאות החלש חלש ב7 סדרי גודל (בהספק)
+נקבל כי עבור האות החלש <span class="math notranslate nohighlight">\(20\log_{10}\left(\frac{A_{max}}{A}\right)=10\log_{10}\left(\frac{P_{strong}}{P_{weak}}\right)=70\)</span>
+נקבל שבמקלט של 8bit ה-SNR עבור האות הזה יהיה <span class="math notranslate nohighlight">\(-22\)</span>. אין סיכוי לקלוט ככה אות
+במקלט של ה-12bit נקבל <span class="math notranslate nohighlight">\(SNR\approx3\)</span>. זה קשה אבל אפשרי לקלוט. כנראה
+נצטרך תיקון שגיאות ממש טוב. אבל עבור ה-16bit נקבל <span class="math notranslate nohighlight">\(SNR\approx28\)</span> וזה כבר לא מזיז לנו אפילו לא קצת.</p>
+<p>רוצים מקרה אמיתי? נניח שאתם מנסים לקלוט GPS. בGPS יש טריק של להרוויח עוד 43dB אחרי
+הקליטה אבל זה בהנחה שהרעש לא קורלטיבי לאות מה שלא נכון אם יש רעש קוונטיזציה חזק.
+נניח לרגע את זה בצד. האות לש GPS מגיע לקרקע ב-125dBm. אם מישהו רוצה פשוט לדחוס אותנו ונניח שיש לנו מקלט 8bit הוא יכול לשדר ככה שאנחנו נקלוט אותו ב–77dBm.
+נניח לרגע מודל אידאלי של ריק שבו הדאיכה של גל אלקטרומגנטי היא ריבועית במרחק
+(הדאיכה של האנרגיה, השדה דואך כמו <span class="math notranslate nohighlight">\(\frac{1}{r}\)</span>). נשתמש בנוסחה שתלמדו
+עליה בקורס הבא:</p>
+<div class="math notranslate nohighlight">
+\[P_{Rx}=\left(\frac{\lambda}{4\pi r}\right)^{2}P_{Tx}\]</div>
+<p>זה אומר שנניח שהמרחק הוא 10KM
+עבור GPS אורך הגל הוא <span class="math notranslate nohighlight">\(\lambda=\frac{c}{f}=\frac{3\cdot10^{8}}{1575.42\cdot10^{6}}=1.9\cdot10^{-1}=19cm\)</span></p>
+<p>נקבל:</p>
+<div class="math notranslate nohighlight">
+\[10\log_{10}\left(\frac{P_{Rx}}{P_{Tx}}\right)=20\log_{10}\left(\frac{\lambda}{4\pi r}\right)=20\log_{10}\left(\frac{0.19}{4\pi\cdot10^{4}}\right)=-104\]</div>
+<p>טוב זה ממש רע,  אבל יוצא לנו שהוא צריך לשדר בעוצמה של <span class="math notranslate nohighlight">\(27dBm\)</span> שזה <span class="math notranslate nohighlight">\(-3dB\)</span>
+כלומר צריך עוצמת שידור של חצי וואט. שזה ממש משהו שאפשר להרכיב בבית :)</p>
+<p>דיסקליימר: אל תנסו את זה בבית, זה לא חוקי. בנוסף זה GPS היא מערכת מורכבת
+ויש אינסוף פרטים שצריך לדעת. בקיצור <strong>אל תנסו את זה בבית</strong></p>
+<p>עוד דיסקליימר הוא שהרבה לפני שנדחוס את המקלט אנחנו נפריע לאות להיקלט
+למה בכל זאת יש יתרון בשיטה הזו? היתרון הוא שאנחנו יכולים לנצל את כל האנרגיה
+שיש לנו כדי לשדר על תדר בודד (הוא אפילו לא חייב להיות ברוחב פס של האות אלא
+רק בתחום של הפילטר). כל עוד מנסים לסנן אותות כאלו באופן דיגיטלי ולא אנלוגי זה יהיה כבר מאוחר מידי.
+כלומר שאנחנו יכולים לדחוס מקלט בכל תחום שהוא לא מסנן, ואם לדוגמה יש אות
+מדלג והמקלט מקשיב לכל טווח הדילוג ומפלטר דיגיטלית אז אנחנו נצליח לדחוס אותו.</p>
+<ul class="simple">
+<li><p>נשים לב שרעש הקוונטיזציה לא רק מגביל אותנו בין אותות שונים אלא גם באותו אות עצמו. יש לנו משרעת של ערכים שאנחנו יכולים להיות רגישים בה</p></li>
+<li><p>התחום הדינמי - <span class="math notranslate nohighlight">\(DR_{dB}=10\log_{10}\left(\frac{P_{max}}{P_{min}}\right)\)</span> כלומר היחס בין העוצמה הכי חזקה להכי חלשה שאנחנו רגישים אליה</p></li>
+</ul>
+<p>נעבור להדגמה</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./digitation_and_reconstruction"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="interpolation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">שחזור (בעזרת אינטרפולציה)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="quantization_example.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">כמה אפשר לקוונטט ?</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">קוונטיזציה לינארית</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">קביעת עומק הקוונטיזציה</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yoav Palti
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

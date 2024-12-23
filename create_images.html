@@ -201,6 +201,9 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="digitation_and_reconstruction/digitation_intro.html">מה זה לדיגיטציה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digitation_and_reconstruction/sampling.html">דגימה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="digitation_and_reconstruction/interpolation.html">שחזור באינטרפולציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="digitation_and_reconstruction/quantization.html">קוונטיזציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="digitation_and_reconstruction/quantization_example.html">קוונטיזציה לדוגמא</a></li>
 </ul>
 
     </div>
@@ -989,6 +992,95 @@
 <img alt="_images/ba19cf0f19ff63c99edb0f034d071a8bf085c208a7a2d7c2430e1b44185a12a3.png" src="_images/ba19cf0f19ff63c99edb0f034d071a8bf085c208a7a2d7c2430e1b44185a12a3.png" />
 <img alt="_images/a8efc32385f1a2ec1521b2a49d53a960f04f360324b1a4511fe34a2c86eb3f49.png" src="_images/a8efc32385f1a2ec1521b2a49d53a960f04f360324b1a4511fe34a2c86eb3f49.png" />
 <img alt="_images/e470f015a8a6c95a9270d64b1548dbfe1defcd3bd362e0324c8a312269718de8.png" src="_images/e470f015a8a6c95a9270d64b1548dbfe1defcd3bd362e0324c8a312269718de8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.fft</span> <span class="k">as</span> <span class="nn">fft</span>
+
+<span class="k">def</span> <span class="nf">get_random_smooth_function</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">upsample_factor</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+    <span class="n">N_f</span> <span class="o">=</span> <span class="n">N</span><span class="o">//</span><span class="mi">3</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">x_f</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">N_f</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">N_f</span><span class="p">)</span>
+    <span class="c1"># generate 0 high frequencies</span>
+    <span class="n">zeroes_pad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">N_f</span><span class="p">)</span>
+    <span class="c1"># make x_t real. f start at 0 than to fs/2 and than to negative f</span>
+    <span class="n">x_f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x_f</span><span class="p">,</span><span class="n">zeroes_pad</span><span class="p">))</span>
+    <span class="n">x_f_up_sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x_f</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">upsample_factor</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x_f</span><span class="p">))))</span>
+    <span class="n">x_t</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">x_f</span><span class="p">,</span><span class="n">norm</span><span class="o">=</span><span class="s1">&#39;forward&#39;</span><span class="p">)</span>
+    <span class="n">x_t_up_sample</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">x_f_up_sample</span><span class="p">,</span><span class="n">norm</span><span class="o">=</span><span class="s1">&#39;forward&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">x_t</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">x_t_up_sample</span><span class="p">)</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">upsample_factor</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">t_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">/</span><span class="n">fs</span>
+<span class="n">t_updample_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">upsample_factor</span><span class="o">*</span><span class="n">N</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">upsample_factor</span><span class="o">*</span><span class="n">fs</span><span class="p">)</span>
+<span class="n">x_t</span><span class="p">,</span><span class="n">x_t_up_sample</span> <span class="o">=</span> <span class="n">get_random_smooth_function</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">upsample_factor</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_updample_axis</span><span class="p">,</span><span class="n">x_t_up_sample</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;original function&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_axis</span><span class="p">,</span><span class="n">x_t</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_axis</span><span class="p">,</span><span class="n">x_t</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;first order interpolation&#39;</span><span class="p">)</span>
+<span class="c1"># edges = list(t_axis) + [len(t_axis)+1/fs]</span>
+<span class="c1"># plt.stairs(x_t,edges,baseline=None, color=&#39;g&#39;, label=&#39;zero order interpolation&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">spine_plot</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6d3e743022b819567cc39201b83c75c1c442f49fe6d9ea5df353ac716c060786.png" src="_images/6d3e743022b819567cc39201b83c75c1c442f49fe6d9ea5df353ac716c060786.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_updample_axis</span><span class="p">,</span><span class="n">x_t_up_sample</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;original function&#39;</span><span class="p">)</span>
+<span class="n">n_bits</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_axis</span><span class="p">,</span><span class="n">x_t</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_axis</span><span class="p">,</span><span class="n">x_t</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;first order interpolation&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x23ad545b550&gt;]
+</pre></div>
+</div>
+<img alt="_images/416c7eaa81fad971ba837c9d547180e7cff1942e8c6f6d2199ce99fb1f4bd6af.png" src="_images/416c7eaa81fad971ba837c9d547180e7cff1942e8c6f6d2199ce99fb1f4bd6af.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_norm_t</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n_bits</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x_t</span><span class="o">-</span><span class="n">x_t_up_sample</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">/</span><span class="p">(</span><span class="n">x_t_up_sample</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">x_t_up_sample</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="n">x_quantize_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">x_norm_t</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n_bits</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x_t_up_sample</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">x_t_up_sample</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">+</span> <span class="n">x_t_up_sample</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_t_up_sample</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">x_t_up_sample</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="mi">2</span><span class="o">**</span><span class="n">n_bits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_updample_axis</span><span class="p">,</span><span class="n">x_t_up_sample</span> <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_axis</span><span class="p">,</span><span class="n">x_quantize_t</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">,</span>  <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;quantized samples&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_axis</span><span class="p">,</span><span class="n">x_t</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;original samples&#39;</span><span class="p">)</span>
+<span class="c1"># plot quantization levels</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">levels</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">03b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">backgroundcolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x23ad786e740&gt;
+</pre></div>
+</div>
+<img alt="_images/fcf98e9ca5c816d5902551e6c5881edeab24a5989092442c6b044df397828453.png" src="_images/fcf98e9ca5c816d5902551e6c5881edeab24a5989092442c6b044df397828453.png" />
 </div>
 </div>
 </section>
