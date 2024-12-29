@@ -53,4 +53,10 @@ parts:
       title: "קוונטיזציה"
     - file: digitation_and_reconstruction/quantization_example
       title: "קוונטיזציה לדוגמא"
+  - caption: "רעש"
+    chapters:
+    - file: noise/noise_intro
+      title: "מה זה רעש"
+    - file: noise/random_signals
+      title: "אותות אקראיים"
 
