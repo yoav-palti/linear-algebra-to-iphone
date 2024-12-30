@@ -1,0 +1,659 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>אותות אקראיים &#8212; Linear Algebra to iPhone 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=2c8ff626" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'noise/random_signals';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="מה זה רעש" href="noise_intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Linear Algebra to iPhone 1 - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Linear Algebra to iPhone 1 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/intro.html">
+                    מאלגברה לינארית לאייפון
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../LTI/intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/impulse_response.html">תגובת להלם</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/frequency_response.html">תגובת בתדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/wave_in_a_room.html">החזרות בחדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">מעגלי RLC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RLC/RC_intro.html">מעגלי RC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RLC/RLC_intro.html">מעגלי RLC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RLC/power_on_load.html">הספק על רכיבים</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור אנלוגי</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/analog_intro.html">מבוא לתקשורת אנלוגית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/AM.html">אפנון AM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/PM_FM.html">אפנון PM ואפנון FM</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור דיגיטלי</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/digital_intro.html">מבוא לתקשורת דיגיטלית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/linear_modulations.html">אפנונים לינארים</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/more_modulations.html">בעיות שלא הכרתם - עוד אפנונים</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/FSK.html">אפנון תדר - FSK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/orthogonality.html">אורתוגונליות</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">דיגיטציה</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/digitation_intro.html">מה זה לדיגיטציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/sampling.html">דגימה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/interpolation.html">שחזור באינטרפולציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/quantization.html">קוונטיזציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/quantization_example.html">קוונטיזציה לדוגמא</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">רעש</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="noise_intro.html">מה זה רעש</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">אותות אקראיים</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/yoav-palti/linear-algebra-to-iphone" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/noise/random_signals.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>אותות אקראיים</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">משתנה אקראי</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">סטציונריות הגדרה מחמירה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ארגודיות</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">אפיון של האות האקראי</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">אוטוקורלציה</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>אותות אקראיים<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>נתחיל לחקור את היצור המתמטי הזה שנקרא אות אקראי.
+דרך אחת לא מאוד שימושית לאפיין אותו היא לומר שיש לנו אנסמבל (אינסופי) עם כל
+האפשרויות השונות לאותות ולכל אחד מהם הסתברות (או צפיפות הסתברות). ממש קשה
+לעבוד עם אובייקט כזה. והוא מאוד מאוד כללי.</p>
+<p>במקום זה נתחיל מלהסתכל על זמן מסויים <span class="math notranslate nohighlight">\(t_{i}\)</span> ולשאול מה הערכים האפשריים של הרעש שם.</p>
+<section id="id2">
+<h2>משתנה אקראי<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>אם היינו מבצעים הרבה מאוד ניסויין ומסתכלים רק על הtאות האקראי (הרעש) בזמן <span class="math notranslate nohighlight">\(t_{i}\)</span> היינו מקבלים המון
+ערכים שונים. נקרא להם <span class="math notranslate nohighlight">\(x\left(t_{i}\right)\)</span>. זה ממש כמו הטלות של קובייה רק שיש לנו טווח ערכים רציף.
+נוכל לאפיין את הסטטיסטיקה של הערכים על ידי <strong>פונקציית צפיפות הסתברות</strong>.</p>
+<p>באופן כללי ל<span class="math notranslate nohighlight">\(x\left(t_{i}\right)\)</span> נקרא משתנה אקראי.</p>
+<div class="tip admonition">
+<p class="admonition-title">מה זה פונקציית צפיפות הסתברות?</p>
+<p>משתנה אקראי <span class="math notranslate nohighlight">\(X\)</span> יהיה מאופיין על ידי פונקציית צפיפות הסתברות <span class="math notranslate nohighlight">\(p_{X}\left(x\right)\)</span>
+אשר אומרת מה הסיכוי למדוד את המשתנה האקראי בטווח ערכים מסויים. כלומר:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{P}\left(x_{1}&lt;X&lt;x_{2}\right)=\intop_{x_{1}}^{x_{2}}p_{X}\left(x\right)dx\]</div>
+<p>נדרוש שתי תכונות:</p>
+<ol class="arabic simple">
+<li><p>חיוביות - <span class="math notranslate nohighlight">\(p_{X}\left(x\right)\ge0\)</span></p></li>
+<li><p>נרמול -  <span class="math notranslate nohighlight">\(\intop_{\Omega}p_{X}\left(x\right)dx=1\)</span></p></li>
+</ol>
+<p>כאשר הכוונה ב<span class="math notranslate nohighlight">\(\Omega\)</span> היא כל תחום הערכים של <span class="math notranslate nohighlight">\(X\)</span>. לרוב יהיה <span class="math notranslate nohighlight">\(\intop_{-\infty}^{\infty}p_{X}\left(x\right)dx=1\)</span></p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">דוגמא - התפלגות נורמלית</p>
+<p>פונקציית צפיפות הסתברות שנעבוד איתה הרבה והיא מאוד מאוד מאוד נפוצה היא גאוסיין. (לפעמים נקראת נורמלית)</p>
+<div class="math notranslate nohighlight">
+\[p_{X}\left(x\right)=\sqrt{\frac{1}{2\pi\sigma^{2}}}e^{-\frac{\left(x-\mu\right)^{2}}{2\sigma^{2}}}\]</div>
+<p>כאשר <span class="math notranslate nohighlight">\(\mu\)</span> היא הערך הממוצע ו<span class="math notranslate nohighlight">\(\sigma\)</span> הסטיית תקן.
+מוזמנים לשחק עם הערכים כדי לראות אי ך הפונקצייה נראית. את ההתפלגות הנורמלית של ממוצע 0 וסטיית תקן 1 ציירתי בשחור</p>
+ <iframe src="https://www.geogebra.org/material/iframe/id/mb5n2gph" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
+<a href="https://www.geogebra.org/material/iframe/id/mb5n2gph" target="_blank">לפתיחה בחלון נפרד</a>
+<p>מה מתפלג ככה? האמת שכמעט הכל (יש לזה סיבות טובות). לדוגמה גובה של אנשים:
+<img alt="height-distribution.png" src="../_images/height-distribution.png" /></p>
+<p>מתוך הגרף הזה אתם יכולים לחשב לדוגמה מה הסיכוי שהגובה של גבר או אישה רנדומלים בעולם הם בין 170-175 .
+זה פשוט לחשב אינטגרל (או לשאול מה השטח מתחת לגרף)</p>
+</div>
+<p>נרצה עכשיו להרחיב את ההגדרה של משתנה אקראי לתהליך אקראי או אות אקראי.
+נצטרך עכשיו לתת הסתברות לכל אפשרות. כלומר תהיה לנו פונקצייה <span class="math notranslate nohighlight">\(\underset{\text{תפתושמ}-\text{תוגלפתה}}{\underbrace{p_{x\left(t\right)}\left(x_{1},x_{2},x_{3},...;t_{1},t_{2},t_{3},...\right)}}\)</span>
+אשר מגדירה מה הסיכוי לאות מסויים:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{P}\left(\left(x_{1}^{\prime}&lt;x\left(t_{1}\right)&lt;x_{1}^{\prime\prime}\right)\land\left(x_{2}^{\prime}&lt;x\left(t_{2}\right)&lt;x_{2}^{\prime\prime}\right)...\right)=\intop_{x_{1}^{\prime}}^{x_{1}^{\prime\prime}}\intop_{x_{2}^{\prime}}^{x_{2}^{\prime\prime}}...p_{x\left(t\right)}\left(x_{1},x_{2},...;t_{1},t_{2},...\right)...dx_{1}dx_{2}\]</div>
+<p>זה מאוד לא שימושי, בעיקר שהאות שלנו הוא רציף ולא בדיד הרבה פעמים. נניח שתי הגדרות שמאוד
+יקלו על ההגדרה והניתוח של האות האקראי. הן לא מתקיימות תמיד אבל כן לרוב.</p>
+</section>
+<section id="id3">
+<h2>סטציונריות הגדרה מחמירה<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>נתחיל מהגדרה מחמירה של מה זה אות סטציונרי. נראה קצת דוגמאות וניקח הגדרה פחות מחמירה בהמשך.</p>
+<p>נגדיר אות כסטציונרי (במובן הצר) אם פונקציית צפיפות ההסתברות שלו לא משתנה בזמן. כלומר:</p>
+<div class="math notranslate nohighlight">
+\[\forall\tau\in\mathbb{R},\forall n\in\mathbb{N}:p_{x\left(t\right)}\left(x_{1},x_{2},...,x_{n};t_{1},t_{2},...t_{n}\right)=p_{x\left(t\right)}\left(x_{1},x_{2},...,x_{n};t_{1}+\tau,t_{2}+\tau,...t_{n}+\tau\right)\]</div>
+<p>ובפרט עבור משתנה זמן בודד:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{\forall\tau\in\mathbb{R}:p_{x\left(t\right)}\left(x_{1};t_{1}\right)=p_{x\left(t\right)}\left(x_{1};t_{1}+\tau\right)}\]</div>
+<p>מה זה אומר? במילים פשוטות זה אומר שאם תתחילו מדידה של האות בזמן כלשהו למשך זמן כלשהו הסטטיסטיקה
+לא תהיה תלוייה בזמן התחלת המדידה.  שימו לב שזה נכון גם למדידה של מספר אחד ולכן <strong>בפרט</strong> הממוצע וסטיית
+התקן לא משתנות בזמן. (זאת הולכת להיות ההגדרה שלנו בהמשך + פרט קטן).</p>
+<p>דוגמאות לאותות שהם לא סטציונרים:</p>
+<ul class="simple">
+<li><p>התמפרטורה בחדר הזה - אם תמדדו בלילה או ביום תקבלו סטטיסטיקות שונות מאוד</p></li>
+<li><p>הרעש מחוץ לחלון הדירה שלי. במהלך היום יש תחב”צ ובפרט הרעש נמוך יותר בשבתות</p></li>
+</ul>
+<p>נשים לב שזה שיש “שינוי” או אירועי קיצון לא אומר שהאות לא סטציונרי. זה רק
+אומר שאירועים כאלו הם חלק מהסטטיסטיקה. מה שהופך את הדוגמאות קודם ללא
+סטציונרים זה שיש “חוקיות” לשינוי של הסטטיסטיקה. לדוגמה בלילה וביום.
+שימו לב שגם אם לא הייתי יודע שקיימים יום ולילה הייתי יכול
+לחשב את ממוצע הטמפרטורה לאורך זמן ולראות מגמה מחזורית מובהקת.
+והסיכוי לקבל מגמה כזו מובהקת במקרה הוא מאוד מאוד נמוך.</p>
+<p>דוגמאות לאותות סטציונרים:</p>
+<ul class="simple">
+<li><p>רעש טרמי (בהינתן שהטמפרטורה קבועה) - התפלגות המהירויות של החלקיקים נשארת קבועה אם הטמפרטורה קבועה. ולכן גם הזרמים שהם יוצרים</p></li>
+<li><p>רעש שוט (בהנחה שהזרם נשאר קבוע)</p></li>
+<li><p>רעש מתפרץ - רעש שקופץ בין שני ערכים כאשר כמות המעברים מתפלגת פואסונית</p></li>
+<li><p>תנועה של חלקיק בדיפוזיה</p></li>
+</ul>
+<p>חשוב להדגיש שתהליך אקראי הוא לא תמיד רעש אבל אותנו מעניינים רעשים. תהליך אקראי לדוגמה
+שאינו רעש הוא ירי של ניורונים במוח שלנו.</p>
+</section>
+<section id="id4">
+<h2>ארגודיות<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>התכונה השנייה שנניח על התהליכים האקראיים שלנו היא קצת יותר קשה לתפיסה.
+בגדול היא אומרת ש:</p>
+<blockquote>
+<div><p><strong>ממוצע לאורך זמן הוא כמו ממוצע של הרבה מדידות חוזרות (ראליזציות)</strong></p>
+</div></blockquote>
+<p>בנוסחה זה אומר ש:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}\left[x\left(t\right)\right]=\left\langle x\left(t\right)\right\rangle \]</div>
+<p>מה זה אומר בכלל. אתם רגילים ששני הביטויים האלו הם פשוט סימונים
+שונים של הממוצע. מה שזה אומר הוא ש:</p>
+<div class="math notranslate nohighlight">
+\[\underset{\mu_{x}}{\underbrace{\intop_{-\infty}^{\infty}x\cdot\mathbb{P}\left(x\right)dx}}=\underset{\left\langle x\left(t\right)\right\rangle }{\underbrace{\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{0}^{T}x\left(t\right)dt}}\]</div>
+<p>כלומר הממוצע של האות הוא גם הממוצע לאורך זמן.
+(אנחנו נניח שבהגדרה של ארגודיות הממוצע לאורך זמן לא תלוי בזמן ההתחלה,
+כלומר האות סטציונרי)</p>
+<p>איך בכלל שני הדברים האלו יכולים להיות שונים?
+נשים לב שהם צריכים להיות שווים רק בגבול של זמן ארוך. כלומר
+גם אם חישוב הממוצע לוקח המון זמן זה לא משנה.</p>
+<p>דוגמה שממחישה למה הם יכולים להיות שונים היא הדוגמה הבאה:</p>
+<p>נניח שיש לנו 2 קוביות על השולחן. אחת עם 6 פאות ואחת עם 12.
+כלומר הממוצע של הראשונה הוא 3.5 ושל השנייה הוא 6.5.
+התהליך האקראי הוא לקחת קוביה אקראית ולזרוק אותה אינסוף פעמים.
+המספרים שיוצאים הם התהליך האקראי שלנו.
+למה זה לא ארגודי?</p>
+<p>צריך להבין מה הממוצע של התהליך. הממוצע מוגדר על הרבה חזרות של התהליך.
+כאשר בחצי מהפעמים נבחר את הקוביה הראשונה ובחצי את הקובייה השנייה.
+הממוצע יצא לנו <span class="math notranslate nohighlight">\(\frac{3.5+6.5}{2}=5\)</span> אבל אם ניקח ניסוי אחד
+לאורך הרבה זמן ונחשב את הממוצע יצא לנו או <span class="math notranslate nohighlight">\(3.5\)</span> או <span class="math notranslate nohighlight">\(6.5\)</span>.</p>
+<p>המסקנה היא:</p>
+<blockquote>
+<div><p>אם אנחנו התהליך יכול להיות תהליך שונה בכל פעם וזה נקבע בהתחלה, אז כנראה שהוא לא ארגודי</p>
+</div></blockquote>
+<p>יכולות להיות הרבה דוגמאות לזה. אבל תנסו לדמיין שאנחנו מודדים בעזרת מכשיר מדידה רעש
+אבל יכול להיות שיש פגם במכשיר. אז מה שבאמת צריך לעשות הוא לדגום בעזרת הרבה מכשירים.</p>
+<p>או יש פאזה התחלתית בדוגם שיכולה להגביר או להחליש את הרעש והיא נקבעת על פי זמן
+ההדלקה של המכשיר אז אנחנו יכולים להיות בבעיה.</p>
+<p>יש עוד דוגמאות מעניינות ממש בפיזיקה אבל לא ניכנס לזה כאן.</p>
+<p>למה ארגודיות חשובה לנו בכלל? היינו רוצים לומר שאם הממוצע של האות
+לא תלוי בזמן (סטציונריות) אז ה מספיק.
+הבעיה היא שלרוב במדידה אמיתית תהיה לנו רק ריאליזציה אחת של הרעש.
+ולכן אם נחשוב שהממוצע של הרעש הוא הממוצע מהתכונה הסטציונרית
+נוכל לטעות ולחשוב שזה הממוצע בכל קטע מספיק ארוך של זמן.</p>
+<p>לרוב נניח שאות גם ארגודי בסטיית התקן שלו ובפונקציית האוטוקורלציה שלו (עוד על זה בהמשך).</p>
+</section>
+<section id="id5">
+<h2>אפיון של האות האקראי<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>הבינתן שיש לנו דגימה של האות האקראי והוא סטציונרי וארגודי נוכל להתחיל לחשב
+תכונות שלו:</p>
+<ul class="simple">
+<li><p>ממוצע - <span class="math notranslate nohighlight">\(\mu_{x}=\intop_{-\infty}^{\infty}x\cdot\mathbb{P}\left(x\right)dx=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{0}^{T}x\left(t\right)dt\)</span></p></li>
+<li><p>סטיית תקן - <strong>כמה אנחנו רחוקים מהממוצע בממוצע</strong></p></li>
+</ul>
+<p>איך נחשב?</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{x}^{2}=\mathbb{E}\left[\left(x\left(t\right)-\mu_{x}\right)^{2}\right]=\mathbb{E}\left[x\left(t\right)^{2}-2\mu_{x}x\left(t\right)+\mu_{x}^{2}\right]=\mathbb{E}\left[x\left(t\right)^{2}\right]-2\mu_{x}\mathbb{E}\left[x\left(t\right)\right]+\mu_{x}^{2}\]</div>
+<div class="math notranslate nohighlight">
+\[=\mathbb{E}\left[x\left(t\right)^{2}\right]-2\mu_{x}^{2}+\mu_{x}^{2}=\mathbb{E}\left[x\left(t\right)^{2}\right]-\mu_{x}^{2}=\left\langle x\left(t\right)^{2}\right\rangle -\mu_{x}^{2}=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{0}^{T}x\left(t\right)^{2}dt-\left(\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{0}^{T}x\left(t\right)dt\right)^{2}\]</div>
+<p>נשים לב שבמקרה שלנו האות <span class="math notranslate nohighlight">\(x\left(t\right)^{2}\)</span> הוא לרוב בעל משמעות של הספק (אם האות שלנו הוא אמפליטודה של גל)
+ולכן אפשר לחשוב על <span class="math notranslate nohighlight">\(\left\langle x\left(t\right)^{2}\right\rangle \)</span> בתור ההספק הממוצע
+נקבל מסקנה חמודה:</p>
+<blockquote>
+<div><p>באות בעל ממוצע 0 (<span class="math notranslate nohighlight">\(\mu_{x}=0\)</span>) סטיית התקן פרופורציונלית להספק הממוצע <span class="math notranslate nohighlight">\(\sigma_{x}^{2}\propto\left\langle P_{x}\right\rangle \)</span></p>
+</div></blockquote>
+<p>כלומר שסטיית התקן של רעש (שלרוב ההמוצע שלו הוא באמת 0) היא סופר חשובה לחישובי SNR</p>
+</section>
+<section id="id6">
+<h2>אוטוקורלציה<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>יש לנו פיסה אחת שחסרה בפאזל. הבנו שאפשר לאפיין את האות האקראי עם פונקצייה <span class="math notranslate nohighlight">\(p_{x}\)</span> אשר לא תלוייה בזמן
+אבל מה הקשר בין הרעש בזמנים שונים?
+לדוגמה מה אם הייתי אומר לכם שאני מטיל קובייה אבל כל פעם אני לא מאפשר
+להטלה הקודמת לחזור על עצמה.
+האם זה משנה את סטטיסטיקת ההטלות?
+התשובה היא שברור שלו. עדיין אני אקבל התפלגות אחידה עבור
+כל אחת מההטלות (עם הרבה חזרות על הניסוי)</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./noise"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="noise_intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">מה זה רעש</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">משתנה אקראי</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">סטציונריות הגדרה מחמירה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ארגודיות</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">אפיון של האות האקראי</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">אוטוקורלציה</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yoav Palti
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

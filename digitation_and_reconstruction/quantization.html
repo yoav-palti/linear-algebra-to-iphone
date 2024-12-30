@@ -207,6 +207,11 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">קוונטיזציה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quantization_example.html">קוונטיזציה לדוגמא</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">רעש</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../noise/noise_intro.html">מה זה רעש</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../noise/random_signals.html">אותות אקראיים</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -496,14 +501,14 @@
 במקרה כזה נוכל לשאול את עצמנו האם יש לנו סיכוי לקלוט גם את האות החלש?
 נניח שהאות החלש חלש ב7 סדרי גודל (בהספק)
 נקבל כי עבור האות החלש <span class="math notranslate nohighlight">\(20\log_{10}\left(\frac{A_{max}}{A}\right)=10\log_{10}\left(\frac{P_{strong}}{P_{weak}}\right)=70\)</span>
-נקבל שבמקלט של 8bit ה-SNR עבור האות הזה יהיה <span class="math notranslate nohighlight">\(-22\)</span>. אין סיכוי לקלוט ככה אות
-במקלט של ה-12bit נקבל <span class="math notranslate nohighlight">\(SNR\approx3\)</span>. זה קשה אבל אפשרי לקלוט. כנראה
-נצטרך תיקון שגיאות ממש טוב. אבל עבור ה-16bit נקבל <span class="math notranslate nohighlight">\(SNR\approx28\)</span> וזה כבר לא מזיז לנו אפילו לא קצת.</p>
+נקבל שבמקלט של 8bit ה-$<span class="math notranslate nohighlight">\(SNR_{dB} עבור האות הזה יהיה \)</span>-22<span class="math notranslate nohighlight">\(. אין סיכוי לקלוט ככה אות
+במקלט של ה-12bit נקבל \)</span>SNR\approx3<span class="math notranslate nohighlight">\(. זה קשה אבל אפשרי לקלוט. כנראה
+נצטרך תיקון שגיאות ממש טוב. אבל עבור ה-16bit נקבל \)</span>SNR\approx28$ וזה כבר לא מזיז לנו אפילו לא קצת.</p>
 <p>רוצים מקרה אמיתי? נניח שאתם מנסים לקלוט GPS. בGPS יש טריק של להרוויח עוד 43dB אחרי
 הקליטה אבל זה בהנחה שהרעש לא קורלטיבי לאות מה שלא נכון אם יש רעש קוונטיזציה חזק.
 נניח לרגע את זה בצד. האות לש GPS מגיע לקרקע ב-125dBm. אם מישהו רוצה פשוט לדחוס אותנו ונניח שיש לנו מקלט 8bit הוא יכול לשדר ככה שאנחנו נקלוט אותו ב–77dBm.
 נניח לרגע מודל אידאלי של ריק שבו הדאיכה של גל אלקטרומגנטי היא ריבועית במרחק
-(הדאיכה של האנרגיה, השדה דואך כמו <span class="math notranslate nohighlight">\(\frac{1}{r}\)</span>). נשתמש בנוסחה שתלמדו
+(הדאיכה של האנרגיה, השדה דועך כמו <span class="math notranslate nohighlight">\(\frac{1}{r}\)</span>). נשתמש בנוסחה שתלמדו
 עליה בקורס הבא:</p>
 <div class="math notranslate nohighlight">
 \[P_{Rx}=\left(\frac{\lambda}{4\pi r}\right)^{2}P_{Tx}\]</div>
