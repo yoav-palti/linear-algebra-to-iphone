@@ -89,9 +89,267 @@ $$\boxed{\forall\tau\in\mathbb{R}:p_{x\left(t\right)}\left(x_{1};t_{1}\right)=p_
 
 דוגמאות לאותות סטציונרים:
 * רעש טרמי (בהינתן שהטמפרטורה קבועה) - התפלגות המהירויות של החלקיקים נשארת קבועה אם הטמפרטורה קבועה. ולכן גם הזרמים שהם יוצרים
-* רעש שוט (בהנחה שמטען האלקטרון נשאר קבוע) :smile:
+* רעש שוט (בהנחה שהזרם נשאר קבוע)
+* רעש מתפרץ - רעש שקופץ בין שני ערכים כאשר כמות המעברים מתפלגת פואסונית
+* תנועה של חלקיק בדיפוזיה
 
+חשוב להדגיש שתהליך אקראי הוא לא תמיד רעש אבל אותנו מעניינים רעשים. תהליך אקראי לדוגמה
+שאינו רעש הוא ירי של ניורונים במוח שלנו.
 
+### ארגודיות
 
+התכונה השנייה שנניח על התהליכים האקראיים שלנו היא קצת יותר קשה לתפיסה.
+בגדול היא אומרת ש:
 
+> **ממוצע לאורך זמן הוא כמו ממוצע של הרבה מדידות חוזרות (ראליזציות)**
 
+בנוסחה זה אומר ש:
+
+$$\mathbb{E}\left[x\left(t\right)\right]=\left\langle x\left(t\right)\right\rangle $$
+
+מה זה אומר בכלל. אתם רגילים ששני הביטויים האלו הם פשוט סימונים
+שונים של הממוצע. מה שזה אומר הוא ש:
+
+$$\underset{\mu_{x}}{\underbrace{\intop_{-\infty}^{\infty}x\cdot\mathbb{P}\left(x\right)dx}}=\underset{\left\langle x\left(t\right)\right\rangle }{\underbrace{\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{0}^{T}x\left(t\right)dt}}$$
+
+כלומר הממוצע של האות הוא גם הממוצע לאורך זמן.
+(אנחנו נניח שבהגדרה של ארגודיות הממוצע לאורך זמן לא תלוי בזמן ההתחלה, 
+כלומר האות סטציונרי)
+
+איך בכלל שני הדברים האלו יכולים להיות שונים?
+נשים לב שהם צריכים להיות שווים רק בגבול של זמן ארוך. כלומר
+גם אם חישוב הממוצע לוקח המון זמן זה לא משנה.
+
+דוגמה שממחישה למה הם יכולים להיות שונים היא הדוגמה הבאה:
+
+נניח שיש לנו 2 קוביות על השולחן. אחת עם 6 פאות ואחת עם 12.
+כלומר הממוצע של הראשונה הוא 3.5 ושל השנייה הוא 6.5.
+התהליך האקראי הוא לקחת קוביה אקראית ולזרוק אותה אינסוף פעמים.
+המספרים שיוצאים הם התהליך האקראי שלנו.
+למה זה לא ארגודי?
+
+צריך להבין מה הממוצע של התהליך. הממוצע מוגדר על הרבה חזרות של התהליך.
+כאשר בחצי מהפעמים נבחר את הקוביה הראשונה ובחצי את הקובייה השנייה.
+הממוצע יצא לנו $\frac{3.5+6.5}{2}=5$ אבל אם ניקח ניסוי אחד
+לאורך הרבה זמן ונחשב את הממוצע יצא לנו או $3.5$ או $6.5$.
+
+המסקנה היא:
+
+> אם אנחנו התהליך יכול להיות תהליך שונה בכל פעם וזה נקבע בהתחלה, אז כנראה שהוא לא ארגודי
+
+יכולות להיות הרבה דוגמאות לזה. אבל תנסו לדמיין שאנחנו מודדים בעזרת מכשיר מדידה רעש
+אבל יכול להיות שיש פגם במכשיר. אז מה שבאמת צריך לעשות הוא לדגום בעזרת הרבה מכשירים.
+
+או יש פאזה התחלתית בדוגם שיכולה להגביר או להחליש את הרעש והיא נקבעת על פי זמן
+ההדלקה של המכשיר אז אנחנו יכולים להיות בבעיה.
+
+יש עוד דוגמאות מעניינות ממש בפיזיקה אבל לא ניכנס לזה כאן.
+
+למה ארגודיות חשובה לנו בכלל? היינו רוצים לומר שאם הממוצע של האות
+לא תלוי בזמן (סטציונריות) אז ה מספיק.
+הבעיה היא שלרוב במדידה אמיתית תהיה לנו רק ריאליזציה אחת של הרעש.
+ולכן אם נחשוב שהממוצע של הרעש הוא הממוצע מהתכונה הסטציונרית
+נוכל לטעות ולחשוב שזה הממוצע בכל קטע מספיק ארוך של זמן.
+
+לרוב נניח שאות גם ארגודי בסטיית התקן שלו ובפונקציית האוטוקורלציה שלו (עוד על זה בהמשך).
+
+### אפיון של האות האקראי
+
+הבינתן שיש לנו דגימה של האות האקראי והוא סטציונרי וארגודי נוכל להתחיל לחשב
+תכונות שלו:
+
+* ממוצע - $\mu_{x}=\intop_{-\infty}^{\infty}x\cdot\mathbb{P}\left(x\right)dx=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{0}^{T}x\left(t\right)dt$
+* סטיית תקן - **כמה אנחנו רחוקים מהממוצע בממוצע**
+
+איך נחשב?
+
+$$\sigma_{x}^{2}=\mathbb{E}\left[\left(x\left(t\right)-\mu_{x}\right)^{2}\right]=\mathbb{E}\left[x\left(t\right)^{2}-2\mu_{x}x\left(t\right)+\mu_{x}^{2}\right]=\mathbb{E}\left[x\left(t\right)^{2}\right]-2\mu_{x}\mathbb{E}\left[x\left(t\right)\right]+\mu_{x}^{2}$$
+$$=\mathbb{E}\left[x\left(t\right)^{2}\right]-2\mu_{x}^{2}+\mu_{x}^{2}=\mathbb{E}\left[x\left(t\right)^{2}\right]-\mu_{x}^{2}=\left\langle x\left(t\right)^{2}\right\rangle -\mu_{x}^{2}=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{0}^{T}x\left(t\right)^{2}dt-\left(\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{0}^{T}x\left(t\right)dt\right)^{2}$$
+
+נשים לב שבמקרה שלנו האות $x\left(t\right)^{2}$ הוא לרוב בעל משמעות של הספק (אם האות שלנו הוא אמפליטודה של גל)
+ולכן אפשר לחשוב על $\left\langle x\left(t\right)^{2}\right\rangle $ בתור ההספק הממוצע
+נקבל מסקנה חמודה:
+
+> באות בעל ממוצע 0 ($\mu_{x}=0$) סטיית התקן פרופורציונלית להספק הממוצע $\sigma_{x}^{2}\propto\left\langle P_{x}\right\rangle $
+
+כלומר שסטיית התקן של רעש (שלרוב ההמוצע שלו הוא באמת 0) היא סופר חשובה לחישובי SNR
+
+### אוטוקורלציה
+
+יש לנו פיסה אחת שחסרה בפאזל. הבנו שאפשר לאפיין את האות האקראי בכל נקודת זמן עם פונקצייה $p_{x}$ אשר לא תלוייה בזמן
+אבל מה הקשר בין הרעש בזמנים שונים? 
+לדוגמה מה אם הייתי אומר לכם שאני מטיל קובייה אבל כל פעם אני לא מאפשר 
+להטלה הקודמת לחזור על עצמה.
+האם זה משנה את סטטיסטיקת ההטלות?
+התשובה היא שברור שלא. נקבל התפלגות אחידה עבור
+כל אחת מההטלות (עם הרבה חזרות על הניסוי) מוזמנים לדוגמה
+להסתכל על הקוד הבא:
+
+```{code-block} python
+import matplotlib.pyplot as plt
+import numpy as np
+def get_die_tosses_non_repeate(N, seed=None):
+    rng = np.random.default_rng(seed)
+    die_tosses = [rng.integers(1, 7)]
+    for i in range(1, N):
+        # toss a die 1-5 and when the result is greater than the previous toss, add 1
+        # this way we get a random toss 1-6 that can't be the same as the previous toss
+        current_toss = rng.integers(1, 6) 
+        if current_toss >= die_tosses[-1]:
+            current_toss+=1
+        die_tosses.append(current_toss)
+    return np.array(die_tosses)
+
+N = 10
+num_of_experiments = 10000
+all_tosses = []
+for i in range(num_of_experiments):
+    die_tosses = get_die_tosses_non_repeate(N)
+    all_tosses.append(die_tosses)
+all_tosses = np.array(all_tosses)
+plt.figure(figsize=(10, 6))
+plt.hist(all_tosses[:,-1],bins=np.linspace(0.5, 6.5, 7), rwidth=0.8, density=True)
+```
+
+שימו לב שאנחנו כל פעם זורקים את הקובייה 10 פעמים כאשר שתי זריקות עוקבות
+לא יכולות להיות זהות. ואכן נראה שההתפלגות של הקובייה נראית כמו קובייה רגילה.
+נוכל לקחת היסטוגרמה של הזריקה העשירית ולראות שההתפלגות אכן אחידה:
+
+![toss_non_repeat.png](images/toss_non_repeat.png)
+
+באופן כללי אני מאוד ממליץ לתכנת לעצמכם דוגמאות קטנות של כל מיני
+תהליכים אקראיים. זה מאוד עוזר להבין מה הולך ולמה מתכננים בכל מיני מדדים.
+
+אז איך נאפיין את הקשר בין שני משתנים? נהוג לאפיין בצורה הפשוטה
+ביותר שניתן לחשוב עליה. בעזרת $Cov\left(x_{i},x_{j}\right)$
+מה זה $COV$? ההגדרה היא:
+
+$$Cov\left(x_{i},x_{j}\right)=\mathbb{E}\left[\left(x_{i}-\mu_{x_{i}}\right)\left(x_{j}-\mu_{x_{j}}\right)^{\ast}\right]$$
+
+> אני אגדיר את כל ההגדרות למשתנים אקראיים מרוכבים. אם עובדים
+> עם משתנים אקראיים ממשיים אפשר פשוט להתעלם מכל הפעולות של הצמדה 
+
+במילים: כמה בבמוצע סטייה של אחד מהמשתנים מהממוצע **מתואמת** עם סטייה של המשתנה השני
+
+נשים לב שאם אנחנו עובדים עם אות שהממוצע שלו הוא תמיד 0 $\mu_{x}=0$ אז נקבל:
+
+$$\boxed{Cov\left(x_{i},x_{j}\right)=\mathbb{E}\left[x_{i}\cdot x_{j}^{\ast}\right]}$$
+
+בהנחה שהתהליך שלנו הוא סטציונרי נוכל לרשום:
+
+$$Cov\left(x\left(t_{i}\right),x\left(t_{j}\right)\right)=\mathbb{E}\left[x\left(t_{i}\right)\cdot x^{\ast}\left(t_{j}\right)\right]=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(t_{j}-t_{i}\right)\right]\underset{\tau=t_{j}-t_{i}}{\underbrace{=}}\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]$$
+
+התוצאה תלויה במשתנה בודד $\tau$ ויש לה סימון מיוחד (ושם):
+
+$$R_{x}\left(\tau\right)\equiv\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]$$
+
+הפונקציה הזו נקראת האוטוקורלציה של האות והיא מדד של כמה האות "דומה" לעצמו
+בהזזה של $\tau$.
+
+נשים לב שבאופן כללי לרוב מגדירים אוטוקורלציה כ-$R_{x}\left(t_{1},t_{2}\right)\equiv\mathbb{E}\left[x\left(t_{1}\right)\cdot x^{\ast}\left(t_{2}\right)\right]  $ אבל
+בגלל הסטציונריות יכולנו להגדיר את זה כפונקציה של משתנה בודד. כלומר:
+
+* אות סטציונרי - $R_{x}\left(t_{1},t_{2}\right)=R_{x}\left(0,t_{2}-t_{1}\right)=R_{x}\left(\tau\right)$
+* אות סטציונרי עם תוכלת 0 -  $R_{x}\left(\tau\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]=Cov\left(x\left(0\right),x\left(\tau\right)\right)$
+
+> מסקנה: האוטוקורלציה היא פונקציה של הפרשי זמנים $\tau=t_{j}-t_{i}$
+
+תכונות חשובות:
+* עבור אות ממשי - $R_{x}\left(0\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(0\right)\right]\underset{\text{ישממ}}{\underbrace{=}}\mathbb{E}\left[\left(x\left(0\right)\right)^{2}\right]=\sigma_{x}^{2}$
+* סימטריות -  $R_{x}\left(-\tau\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(-\tau\right)\right]=\mathbb{E}\left[x\left(\tau\right)\cdot x^{\ast}\left(0\right)\right]=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)^{\ast}\right]=R_{x}^{\ast}\left(\tau\right)$
+
+נשים לב שאם האות סטציונרי אז נוכל לרשום כי $\forall t:R_{x}\left(0\right)=\mathbb{E}\left[\left|x\left(t\right)\right|^{2}\right]\in\mathbb{R}$
+
+האם יתכן מצב בו $R_{x}\left(0\right)<\left|R_{x}\left(\tau>0\right)\right|$ התשובה היא לא:
+
+$$\left|R_{x}\left(\tau>0\right)\right|=\left|\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]\right|\le max\left(\left|\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(0\right)\right]\right|,\left|\mathbb{E}\left[x\left(\tau\right)\cdot x^{\ast}\left(\tau\right)\right]\right|\right)=max\left(R_{x}\left(0\right),R_{x}\left(0\right)\right)=R_{x}\left(0\right)$$
+
+> האות הכי דומה לעצמו כשלא מזיזים אותו. כלומר $\forall\tau>0:\left|R_{x}\left(\tau\right)\right|\le R_{x}\left(0\right)$
+> 
+> הרבה פעמים מה שנעשה הוא לצייר את הפונקצייה של האוטוקורלציה המנורמלת כלומר $\frac{R_{x}\left(\tau\right)}{R_{x}\left(0\right)}$
+
+#### אוטוקורלציה עבור אותות לא אקראיים
+
+המדד של אוטוקורלציה כל כך שימושי שאפשר להשתמש בו גם עבור **אותות לא אקראיים**
+לדוגמא:
+
+$$x\left(t\right)=A\sin\left(\omega t+\phi_{0}\right)$$
+
+באותות לא אקראיים לא נוכל להשתמש ב-$R_{x}\left(\tau\right)\equiv\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]$ אלא נשתמש ב-$R_{x}\left(\tau\right)\equiv\left\langle x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right\rangle $
+אז נרשום לפי ההגדרה:
+
+$$R_{x}\left(\tau\right)=\left\langle x\left(t\right),x^{\ast}\left(t+\tau\right)\right\rangle \underset{T=\frac{2\pi}{\omega}}{\underbrace{=}}\frac{1}{T}\intop_{0}^{T}\left(A\sin\left(\omega t+\phi_{0}\right)\right)\left(A\sin\left(\omega\left(t+\tau\right)+\phi_{0}\right)\right)dt=$$
+$$=\frac{A^{2}}{T}\intop_{0}^{T}\left(\sin\left(\omega t+\phi_{0}\right)\right)\left(\sin\left(\omega t+\phi_{0}\right)\cos\left(\omega\tau\right)+\cos\left(\omega t+\phi_{0}\right)\sin\left(\omega\tau\right)\right)dt$$
+$$=\frac{A^{2}\cos\left(\omega\tau\right)}{T}\underset{\frac{T}{2}}{\underbrace{\intop_{0}^{T}\sin^{2}\left(\omega t+\phi_{0}\right)dt}}+\frac{A^{2}\sin\left(\omega\tau\right)}{T}\underset{0}{\underbrace{\intop_{0}^{T}\frac{1}{2}\sin\left(2\omega t+2\phi_{0}\right)dt}}$$
+$$=\frac{A^{2}\cos\left(\omega\tau\right)}{2}$$
+
+### אותות אנרגיה ואותות הספק
+עד עכשיו קצת התחמקנו מנקודה עדינה. שאתם עשויים להיתקל בה יחסית הרבה.
+אנחנו יכולים לדבר על שני סוגים של אותות:
+
+* **אותות ספק** - יש להם הספק קבוע בזמן ואנרגיה אינסופית (כי הם על זמן אינסופי)
+  * רעש סטציונרי הוא אות הספק משום שההספק פרופורציונלי לסטיית התקן שהיא קבוע
+  * גל סינוס מחזורי הוא בעל הספק ממוצע קבוע בכל זמן מחזור ואנרגיה אינסופית
+* **אותות אנרגיה** - יש להם אנרגיה סופית
+  * פולס מלבני הוא בעל אנרגיה סופית
+  * פולס גאוסייני הוא בעל אנרגיה סופית למרות שהוא לא סופי בזמן
+
+כל מה שאנחנו צריכים לשים לב אליו זה להכפלה של $\frac{1}{T}$ כאשר מחשבים את האוטוקורלציה
+באופן מפורש מתמטי:
+
+* אותות הספק - $R_{x}\left(\tau\right)=\left\langle x\left(t\right),x^{\ast}\left(t+\tau\right)\right\rangle =\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)x^{\ast}\left(t+\tau\right)dt$
+* אותות אנרגיה - $R_{x}\left(\tau\right)=\left\langle x\left(t\right),x^{\ast}\left(t+\tau\right)\right\rangle =\lim_{T\rightarrow\infty}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)x^{\ast}\left(t+\tau\right)dt$
+
+### סטציונריות במובן הרחב
+
+נחזור עכשיו להגדרה של סטציונריות ונהפוך אותה למקלה יותר.
+הרבה פעמים אנחנו מקבלים דגימות מאות מסויים (לפעמים אפילו דגימה אחת ארוכה) ואין לנו דרך לדעת
+אם באמת ה-PDF של האות בכל זמן הוא זהה. מה שאנחנו כן יכולים לחשב
+בקלות הוא ממוצע רץ ואוטוקורלצייה עם זמני התחלה שונים כלומר את $R_{x}\left(t,t+\tau\right)\approx\frac{1}{T}\intop_{t}^{t+T}x\left(t^{\prime}\right)x\left(t^{\prime}+\tau\right)dt^{\prime}$
+ולראות אם התוצאה תלוייה רק  ב$\tau$
+
+עבור תהליך ארגודי נוכל לומר כי:
+1. $\left\langle x\left(t_{i}\right)\right\rangle =\underset{\text{עובק}}{\underbrace{\mu_{x}}}\Rightarrow\boxed{\mathbb{E}\left[x\left(t_{i}\right)\right]=\underset{\text{עובק}}{\underbrace{\mu_{x}}}}$
+2. $\left\langle x\left(t_{i}\right)\cdot x^{\ast}\left(t_{j}\right)\right\rangle =\left\langle x\left(0\right)\cdot x^{\ast}\left(t_{j}-t_{i}\right)\right\rangle \Rightarrow\boxed{R_{x}\left(t_{i},t_{j}\right)=R_{x}\left(t_{j}-t_{i}\right)}$
+
+כלומר נוכל לבדוק את שתי התכונות האלו שהן חשובות לנו. נתן שם מיוחד לאות שמקיים את שתי התכונות הללו. נקרא לו סטציונרי במובן הרחב 
+
+```{admonition} סטציונריות במובן הרחב
+
+נאמר שאות אקראי $x\left(t\right)$ הוא סטציונרי במובן הרחב אם:
+1. הממוצע שלו לאורך זמן קבוע - $\mu_{x}\left(t\right)=\mathbb{E}\left[x\left(t\right)\right]=\underset{\text{עובק}}{\underbrace{\mu_{x}}}$
+2. האוטוקורלציה שלו תלויה רק בהפרשי זמן - $R_{x}\left(t_{i},t_{j}\right)=R_{x}\left(t_{i}-t_{j}\right)$
+
+זה אומר שגם $Cov\left(x\left(t_{i}\right),x\left(t_{j}\right)\right)$ הוא פונקציה רק של הפרשי זמנים:
+
+$$Cov\left(x\left(t_{i}\right),x\left(t_{j}\right)\right)=\mathbb{E}\left[\left(x\left(t_{i}\right)-\mu_{x}\right)\left(x\left(t_{j}\right)-\mu_{x}\right)^{\ast}\right]=\mathbb{E}\left[x\left(t_{i}\right),x^{\ast}\left(t_{j}\right)\right]-\mu_{x}^{2}=R_{x}\left(t_{i}-t_{j}\right)-\mu_{x}^{2}$$
+
+ובפרט סטיית התקן קבועה בזמן:
+
+$$\sigma_{x}\left(t\right)=\sqrt{Cov\left(x\left(t\right),x\left(t\right)\right)}=R_{x}\left(0\right)-\mu_{x}^{2}=\underset{\text{עובק}}{\underbrace{\sigma_{x}}}$$
+
+```
+
+כל האותות שנעבוד איתם מהנקודה הזו והלאה (אלא אם צויין אחרת) הם ארגודים וסטציונרים במובן הרחב.
+
+> הסטציונריות במובן הרחב חשובה לנו על מנת לאפיין את התכונות של האות
+>
+>  הארגודיות חשובה לנו כדי שנוכל לקבוע את התכונות של האות באמצעות דגימה ארוכה של האות ולא בעזרת המון ריאליזציות שונות
+
+נשים לב שסטציונריות במובן הרחב לא מחייבת שכל המשתנים האקראיים של האות
+יתפלגו בדיוק באותה צורה בכל זמן. וגם לא שההתפלגות המשוטפת תהיה בדיוק זהה בזמנים שונים.
+זאת הגדרה הרבה יותר מקלה אבל גם מאוד מאוד שימושית. אנחנו נראה
+בהמשך איך פונקציית האוטוקורלציה משחת תפקיד מרכזי בניתוח של רעשים בתדר.
+
+נסכם:
+
+אות סטציונרי במובן הרחב מאופיין על ידי:
+* ממוצע - $\mu_{x}$
+* פונקציית אוטוקורלציה - $R_{x}\left(\tau\right)$
+
+אם האות ארגודי ניתן לחשב את שני הגדלים האלו:
+* ממוצע - $\mu_{x}\left(t\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)dt$
+* אוטוקורלציה - $R_{x}\left(\tau\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)x^{\ast}\left(t+\tau\right)dt$
+
+עכשיו כשיש לנו תשתית לדבר על אותות אקראיים נתחיל להבין איך זה קשור לאותות ולתדרים.
+איך זה מתקשר לקליטה של אותות ופענוח.
