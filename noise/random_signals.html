@@ -66,6 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'noise/random_signals';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="רעש במרחב התדר" href="noise_spectrum.html" />
     <link rel="prev" title="מה זה רעש" href="noise_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -210,6 +211,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="noise_intro.html">מה זה רעש</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">אותות אקראיים</a></li>
+<li class="toctree-l1"><a class="reference internal" href="noise_spectrum.html">ספקטרום רעש</a></li>
 </ul>
 
     </div>
@@ -369,7 +371,12 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">סטציונריות הגדרה מחמירה</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ארגודיות</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">אפיון של האות האקראי</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">אוטוקורלציה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">אוטוקורלציה</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">אוטוקורלציה עבור אותות לא אקראיים</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">אותות אנרגיה ואותות הספק</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">סטציונריות במובן הרחב</a></li>
 </ul>
             </nav>
         </div>
@@ -531,13 +538,180 @@
 </section>
 <section id="id6">
 <h2>אוטוקורלציה<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
-<p>יש לנו פיסה אחת שחסרה בפאזל. הבנו שאפשר לאפיין את האות האקראי עם פונקצייה <span class="math notranslate nohighlight">\(p_{x}\)</span> אשר לא תלוייה בזמן
+<p>יש לנו פיסה אחת שחסרה בפאזל. הבנו שאפשר לאפיין את האות האקראי בכל נקודת זמן עם פונקצייה <span class="math notranslate nohighlight">\(p_{x}\)</span> אשר לא תלוייה בזמן
 אבל מה הקשר בין הרעש בזמנים שונים?
 לדוגמה מה אם הייתי אומר לכם שאני מטיל קובייה אבל כל פעם אני לא מאפשר
 להטלה הקודמת לחזור על עצמה.
 האם זה משנה את סטטיסטיקת ההטלות?
-התשובה היא שברור שלו. עדיין אני אקבל התפלגות אחידה עבור
-כל אחת מההטלות (עם הרבה חזרות על הניסוי)</p>
+התשובה היא שברור שלא. נקבל התפלגות אחידה עבור
+כל אחת מההטלות (עם הרבה חזרות על הניסוי) מוזמנים לדוגמה
+להסתכל על הקוד הבא:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">get_die_tosses_non_repeate</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">die_tosses</span> <span class="o">=</span> <span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="c1"># toss a die 1-5 and when the result is greater than the previous toss, add 1</span>
+        <span class="c1"># this way we get a random toss 1-6 that can&#39;t be the same as the previous toss</span>
+        <span class="n">current_toss</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="n">current_toss</span> <span class="o">&gt;=</span> <span class="n">die_tosses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">current_toss</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">die_tosses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_toss</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">die_tosses</span><span class="p">)</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">num_of_experiments</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">all_tosses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_of_experiments</span><span class="p">):</span>
+    <span class="n">die_tosses</span> <span class="o">=</span> <span class="n">get_die_tosses_non_repeate</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">all_tosses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">die_tosses</span><span class="p">)</span>
+<span class="n">all_tosses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_tosses</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">all_tosses</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>שימו לב שאנחנו כל פעם זורקים את הקובייה 10 פעמים כאשר שתי זריקות עוקבות
+לא יכולות להיות זהות. ואכן נראה שההתפלגות של הקובייה נראית כמו קובייה רגילה.
+נוכל לקחת היסטוגרמה של הזריקה העשירית ולראות שההתפלגות אכן אחידה:</p>
+<p><img alt="toss_non_repeat.png" src="../_images/toss_non_repeat.png" /></p>
+<p>באופן כללי אני מאוד ממליץ לתכנת לעצמכם דוגמאות קטנות של כל מיני
+תהליכים אקראיים. זה מאוד עוזר להבין מה הולך ולמה מתכננים בכל מיני מדדים.</p>
+<p>אז איך נאפיין את הקשר בין שני משתנים? נהוג לאפיין בצורה הפשוטה
+ביותר שניתן לחשוב עליה. בעזרת <span class="math notranslate nohighlight">\(Cov\left(x_{i},x_{j}\right)\)</span>
+מה זה <span class="math notranslate nohighlight">\(COV\)</span>? ההגדרה היא:</p>
+<div class="math notranslate nohighlight">
+\[Cov\left(x_{i},x_{j}\right)=\mathbb{E}\left[\left(x_{i}-\mu_{x_{i}}\right)\left(x_{j}-\mu_{x_{j}}\right)^{\ast}\right]\]</div>
+<blockquote>
+<div><p>אני אגדיר את כל ההגדרות למשתנים אקראיים מרוכבים. אם עובדים
+עם משתנים אקראיים ממשיים אפשר פשוט להתעלם מכל הפעולות של הצמדה</p>
+</div></blockquote>
+<p>במילים: כמה בבמוצע סטייה של אחד מהמשתנים מהממוצע <strong>מתואמת</strong> עם סטייה של המשתנה השני</p>
+<p>נשים לב שאם אנחנו עובדים עם אות שהממוצע שלו הוא תמיד 0 <span class="math notranslate nohighlight">\(\mu_{x}=0\)</span> אז נקבל:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{Cov\left(x_{i},x_{j}\right)=\mathbb{E}\left[x_{i}\cdot x_{j}^{\ast}\right]}\]</div>
+<p>בהנחה שהתהליך שלנו הוא סטציונרי נוכל לרשום:</p>
+<div class="math notranslate nohighlight">
+\[Cov\left(x\left(t_{i}\right),x\left(t_{j}\right)\right)=\mathbb{E}\left[x\left(t_{i}\right)\cdot x^{\ast}\left(t_{j}\right)\right]=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(t_{j}-t_{i}\right)\right]\underset{\tau=t_{j}-t_{i}}{\underbrace{=}}\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]\]</div>
+<p>התוצאה תלויה במשתנה בודד <span class="math notranslate nohighlight">\(\tau\)</span> ויש לה סימון מיוחד (ושם):</p>
+<div class="math notranslate nohighlight">
+\[R_{x}\left(\tau\right)\equiv\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]\]</div>
+<p>הפונקציה הזו נקראת האוטוקורלציה של האות והיא מדד של כמה האות “דומה” לעצמו
+בהזזה של <span class="math notranslate nohighlight">\(\tau\)</span>.</p>
+<p>נשים לב שבאופן כללי לרוב מגדירים אוטוקורלציה כ-<span class="math notranslate nohighlight">\(R_{x}\left(t_{1},t_{2}\right)\equiv\mathbb{E}\left[x\left(t_{1}\right)\cdot x^{\ast}\left(t_{2}\right)\right]  \)</span> אבל
+בגלל הסטציונריות יכולנו להגדיר את זה כפונקציה של משתנה בודד. כלומר:</p>
+<ul class="simple">
+<li><p>אות סטציונרי - <span class="math notranslate nohighlight">\(R_{x}\left(t_{1},t_{2}\right)=R_{x}\left(0,t_{2}-t_{1}\right)=R_{x}\left(\tau\right)\)</span></p></li>
+<li><p>אות סטציונרי עם תוכלת 0 -  <span class="math notranslate nohighlight">\(R_{x}\left(\tau\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]=Cov\left(x\left(0\right),x\left(\tau\right)\right)\)</span></p></li>
+</ul>
+<blockquote>
+<div><p>מסקנה: האוטוקורלציה היא פונקציה של הפרשי זמנים <span class="math notranslate nohighlight">\(\tau=t_{j}-t_{i}\)</span></p>
+</div></blockquote>
+<p>תכונות חשובות:</p>
+<ul class="simple">
+<li><p>עבור אות ממשי - <span class="math notranslate nohighlight">\(R_{x}\left(0\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(0\right)\right]\underset{\text{ישממ}}{\underbrace{=}}\mathbb{E}\left[\left(x\left(0\right)\right)^{2}\right]=\sigma_{x}^{2}\)</span></p></li>
+<li><p>סימטריות -  <span class="math notranslate nohighlight">\(R_{x}\left(-\tau\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(-\tau\right)\right]=\mathbb{E}\left[x\left(\tau\right)\cdot x^{\ast}\left(0\right)\right]=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)^{\ast}\right]=R_{x}^{\ast}\left(\tau\right)\)</span></p></li>
+</ul>
+<p>נשים לב שאם האות סטציונרי אז נוכל לרשום כי <span class="math notranslate nohighlight">\(\forall t:R_{x}\left(0\right)=\mathbb{E}\left[\left|x\left(t\right)\right|^{2}\right]\in\mathbb{R}\)</span></p>
+<p>האם יתכן מצב בו <span class="math notranslate nohighlight">\(R_{x}\left(0\right)&lt;\left|R_{x}\left(\tau&gt;0\right)\right|\)</span> התשובה היא לא:</p>
+<div class="math notranslate nohighlight">
+\[\left|R_{x}\left(\tau&gt;0\right)\right|=\left|\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]\right|\le max\left(\left|\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(0\right)\right]\right|,\left|\mathbb{E}\left[x\left(\tau\right)\cdot x^{\ast}\left(\tau\right)\right]\right|\right)=max\left(R_{x}\left(0\right),R_{x}\left(0\right)\right)=R_{x}\left(0\right)\]</div>
+<blockquote>
+<div><p>האות הכי דומה לעצמו כשלא מזיזים אותו. כלומר <span class="math notranslate nohighlight">\(\forall\tau&gt;0:\left|R_{x}\left(\tau\right)\right|\le R_{x}\left(0\right)\)</span></p>
+<p>הרבה פעמים מה שנעשה הוא לצייר את הפונקצייה של האוטוקורלציה המנורמלת כלומר <span class="math notranslate nohighlight">\(\frac{R_{x}\left(\tau\right)}{R_{x}\left(0\right)}\)</span></p>
+</div></blockquote>
+<section id="id7">
+<h3>אוטוקורלציה עבור אותות לא אקראיים<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>המדד של אוטוקורלציה כל כך שימושי שאפשר להשתמש בו גם עבור <strong>אותות לא אקראיים</strong>
+לדוגמא:</p>
+<div class="math notranslate nohighlight">
+\[x\left(t\right)=A\sin\left(\omega t+\phi_{0}\right)\]</div>
+<p>באותות לא אקראיים לא נוכל להשתמש ב-<span class="math notranslate nohighlight">\(R_{x}\left(\tau\right)\equiv\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]\)</span> אלא נשתמש ב-<span class="math notranslate nohighlight">\(R_{x}\left(\tau\right)\equiv\left\langle x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right\rangle \)</span>
+אז נרשום לפי ההגדרה:</p>
+<div class="math notranslate nohighlight">
+\[R_{x}\left(\tau\right)=\left\langle x\left(t\right),x^{\ast}\left(t+\tau\right)\right\rangle \underset{T=\frac{2\pi}{\omega}}{\underbrace{=}}\frac{1}{T}\intop_{0}^{T}\left(A\sin\left(\omega t+\phi_{0}\right)\right)\left(A\sin\left(\omega\left(t+\tau\right)+\phi_{0}\right)\right)dt=\]</div>
+<div class="math notranslate nohighlight">
+\[=\frac{A^{2}}{T}\intop_{0}^{T}\left(\sin\left(\omega t+\phi_{0}\right)\right)\left(\sin\left(\omega t+\phi_{0}\right)\cos\left(\omega\tau\right)+\cos\left(\omega t+\phi_{0}\right)\sin\left(\omega\tau\right)\right)dt\]</div>
+<div class="math notranslate nohighlight">
+\[=\frac{A^{2}\cos\left(\omega\tau\right)}{T}\underset{\frac{T}{2}}{\underbrace{\intop_{0}^{T}\sin^{2}\left(\omega t+\phi_{0}\right)dt}}+\frac{A^{2}\sin\left(\omega\tau\right)}{T}\underset{0}{\underbrace{\intop_{0}^{T}\frac{1}{2}\sin\left(2\omega t+2\phi_{0}\right)dt}}\]</div>
+<div class="math notranslate nohighlight">
+\[=\frac{A^{2}\cos\left(\omega\tau\right)}{2}\]</div>
+</section>
+</section>
+<section id="id8">
+<h2>אותות אנרגיה ואותות הספק<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>עד עכשיו קצת התחמקנו מנקודה עדינה. שאתם עשויים להיתקל בה יחסית הרבה.
+אנחנו יכולים לדבר על שני סוגים של אותות:</p>
+<ul class="simple">
+<li><p><strong>אותות ספק</strong> - יש להם הספק קבוע בזמן ואנרגיה אינסופית (כי הם על זמן אינסופי)</p>
+<ul>
+<li><p>רעש סטציונרי הוא אות הספק משום שההספק פרופורציונלי לסטיית התקן שהיא קבוע</p></li>
+<li><p>גל סינוס מחזורי הוא בעל הספק ממוצע קבוע בכל זמן מחזור ואנרגיה אינסופית</p></li>
+</ul>
+</li>
+<li><p><strong>אותות אנרגיה</strong> - יש להם אנרגיה סופית</p>
+<ul>
+<li><p>פולס מלבני הוא בעל אנרגיה סופית</p></li>
+<li><p>פולס גאוסייני הוא בעל אנרגיה סופית למרות שהוא לא סופי בזמן</p></li>
+</ul>
+</li>
+</ul>
+<p>כל מה שאנחנו צריכים לשים לב אליו זה להכפלה של <span class="math notranslate nohighlight">\(\frac{1}{T}\)</span> כאשר מחשבים את האוטוקורלציה
+באופן מפורש מתמטי:</p>
+<ul class="simple">
+<li><p>אותות הספק - <span class="math notranslate nohighlight">\(R_{x}\left(\tau\right)=\left\langle x\left(t\right),x^{\ast}\left(t+\tau\right)\right\rangle =\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)x^{\ast}\left(t+\tau\right)dt\)</span></p></li>
+<li><p>אותות אנרגיה - <span class="math notranslate nohighlight">\(R_{x}\left(\tau\right)=\left\langle x\left(t\right),x^{\ast}\left(t+\tau\right)\right\rangle =\lim_{T\rightarrow\infty}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)x^{\ast}\left(t+\tau\right)dt\)</span></p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>סטציונריות במובן הרחב<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>נחזור עכשיו להגדרה של סטציונריות ונהפוך אותה למקלה יותר.
+הרבה פעמים אנחנו מקבלים דגימות מאות מסויים (לפעמים אפילו דגימה אחת ארוכה) ואין לנו דרך לדעת
+אם באמת ה-PDF של האות בכל זמן הוא זהה. מה שאנחנו כן יכולים לחשב
+בקלות הוא ממוצע רץ ואוטוקורלצייה עם זמני התחלה שונים כלומר את <span class="math notranslate nohighlight">\(R_{x}\left(t,t+\tau\right)\approx\frac{1}{T}\intop_{t}^{t+T}x\left(t^{\prime}\right)x\left(t^{\prime}+\tau\right)dt^{\prime}\)</span>
+ולראות אם התוצאה תלוייה רק  ב<span class="math notranslate nohighlight">\(\tau\)</span></p>
+<p>עבור תהליך ארגודי נוכל לומר כי:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\left\langle x\left(t_{i}\right)\right\rangle =\underset{\text{עובק}}{\underbrace{\mu_{x}}}\Rightarrow\boxed{\mathbb{E}\left[x\left(t_{i}\right)\right]=\underset{\text{עובק}}{\underbrace{\mu_{x}}}}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\left\langle x\left(t_{i}\right)\cdot x^{\ast}\left(t_{j}\right)\right\rangle =\left\langle x\left(0\right)\cdot x^{\ast}\left(t_{j}-t_{i}\right)\right\rangle \Rightarrow\boxed{R_{x}\left(t_{i},t_{j}\right)=R_{x}\left(t_{j}-t_{i}\right)}\)</span></p></li>
+</ol>
+<p>כלומר נוכל לבדוק את שתי התכונות האלו שהן חשובות לנו. נתן שם מיוחד לאות שמקיים את שתי התכונות הללו. נקרא לו סטציונרי במובן הרחב</p>
+<div class="admonition- admonition">
+<p class="admonition-title">סטציונריות במובן הרחב</p>
+<p>נאמר שאות אקראי <span class="math notranslate nohighlight">\(x\left(t\right)\)</span> הוא סטציונרי במובן הרחב אם:</p>
+<ol class="arabic simple">
+<li><p>הממוצע שלו לאורך זמן קבוע - <span class="math notranslate nohighlight">\(\mu_{x}\left(t\right)=\mathbb{E}\left[x\left(t\right)\right]=\underset{\text{עובק}}{\underbrace{\mu_{x}}}\)</span></p></li>
+<li><p>האוטוקורלציה שלו תלויה רק בהפרשי זמן - <span class="math notranslate nohighlight">\(R_{x}\left(t_{i},t_{j}\right)=R_{x}\left(t_{i}-t_{j}\right)\)</span></p></li>
+</ol>
+<p>זה אומר שגם <span class="math notranslate nohighlight">\(Cov\left(x\left(t_{i}\right),x\left(t_{j}\right)\right)\)</span> הוא פונקציה רק של הפרשי זמנים:</p>
+<div class="math notranslate nohighlight">
+\[Cov\left(x\left(t_{i}\right),x\left(t_{j}\right)\right)=\mathbb{E}\left[\left(x\left(t_{i}\right)-\mu_{x}\right)\left(x\left(t_{j}\right)-\mu_{x}\right)^{\ast}\right]=\mathbb{E}\left[x\left(t_{i}\right),x^{\ast}\left(t_{j}\right)\right]-\mu_{x}^{2}=R_{x}\left(t_{i}-t_{j}\right)-\mu_{x}^{2}\]</div>
+<p>ובפרט סטיית התקן קבועה בזמן:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{x}\left(t\right)=\sqrt{Cov\left(x\left(t\right),x\left(t\right)\right)}=R_{x}\left(0\right)-\mu_{x}^{2}=\underset{\text{עובק}}{\underbrace{\sigma_{x}}}\]</div>
+</div>
+<p>כל האותות שנעבוד איתם מהנקודה הזו והלאה (אלא אם צויין אחרת) הם ארגודים וסטציונרים במובן הרחב.</p>
+<blockquote>
+<div><p>הסטציונריות במובן הרחב חשובה לנו על מנת לאפיין את התכונות של האות</p>
+<p>הארגודיות חשובה לנו כדי שנוכל לקבוע את התכונות של האות באמצעות דגימה ארוכה של האות ולא בעזרת המון ריאליזציות שונות</p>
+</div></blockquote>
+<p>נשים לב שסטציונריות במובן הרחב לא מחייבת שכל המשתנים האקראיים של האות
+יתפלגו בדיוק באותה צורה בכל זמן. וגם לא שההתפלגות המשוטפת תהיה בדיוק זהה בזמנים שונים.
+זאת הגדרה הרבה יותר מקלה אבל גם מאוד מאוד שימושית. אנחנו נראה
+בהמשך איך פונקציית האוטוקורלציה משחת תפקיד מרכזי בניתוח של רעשים בתדר.</p>
+<p>נסכם:</p>
+<p>אות סטציונרי במובן הרחב מאופיין על ידי:</p>
+<ul class="simple">
+<li><p>ממוצע - <span class="math notranslate nohighlight">\(\mu_{x}\)</span></p></li>
+<li><p>פונקציית אוטוקורלציה - <span class="math notranslate nohighlight">\(R_{x}\left(\tau\right)\)</span></p></li>
+</ul>
+<p>אם האות ארגודי ניתן לחשב את שני הגדלים האלו:</p>
+<ul class="simple">
+<li><p>ממוצע - <span class="math notranslate nohighlight">\(\mu_{x}\left(t\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)dt\)</span></p></li>
+<li><p>אוטוקורלציה - <span class="math notranslate nohighlight">\(R_{x}\left(\tau\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)x^{\ast}\left(t+\tau\right)dt\)</span></p></li>
+</ul>
+<p>עכשיו כשיש לנו תשתית לדבר על אותות אקראיים נתחיל להבין איך זה קשור לאותות ולתדרים.
+איך זה מתקשר לקליטה של אותות ופענוח.</p>
 </section>
 </section>
 
@@ -580,6 +754,15 @@
         <p class="prev-next-title">מה זה רעש</p>
       </div>
     </a>
+    <a class="right-next"
+       href="noise_spectrum.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">רעש במרחב התדר</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -601,7 +784,12 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">סטציונריות הגדרה מחמירה</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ארגודיות</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">אפיון של האות האקראי</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">אוטוקורלציה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">אוטוקורלציה</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">אוטוקורלציה עבור אותות לא אקראיים</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">אותות אנרגיה ואותות הספק</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">סטציונריות במובן הרחב</a></li>
 </ul>
   </nav></div>
 
