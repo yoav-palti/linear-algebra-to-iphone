@@ -22,6 +22,10 @@
     direction:ltr;
 }
 
+.highlight-python{
+    direction:ltr;
+}
+
 summary {
   list-style: none;
   display: flex;
