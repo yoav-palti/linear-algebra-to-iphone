@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=2c8ff626" />
+    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=28a1b870" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -367,16 +367,16 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">משתנה אקראי</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">סטציונריות הגדרה מחמירה</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ארגודיות</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">אפיון של האות האקראי</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">אוטוקורלציה</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">אוטוקורלציה עבור אותות לא אקראיים</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">משתנה אקראי</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">סטציונריות הגדרה מחמירה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ארגודיות</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">אפיון של האות האקראי</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">אוטוקורלציה</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">אוטוקורלציה עבור אותות לא אקראיים</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">אותות אנרגיה ואותות הספק</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">סטציונריות במובן הרחב</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">אותות אנרגיה ואותות הספק</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">סטציונריות במובן הרחב</a></li>
 </ul>
             </nav>
         </div>
@@ -390,13 +390,45 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>אותות אקראיים<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<div class="dropdown admonition">
+<p class="admonition-title">אמ;לק</p>
+<p>תהליך אקראי (או אות אקראי) הוא אוסף משתנים מקריים.
+יכולה להיות לכולם את אותה התפלגות או לא ויכולות גם להיות
+תלויות בינהם.</p>
+<p>שתי הנחות שאנחנו הולכים להניח על כל אות מסוף פרק זה והלאה:</p>
+<h3 class="rubric" id="id2">1. סטציונריות במובן הרחב</h3>
+<p>נאמר שאות אקראי <span class="math notranslate nohighlight">\(x\left(t\right)\)</span> הוא סטציונרי במובן הרחב אם:</p>
+<ol class="arabic simple">
+<li><p>הממוצע שלו לאורך זמן קבוע - <span class="math notranslate nohighlight">\(\mu_{x}\left(t\right)=\mathbb{E}\left[x\left(t\right)\right]=\underset{\text{עובק}}{\underbrace{\mu_{x}}}\)</span></p></li>
+<li><p>האוטוקורלציה שלו תלויה רק בהפרשי זמן - <span class="math notranslate nohighlight">\(R_{x}\left(t_{i},t_{j}\right)=R_{x}\left(t_{i}-t_{j}\right)\)</span></p></li>
+</ol>
+<h3 class="rubric" id="id3">2. ארגודיות</h3>
+<p>נאמר שאות ארגודי אם
+<strong>ממוצע לאורך זמן הוא כמו ממוצע של הרבה מדידות חוזרות (ראליזציות)</strong></p>
+<p>כלומר:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}\left[x\left(t\right)\right]=\left\langle x\left(t\right)\right\rangle \]</div>
+<p>את האוטוקורלציה הגדרנו להיות:</p>
+<div class="math notranslate nohighlight">
+\[R_{x}\left(\tau\right)\equiv\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]\]</div>
+<p>כלומר כמה האות דומה לעצמו בהזזה של <span class="math notranslate nohighlight">\(\tau\)</span>. אם אנחנו מניחים ארגודיות
+וסטציונריות ממש אפשר לחשב אוטוקורלציה כמו “שהיינו רוצים”</p>
+<div class="math notranslate nohighlight">
+\[R_{x}\left(\tau\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)x^{\ast}\left(t+\tau\right)dt\]</div>
+<p>ראינו שלוש תכונות חשובות של הקורלציה:</p>
+<ol class="arabic simple">
+<li><p><strong>קישור להתפלגות בכל רגע</strong> - R_{x}\left(0\right)=\sigma_{x}^{2}+\mu_{x}^{2} כלומר מתארת את הספק האות האקראי בתור חיבור של הממוצע בריבוע וסטיית התקן בריבוע</p></li>
+<li><p><strong>מקסימום מתקבל ב-0</strong> -  \forall\tau&gt;0:\left|R_{x}\left(\tau\right)\right|\le R_{x}\left(0\right)</p></li>
+<li><p><strong>סימטרית (יוניטרית)</strong> - R_{x}\left(-\tau\right)=R_{x}^{\ast}\left(\tau\right)</p></li>
+</ol>
+</div>
 <p>נתחיל לחקור את היצור המתמטי הזה שנקרא אות אקראי.
 דרך אחת לא מאוד שימושית לאפיין אותו היא לומר שיש לנו אנסמבל (אינסופי) עם כל
 האפשרויות השונות לאותות ולכל אחד מהם הסתברות (או צפיפות הסתברות). ממש קשה
 לעבוד עם אובייקט כזה. והוא מאוד מאוד כללי.</p>
 <p>במקום זה נתחיל מלהסתכל על זמן מסויים <span class="math notranslate nohighlight">\(t_{i}\)</span> ולשאול מה הערכים האפשריים של הרעש שם.</p>
-<section id="id2">
-<h2>משתנה אקראי<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="id4">
+<h2>משתנה אקראי<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>אם היינו מבצעים הרבה מאוד ניסויין ומסתכלים רק על הtאות האקראי (הרעש) בזמן <span class="math notranslate nohighlight">\(t_{i}\)</span> היינו מקבלים המון
 ערכים שונים. נקרא להם <span class="math notranslate nohighlight">\(x\left(t_{i}\right)\)</span>. זה ממש כמו הטלות של קובייה רק שיש לנו טווח ערכים רציף.
 נוכל לאפיין את הסטטיסטיקה של הערכים על ידי <strong>פונקציית צפיפות הסתברות</strong>.</p>
@@ -436,8 +468,8 @@
 <p>זה מאוד לא שימושי, בעיקר שהאות שלנו הוא רציף ולא בדיד הרבה פעמים. נניח שתי הגדרות שמאוד
 יקלו על ההגדרה והניתוח של האות האקראי. הן לא מתקיימות תמיד אבל כן לרוב.</p>
 </section>
-<section id="id3">
-<h2>סטציונריות הגדרה מחמירה<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<section id="id5">
+<h2>סטציונריות הגדרה מחמירה<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>נתחיל מהגדרה מחמירה של מה זה אות סטציונרי. נראה קצת דוגמאות וניקח הגדרה פחות מחמירה בהמשך.</p>
 <p>נגדיר אות כסטציונרי (במובן הצר) אם פונקציית צפיפות ההסתברות שלו לא משתנה בזמן. כלומר:</p>
 <div class="math notranslate nohighlight">
@@ -469,8 +501,8 @@
 <p>חשוב להדגיש שתהליך אקראי הוא לא תמיד רעש אבל אותנו מעניינים רעשים. תהליך אקראי לדוגמה
 שאינו רעש הוא ירי של ניורונים במוח שלנו.</p>
 </section>
-<section id="id4">
-<h2>ארגודיות<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<section id="id6">
+<h2>ארגודיות<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>התכונה השנייה שנניח על התהליכים האקראיים שלנו היא קצת יותר קשה לתפיסה.
 בגדול היא אומרת ש:</p>
 <blockquote>
@@ -515,8 +547,8 @@
 נוכל לטעות ולחשוב שזה הממוצע בכל קטע מספיק ארוך של זמן.</p>
 <p>לרוב נניח שאות גם ארגודי בסטיית התקן שלו ובפונקציית האוטוקורלציה שלו (עוד על זה בהמשך).</p>
 </section>
-<section id="id5">
-<h2>אפיון של האות האקראי<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<section id="id7">
+<h2>אפיון של האות האקראי<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>הבינתן שיש לנו דגימה של האות האקראי והוא סטציונרי וארגודי נוכל להתחיל לחשב
 תכונות שלו:</p>
 <ul class="simple">
@@ -536,8 +568,8 @@
 </div></blockquote>
 <p>כלומר שסטיית התקן של רעש (שלרוב ההמוצע שלו הוא באמת 0) היא סופר חשובה לחישובי SNR</p>
 </section>
-<section id="id6">
-<h2>אוטוקורלציה<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<section id="id8">
+<h2>אוטוקורלציה<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>יש לנו פיסה אחת שחסרה בפאזל. הבנו שאפשר לאפיין את האות האקראי בכל נקודת זמן עם פונקצייה <span class="math notranslate nohighlight">\(p_{x}\)</span> אשר לא תלוייה בזמן
 אבל מה הקשר בין הרעש בזמנים שונים?
 לדוגמה מה אם הייתי אומר לכם שאני מטיל קובייה אבל כל פעם אני לא מאפשר
@@ -620,8 +652,77 @@
 <div><p>האות הכי דומה לעצמו כשלא מזיזים אותו. כלומר <span class="math notranslate nohighlight">\(\forall\tau&gt;0:\left|R_{x}\left(\tau\right)\right|\le R_{x}\left(0\right)\)</span></p>
 <p>הרבה פעמים מה שנעשה הוא לצייר את הפונקצייה של האוטוקורלציה המנורמלת כלומר <span class="math notranslate nohighlight">\(\frac{R_{x}\left(\tau\right)}{R_{x}\left(0\right)}\)</span></p>
 </div></blockquote>
-<section id="id7">
-<h3>אוטוקורלציה עבור אותות לא אקראיים<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="dropdown admonition">
+<p class="admonition-title">דוגמא - רעש טלגרף (מערכת שני מצבים)</p>
+<p>ניקח את המערכת הכי פשוטה שאנחנו יכולים לחשוב עליה (כמעט). נניח שיש לנו שני מצבים. 0,1
+נגדיר התפלגות זמני מעבר. זה אומר שאם עכשיו עברתי למצב 1 מה הזמן שאני אשאר שם לפני אני אעבור למצב 0
+ואותו הדבר בהינתן שעברתי למצב 0 כמה זמן אשאר שם לפני שאעבור למצב 1.</p>
+<p>נגדיר:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\tau_{0\rightarrow1}\sim\exp\left(\lambda_{0}\right)=\begin{cases}
+\lambda_{0}e^{-\lambda_{0}t} &amp; t\ge0\\
+0 &amp; t&lt;0
+\end{cases}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\tau_{1\rightarrow0}\sim\exp\left(\lambda_{1}\right)=\begin{cases}
+\lambda_{1}e^{-\lambda_{1}t} &amp; t\ge0\\
+0 &amp; t&lt;0
+\end{cases}\end{split}\]</div>
+<p>איך נראה ריאליזציה של תהליך כזה?</p>
+<p><img alt="telegraph_noise.png" src="../_images/telegraph_noise.png" /></p>
+<p>אז נרצה לחשב את האוטוקורלציה של האות. נזכור שהאוטוקורלציה היא פונקציה של הפרשי זמן
+נחשב את האוטוקורלציה בצורה של סיכוי מותנה:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)\right]=\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]\cdot\mathbb{P}\left(x\left(0\right)=1\right)+\underset{0}{\underbrace{\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=0\right]}}\cdot\mathbb{P}\left(x\left(0\right)=0\right)\]</div>
+<div class="math notranslate nohighlight">
+\[=\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]\cdot\mathbb{P}\left(x\left(0\right)=1\right)\]</div>
+<p>נסתכל קודם על הביטוי <span class="math notranslate nohighlight">\(\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]=1\cdot\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)+0\cdot\mathbb{P}\left(x\left(t\right)=0|x\left(0\right)=1\right)=\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)\]</div>
+<p>אז אנחנו צריכים לדעת מה הסיכוי להיות במצב של 1 בזמן <span class="math notranslate nohighlight">\(t\)</span> בהינתן שבזמן <span class="math notranslate nohighlight">\(t=0\)</span> התחלנו ב-0.
+התשובה לזה מערבת קצת מתמטיקה ויוצא בסוף ש:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=\frac{\lambda_{0}+\lambda_{1}e^{-\left(\lambda_{0}+\lambda_{1}\right)t}}{\lambda_{0}+\lambda_{1}}\]</div>
+<p>נשים לב שבזמנים קטנים הסיכוי להישאר ב-1 הוא גבוה ושואף ל1 כמו שהיינו מצפים.
+מצד שני הסיכוי באינסוף לא שואף ל-0 אלא למספר קבוע:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}\]</div>
+<p>מסתבר שהמספר שאם מניחים שהתחלנו לצפות בתהליך בזמן אקראי כלשהו זה גם הסיבוי שהמצב שאנחנו צופים בו יהיה 1 משום שהסיכוי הזה לא תלוי במצב ההתחלתי.
+לא נחשב כאן אבל הטענה היא ש-</p>
+<div class="math notranslate nohighlight">
+\[\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=0\right)=\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}\]</div>
+<p>נשים לב שזה מסתדר לנו. אם <span class="math notranslate nohighlight">\(\lambda_{0}\)</span> גדול זה אומר שאנחנו קופצים מהר החוצה ממצב 0 ולכן נמצאים יותר במצב 1.</p>
+<p>נקבל לבסוף כי:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)\right]=\underset{\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]}{\underbrace{\frac{\lambda_{0}+\lambda_{1}e^{-\left(\lambda_{0}+\lambda_{1}\right)t}}{\lambda_{0}+\lambda_{1}}}}\cdot\underset{\mathbb{P}\left(x\left(0\right)=1\right)}{\underbrace{\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}}}\]</div>
+<p>כלומר:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{R_{x}\left(\tau\right)=\mathbb{E}\left[x\left(\tau\right)\cdot x\left(0\right)\right]=\frac{\lambda_{0}^{2}+\lambda_{1}\lambda_{0}e^{-\left(\lambda_{0}+\lambda_{1}\right)\left|\tau\right|}}{\left(\lambda_{0}+\lambda_{1}\right)^{2}}}\]</div>
+<p>הערך המוחלט הוא בגלל שאנחנו תלויים רק בהפרש הזמנים בערך מוחלט.</p>
+<p>מה עם הממוצע לאורך זמן?</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}\left[x\left(t\right)\right]=1\cdot\mathbb{P}\left(x\left(t\right)=1\right)+0\cdot\mathbb{P}\left(x\left(0\right)=0\right)\]</div>
+<p>ולכן:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{\mu_{x}=\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}}\]</div>
+<p>נשים לב שעבור הפרש זמנים מאוד גדול האוטוקורלציה היא:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{\tau\rightarrow\infty}R_{x}\left(\tau\right)=\left(\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}\right)^{2}=\mu_{x}^{2}\]</div>
+<p>נסרטט:</p>
+ <iframe src="https://www.geogebra.org/material/iframe/id/entghwt6" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
+<a href="https://www.geogebra.org/material/iframe/id/entghwt6" target="_blank">לפתיחה בחלון נפרד</a>
+<p>מה ההתפלגות של התהליך שלנו בכל זמן נתון? נשים לב שכאן אנחנו יכולים להיות רק בשני מצבין ולא באינסוף ולכן לא נצטרך PDF אלא פשוט
+וקטור שאומר מה הסיכוי להיות בכל מצב. במקרה שלנו:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vec{p}=\begin{pmatrix}\mathbb{P}\left(x\left(t\right)=0\right)\\
+\mathbb{P}\left(x\left(t\right)=1\right)
+\end{pmatrix}=\begin{pmatrix}\frac{\lambda_{1}}{\lambda_{0}+\lambda_{1}}\\
+\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}
+\end{pmatrix}\end{split}\]</div>
+<p>יש לנו את כל מה שאנחנו צריכים :)</p>
+</div>
+<section id="id9">
+<h3>אוטוקורלציה עבור אותות לא אקראיים<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <p>המדד של אוטוקורלציה כל כך שימושי שאפשר להשתמש בו גם עבור <strong>אותות לא אקראיים</strong>
 לדוגמא:</p>
 <div class="math notranslate nohighlight">
@@ -638,8 +739,8 @@
 \[=\frac{A^{2}\cos\left(\omega\tau\right)}{2}\]</div>
 </section>
 </section>
-<section id="id8">
-<h2>אותות אנרגיה ואותות הספק<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<section id="id10">
+<h2>אותות אנרגיה ואותות הספק<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <p>עד עכשיו קצת התחמקנו מנקודה עדינה. שאתם עשויים להיתקל בה יחסית הרבה.
 אנחנו יכולים לדבר על שני סוגים של אותות:</p>
 <ul class="simple">
@@ -663,8 +764,8 @@
 <li><p>אותות אנרגיה - <span class="math notranslate nohighlight">\(R_{x}\left(\tau\right)=\left\langle x\left(t\right),x^{\ast}\left(t+\tau\right)\right\rangle =\lim_{T\rightarrow\infty}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)x^{\ast}\left(t+\tau\right)dt\)</span></p></li>
 </ul>
 </section>
-<section id="id9">
-<h2>סטציונריות במובן הרחב<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<section id="id11">
+<h2>סטציונריות במובן הרחב<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
 <p>נחזור עכשיו להגדרה של סטציונריות ונהפוך אותה למקלה יותר.
 הרבה פעמים אנחנו מקבלים דגימות מאות מסויים (לפעמים אפילו דגימה אחת ארוכה) ואין לנו דרך לדעת
 אם באמת ה-PDF של האות בכל זמן הוא זהה. מה שאנחנו כן יכולים לחשב
@@ -780,16 +881,16 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">משתנה אקראי</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">סטציונריות הגדרה מחמירה</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ארגודיות</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">אפיון של האות האקראי</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">אוטוקורלציה</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">אוטוקורלציה עבור אותות לא אקראיים</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">משתנה אקראי</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">סטציונריות הגדרה מחמירה</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ארגודיות</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">אפיון של האות האקראי</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">אוטוקורלציה</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">אוטוקורלציה עבור אותות לא אקראיים</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">אותות אנרגיה ואותות הספק</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">סטציונריות במובן הרחב</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">אותות אנרגיה ואותות הספק</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">סטציונריות במובן הרחב</a></li>
 </ul>
   </nav></div>
 

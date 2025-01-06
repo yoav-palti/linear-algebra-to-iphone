@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=2c8ff626" />
+    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=28a1b870" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
@@ -343,7 +343,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -359,6 +361,18 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#psd">PSD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wienerkhinchin-theorem">Wiener–Khinchin theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">סינון רעש</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">חיבור רעשים</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">הספק תדרי</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -393,9 +407,65 @@
 \[R_{x}\left(\tau\right)=\intop_{-\infty}^{\infty}x\left(t\right)x^{\ast}\left(t+\tau\right)=\intop_{-\infty}^{\infty}x\left(t\right)x^{\ast}\left(\tau-\left(-t\right)\right)dt=x\left(t\right)\ast x\left(-t\right)\]</div>
 <div class="math notranslate nohighlight">
 \[\tilde{S}_{xx}\left(\omega\right)=\mathcal{F}\left[R_{x}\left(\tau\right)\right]=\mathcal{F}\left[x\left(t\right)\ast x\left(-t\right)\right]=\sqrt{2\pi}\tilde{X}\left(\omega\right)\cdot\tilde{X}^{\ast}\left(\omega\right)=\sqrt{2\pi}\left|\tilde{X}\left(\omega\right)\right|^{2}\]</div>
-<p>אבל מה זה בכלל אומר לעשות פורייה ל-<span class="math notranslate nohighlight">\(x\left(t\right)\)</span>
+<section id="psd">
+<h2>PSD<a class="headerlink" href="#psd" title="Link to this heading">#</a></h2>
+<p>נצא מתוך האינטואיציה הזו ונתן שם
+לגודל <span class="math notranslate nohighlight">\(\tilde{S}_{xx}\left(\omega\right)\)</span> . נקרא לו Power Spectral Density או בקיצור PSD
+הוא הולך לומר לנו איך האנרגיה של האות האקראי שלנו מתחלקת בין
+תדרים שונים</p>
+<p>אפשר לבדוק יחידות ולראות שה-PSD נמדד ב-<span class="math notranslate nohighlight">\(\frac{W}{Hz}\)</span> כלומר הספק לפורסת תדר
+ולכן זה נקרא <strong>צפיפות הספק ספקטרלית</strong></p>
+<p>בהמשך נעשה את החיבור לפורייה של הריאליזציה <span class="math notranslate nohighlight">\(\tilde{X}\left(\omega\right)\)</span></p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">דוגמא - רעש לבן</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">ניקח את הדוגמה הכי בסיסית שאנחנו יכולים לחשוב עליה.
+אוטוקורלציה של 0 בכל זמן חוץ מהראשית  וממוצע 0:</p>
+<div class="math notranslate nohighlight">
+\[R_{x}\left(\tau\right)=\sigma^{2}\delta\left(\tau\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\mu_{x}=0\]</div>
+<p class="sd-card-text">יש כאן נקודה עדינה. אם האוטוקורלציה היא אינסוף ב<span class="math notranslate nohighlight">\(\tau=0\)</span> איך נראה המשתנה המקרי?
+אני לא אכנס לזה כאן. מוזמנים לקרוא את
+<a class="reference external" href="https://https://danshiebler.com/2020-01-09-white-noise/">הבלוג הזה לדוגמא ואת הספר שהוא מפנה אליו</a>
+בכל מקרה נמשיך עם זה ש שהאוטוקורלציה שלנו מוגדרת ואנחנו לא מפחדים!</p>
+<p class="sd-card-text">אי ך יראה ה-PSD <span class="math notranslate nohighlight">\(\tilde{S}_{xx}\left(\omega\right)\)</span>?</p>
+<p class="sd-card-text">זה כבר פשוט, צריך לעשות פורייה לדלתא ומקבלים:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{S}_{xx}\left(\omega\right)=\frac{\sigma^{2}}{\sqrt{2\pi}}\]</div>
+<p class="sd-card-text">כלומר פונקציה קבועה!</p>
+<blockquote>
+<div><p class="sd-card-text">ה-PSD של רעש לבן הוא קבוע (לכן הוא נקרא לבן - הוא מכיל את כל התדרים)</p>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p class="sd-card-text">אנחנו הולכים לדבר הרבה בהמשך על מה שנקרא רעש לבן גאוסייני. חשוב לראות
+שלא הנחנו כלום על ה-PDF של הרעש בכל זמן ומה שהיה חשוב כדי שהוא יהיה לבן
+זה שהוא יהיה חסר קורלציה.</p>
+<p class="sd-card-text">יכולים להיות רעשים לבנים כל התפלגות שאתם יכולים לחשוב עליה</p>
+</div>
+<blockquote>
+<div><p class="sd-card-text">רעש לבן <span class="math notranslate nohighlight">\(\Longleftrightarrow\)</span> רעש עם אוטוקורלציה של <span class="math notranslate nohighlight">\(R_{x}\left(\tau\right)=\sigma^{2}\delta\left(\tau\right)\)</span></p>
+</div></blockquote>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">דוגמא - רעש לבן בעל רוחב סרט סופי</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="math notranslate nohighlight">
+\[\tilde{S}_{xx}\left(\omega\right)=\frac{\sigma^{2}}{\omega_{c}\sqrt{2\pi}}Rect\left(\frac{\omega}{\omega_{c}}\right)\]</div>
+<p class="sd-card-text">ולכן:</p>
+<div class="math notranslate nohighlight">
+\[R_{x}\left(\tau\right)=\sigma^{2}sinc\left(\frac{\omega_{c}}{2\pi}t\right)\]</div>
+<p class="sd-card-text"><img alt="white_bound_corr.png" src="../_images/white_bound_corr.png" /></p>
+<p class="sd-card-text">נשים לב שיש מקומות בהן האוטוקורלציה שלילית! זה לא טעות ולא אותו הדבר כמו קורלציה 0
+זה אומר שבממוצע אם הרעש בזמן 0 הוא חיובי אז הרעש בזמן <span class="math notranslate nohighlight">\(\tau\)</span> הוא שלילי (ולהפך)</p>
+</div>
+</details></section>
+<section id="wienerkhinchin-theorem">
+<h2>Wiener–Khinchin theorem<a class="headerlink" href="#wienerkhinchin-theorem" title="Link to this heading">#</a></h2>
+<p>מה זה בכלל אומר לעשות פורייה ל-<span class="math notranslate nohighlight">\(x\left(t\right)\)</span>
 זה פורייה של אחת הריאליזציות. למה שעבור שתי ריאליזציות שונות לא נקבל תוצאות שונות?</p>
-<p>אז התשובה היא שכן נקבל תוצאות שונות אבל לא בערך המוחלט.</p>
+<p>אז התשובה היא שכן נקבל תוצאות שונות אבל לא בערך המוחלט (לפחות בממוצע).</p>
 <p>נעשה קצת סדר בדברים:</p>
 <ul class="simple">
 <li><p>הגודל <span class="math notranslate nohighlight">\(\tilde{S}_{xx}\left(\omega\right)\)</span> הוא לא משתנה מקרי. זה בגלל שהפונקציה <span class="math notranslate nohighlight">\(R_{x}\left(\tau\right)\)</span> היא פשוט פונקציה רגילה וידועה</p></li>
@@ -426,34 +496,85 @@
 <p>ממש חשוב לשים לב שהגבול הוא מחוץ לתוכלת ולא בתוך. כלומר לא לוקחים את התוכלת של הגבול
 אלא את הגבול של התוכלת</p>
 </div>
-<p>לגודל <span class="math notranslate nohighlight">\(\tilde{S}_{xx}\left(\omega\right)\)</span> יש שם. הוא נקרא Power Spectral Density או בקיצור PSD
-הוא הולך לומר לנו איך האנרגיה של האות האקראי שלנו מתחלקת בין
-תדרים שונים</p>
-<p>אפשר לבדוק יחידות ולראות שה-PSD נמדד ב-<span class="math notranslate nohighlight">\(\frac{W}{Hz}\)</span> כלומר הספק לפורסת תדר
-ולכן זה נקרא <strong>צפיפות הספק ספקטרלית</strong></p>
-<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
-<summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">דוגמא - רעש לבן</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">ניקח את הדוגמה הכי בסיסית שאנחנו יכולים לחשוב עליה.
-אוטוקורלציה של 0 בכל זמן חוץ מהראשית  וממוצע 0:</p>
-<div class="math notranslate nohighlight">
-\[R_{x}\left(\tau\right)=\sigma^{2}\delta\left(\tau\right)\]</div>
-<div class="math notranslate nohighlight">
-\[\mu_{x}=0\]</div>
-<p class="sd-card-text">יש כאן נקודה עדינה. אם האוטוקורלציה היא אינסוף ב<span class="math notranslate nohighlight">\(\tau=0\)</span> איך נראה המשתנה המקרי?
-אני לא אכנס לזה כאן. מוזמנים לקרוא את
-<a class="reference external" href="https://https://danshiebler.com/2020-01-09-white-noise/">הבלוג הזה לדוגמא ואת הספר שהוא מפנה אליו</a>
-בכל מקרה נמשיך עם זה ש שהאוטוקורלציה שלנו מוגדרת ואנחנו לא מפחדים!</p>
-<p class="sd-card-text">אי ך יראה ה-PSD <span class="math notranslate nohighlight">\(\tilde{S}_{xx}\left(\omega\right)\)</span>?</p>
-<p class="sd-card-text">זה כבר פשוט, צריך לעשות פורייה לדלתא ומקבלים:</p>
-<div class="math notranslate nohighlight">
-\[\tilde{S}_{xx}\left(\omega\right)=\frac{\sigma^{2}}{\sqrt{2\pi}}\]</div>
-<p class="sd-card-text">כלומר פונקציה קבועה!</p>
+<p>מסקנה חשובה שאנחנו רואים הוא שאנחנו לוקחים את הממוצע של הערך המוחלט בריבוע של
+הפורייה של הריאליזציה.
+האם יכול להיות שלשני אותות שונים יכול להיות אותו PSD אבל צורה שונה לחלוטין?
+התשובה היא כן. והסיבה היא שכל שני אותות שיש להם את אותה אוטוקורלציה יש להם את אותו PSD.</p>
 <blockquote>
-<div><p class="sd-card-text">ה-PSD של רעש לבן הוא קבוע (לכן הוא נקרא לבן - הוא מכיל את כל התדרים)</p>
+<div><p>לא ניתן לקבוע מה ההתפלגות של הרעש בזמן מסויים מתוך ה-PSD אלא רק את האוטוקורלציה</p>
+</div></blockquote>
+<blockquote>
+<div><p>מסקנה נוספת ונחמדה היא שה-<strong>PSD הוא תמיד חיובי</strong></p>
+</div></blockquote>
+</section>
+<section id="id2">
+<h2>סינון רעש<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>מה קורה לאות אקראי אם אנחנו מעבירים אותו דרך מסנן?
+היינו רוצים לדעת איך זה משפיע על ה-PSD. האות המסונן יהיה <span class="math notranslate nohighlight">\(y\left(t\right)=\underset{\text{יארקא}-\text{תוא}}{\underbrace{x\left(t\right)}}\ast\underset{\text{ןנסמ}}{\underbrace{h\left(t\right)}}\)</span></p>
+<p>אנחנו רוצעם לחשב את:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{F}\left[\mathbb{E}\left[\left(x\ast h\right)\left(t\right),\left(x\ast h\right)\left(0\right)\right]\right]=?\]</div>
+<p>אוקי זה מסובך. אבל כאן מגיע משפט וינר חינצ’ין לעזרתנו!</p>
+<div class="math notranslate nohighlight">
+\[\tilde{S}_{yy}\left(\omega\right)=\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\ast h\left(t\right)\right]\right|^{2}\right]=\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\left[\sqrt{2\pi}\tilde{X}_{T}\left(\omega\right)\cdot\tilde{H}\left(\omega\right)\right]\right|^{2}\right]\]</div>
+<div class="math notranslate nohighlight">
+\[=2\pi\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\left[\tilde{X}_{T}\left(\omega\right)\right]\right|^{2}\right]\cdot\left|\tilde{H}\left(\omega\right)\right|^{2}=2\pi\tilde{S}_{xx}\left(\omega\right)\cdot\left|\tilde{H}\left(\omega\right)\right|^{2}\]</div>
+<p>קיבלנו תוצאה חשובה!</p>
+<div class="admonition- admonition">
+<p class="admonition-title">סינון רעש</p>
+<p>אם יש לנו אות אקראי <span class="math notranslate nohighlight">\(x\left(t\right)\)</span> ואנחנו מעבירים אותו במערכת לינארית (מסנן) <span class="math notranslate nohighlight">\(h\left(t\right)\)</span></p>
+<p>נקבל כי ה-PSD של האות המסוננת הוא פשוט המכפלה של ה-PSD של האות המקורית וערך המוחלט של התמסורת בריבוע</p>
+<div class="math notranslate nohighlight">
+\[\tilde{S}_{yy}\left(\omega\right)=2\pi\tilde{S}_{xx}\left(\omega\right)\cdot\left|\tilde{H}\left(\omega\right)\right|^{2}\]</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>אנחנו יודעים איך סינון רעש משפיע על ה-PSD אבל זה מאוד לא ברור מה הוא עושה ל-PDF של הרעש בכל
+זמן. ראינו שיש הרבה רעשים שונים עם אותו PSD ובפרט סינון של רעש יכול לשנות
+דרסטית את ה-PDF שלו.</p>
+<p>לדוגמה אם ניקח רעש לבן (זמן לא רציף אלא דגום) עם התפלגות אחידה על הקטע <span class="math notranslate nohighlight">\(\left[-1,1\right]\)</span>
+אז סינון לינארי הוא פעולת קונבולוציה כלומר חיבור של הרבה משתנים שמתפלגים אחיד
+כל אחד כפול מספר אחר. אם ניקח קונבולוציה עם חלון (מיצוע לאורך זמן) אפילו נקבל
+ממש ממוצע.</p>
+<p>מה קורה כשממצאים הרבה משתנים שמתפלגים אחיד? התוצאה שואפת להתפלגות גאוסיינית!</p>
+<blockquote>
+<div><p>מקרה חריג הוא המקרה בו ההתפלגות היא גאוסיין. במקרה כזה כל סינון לינארי משאיר את ההתפלגות גאוסיינית</p>
 </div></blockquote>
 </div>
-</details></section>
+</section>
+<section id="id3">
+<h2>חיבור רעשים<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>אם יש לנו שני רעשים אקראיים <span class="math notranslate nohighlight">\(x_{1}\left(t\right),x_{2}\left(t\right)\)</span> ואנחנו מחברים אותם. איך נראת האוטוקורלציה של החיבור?</p>
+<div class="math notranslate nohighlight">
+\[R_{x+y}\left(\tau\right)=\mathbb{E}\left[\left(x\left(\tau\right)+y\left(\tau\right)\right)\cdot\left(x\left(0\right)+y\left(0\right)\right)\right]=\mathbb{E}\left[x\left(\tau\right)\cdot x\left(0\right)\right]+\mathbb{E}\left[y\left(\tau\right)\cdot y\left(0\right)\right]+\mathbb{E}\left[y\left(\tau\right)\cdot x\left(0\right)+x\left(\tau\right)\cdot y\left(0\right)\right]\]</div>
+<div class="math notranslate nohighlight">
+\[=R_{x}\left(\tau\right)+R_{y}\left(\tau\right)+\underset{0?}{\underbrace{\mathbb{E}\left[y\left(\tau\right)\cdot x\left(0\right)+x\left(\tau\right)\cdot y\left(0\right)\right]}}\]</div>
+<p>האיבר האחרון נקרא הקרוסקורלציה. אם הרעשים הם לא תלויים אז הקרוסקורלציה שווה 0 ואז:</p>
+<div class="math notranslate nohighlight">
+\[R_{x+y}\left(\tau\right)=R_{x}\left(\tau\right)+R_{y}\left(\tau\right)\]</div>
+<blockquote>
+<div><p>עבור אותות לא תלויים (0 קרוסקורלציה) <span class="math notranslate nohighlight">\(R_{x+y}\left(\tau\right)=R_{x}\left(\tau\right)+R_{y}\left(\tau\right)\)</span></p>
+<p>נשים לב שזה גם אומר שה-PSD מתחברים <span class="math notranslate nohighlight">\(\tilde{S}_{x+y,x+y}\left(\omega\right)=\tilde{S}_{xx}\left(\omega\right)+\tilde{S}_{yy}\left(\omega\right)\)</span></p>
+</div></blockquote>
+</section>
+<section id="id4">
+<h2>הספק תדרי<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>כבר ראינו שאנחנו מודדים את ההספק של הרעש לפי <span class="math notranslate nohighlight">\(R_{x}\left(0\right)\)</span>. עבור רעש עם ממוצע <span class="math notranslate nohighlight">\(\mu_{x}=0\)</span>.
+ראינו לפני רגע שאם האותות לא תלויים אז האוטוקורלציות מתחברות. וזה אומר שההספק מתחבר.</p>
+<p>אם ההספק מתחבר מה קורה לאמפליטודות? אנחנו מודדים את האמפליטודות
+בעזרת <span class="math notranslate nohighlight">\(\sigma_{x}=\sqrt{R_{x}\left(0\right)},\sigma_{y}=\sqrt{R_{y}\left(0\right)}\)</span>
+זה אומר ש:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{x+y}=\sqrt{\sigma_{x}^{2}+\sigma_{y}^{2}}\]</div>
+<p>או באופן כללי אם מחברים <span class="math notranslate nohighlight">\(N\)</span> רעשים שונים:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{s}=\sqrt{\sum_{i=1}^{N}\sigma_{i}^{2}}\]</div>
+<p>מה יקרה אם נשעה N מדידות שונות לאותו האות ונמצע אותן?
+האמפליטודה של חיבור הרעשים תהיה רק <span class="math notranslate nohighlight">\(\sqrt{N}\)</span> חזקה יותר
+לאומת האמפליטודה של האות שתגדל ב-<span class="math notranslate nohighlight">\(N\)</span>. ולכן בממוצע האות ישאר
+כמו שהוא אבל הרעש יחלש (באמפליטודה) ב<span class="math notranslate nohighlight">\(\frac{1}{\sqrt{N}}\)</span></p>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -500,6 +621,26 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#psd">PSD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wienerkhinchin-theorem">Wiener–Khinchin theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">סינון רעש</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">חיבור רעשים</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">הספק תדרי</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
