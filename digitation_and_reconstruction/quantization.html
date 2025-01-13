@@ -212,6 +212,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../noise/noise_intro.html">מה זה רעש</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../noise/random_signals.html">אותות אקראיים</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../noise/noise_spectrum.html">ספקטרום רעש</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../noise/physical_noises.html">רעשים במערכות פיזיקליות</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../noise/noise_filters.html">סינון רעשים</a></li>
 </ul>
 
     </div>
@@ -502,9 +504,9 @@
 במקרה כזה נוכל לשאול את עצמנו האם יש לנו סיכוי לקלוט גם את האות החלש?
 נניח שהאות החלש חלש ב7 סדרי גודל (בהספק)
 נקבל כי עבור האות החלש <span class="math notranslate nohighlight">\(20\log_{10}\left(\frac{A_{max}}{A}\right)=10\log_{10}\left(\frac{P_{strong}}{P_{weak}}\right)=70\)</span>
-נקבל שבמקלט של 8bit ה-$<span class="math notranslate nohighlight">\(SNR_{dB} עבור האות הזה יהיה \)</span>-22<span class="math notranslate nohighlight">\(. אין סיכוי לקלוט ככה אות
-במקלט של ה-12bit נקבל \)</span>SNR\approx3<span class="math notranslate nohighlight">\(. זה קשה אבל אפשרי לקלוט. כנראה
-נצטרך תיקון שגיאות ממש טוב. אבל עבור ה-16bit נקבל \)</span>SNR\approx28$ וזה כבר לא מזיז לנו אפילו לא קצת.</p>
+נקבל שבמקלט של 8bit ה-<span class="math notranslate nohighlight">\(SNR_{dB}\)</span> עבור האות הזה יהיה <span class="math notranslate nohighlight">\(-22\)</span>. אין סיכוי לקלוט ככה אות
+במקלט של ה-12bit נקבל <span class="math notranslate nohighlight">\(SNR\approx3\)</span>. זה קשה אבל אפשרי לקלוט. כנראה
+נצטרך תיקון שגיאות ממש טוב. אבל עבור ה-16bit נקבל <span class="math notranslate nohighlight">\(SNR\approx28\)</span> וזה כבר לא מזיז לנו אפילו לא קצת.</p>
 <p>רוצים מקרה אמיתי? נניח שאתם מנסים לקלוט GPS. בGPS יש טריק של להרוויח עוד 43dB אחרי
 הקליטה אבל זה בהנחה שהרעש לא קורלטיבי לאות מה שלא נכון אם יש רעש קוונטיזציה חזק.
 נניח לרגע את זה בצד. האות לש GPS מגיע לקרקע ב-125dBm. אם מישהו רוצה פשוט לדחוס אותנו ונניח שיש לנו מקלט 8bit הוא יכול לשדר ככה שאנחנו נקלוט אותו ב–77dBm.

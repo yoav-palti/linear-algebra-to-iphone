@@ -61,9 +61,13 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'noise/physical_noises';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="סינון רעש" href="noise_filters.html" />
+    <link rel="prev" title="רעש במרחב התדר" href="noise_spectrum.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -114,8 +118,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -206,10 +208,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/quantization_example.html">קוונטיזציה לדוגמא</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">רעש</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="noise_intro.html">מה זה רעש</a></li>
 <li class="toctree-l1"><a class="reference internal" href="random_signals.html">אותות אקראיים</a></li>
 <li class="toctree-l1"><a class="reference internal" href="noise_spectrum.html">ספקטרום רעש</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">רעשים במערכות פיזיקליות</a></li>
+<li class="toctree-l1"><a class="reference internal" href="noise_filters.html">סינון רעשים</a></li>
 </ul>
 
     </div>
@@ -366,6 +370,7 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shot-noise">shot noise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">רעש תרמי</a></li>
 </ul>
             </nav>
         </div>
@@ -388,15 +393,89 @@
 <section id="shot-noise">
 <h2>shot noise<a class="headerlink" href="#shot-noise" title="Link to this heading">#</a></h2>
 <p>הזרם שאנחנו מודדים תמיד מורכב מנושאי מטען בודדים (לרוב אלקטרונים אבל יכול להיות גם יונים אחרים).
-ולכן אם אנחנו מודדים “זרם” קבוע בםועל הוא לא קבוע. הזרם הוא רק הממוצע
+ולכן אם אנחנו מודדים “זרם” קבוע בפועל הוא לא קבוע. הזרם הוא רק הממוצע
 זה אומר שאם נמדוד בזמנים מספיק קטנים נוכל למדוד את המטענים הבודדים.</p>
 <p>נניח הנחה שהיא רק קירוב של המציאות:
 <strong>בכל רגע יש הסתברות קבועה למדידה של נושא מטען</strong></p>
 <p>ההנחה הזו אומרת לנו שכמות נושאי המטען שנמדוד בזמן סופי כלשהו
 היא פואסונית ואנחנו מניחים שההגעה של אלקטרונים
 היא בלתי תלויה. כלומר הרעש לבן.</p>
-<p>איזה התפלגות פואסונית? היא צריכה להיקבע על פי הזרם הממוצע.
-כלומר:</p>
+<p>איך נראה הזרם באמת? כל פעם שמגיע מטען הזרם הוא <span class="math notranslate nohighlight">\(\delta\)</span> ובין לבין
+הוא פשוט 0.
+זה אומר שהצורה האמיתית של הזרם היא:</p>
+<div class="math notranslate nohighlight">
+\[I\left(t\right)=q\sum_{n}\delta\left(t-t_{n}\right)\]</div>
+<p>כאשר הזמנים <span class="math notranslate nohighlight">\(t_{n}\)</span> עצמם הם רנדומאלים ודואגים שההתפלגות תהיה פואסונית</p>
+<p>למה הכוונה התפלגות פואסונית? הכוונה היא שמספר המטענים
+שעברו במוליך (במקום שאנחנו מודדים את הזרם)
+בחלון זמן <span class="math notranslate nohighlight">\(T\)</span> מתפלג פואסונית.
+כמה מטענים עברו במוליך? בזמן <span class="math notranslate nohighlight">\(T\)</span>? אם נחשב את האינטגרל על
+הזרם ונחלק במטען נקבל את התשובה. כלומר:</p>
+<div class="math notranslate nohighlight">
+\[\underset{\text{םינעטמ}\text{סמ}}{\underbrace{N\left(T\right)}}=\frac{1}{q}\intop_{-\frac{T}{2}}^{\frac{T}{2}}I\left(t\right)dt\]</div>
+<p>המספר הזה מתפלג פואסונית ולכן אם נגדיר את <span class="math notranslate nohighlight">\(\left\langle I\right\rangle _{T}\left(t\right)=q\cdot N\left(t\right)\)</span> נקבל
+את הזרם הממוצע בזמן <span class="math notranslate nohighlight">\(T\)</span> ואת ההפתלגות שלו:</p>
+<div class="math notranslate nohighlight">
+\[N\left(T\right)\sim Pois\left(\lambda\cdot T\right)\Rightarrow\left\langle I\right\rangle _{T}=\intop_{-\frac{T}{2}}^{\frac{T}{2}}I\left(t\right)dt\sim q\cdot Pois\left(\lambda\cdot T\right)\]</div>
+<p>עכשיו ניתן לשאול מה הוא <span class="math notranslate nohighlight">\(\lambda\)</span> נרצה
+כי הזרם הממוצע יהיה <span class="math notranslate nohighlight">\(\left\langle I\right\rangle \)</span> שהוא הזרם שאנחנו מודדים</p>
+<p>זה אומר כי:</p>
+<div class="math notranslate nohighlight">
+\[q\lambda T\underset{\mathbb{E}\left[Pois\left(\alpha\right)\right]=\alpha}{\underbrace{=}}\mathbb{E}\left[\left\langle I\right\rangle _{T}\right]=\mathbb{E}\left[\intop_{-\frac{T}{2}}^{\frac{T}{2}}I\left(t\right)dt\right]=T\cdot\left\langle I\right\rangle \]</div>
+<p>כלומר:</p>
+<div class="math notranslate nohighlight">
+\[\lambda=\frac{\left\langle I\right\rangle }{q}\]</div>
+<p>אנחנו יודעים שהרעש הוא לבן ושעבור רעש לבן ה-PSD הוא קבוע
+(אם הממוצע הוא 0) נוכל להסתכל על התהליך המקרי <span class="math notranslate nohighlight">\(x\left(t\right)=I\left(t\right)-\left\langle I\right\rangle \)</span> שיש לו
+ממוצע 0 והוא גם לבן. נשתמש במשפט וינר חינצ’ין על מנת
+לחשב את הערך של PSD עבור ערך ספציפי (זה כמובן לא משנה כי ה-PSD קבוע)</p>
+<p>צריך קודם כל להגדיר אות:</p>
+<div class="math notranslate nohighlight">
+\[x_{T}\left(t\right)=Rect\cdot\left(\frac{t}{T}\right)x\left(t\right)\]</div>
+<p>ואז נוכל לרשום כי:</p>
+<div class="math notranslate nohighlight">
+\[S_{xx}\left(\omega\right)=S_{xx}\left(0\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\right]\left(\omega=0\right)\right|^{2}\right]\]</div>
+<p>נשים לב שלעשות פורייה ולקחת את המקום ה-0 זה כמו למצע בזמן <span class="math notranslate nohighlight">\(\mathcal{F}\left[x_{T}\left(t\right)\right]\left(\omega=0\right)=\intop_{-\infty}^{\infty}Rect\cdot\left(\frac{t}{T}\right)x\left(t\right)dt=\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)dt=\left(\left\langle I\right\rangle _{T}\left(t\right)-T\left\langle I\right\rangle \right)\)</span></p>
+<p>זה אומר כי:</p>
+<div class="math notranslate nohighlight">
+\[S_{xx}\left(0\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\mathbb{E}\left[\left(\left\langle I\right\rangle _{T}\left(t\right)-T\left\langle I\right\rangle \right)^{2}\right]=\lim_{T\rightarrow\infty}\frac{1}{T}\left(\mathbb{V}\left[\left\langle I\right\rangle _{T}\left(t\right)\right]\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\left(q^{2}\lambda T\right)=q\left\langle I\right\rangle \]</div>
+<p>מה קרה כאן? השתמשנו בכך שהתוכלת על משתנה מקרי <span class="math notranslate nohighlight">\(\left\langle I\right\rangle _{T}\left(t\right)\)</span> פחות התוכלת שלו <span class="math notranslate nohighlight">\(T\left\langle I\right\rangle \)</span> בריבוע זה פשוט ה-VAR שלו.
+בגלל שה-PSD קבוע היה מספיק לנו לחשב נקודה אחת.</p>
+<p>קיבלנו כי:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{S_{xx}\left(f\right)=q\left\langle I\right\rangle }\]</div>
+<p>מסקנות:</p>
+<ul class="simple">
+<li><p>הרעש יותר גדול ככל שהזרם יותר גדול</p></li>
+<li><p>אם יש לנו פילטר לתחום תדרים <span class="math notranslate nohighlight">\(\Delta f=f_{2}-f_{1}\)</span> נקבל כי גודל הרעש הוא <span class="math notranslate nohighlight">\(S_{xx}\left(f\right)=q\left\langle I\right\rangle \Delta f\)</span></p></li>
+<li><p>אם אנחנו מעוניינים לדעת את הספק רעש שוט על נגד בגודל <span class="math notranslate nohighlight">\(R\)</span> נקבל פשוט <span class="math notranslate nohighlight">\(S_{xx}\left(f\right)=qR\left\langle I\right\rangle \Delta f\)</span></p></li>
+</ul>
+<p>מה הוא ה-SNR של רעש שוט כאשר מודדים על נגד בגודל <span class="math notranslate nohighlight">\(R\)</span>?</p>
+<div class="math notranslate nohighlight">
+\[SNR=\frac{\left\langle P_{sig}\right\rangle }{\left\langle P_{noise}\right\rangle }=\frac{R\left\langle I\right\rangle ^{2}}{eR\left\langle I\right\rangle \Delta f}=\frac{\left\langle I\right\rangle }{e\Delta f}\]</div>
+<p>איך נגדיל את יחס האות לרעש?</p>
+<ul class="simple">
+<li><p>נבחר <span class="math notranslate nohighlight">\(\Delta\omega\)</span> כמה שיותר קטן כך שהוא לא מסנן לנו את האות</p></li>
+<li><p>נגדיל את הזרם הממוצע שלנו</p></li>
+<li><p>נקטין את מטען האלקטרון :)</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>רעש תרמי<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>יש לנו מוליך שמלא באלקטרונים. אבל בגלל שיש תמית תמפרטורה כלשהי
+האלקטרונים לא עומדים במקום אלא זורמים לכלל הכיוונים. נגיד שכיוון הזרימה במוליך שלנו הוא <span class="math notranslate nohighlight">\(x\)</span>. אנחנו מעוניינים לדעת מה המהירות הממוצעת או יותר נכון מה הספק הרעש.</p>
+<p>לא נעשה כאן ניתוח שלם אבל רק נבין איך הגדלים נכנסים לבעייה.</p>
+<p>הקשר בין טמפרטורה למהירות הוא חוק ידוע בתרמודינמיקה: וביקירוב ניתן לומר כי:</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{2}mu_{x}^{2}=\frac{1}{2}k_{B}T\]</div>
+<p>אנחנו יודעים שהספק האות מתכונתי לזרם בריבוע שמתכונתי למהירות בריבוע:</p>
+<div class="math notranslate nohighlight">
+\[\left\langle P\right\rangle \propto\left\langle I\right\rangle ^{2}\propto\left\langle u_{x}^{2}\right\rangle \propto k_{B}T\]</div>
+<p>ניתוח מעמיק יותר של המערכת יתן בדיוק את הקבועים. וכמו קודם נניח שאנחנו מודדים את הרעש במערכת שמסננת את כלל התדרים חוץ מרצועה בגודל <span class="math notranslate nohighlight">\(\Delta f\)</span>.
+נקבל כי:</p>
+<div class="math notranslate nohighlight">
+\[\left\langle P\right\rangle =RS_{II}\left(f\right)=4k_{B}T\Delta f\]</div>
+<p>כלומר הספק הרעש לינארי בטמפרטורה.</p>
 </section>
 </section>
 
@@ -430,6 +509,24 @@
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="noise_spectrum.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">רעש במרחב התדר</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="noise_filters.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">סינון רעש</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -448,6 +545,7 @@
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shot-noise">shot noise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">רעש תרמי</a></li>
 </ul>
   </nav></div>
 
