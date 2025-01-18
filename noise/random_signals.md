@@ -1,5 +1,45 @@
 # אותות אקראיים
 
+```{admonition} אמ;לק
+:class: dropdown 
+
+תהליך אקראי (או אות אקראי) הוא אוסף משתנים מקריים.
+יכולה להיות לכולם את אותה התפלגות או לא ויכולות גם להיות
+תלויות בינהם.
+
+שתי הנחות שאנחנו הולכים להניח על כל אות מסוף פרק זה והלאה:
+
+### 1. סטציונריות במובן הרחב 
+
+נאמר שאות אקראי $x\left(t\right)$ הוא סטציונרי במובן הרחב אם:
+1. הממוצע שלו לאורך זמן קבוע - $\mu_{x}\left(t\right)=\mathbb{E}\left[x\left(t\right)\right]=\underset{\text{עובק}}{\underbrace{\mu_{x}}}$
+2. האוטוקורלציה שלו תלויה רק בהפרשי זמן - $R_{x}\left(t_{i},t_{j}\right)=R_{x}\left(t_{i}-t_{j}\right)$
+
+### 2. ארגודיות
+
+נאמר שאות ארגודי אם
+ **ממוצע לאורך זמן הוא כמו ממוצע של הרבה מדידות חוזרות (ראליזציות)**
+
+כלומר:
+
+$$\mathbb{E}\left[x\left(t\right)\right]=\left\langle x\left(t\right)\right\rangle $$
+
+את האוטוקורלציה הגדרנו להיות:
+
+$$R_{x}\left(\tau\right)\equiv\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]$$
+
+כלומר כמה האות דומה לעצמו בהזזה של $\tau$. אם אנחנו מניחים ארגודיות
+וסטציונריות ממש אפשר לחשב אוטוקורלציה כמו "שהיינו רוצים"
+
+$$R_{x}\left(\tau\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)x^{\ast}\left(t+\tau\right)dt$$
+
+ראינו שלוש תכונות חשובות של הקורלציה:
+1. **קישור להתפלגות בכל רגע** - R_{x}\left(0\right)=\sigma_{x}^{2}+\mu_{x}^{2} כלומר מתארת את הספק האות האקראי בתור חיבור של הממוצע בריבוע וסטיית התקן בריבוע
+2. **מקסימום מתקבל ב-0** -  \forall\tau>0:\left|R_{x}\left(\tau\right)\right|\le R_{x}\left(0\right)
+3. **סימטרית (יוניטרית)** - R_{x}\left(-\tau\right)=R_{x}^{\ast}\left(\tau\right) 
+```
+
+
 נתחיל לחקור את היצור המתמטי הזה שנקרא אות אקראי.
 דרך אחת לא מאוד שימושית לאפיין אותו היא לומר שיש לנו אנסמבל (אינסופי) עם כל 
 האפשרויות השונות לאותות ולכל אחד מהם הסתברות (או צפיפות הסתברות). ממש קשה
@@ -250,7 +290,7 @@ $$R_{x}\left(\tau\right)\equiv\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left
 בגלל הסטציונריות יכולנו להגדיר את זה כפונקציה של משתנה בודד. כלומר:
 
 * אות סטציונרי - $R_{x}\left(t_{1},t_{2}\right)=R_{x}\left(0,t_{2}-t_{1}\right)=R_{x}\left(\tau\right)$
-* אות סטציונרי עם תוכלת 0 -  $R_{x}\left(\tau\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]=Cov\left(x\left(0\right),x\left(\tau\right)\right)$
+* אות סטציונרי עם תוחלת 0 -  $R_{x}\left(\tau\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]=Cov\left(x\left(0\right),x\left(\tau\right)\right)$
 
 > מסקנה: האוטוקורלציה היא פונקציה של הפרשי זמנים $\tau=t_{j}-t_{i}$
 
@@ -267,6 +307,98 @@ $$\left|R_{x}\left(\tau>0\right)\right|=\left|\mathbb{E}\left[x\left(0\right)\cd
 > האות הכי דומה לעצמו כשלא מזיזים אותו. כלומר $\forall\tau>0:\left|R_{x}\left(\tau\right)\right|\le R_{x}\left(0\right)$
 > 
 > הרבה פעמים מה שנעשה הוא לצייר את הפונקצייה של האוטוקורלציה המנורמלת כלומר $\frac{R_{x}\left(\tau\right)}{R_{x}\left(0\right)}$
+
+```{admonition} דוגמא - רעש טלגרף (מערכת שני מצבים) 
+:class: dropdown
+
+ניקח את המערכת הכי פשוטה שאנחנו יכולים לחשוב עליה (כמעט). נניח שיש לנו שני מצבים. 0,1 
+נגדיר התפלגות זמני מעבר. זה אומר שאם עכשיו עברתי למצב 1 מה הזמן שאני אשאר שם לפני אני אעבור למצב 0
+ואותו הדבר בהינתן שעברתי למצב 0 כמה זמן אשאר שם לפני שאעבור למצב 1.
+
+נגדיר:
+
+$$\tau_{0\rightarrow1}\sim\exp\left(\lambda_{0}\right)=\begin{cases}
+\lambda_{0}e^{-\lambda_{0}t} & t\ge0\\
+0 & t<0
+\end{cases}$$
+
+$$\tau_{1\rightarrow0}\sim\exp\left(\lambda_{1}\right)=\begin{cases}
+\lambda_{1}e^{-\lambda_{1}t} & t\ge0\\
+0 & t<0
+\end{cases}$$
+
+איך נראה ריאליזציה של תהליך כזה?
+
+![telegraph_noise.png](images/telegraph_noise.png)
+
+אז נרצה לחשב את האוטוקורלציה של האות. נזכור שהאוטוקורלציה היא פונקציה של הפרשי זמן
+נחשב את האוטוקורלציה בצורה של סיכוי מותנה:
+
+$$\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)\right]=\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]\cdot\mathbb{P}\left(x\left(0\right)=1\right)+\underset{0}{\underbrace{\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=0\right]}}\cdot\mathbb{P}\left(x\left(0\right)=0\right)$$
+$$=\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]\cdot\mathbb{P}\left(x\left(0\right)=1\right)$$
+
+נסתכל קודם על הביטוי $\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]$:
+
+$$\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]=1\cdot\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)+0\cdot\mathbb{P}\left(x\left(t\right)=0|x\left(0\right)=1\right)=\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)$$
+
+אז אנחנו צריכים לדעת מה הסיכוי להיות במצב של 1 בזמן $t$ בהינתן שבזמן $t=0$ התחלנו ב-0.
+התשובה לזה מערבת קצת מתמטיקה ויוצא בסוף ש:
+
+$$\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=\frac{\lambda_{0}+\lambda_{1}e^{-\left(\lambda_{0}+\lambda_{1}\right)t}}{\lambda_{0}+\lambda_{1}}$$
+
+נשים לב שבזמנים קטנים הסיכוי להישאר ב-1 הוא גבוה ושואף ל1 כמו שהיינו מצפים.
+מצד שני הסיכוי באינסוף לא שואף ל-0 אלא למספר קבוע:
+
+$$\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}$$
+
+מסתבר שהמספר שאם מניחים שהתחלנו לצפות בתהליך בזמן אקראי כלשהו זה גם הסיבוי שהמצב שאנחנו צופים בו יהיה 1 משום שהסיכוי הזה לא תלוי במצב ההתחלתי.
+לא נחשב כאן אבל הטענה היא ש-
+
+$$\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=0\right)=\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}$$
+
+נשים לב שזה מסתדר לנו. אם $\lambda_{0}$ גדול זה אומר שאנחנו קופצים מהר החוצה ממצב 0 ולכן נמצאים יותר במצב 1.
+
+נקבל לבסוף כי:
+
+$$\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)\right]=\underset{\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]}{\underbrace{\frac{\lambda_{0}+\lambda_{1}e^{-\left(\lambda_{0}+\lambda_{1}\right)t}}{\lambda_{0}+\lambda_{1}}}}\cdot\underset{\mathbb{P}\left(x\left(0\right)=1\right)}{\underbrace{\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}}}$$
+
+כלומר:
+
+$$\boxed{R_{x}\left(\tau\right)=\mathbb{E}\left[x\left(\tau\right)\cdot x\left(0\right)\right]=\frac{\lambda_{0}^{2}+\lambda_{1}\lambda_{0}e^{-\left(\lambda_{0}+\lambda_{1}\right)\left|\tau\right|}}{\left(\lambda_{0}+\lambda_{1}\right)^{2}}}$$
+
+הערך המוחלט הוא בגלל שאנחנו תלויים רק בהפרש הזמנים בערך מוחלט.
+
+מה עם הממוצע לאורך זמן?
+
+$$\mathbb{E}\left[x\left(t\right)\right]=1\cdot\mathbb{P}\left(x\left(t\right)=1\right)+0\cdot\mathbb{P}\left(x\left(0\right)=0\right)$$
+
+ולכן:
+
+$$\boxed{\mu_{x}=\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}}$$
+
+
+נשים לב שעבור הפרש זמנים מאוד גדול האוטוקורלציה היא:
+
+
+$$\lim_{\tau\rightarrow\infty}R_{x}\left(\tau\right)=\left(\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}\right)^{2}=\mu_{x}^{2}$$
+
+נסרטט:
+
+ <iframe src="https://www.geogebra.org/material/iframe/id/entghwt6" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
+<a href="https://www.geogebra.org/material/iframe/id/entghwt6" target="_blank">לפתיחה בחלון נפרד</a>
+
+מה ההתפלגות של התהליך שלנו בכל זמן נתון? נשים לב שכאן אנחנו יכולים להיות רק בשני מצבין ולא באינסוף ולכן לא נצטרך PDF אלא פשוט
+וקטור שאומר מה הסיכוי להיות בכל מצב. במקרה שלנו:
+
+$$\vec{p}=\begin{pmatrix}\mathbb{P}\left(x\left(t\right)=0\right)\\
+\mathbb{P}\left(x\left(t\right)=1\right)
+\end{pmatrix}=\begin{pmatrix}\frac{\lambda_{1}}{\lambda_{0}+\lambda_{1}}\\
+\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}
+\end{pmatrix}$$
+
+יש לנו את כל מה שאנחנו צריכים :)
+
+```
 
 #### אוטוקורלציה עבור אותות לא אקראיים
 

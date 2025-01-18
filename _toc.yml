@@ -59,4 +59,11 @@ parts:
       title: "מה זה רעש"
     - file: noise/random_signals
       title: "אותות אקראיים"
-
+    - file: noise/noise_spectrum
+      title: "ספקטרום רעש"
+    - file: noise/physical_noises
+      title: "רעשים במערכות פיזיקליות"
+    - file: noise/noise_filters
+      title: "סינון רעשים"
+    - file: noise/detection
+      title: "תורת הגילוי"
