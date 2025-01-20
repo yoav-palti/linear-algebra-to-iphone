@@ -214,6 +214,8 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">ספקטרום רעש</a></li>
 <li class="toctree-l1"><a class="reference internal" href="physical_noises.html">רעשים במערכות פיזיקליות</a></li>
 <li class="toctree-l1"><a class="reference internal" href="noise_filters.html">סינון רעשים</a></li>
+<li class="toctree-l1"><a class="reference internal" href="detection.html">תורת הגילוי</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DSP/DFT_intro.html">מבוא ל-DFT</a></li>
 </ul>
 
     </div>
@@ -491,13 +493,13 @@
 <p>נפרק את המשפט לאט לאט. בצד ימים יש לנו את הפונקציה <span class="math notranslate nohighlight">\(\tilde{S}_{xx}\left(\omega\right)\)</span>
 שאותה אנחנו מכירים והיא לא אות אקראי.
 בצד שמאל יש לנו את הגודל <span class="math notranslate nohighlight">\(\left|\mathcal{F}\left[x_{T}\left(t\right)\right]\right|^{2}\)</span>
-שהוא כן משתנה מקרי. אנחנו ניקח את התוכלת שלו <span class="math notranslate nohighlight">\(\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\right]\right|^{2}\right]\)</span>
+שהוא כן משתנה מקרי. אנחנו ניקח את התוחלת שלו <span class="math notranslate nohighlight">\(\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\right]\right|^{2}\right]\)</span>
 זאת פונקציה של <span class="math notranslate nohighlight">\(\omega,T\)</span> ואם ניקח את הגבול של <span class="math notranslate nohighlight">\(T\rightarrow\infty\)</span>
 אז הצדדים שווים.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>ממש חשוב לשים לב שהגבול הוא מחוץ לתוכלת ולא בתוך. כלומר לא לוקחים את התוכלת של הגבול
-אלא את הגבול של התוכלת</p>
+<p>ממש חשוב לשים לב שהגבול הוא מחוץ לתוחלת ולא בתוך. כלומר לא לוקחים את התוחלת של הגבול
+אלא את הגבול של התוחלת</p>
 </div>
 <p>מסקנה חשובה שאנחנו רואים הוא שאנחנו לוקחים את הממוצע של הערך המוחלט בריבוע של
 הפורייה של הריאליזציה.

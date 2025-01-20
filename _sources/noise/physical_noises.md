@@ -70,7 +70,7 @@ $$S_{xx}\left(\omega\right)=S_{xx}\left(0\right)=\lim_{T\rightarrow\infty}\frac{
 
 $$S_{xx}\left(0\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\mathbb{E}\left[\left(\left\langle I\right\rangle _{T}\left(t\right)-T\left\langle I\right\rangle \right)^{2}\right]=\lim_{T\rightarrow\infty}\frac{1}{T}\left(\mathbb{V}\left[\left\langle I\right\rangle _{T}\left(t\right)\right]\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\left(q^{2}\lambda T\right)=q\left\langle I\right\rangle $$
 
-מה קרה כאן? השתמשנו בכך שהתוכלת על משתנה מקרי $\left\langle I\right\rangle _{T}\left(t\right)$ פחות התוכלת שלו $T\left\langle I\right\rangle $ בריבוע זה פשוט ה-VAR שלו.
+מה קרה כאן? השתמשנו בכך שהתוחלת על משתנה מקרי $\left\langle I\right\rangle _{T}\left(t\right)$ פחות התוחלת שלו $T\left\langle I\right\rangle $ בריבוע זה פשוט ה-VAR שלו.
 בגלל שה-PSD קבוע היה מספיק לנו לחשב נקודה אחת.
 
 קיבלנו כי:

@@ -1,0 +1,855 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>מבוא ל-DFT &#8212; Linear Algebra to iPhone 1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=28a1b870" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'DSP/DFT_intro';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="תורת הגילוי" href="../noise/detection.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Linear Algebra to iPhone 1 - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Linear Algebra to iPhone 1 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro/intro.html">
+                    מאלגברה לינארית לאייפון
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../LTI/intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/impulse_response.html">תגובת להלם</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/frequency_response.html">תגובת בתדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/wave_in_a_room.html">החזרות בחדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">מעגלי RLC</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RLC/RC_intro.html">מעגלי RC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RLC/RLC_intro.html">מעגלי RLC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RLC/power_on_load.html">הספק על רכיבים</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור אנלוגי</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/analog_intro.html">מבוא לתקשורת אנלוגית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/AM.html">אפנון AM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analog_communication/PM_FM.html">אפנון PM ואפנון FM</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">שידור דיגיטלי</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/digital_intro.html">מבוא לתקשורת דיגיטלית</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/linear_modulations.html">אפנונים לינארים</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/more_modulations.html">בעיות שלא הכרתם - עוד אפנונים</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/FSK.html">אפנון תדר - FSK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digital_communication/orthogonality.html">אורתוגונליות</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">דיגיטציה</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/digitation_intro.html">מה זה לדיגיטציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/sampling.html">דגימה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/interpolation.html">שחזור באינטרפולציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/quantization.html">קוונטיזציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/quantization_example.html">קוונטיזציה לדוגמא</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">רעש</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../noise/noise_intro.html">מה זה רעש</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../noise/random_signals.html">אותות אקראיים</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../noise/noise_spectrum.html">ספקטרום רעש</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../noise/physical_noises.html">רעשים במערכות פיזיקליות</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../noise/noise_filters.html">סינון רעשים</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../noise/detection.html">תורת הגילוי</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">מבוא ל-DFT</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/yoav-palti/linear-algebra-to-iphone" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/DSP/DFT_intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>מבוא ל-DFT</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">סדר התדרים ב-DFT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">הזזה מעגלית</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">קונבולוציה סירקולרית</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ריפוד באפסים</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="dft">
+<h1>מבוא ל-DFT<a class="headerlink" href="#dft" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.fft</span> <span class="k">as</span> <span class="nn">fft</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>נזכיר את המשוואות המרכזיות שלנו:</p>
+<div class="math notranslate nohighlight">
+\[x_{n}=\frac{1}{N}\sum_{k=0}^{N-1}\tilde{X}_{k}e^{i\frac{2\pi n}{N}k}\leftrightarrows\tilde{X}_{k}=\sum_{n=0}^{N-1}x_{n}e^{-i\frac{2\pi k}{N}n}\]</div>
+<p>נשכח להמשך הדיון מהנרמול של <span class="math notranslate nohighlight">\(\frac{1}{N}\)</span> למרות שלפעמים הוא חשוב</p>
+<p>בנוסף למען הנוחות נסמן את שורש היחידה מסדר <span class="math notranslate nohighlight">\(N\)</span> בתור <span class="math notranslate nohighlight">\(\omega=e^{-i\frac{2\pi}{N}}\)</span></p>
+<p>אפשר לראות כי זה פשוט מכפלה של וקטור במטריצה. נוכל להגדיר מטריצה:</p>
+<div class="math notranslate nohighlight">
+\[D_{kn}=e^{-i\frac{2\pi k}{N}n}=\omega^{kn}\Rightarrow\tilde{X}_{k}=\sum_{n=0}^{N-1}D_{kn}x_{n}\]</div>
+<p>המטריצה <span class="math notranslate nohighlight">\(D\)</span> היא בגודל של <span class="math notranslate nohighlight">\(D\in\mathbb{C}_{N\times N}\)</span> וכמובן מרוכבת.</p>
+<p>נשים לב לכמה תכונות מיוחדות:</p>
+<ol class="arabic simple">
+<li><p>המטריצה סימטרית כלומר <span class="math notranslate nohighlight">\(D=D^{T}\)</span></p></li>
+<li><p>המטריצה יוניטרית (צריך להוסף נירמול). כלומר: <span class="math notranslate nohighlight">\(DD^{\dagger}=N\cdot I_{N\times N}\)</span></p></li>
+</ol>
+<p>ניתן דוגמא לאיך נראית <span class="math notranslate nohighlight">\(D_{4}\in\mathbb{C}_{4\times4}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}D_{4}=\begin{pmatrix}\omega^{0} &amp; \omega^{0} &amp; \omega^{0} &amp; \omega^{0}\\
+\omega^{0} &amp; \omega^{1} &amp; \omega^{2} &amp; \omega^{3}\\
+\omega^{0} &amp; \omega^{2} &amp; \omega^{4} &amp; \omega^{6}\\
+\omega^{0} &amp; \omega^{3} &amp; \omega^{6} &amp; \omega^{9}
+\end{pmatrix}=\begin{pmatrix}1 &amp; 1 &amp; 1 &amp; 1\\
+1 &amp; -i &amp; -1 &amp; i\\
+1 &amp; -1 &amp; 1 &amp; -1\\
+1 &amp; i &amp; -1 &amp; -i
+\end{pmatrix}\end{split}\]</div>
+<p>עכשיו כשיש לנו בראש את זה שפורייה זה הכפלה במטריצה יוניטרית. נוכל לשאול את עצמנו איזה וקטורים אנחנו יכולים להכפיל במטריצה הזו ולקבל וקטור שכולו אפסים חוץ ממקום אחד. טוב כמובן מההגדרות אלו בדיוק העמודות של המטריצה. ואכן נבדוק:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">root_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">root_n</span><span class="o">**</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)])</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="c1"># iterate over rows and calculate the dft (fft)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">D_k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
+    <span class="n">D_k_f</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">D_k</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">D_k_f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c15a48400658418b7f4ae9bb7cabe7a648f8e39e3b105056968479c41f0c8d71.png" src="../_images/c15a48400658418b7f4ae9bb7cabe7a648f8e39e3b105056968479c41f0c8d71.png" />
+</div>
+</div>
+<p>נשים לב שהעמודות הן בדיוק מה שהיינו מגדירים “תדר טהור” ומה שמיוחד בו הוא מסיים כמות סיבובים שלמה על הקטע.</p>
+<p>מה התדר הכי גבוה? השורה האמצעית שהיא פשוט
+<span class="math notranslate nohighlight">\(\begin{pmatrix}1\\
+-1\\
+1\\
+-1\\
+\vdots\\
+-1
+\end{pmatrix}\)</span>
+נשים לב שזה התדר הכי גבוה רק אם <span class="math notranslate nohighlight">\(N\)</span> מספר זוגי. אחרת לא בדיוק מוגדר תדר הכי גבוה. כי יש לנו שתי שורות שהן “התדר הכי גבוה”</p>
+<p>לדוגמא עבור <span class="math notranslate nohighlight">\(N=5\)</span> יש את העמודה שעושה קפיצות של <span class="math notranslate nohighlight">\(\frac{2}{5}\)</span> מעגל כל פעם ויש את העמודה שעושה <span class="math notranslate nohighlight">\(\frac{3}{5}\)</span> מעגל כל פעם.</p>
+<p>כבר כאן אנחנו מתחילים לראות שיש חשיבות לקשר בין הדגימה הראשונה והאחרונה. מה יקרה אם ניקח תדר שגורם לכך שהגל שלנו לא יכנס מספר פעמים שלם בקטע? נבדוק:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Rectangle</span>
+<span class="k">def</span> <span class="nf">plot_phasor_fft</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">w</span><span class="p">):</span>
+    <span class="n">n_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">phasor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">w</span><span class="o">*</span><span class="n">n_axis</span><span class="p">)</span>
+    <span class="n">phasor_f</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">phasor</span><span class="p">)</span>
+    <span class="n">blanc_rect</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span><span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">n_axis</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">phasor</span><span class="p">))</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x_</span><span class="si">{n}</span><span class="s1">$&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">n_axis</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">phasor_f</span><span class="p">))</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\tilde</span><span class="si">{X}</span><span class="s1">_</span><span class="si">{k}</span><span class="s1">$&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">blanc_rect</span><span class="p">],[</span><span class="sa">f</span><span class="s1">&#39;$\omega=</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">N</span><span class="p">)</span><span class="si">}</span><span class="s1"> / N$&#39;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span><span class="n">axes</span>
+    
+<span class="n">N</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">w_int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="o">/</span><span class="n">N</span>
+<span class="n">w_frac</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.25</span><span class="o">/</span><span class="n">N</span>
+<span class="n">w_middel</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.5</span><span class="o">/</span><span class="n">N</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">axes</span> <span class="o">=</span> <span class="n">plot_phasor_fft</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">w_int</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;DFT of integer frequencies&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">axes</span> <span class="o">=</span> <span class="n">plot_phasor_fft</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">w_frac</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;DFT of fractional frequencies&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">axes</span> <span class="o">=</span> <span class="n">plot_phasor_fft</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">w_middel</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;DFT of in the middel between frequencies&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/f13b0ad25d05127cf914811e29a00849be2fa0118671f3b46576a8d26b1cea46.png" src="../_images/f13b0ad25d05127cf914811e29a00849be2fa0118671f3b46576a8d26b1cea46.png" />
+<img alt="../_images/7508230d6fa42d32d4ee802a2b9685d75a568884b03d252c66d7bcde4a6e69cb.png" src="../_images/7508230d6fa42d32d4ee802a2b9685d75a568884b03d252c66d7bcde4a6e69cb.png" />
+<img alt="../_images/076f75f17dcabf177c331717e58f427770253026ca0f42917375593baf5720a2.png" src="../_images/076f75f17dcabf177c331717e58f427770253026ca0f42917375593baf5720a2.png" />
+</div>
+</div>
+<section id="id1">
+<h2>סדר התדרים ב-DFT<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>כבר ראינו שהתדרים (או התדר) הכי גבוהים נמצאים באמצע המטריצה. למה זה הגיוני? משום שהתדר הכי גבוה הוא לקפוץ כל פעם חצי מעגל ואחרי זה אנחנו יכולים לפרש את הקפיצות בתור קפיצות קטנות יותר לצד השני. זה אומר שהציר של התדרים הוא ממש מוזר.</p>
+<p>הוא מתחיל מהמקדם של תדר 0 שהוא מגיע מהשורה הראשונה במטריצה. השורה הזו היא פשוט המספר 1 ולכן מחשבת ממוצע. זה תדר 0 המוכר והאהוב.</p>
+<p>לאט לאט התדרים עולים ובשלב כלשהו אחרי התדר הגבוה ביותר התדרים נהיים שליליים.</p>
+<p>יש פונקציה מובנית שמחזירה לנו את ציר התדר עבור חישוב פורייה מסויים.</p>
+<p>נסתכל עליה עבור <span class="math notranslate nohighlight">\(N=8\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 1/sample_rate</span>
+<span class="n">f_axis</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">f_axis</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.   ,  0.125,  0.25 ,  0.375, -0.5  , -0.375, -0.25 , -0.125])
+</pre></div>
+</div>
+</div>
+</div>
+<p>אבל מה אם אנחנו רוצים את כל התדרים השליליים בצד שמאל יש לזה פונקציה</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">f_axis</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.5  , -0.375, -0.25 , -0.125,  0.   ,  0.125,  0.25 ,  0.375])
+</pre></div>
+</div>
+</div>
+</div>
+<p>ולכן נניח שיש לנו סיגנל שאנחנו רוצים לעשות לו fft ולצייר אותו</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">90</span><span class="p">)))</span>
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
+<span class="n">t_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">/</span><span class="n">fs</span>
+<span class="n">f_axis</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">fs</span><span class="p">)</span>
+<span class="n">sig_f</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;sig&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x_</span><span class="si">{n}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sig_f</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)[::</span><span class="mi">20</span><span class="p">],</span><span class="n">f_axis</span><span class="p">[::</span><span class="mi">20</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;not shifted fft&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\tilde</span><span class="si">{X}</span><span class="s1">_</span><span class="si">{k}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">f_axis</span><span class="p">),</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sig_f</span><span class="p">)))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;shifted fft&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\tilde</span><span class="si">{X}</span><span class="s1">_</span><span class="si">{k}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/677a5f2f8394501ca3e2f611cb4fe169a631b80da3817fb18dba676c00eb3663.png" src="../_images/677a5f2f8394501ca3e2f611cb4fe169a631b80da3817fb18dba676c00eb3663.png" />
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>הזזה מעגלית<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_fft</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span><span class="n">fs</span><span class="p">,</span> <span class="n">plot_phase</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">vertical</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">t_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sig</span><span class="p">))</span><span class="o">/</span><span class="n">fs</span>
+    <span class="n">f_axis</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sig</span><span class="p">),</span><span class="mi">1</span><span class="o">/</span><span class="n">fs</span><span class="p">))</span>
+    <span class="n">sig_f</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">sig</span><span class="p">))</span>
+    <span class="n">num_plots</span> <span class="o">=</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">plot_phase</span> <span class="k">else</span> <span class="mi">2</span>
+    <span class="n">plots_shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_plots</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">vertical</span> <span class="k">else</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">num_plots</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="o">*</span><span class="n">plots_shape</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">num_plots</span><span class="p">))</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">t_axis</span><span class="p">,</span><span class="n">sig</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x_</span><span class="si">{n}</span><span class="s1">$&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">f_axis</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sig_f</span><span class="p">))</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\left|\tilde</span><span class="si">{X}</span><span class="s1">_</span><span class="si">{k}</span><span class="s1">\right|$&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">plot_phase</span><span class="p">:</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">f_axis</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">sig_f</span><span class="p">))</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\arg\left(\tilde</span><span class="si">{X}</span><span class="s1">_</span><span class="si">{k}</span><span class="s1">\right)|$&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span><span class="n">axes</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>אנחנו יודעים שפורייה טרנספורם רציף אינווריאנטי להזזות (או יותר במדוייק מוכפל בפאזה שתלויה לינארית בתדר). מה קורה עם פורייה בדיד? מה זה בכלל אומר “להזיז” את הוקטור.</p>
+<p>כבר קיבלנו לזה קצת רמיזות, הדגימה האחרונה והשנייה הם להסתובב על המעגל באותו קצב רק בכיוונים מנוגדים (במקרה ש-N אי זוגי) ובאופן כללי דיברנו לפני כמה שיעורים על זה שאנחנו ב-DFT מתייחסים לזמן כמעגלי. שזה אומר שאנחנו יכולים לחשוב על האות שלנו בתור רצף אינסופי של דגימות שחוזרות על עצמן במחזוריות של אורך האות שלנו <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<p>כלומר אנחנו רוצים לדעת מה קורה לוקטור אשר מזיזים אותו באופן מעגלי ואז עושים לו פורייה.
+נבדוק:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">90</span><span class="p">)))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plot_fft</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span><span class="n">fs</span><span class="p">,</span> <span class="n">plot_phase</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">sig_roll</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plot_fft</span><span class="p">(</span><span class="n">sig_roll</span><span class="p">,</span><span class="n">fs</span><span class="p">,</span> <span class="n">plot_phase</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6c30be09d82f1610e26c87746dcde26f36bae2fa9bbbc9e4f041dc24557f5f5e.png" src="../_images/6c30be09d82f1610e26c87746dcde26f36bae2fa9bbbc9e4f041dc24557f5f5e.png" />
+<img alt="../_images/9f2c2cf25e6f929b6457ae2f5cfc6510c5eb1602c4b29f65ffc4760ac61e316c.png" src="../_images/9f2c2cf25e6f929b6457ae2f5cfc6510c5eb1602c4b29f65ffc4760ac61e316c.png" />
+</div>
+</div>
+<p>קיבלנו בדיוק אותו הדבר באמפליטודה אבל הפאזה השתמנתה באופן לינארי לתדר. יחסית קל גם לראות את זה מתמטית:</p>
+<div class="math notranslate nohighlight">
+\[Dx_{\left(n-n_{0}\right)\mod N}=\sum_{n=0}^{N-1}x_{\left(n-n_{0}\right)\mod N}e^{-i\frac{2\pi k}{N}n}=\sum_{n=0}^{N-1}x_{\left(n-n_{0}\right)\mod N}e^{-i\frac{2\pi k}{N}\left(n-n_{0}\right)}e^{i\frac{2\pi k}{N}n_{0}}=e^{i\frac{2\pi k}{N}n_{0}}\tilde{X}_{k}\]</div>
+<blockquote>
+<div><p>הזזה של וקטור דגימות בצורה <strong>מעגלית</strong> מייצר רק פאזה לינארית ולא משפיע על האמפליטודה של המקדמים במרחב התדר</p>
+</div></blockquote>
+</section>
+<section id="id3">
+<h2>קונבולוציה סירקולרית<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>:
+נשאלת השאלה איך תראה קורלציה בין שני אותות כאלו? בבירור הסוף של אות אחד ברגע שיעבור את הסוף של אות מסויים יחזור להתחלה שלו. פעולה כזו נקראת קורלציה סירקולרית.</p>
+<blockquote>
+<div><p>קורלציה סירקולרית</p>
+<div class="math notranslate nohighlight">
+\[\left(\vec{x}\circledast\vec{y}\right)\left[m\right]=\sum_{n=0}^{N-1}x\left[n\right]\cdot y\left[\left(m-n\right)\mod N\right]\]</div>
+</div></blockquote>
+<p>ניתן להראות מקבליה למשפט הקונבולוציה אבל הפעם לאותות סופיים</p>
+<div class="admonition- admonition">
+<p class="admonition-title">משפט הקונבולוציה לאותות סופיים</p>
+<div class="math notranslate nohighlight">
+\[D\left(\vec{x}\circledast\vec{y}\right)\left[k\right]=\underset{D\vec{x}}{\underbrace{\tilde{X}\left[k\right]}}\cdot\underset{D\vec{y}}{\underbrace{\tilde{Y}\left[k\right]}}\]</div>
+</div>
+<p>בואו נראה איך זה נראה בפועל</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">circular_conv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">x_f</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y_f</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">x_f</span><span class="o">*</span><span class="n">y_f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sig1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">40</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">49</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">sig2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">90</span><span class="p">)))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plot_fft</span><span class="p">(</span><span class="n">sig1</span><span class="p">,</span><span class="n">fs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plot_fft</span><span class="p">(</span><span class="n">sig2</span><span class="p">,</span><span class="n">fs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">sig_conv</span> <span class="o">=</span> <span class="n">circular_conv</span><span class="p">(</span><span class="n">sig1</span><span class="p">,</span><span class="n">sig2</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plot_fft</span><span class="p">(</span><span class="n">sig_conv</span><span class="p">,</span><span class="n">fs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dede1aaea05b39cc6cdbd64a263ffcc79d55b5a4ad8064c82ee47d88052a6309.png" src="../_images/dede1aaea05b39cc6cdbd64a263ffcc79d55b5a4ad8064c82ee47d88052a6309.png" />
+<img alt="../_images/fe69d6a3824dcb2bfcde31e72e2ea3d968365af1214f16b4c3fda68fdfdbf706.png" src="../_images/fe69d6a3824dcb2bfcde31e72e2ea3d968365af1214f16b4c3fda68fdfdbf706.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\yoavp\Documents\projects\python_venvs\jupyter-book\lib\site-packages\matplotlib\cbook.py:1762: ComplexWarning: Casting complex values to real discards the imaginary part
+  return math.isfinite(val)
+C:\Users\yoavp\Documents\projects\python_venvs\jupyter-book\lib\site-packages\numpy\ma\core.py:3413: ComplexWarning: Casting complex values to real discards the imaginary part
+  _data[indx] = dval
+C:\Users\yoavp\Documents\projects\python_venvs\jupyter-book\lib\site-packages\matplotlib\cbook.py:1398: ComplexWarning: Casting complex values to real discards the imaginary part
+  return np.asarray(x, float)
+</pre></div>
+</div>
+<img alt="../_images/d6080a3d9cf651c59184d2114f5ba0f885fa8761ff85b5aede037b5705d443cd.png" src="../_images/d6080a3d9cf651c59184d2114f5ba0f885fa8761ff85b5aede037b5705d443cd.png" />
+</div>
+</div>
+<p>בואות נראה איך זה נראה בפועל</p>
+<p>מה אנחנו רואים כאן? אנחנו יכולים לראות שקיבלנו באמת קונבולוציה כמו שהיינו מצפים משתי ראמפות אבל נשים לב שה-“דלתא” בסוף הסיגנל הראשון גרמה ל-“זליגה” לתוך ההתחלה של הקורלציה!</p>
+<p>איך אפשר להתמודד עם זה? ובכן צריך לרפד באפסים</p>
+</section>
+<section id="id4">
+<h2>ריפוד באפסים<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>לריפוד באפסים יש כמה תפקידים חשובים בעיבוד אות דיגיטלי. ראינו את אחד מהם לפני רגע עם הקונבולוציה. אבל האמת שלריפוד אפסים יש אינטרפטציה מעניינת יותר.
+בואו ניקח אות ונרפד אותו לאט לאט באפסים ונצייר את ה-DFT שלו כל פעם</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
+<span class="k">for</span> <span class="n">pad_size</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">sig_pad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">sig</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="n">pad_size</span><span class="p">))</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plot_fft</span><span class="p">(</span><span class="n">sig_pad</span><span class="p">,</span><span class="n">fs</span><span class="p">,</span><span class="n">vertical</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f3b1a501ac6c9dc369af63e6b72b7886da286a71c1123f9bd048a2fe38e20182.png" src="../_images/f3b1a501ac6c9dc369af63e6b72b7886da286a71c1123f9bd048a2fe38e20182.png" />
+<img alt="../_images/0e727c6c9b6f2b79dcbcce85d2413c1f733289e6825e3bd8f8f8c60d6fdf3373.png" src="../_images/0e727c6c9b6f2b79dcbcce85d2413c1f733289e6825e3bd8f8f8c60d6fdf3373.png" />
+<img alt="../_images/28bdfc2dc453eff0e03b012863f22949b949fc3ba3fe8c1195011cb4c77e294b.png" src="../_images/28bdfc2dc453eff0e03b012863f22949b949fc3ba3fe8c1195011cb4c77e294b.png" />
+<img alt="../_images/222473afa1908de3ff6e46da6447d4e36c4896eac7d26348c280c5005fb201d0.png" src="../_images/222473afa1908de3ff6e46da6447d4e36c4896eac7d26348c280c5005fb201d0.png" />
+<img alt="../_images/7c098da7e52274824ba2873002832bf9adb451453b149b1e929d49f8b5bd1673.png" src="../_images/7c098da7e52274824ba2873002832bf9adb451453b149b1e929d49f8b5bd1673.png" />
+<img alt="../_images/df9d60c1a006c2af3a821521e9a5d10de4f2a24d5f50bf3a546ba79d74769e8b.png" src="../_images/df9d60c1a006c2af3a821521e9a5d10de4f2a24d5f50bf3a546ba79d74769e8b.png" />
+<img alt="../_images/099bbe62aa7bff26091e91fa5cbb5b70cd41fbd1638bd4def0b5de47a10e1fe2.png" src="../_images/099bbe62aa7bff26091e91fa5cbb5b70cd41fbd1638bd4def0b5de47a10e1fe2.png" />
+<img alt="../_images/ac94da29daa76f3a664eb05b6dd047d6293eaab1f54be559621885d16066c3ac.png" src="../_images/ac94da29daa76f3a664eb05b6dd047d6293eaab1f54be559621885d16066c3ac.png" />
+<img alt="../_images/048a80026bcd410ef93780e5ce391369268017862344c81e9664162b57e88e4a.png" src="../_images/048a80026bcd410ef93780e5ce391369268017862344c81e9664162b57e88e4a.png" />
+<img alt="../_images/4db3a25f9207783969545e2f5b9c1d5b703664102406d0c87f0f75351ffaf3db.png" src="../_images/4db3a25f9207783969545e2f5b9c1d5b703664102406d0c87f0f75351ffaf3db.png" />
+</div>
+</div>
+<p>נשים את הסיגנל בלי הריפוד ועם הריפוד אחד על השני בתדר</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span>
+<span class="n">pad_size</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">sig_pad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">sig</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="n">pad_size</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plot_fft</span><span class="p">(</span><span class="n">sig_pad</span><span class="p">,</span><span class="n">fs</span><span class="p">,</span><span class="n">vertical</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">f_axis</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sig</span><span class="p">),</span><span class="mi">1</span><span class="o">/</span><span class="n">fs</span><span class="p">))</span>
+<span class="n">sig_f</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">sig</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">f_axis</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sig_f</span><span class="p">),</span><span class="n">linefmt</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/996f4cdf68307200b6b5d4f8482b8c096daddc17b7fc9928a678e10e76c58495.png" src="../_images/996f4cdf68307200b6b5d4f8482b8c096daddc17b7fc9928a678e10e76c58495.png" />
+</div>
+</div>
+<p>אנחנו רואים שככל שאנחנו מוסיפים אפסים בזמן אנחנו בעצם מקבלים רזולוציה תדרית גבוהה יותר על פונקציה רציפה כלשהי. מה היא הפונקציה הזו? אם תחזרו אחורה בשיעורים תגלו שזו הייתה בדיוק ההגדרה של הפונקציה</p>
+<div class="math notranslate nohighlight">
+\[\tilde{V}\left(\theta\right)=\frac{1}{\sqrt{2\pi}}\sum_{n=-\infty}^{\infty}V_{n}e^{-i\theta n}\]</div>
+<p>נקודה למחשבה. מה היה קורה אם היינו מרפדים באפסים בתדר ואז מחזירים לזמן?</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./DSP"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../noise/detection.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">תורת הגילוי</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">סדר התדרים ב-DFT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">הזזה מעגלית</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">קונבולוציה סירקולרית</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">ריפוד באפסים</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yoav Palti
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

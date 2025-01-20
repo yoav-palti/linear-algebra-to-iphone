@@ -66,6 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'noise/noise_filters';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="תורת הגילוי" href="detection.html" />
     <link rel="prev" title="רעשים פיזיקלים" href="physical_noises.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -213,6 +214,8 @@
 <li class="toctree-l1"><a class="reference internal" href="noise_spectrum.html">ספקטרום רעש</a></li>
 <li class="toctree-l1"><a class="reference internal" href="physical_noises.html">רעשים במערכות פיזיקליות</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">סינון רעשים</a></li>
+<li class="toctree-l1"><a class="reference internal" href="detection.html">תורת הגילוי</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DSP/DFT_intro.html">מבוא ל-DFT</a></li>
 </ul>
 
     </div>
@@ -371,7 +374,6 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">רעש ואות לא חופפים</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">רעש לבן</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wiener-filter">שחזור אופטימלי - wiener filter</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#match-filter">גילוי אופטימלי - match filter</a></li>
 </ul>
             </nav>
         </div>
@@ -412,11 +414,6 @@
 <li><p>עבור <span class="math notranslate nohighlight">\(SNR\left(\omega\right)\ll1\)</span> נקבל <span class="math notranslate nohighlight">\(\tilde{H}\left(\omega\right)=0\)</span></p></li>
 </ul>
 <p>נשים לב שממש איפטמנו על להיות כמה שיותר קרובים לסיגנל המקורי כך שבתקווה נקבל באמת אות דומה ככל האפשר.</p>
-</section>
-<section id="match-filter">
-<h2>גילוי אופטימלי - match filter<a class="headerlink" href="#match-filter" title="Link to this heading">#</a></h2>
-<p>אם אנחנו רוצים רק לדעת אם האות קיים או לא קיים ולא לשחזר אותו אז יש דרך יותר טובה מאשר wiener filter.
-ננסה לפתור את הבעיה עבור רעש לבן</p>
 </section>
 </section>
 
@@ -459,6 +456,15 @@
         <p class="prev-next-title">רעשים פיזיקלים</p>
       </div>
     </a>
+    <a class="right-next"
+       href="detection.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">תורת הגילוי</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -479,7 +485,6 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">רעש ואות לא חופפים</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">רעש לבן</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wiener-filter">שחזור אופטימלי - wiener filter</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#match-filter">גילוי אופטימלי - match filter</a></li>
 </ul>
   </nav></div>
 

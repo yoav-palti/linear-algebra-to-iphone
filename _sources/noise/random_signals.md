@@ -290,7 +290,7 @@ $$R_{x}\left(\tau\right)\equiv\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left
 בגלל הסטציונריות יכולנו להגדיר את זה כפונקציה של משתנה בודד. כלומר:
 
 * אות סטציונרי - $R_{x}\left(t_{1},t_{2}\right)=R_{x}\left(0,t_{2}-t_{1}\right)=R_{x}\left(\tau\right)$
-* אות סטציונרי עם תוכלת 0 -  $R_{x}\left(\tau\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]=Cov\left(x\left(0\right),x\left(\tau\right)\right)$
+* אות סטציונרי עם תוחלת 0 -  $R_{x}\left(\tau\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]=Cov\left(x\left(0\right),x\left(\tau\right)\right)$
 
 > מסקנה: האוטוקורלציה היא פונקציה של הפרשי זמנים $\tau=t_{j}-t_{i}$
 
