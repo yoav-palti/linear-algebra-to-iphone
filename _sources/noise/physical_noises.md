@@ -79,12 +79,20 @@ $$\boxed{S_{xx}\left(f\right)=q\left\langle I\right\rangle }$$
 
 מסקנות:
 * הרעש יותר גדול ככל שהזרם יותר גדול
-* אם יש לנו פילטר לתחום תדרים $\Delta f=f_{2}-f_{1}$ נקבל כי גודל הרעש הוא $S_{xx}\left(f\right)=q\left\langle I\right\rangle \Delta f$
-* אם אנחנו מעוניינים לדעת את הספק רעש שוט על נגד בגודל $R$ נקבל פשוט $S_{xx}\left(f\right)=qR\left\langle I\right\rangle \Delta f$
+* אם יש לנו פילטר לתחום תדרים $\Delta f=f_{2}-f_{1}$ נקבל כי גודל הרעש על נגד בגודל $R$ הוא $\left\langle P\right\rangle =2qR\left\langle I\right\rangle \Delta f$
 
 מה הוא ה-SNR של רעש שוט כאשר מודדים על נגד בגודל $R$?
 
-$$SNR=\frac{\left\langle P_{sig}\right\rangle }{\left\langle P_{noise}\right\rangle }=\frac{R\left\langle I\right\rangle ^{2}}{eR\left\langle I\right\rangle \Delta f}=\frac{\left\langle I\right\rangle }{e\Delta f}$$
+$$SNR=\frac{\left\langle P_{sig}\right\rangle }{\left\langle P_{noise}\right\rangle }=\frac{R\left\langle I\right\rangle ^{2}}{2eR\left\langle I\right\rangle \Delta f}=\frac{\left\langle I\right\rangle }{2e\Delta f}$$
+
+:::{admonition} למה פקטור 2?
+:class: warning
+
+למה כאשר שמנו פילטר בעל רוחב $\Delta f=f_{2}-f_{1}$ קיבלנו שההספק הוא $\left\langle P\right\rangle =2qR\left\langle I\right\rangle \Delta f$  ולא $\left\langle P\right\rangle =qR\left\langle I\right\rangle \Delta f$
+
+הסיבה היא שה-PSD סימטרי וכך גם הפילטר. כלומר פילטר שמשאיר רק את התדרים בתחום $\left[f_{1},f_{2}\right]$ משאיר גם את התדרים בתחום $\left[-f_{2},-f_{1}\right]$ ולכן כשמחשבים את האינטגרל מקבלים פקטור 2.
+
+:::
 
 איך נגדיל את יחס האות לרעש?
 * נבחר $\Delta\omega$ כמה שיותר קטן כך שהוא לא מסנן לנו את האות
@@ -93,7 +101,7 @@ $$SNR=\frac{\left\langle P_{sig}\right\rangle }{\left\langle P_{noise}\right\ran
 
 
 ### רעש תרמי
-יש לנו מוליך שמלא באלקטרונים. אבל בגלל שיש תמית תמפרטורה כלשהי
+יש לנו מוליך שמלא באלקטרונים. אבל בגלל שיש תמית טמפרטורה כלשהי
 האלקטרונים לא עומדים במקום אלא זורמים לכלל הכיוונים. נגיד שכיוון הזרימה במוליך שלנו הוא $x$. אנחנו מעוניינים לדעת מה המהירות הממוצעת או יותר נכון מה הספק הרעש.
 
 לא נעשה כאן ניתוח שלם אבל רק נבין איך הגדלים נכנסים לבעייה.

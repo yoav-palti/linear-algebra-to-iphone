@@ -146,14 +146,14 @@ $$ h\left(t,\tau\right)=h\left(t-\tau\right)$$
 
 $$T:\left\{ x\left(t\right)\right\} \underset{Linear}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t,\tau\right)d\tau\underset{Time-Intariant}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau\equiv x\left(t\right)\ast h\left(t\right)$$
 
-המעבר האחרון הוא סימון. לאינטגרל $\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)$ יש שם מיוחד. הוא נקרא קונבולוציה ונסמן אותו ב-$x\left(t\right)\ast h\left(t\right)$
+המעבר האחרון הוא סימון. לאינטגרל $\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau$ יש שם מיוחד. הוא נקרא קונבולוציה ונסמן אותו ב-$x\left(t\right)\ast h\left(t\right)$
 נסכם את התוצאה שלנו
 
 ```{admonition} מערכות LTI
 :class: tip
 
 $$T:\left\{ x\left(t\right)\right\} =x\left(t\right)\ast h\left(t\right)$$
-$$x\left(t\right)\ast h\left(t\right)\equiv\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)$$
+$$x\left(t\right)\ast h\left(t\right)\equiv\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)\tau$$
 
 ```
 

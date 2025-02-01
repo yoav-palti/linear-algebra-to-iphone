@@ -217,6 +217,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../noise/detection.html">תורת הגילוי</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DSP/DFT_intro.html">מבוא ל-DFT</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">תורת האינפורמציה</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../information/entropy.html">למה אנטרופיה?</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -440,6 +444,15 @@
 <div class="math notranslate nohighlight">
 \[\omega_{k}-\omega_{l}=n\frac{\pi}{T_{s}},n\in\mathbb{N}\]</div>
 <p>כלומר אנחנו צריכים קפיצות תדר מסויימות אחרת נאבד את האורתוגונליות!</p>
+<p>נשים לב שאם אנחנו לא יודעים את הפאזה של כל ערוץ כלומר הסימבולים הם:</p>
+<div class="math notranslate nohighlight">
+\[z_{km}\left(t\right)\in\left\{ e^{i\left(\omega_{k}t+\phi_{k}\right)}Rect\left(\frac{t-mT_{s}}{T_{s}}\right)\right\} _{m=-\infty}^{\infty}\]</div>
+<p>נקבל בסוף תנאי:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\sin\left[\left(\omega_{k}-\omega_{l}\right)T_{s}+\phi_{k}-\phi_{l}\right]-\sin\left[\phi_{k}-\phi_{l}\right]}{\omega_{k}-\omega_{l}}=0\]</div>
+<p>ולכן לרוב נדרוש:</p>
+<div class="math notranslate nohighlight">
+\[\omega_{k}-\omega_{l}=n\frac{2\pi}{T_{s}},n\in\mathbb{N}\]</div>
 </section>
 <section id="cdma">
 <h2>CDMA<a class="headerlink" href="#cdma" title="Link to this heading">#</a></h2>

@@ -66,6 +66,18 @@ $$\omega_{k}-\omega_{l}=n\frac{\pi}{T_{s}},n\in\mathbb{N}$$
 
 כלומר אנחנו צריכים קפיצות תדר מסויימות אחרת נאבד את האורתוגונליות!
 
+נשים לב שאם אנחנו לא יודעים את הפאזה של כל ערוץ כלומר הסימבולים הם:
+
+$$z_{km}\left(t\right)\in\left\{ e^{i\left(\omega_{k}t+\phi_{k}\right)}Rect\left(\frac{t-mT_{s}}{T_{s}}\right)\right\} _{m=-\infty}^{\infty}$$
+
+נקבל בסוף תנאי:
+
+$$\frac{\sin\left[\left(\omega_{k}-\omega_{l}\right)T_{s}+\phi_{k}-\phi_{l}\right]-\sin\left[\phi_{k}-\phi_{l}\right]}{\omega_{k}-\omega_{l}}=0$$
+
+ולכן לרוב נדרוש:
+
+$$\omega_{k}-\omega_{l}=n\frac{2\pi}{T_{s}},n\in\mathbb{N}$$
+
 ### CDMA
 
 שיטה אחרת היא שפותרת לנו את בעיית המשתמשים היא ליצור קוד עבור כל משתמש כך שהאותות

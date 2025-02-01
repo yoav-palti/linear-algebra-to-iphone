@@ -217,6 +217,10 @@
 <li class="toctree-l1"><a class="reference internal" href="detection.html">תורת הגילוי</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DSP/DFT_intro.html">מבוא ל-DFT</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">תורת האינפורמציה</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../information/entropy.html">למה אנטרופיה?</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -449,12 +453,16 @@
 <p>מסקנות:</p>
 <ul class="simple">
 <li><p>הרעש יותר גדול ככל שהזרם יותר גדול</p></li>
-<li><p>אם יש לנו פילטר לתחום תדרים <span class="math notranslate nohighlight">\(\Delta f=f_{2}-f_{1}\)</span> נקבל כי גודל הרעש הוא <span class="math notranslate nohighlight">\(S_{xx}\left(f\right)=q\left\langle I\right\rangle \Delta f\)</span></p></li>
-<li><p>אם אנחנו מעוניינים לדעת את הספק רעש שוט על נגד בגודל <span class="math notranslate nohighlight">\(R\)</span> נקבל פשוט <span class="math notranslate nohighlight">\(S_{xx}\left(f\right)=qR\left\langle I\right\rangle \Delta f\)</span></p></li>
+<li><p>אם יש לנו פילטר לתחום תדרים <span class="math notranslate nohighlight">\(\Delta f=f_{2}-f_{1}\)</span> נקבל כי גודל הרעש על נגד בגודל <span class="math notranslate nohighlight">\(R\)</span> הוא <span class="math notranslate nohighlight">\(\left\langle P\right\rangle =2qR\left\langle I\right\rangle \Delta f\)</span></p></li>
 </ul>
 <p>מה הוא ה-SNR של רעש שוט כאשר מודדים על נגד בגודל <span class="math notranslate nohighlight">\(R\)</span>?</p>
 <div class="math notranslate nohighlight">
-\[SNR=\frac{\left\langle P_{sig}\right\rangle }{\left\langle P_{noise}\right\rangle }=\frac{R\left\langle I\right\rangle ^{2}}{eR\left\langle I\right\rangle \Delta f}=\frac{\left\langle I\right\rangle }{e\Delta f}\]</div>
+\[SNR=\frac{\left\langle P_{sig}\right\rangle }{\left\langle P_{noise}\right\rangle }=\frac{R\left\langle I\right\rangle ^{2}}{2eR\left\langle I\right\rangle \Delta f}=\frac{\left\langle I\right\rangle }{2e\Delta f}\]</div>
+<div class="warning admonition">
+<p class="admonition-title">למה פקטור 2?</p>
+<p>למה כאשר שמנו פילטר בעל רוחב <span class="math notranslate nohighlight">\(\Delta f=f_{2}-f_{1}\)</span> קיבלנו שההספק הוא <span class="math notranslate nohighlight">\(\left\langle P\right\rangle =2qR\left\langle I\right\rangle \Delta f\)</span>  ולא <span class="math notranslate nohighlight">\(\left\langle P\right\rangle =qR\left\langle I\right\rangle \Delta f\)</span></p>
+<p>הסיבה היא שה-PSD סימטרי וכך גם הפילטר. כלומר פילטר שמשאיר רק את התדרים בתחום <span class="math notranslate nohighlight">\(\left[f_{1},f_{2}\right]\)</span> משאיר גם את התדרים בתחום <span class="math notranslate nohighlight">\(\left[-f_{2},-f_{1}\right]\)</span> ולכן כשמחשבים את האינטגרל מקבלים פקטור 2.</p>
+</div>
 <p>איך נגדיל את יחס האות לרעש?</p>
 <ul class="simple">
 <li><p>נבחר <span class="math notranslate nohighlight">\(\Delta\omega\)</span> כמה שיותר קטן כך שהוא לא מסנן לנו את האות</p></li>
@@ -464,7 +472,7 @@
 </section>
 <section id="id2">
 <h2>רעש תרמי<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p>יש לנו מוליך שמלא באלקטרונים. אבל בגלל שיש תמית תמפרטורה כלשהי
+<p>יש לנו מוליך שמלא באלקטרונים. אבל בגלל שיש תמית טמפרטורה כלשהי
 האלקטרונים לא עומדים במקום אלא זורמים לכלל הכיוונים. נגיד שכיוון הזרימה במוליך שלנו הוא <span class="math notranslate nohighlight">\(x\)</span>. אנחנו מעוניינים לדעת מה המהירות הממוצעת או יותר נכון מה הספק הרעש.</p>
 <p>לא נעשה כאן ניתוח שלם אבל רק נבין איך הגדלים נכנסים לבעייה.</p>
 <p>הקשר בין טמפרטורה למהירות הוא חוק ידוע בתרמודינמיקה: וביקירוב ניתן לומר כי:</p>

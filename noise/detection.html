@@ -217,6 +217,10 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">תורת הגילוי</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DSP/DFT_intro.html">מבוא ל-DFT</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">תורת האינפורמציה</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../information/entropy.html">למה אנטרופיה?</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -571,7 +575,8 @@ A\cdot s\left[n-n_{0}\right]+\xi\left[n\right] &amp; \mathcal{H}_{1}\\
 <div class="math notranslate nohighlight">
 \[P_{FA}=\intop_{r_{th}}^{\infty}\mathbb{P}\left(r_{match}|\mathcal{H}_{0}\right)dr_{match}\]</div>
 <p>לא הכי פשוט לענות על השאלה מי הן ההתפלגויות משום שהרעש לא לבן אחרי הפילטר. אם לא היינו לוקחים max אלא מסתכלים על דגימה מסויימת היינו מקבלים ששתי ההתפלגויות הן גאוסייניות והחישובים היו קלים. די בקלות אפשר לעשות סימולציה למקרה הזה. מזמין אתכם לנסות וליצור עקומת ROC.</p>
-<p>נקודה למחשבה. מה היה קורה אם היינו מרפדים באפסים בתדר ואז מחזירים לזמן?</p>
+<p>אנחנו רוצים ליצור את הפילטר האידאלי כלומר וקטור שאם אני אעשה איתו קונבולוציה אני אכפיל במלבן מושלם בתדר. המטרה שלכם היא ליצור אות סופי בגודל 100 אשר הפורייה שלו כמה שיותר קרוב למלבן בתדר. שימו לב שכאשר אתם עושים FFT לסיגנל שלכם אתם דוגמים רק 100 תדרים. אני ממליץ לרפד באפסים וככה לדגום יותר תדרים ולראות כמה הפילטר שלכם טוב.
+פונקציית המטרה היא למנם את המרחק מהחלון האידאלי בנורמת L1. מומנים לבדוק בעזרת פונקציית הניקוד הבאה (אני לא מתחייב על איזה pad_length אני אשתמש אבל הוא יהיה גבוה)</p>
 </section>
 </section>
 

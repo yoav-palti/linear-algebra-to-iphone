@@ -217,6 +217,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../noise/detection.html">תורת הגילוי</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DSP/DFT_intro.html">מבוא ל-DFT</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">תורת האינפורמציה</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../information/entropy.html">למה אנטרופיה?</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -536,14 +540,14 @@ h\left(t,\tau\right)=\sum_{i}\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\
 <p>עבור מערכות אלו נרשום:</p>
 <div class="math notranslate nohighlight">
 \[T:\left\{ x\left(t\right)\right\} \underset{Linear}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t,\tau\right)d\tau\underset{Time-Intariant}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau\equiv x\left(t\right)\ast h\left(t\right)\]</div>
-<p>המעבר האחרון הוא סימון. לאינטגרל <span class="math notranslate nohighlight">\(\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)\)</span> יש שם מיוחד. הוא נקרא קונבולוציה ונסמן אותו ב-<span class="math notranslate nohighlight">\(x\left(t\right)\ast h\left(t\right)\)</span>
+<p>המעבר האחרון הוא סימון. לאינטגרל <span class="math notranslate nohighlight">\(\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau\)</span> יש שם מיוחד. הוא נקרא קונבולוציה ונסמן אותו ב-<span class="math notranslate nohighlight">\(x\left(t\right)\ast h\left(t\right)\)</span>
 נסכם את התוצאה שלנו</p>
 <div class="tip admonition">
 <p class="admonition-title">מערכות LTI</p>
 <div class="math notranslate nohighlight">
 \[T:\left\{ x\left(t\right)\right\} =x\left(t\right)\ast h\left(t\right)\]</div>
 <div class="math notranslate nohighlight">
-\[x\left(t\right)\ast h\left(t\right)\equiv\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)\]</div>
+\[x\left(t\right)\ast h\left(t\right)\equiv\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)\tau\]</div>
 </div>
 </section>
 <section id="id8">
