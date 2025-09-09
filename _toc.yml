@@ -44,7 +44,7 @@ parts:
   - caption: "דיגיטציה"
     chapters:
     - file: digitation_and_reconstruction/digitation_intro
-      title: "מה זה לדיגיטציה"
+      title: "מה זה דיגיטציה"
     - file: digitation_and_reconstruction/sampling
       title: "דגימה"
     - file: digitation_and_reconstruction/interpolation
@@ -67,3 +67,10 @@ parts:
       title: "סינון רעשים"
     - file: noise/detection
       title: "תורת הגילוי"
+    - file: DSP/DFT_intro
+      title: "מבוא ל-DFT"
+  - caption: "תורת האינפורמציה"
+    chapters:
+    - file: information/entropy
+      title: "למה אנטרופיה?"
+
