@@ -1,6 +1,63 @@
 # הספק על רכיב מרוכב
 
-### עומס מרוכב 
+<details>
+  <summary>אמ;לק</summary>
+
+בעומס כללי עם עכבה מרוכבת  
+
+$$Z(\omega)=R(\omega)+i\chi(\omega)=|Z|e^{i\phi(\omega)}$$  
+
+ההספק הרגעי הוא  
+
+$$P(t)=V(t)\cdot I(t)=\frac{V_{0}^{2}}{2|Z|}\left[\cos(2\omega t-\phi)+\cos(\phi)\right]$$  
+
+וההספק הממוצע:
+
+$$\boxed{\left\langle P\right\rangle =\frac{V_{0}^{2}}{2|Z|}\cos(\phi)}$$
+
+---
+
+### מסקנות עיקריות:
+* רק **החלק הממשי** של העכבה צורך הספק.
+    * צריכת הספק - $\Re[Z]>0$
+    * החזר הספק - $\Re[Z]<0 \Rightarrow \text{הספק מוחזר (Negative Impedance)}$
+* רכיבים טהורים ($L$ או $C$ בלבד) אינם צורכים הספק ממוצע.
+  $$\cos(\phi)=0$$
+* בתדר הרזוננס במעגל $LC$ מתקיים $\cos(\phi)=1$ → האימפדנס ממשי.
+
+---
+
+### תיאום עכבות
+נניח מקור ועומס:
+
+$$Z_{S}, Z_{L}$$  
+
+הזרם:  
+
+$$I=\frac{V_{0}}{Z_{S}+Z_{L}}$$  
+
+ההספק על העומס:  
+
+$$\left\langle P_{L}\right\rangle =\frac{|V_{0}|^{2}}{2}\frac{\Re[Z_{L}]}{|Z_{S}+Z_{L}|^{2}}$$  
+
+כדי למקסם את ההספק:
+
+$$\boxed{Z_{L}=Z_{S}^{\ast}}$$  
+
+במקרה של מקור ממשי:
+
+$$R_{L}=R_{S} \Rightarrow P_{max}=\frac{|V_{0}|^{2}}{8R_{S}}$$  
+
+---
+
+**בשורה התחתונה:**  
+* רק החלק הממשי של העכבה מבזבז הספק.  
+* תיאום עכבות ($Z_{L}=Z_{S}^{\ast}$) מבטיח העברת הספק ממוצע מקסימלי.  
+* במעגלים בתדר קבוע – ניתן לבטל את החלק המדומה (לדוגמה ע"י הוספת קבל/סליל).
+
+</details>
+
+### עומס מרוכב
 ![complex_impedance.png](images/complex_impedance.png)
 
 נרצה לדעת בהינתן רכיב כללי עם עכבה כלשהי $Z\left(\omega\right)=R\left(\omega\right)+i\chi\left(\omega\right)=\left|Z\left(\omega\right)\right|e^{i\phi\left(\omega\right)}$

@@ -73,4 +73,6 @@ parts:
     chapters:
     - file: information/entropy
       title: "למה אנטרופיה?"
+    - file: temp
+      title: "בדיקת תוכן"
 

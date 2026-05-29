@@ -1,0 +1,7369 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+% Necessary Commands:
+\usepackage{autobreak}
+\usepackage{relsize}
+% Set vertical space before and after dislpay equations to be longer for better redability:
+\AtBeginDocument{\setlength\abovedisplayskip{12pt}}
+\AtBeginDocument{\setlength\belowdisplayskip{12pt}}
+\AtBeginDocument{\setlength\belowdisplayshortskip{12pt}}
+\AtBeginDocument{\setlength\belowdisplayshortskip{12pt}}
+
+% Set space between words to be wider:
+\spaceskip=1.3\fontdimen2\font plus 1\fontdimen3\font minus 1.5\fontdimen4\font
+
+% Convert the Lyx colors into more pleasent colors:
+\usepackage{xcolor}
+\definecolor{blue}{RGB}{14,107,217}
+\definecolor{green}{RGB}{0,158,40}
+\definecolor{red}{RGB}{235,16,16}
+\definecolor{brown}{RGB}{164,66,0}
+\definecolor{orange}{RGB}{231,135,26}
+\definecolor{purple}{RGB}{94,53,177}
+
+% Convert the QED Symbol at the end of proofs to a solid black square (credit: Yakir Oz):
+\usepackage{amssymb}
+
+% Make the layout more similar to Hebrew Article, which I am more used to:
+\renewcommand*{\@seccntformat}[1]{\hspace{0.5cm}\csname the#1\endcsname\hspace{0.5cm}} 
+\usepackage{titlesec}
+\titleformat{\section}{\fontsize{20}{20}\bfseries}{\thesection}{10pt}{}
+\titleformat{\subsection}{\fontsize{15}{15}\bfseries}{\thesubsection}{10pt}{}
+\titleformat{\subsubsection}{\bfseries}{\thesubsubsection}{10pt}{}
+
+% Create disjoint union symbols:
+\makeatletter
+\def\moverlay{\mathpalette\mov@rlay}
+\def\mov@rlay#1#2{\leavevmode\vtop{%
+   \baselineskip\z@skip \lineskiplimit-\maxdimen
+   \ialign{\hfil$\m@th#1##$\hfil\cr#2\crcr}}}
+\newcommand{\charfusion}[3][\mathord]{
+    #1{\ifx#1\mathop\vphantom{#2}\fi
+        \mathpalette\mov@rlay{#2\cr#3}
+      }
+    \ifx#1\mathop\expandafter\displaylimits\fi}
+\makeatother
+\newcommand{\cupdot}{\charfusion[\mathbin]{\cup}{\cdot}}
+\newcommand{\bigcupdot}{\charfusion[\mathop]{\bigcup}{\cdot}}
+
+
+% Create large And symbol
+\newcommand{\kaliLargeLand}{\mathop{\mathlarger{\mathlarger{\mathlarger{\land}}}}}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\begin_local_layout
+Style Section
+	Font
+	  Series     Medium
+	  Shape      Smallcaps
+	  Size       Larger
+	  Series     Bold
+	EndFont
+	TocLevel 1
+End
+
+
+Style Section*
+	Font
+	  Series     Medium
+	  Shape      Smallcaps
+	  Size      Larger
+	  Series     Bold
+	EndFont
+End
+
+
+Style Solution
+
+	LabelString           "פיתרון: "
+End
+
+
+Style Notation
+
+	LabelString           "סימון  \thetheorem: "
+End
+
+Style Theorem
+
+	LabelString           "משפט \thetheorem: "
+End
+
+Style Property
+
+	LabelString           "תזכורת: "
+End
+\end_local_layout
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing onehalf
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\pdf_quoted_options "linkcolor=magenta, urlcolor=blue, citecolor=blue, hyperfootnotes=false, unicode=true"
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1cm
+\topmargin 2cm
+\rightmargin 1cm
+\bottommargin 3cm
+\headheight 0cm
+\headsep 0cm
+\footskip 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip smallskip
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+F\left(\omega\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}f\left(t\right)e^{-i\omega t}dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(t\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}F\left(\omega\right)e^{i\omega t}dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(t\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\underset{\text{םימדקמ}}{\underbrace{F\left(\omega\right)}}e^{i\omega t}dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\underset{\text{םימדקמ}}{\underbrace{\tilde{X}\left(\omega\right)}}e^{i\omega t}dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+X\left(\omega\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}x\left(t\right)e^{-i\omega t}dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+y\left(t\right)=T:\left\{ x\left(t\right)\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+T:\underset{input}{\left\{ \underbrace{x\left(t\right)}\right\} }=\underset{output}{\underbrace{y\left(t\right)}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\underset{\text{ןופורקימה אצומב חתמ}}{\underbrace{V\left(t\right)}}=T:\underset{\text{ןופורקימה}\text{לש}\text{הנרבממב}\text{ץחל}}{\left\{ \underbrace{p\left(t\right)}\right\} }
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t\right)\ \ \ y\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t\right)=\alpha x_{1}\left(t\right)+\beta x_{2}\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T:\underset{x\left(t\right)}{\underbrace{\left\{ \alpha x_{1}\left(t\right)+\beta x_{2}\left(t\right)\right\} }}=\alpha\underset{y_{1}\left(t\right)}{\underbrace{T:\left\{ x_{1}\left(t\right)\right\} }}+\beta\underset{y_{2}\left(t\right)}{\underbrace{T:\left\{ x_{2}\left(t\right)\right\} }}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T:\left\{ \alpha x_{1}+\beta x_{2}\right\} =\alpha T:\left\{ x_{1}\right\} +\beta T:\left\{ x_{2}\right\} 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+ST:\left\{ x\left(t\right)\right\} =S:\left\{ T:\left\{ \alpha x_{1}\left(t\right)+\beta x_{2}\left(t\right)\right\} \right\} \underset{\text{תיראניל\ }T}{\underbrace{=}}S:\left\{ \alpha T:\left\{ x_{1}\left(t\right)\right\} +\beta T:\left\{ x_{2}\left(t\right)\right\} \right\} 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\underset{\text{תיראניל\ }S}{\underbrace{=}}\alpha S:\left\{ T:\left\{ x_{1}\left(t\right)\right\} \right\} +\beta S:\left\{ T:\left\{ x_{2}\left(t\right)\right\} \right\} =\alpha ST:\left\{ x_{1}\left(t\right)\right\} +\beta ST:\left\{ x_{2}\left(t\right)\right\} 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left(t\right)=R:\left\{ I\left(t\right)\right\} =R\cdot I\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I_{1}\left(t\right)=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I_{2}\left(t\right)=2
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(t\right)=2I_{1}\left(t\right)+I_{2}\left(t\right)=4
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left(t\right)=R:\left\{ I\left(t\right)\right\} =R:\left\{ 2I_{1}\left(t\right)+I_{2}\left(t\right)\right\} =2R:\left\{ I_{1}\left(t\right)\right\} +R:\left\{ I_{2}\left(t\right)\right\} 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\delta\left(t-t_{0}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\delta\left(t\ne0\right)=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\intop_{-\infty}^{\infty}\delta\left(t\right)dt=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t\right)\cdot\delta\left(t-\tau\right)=x\left(\tau\right)\cdot\delta\left(t-\tau\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\intop_{-\infty}^{\infty}x\left(\tau\right)\cdot\delta\left(t-\tau\right)d\tau=\intop_{-\infty}^{\infty}x\left(t\right)\cdot\delta\left(t-\tau\right)d\tau=x\left(t\right)\underset{1}{\underbrace{\intop_{-\infty}^{\infty}\cdot\delta\left(t-\tau\right)d\tau}}=x\left(t\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\boxed{\underset{\text{תוא}}{\underbrace{x\left(t\right)}}=\intop_{-\infty}^{\infty}\underset{\text{רפסמ}}{\underbrace{x\left(\tau\right)}}\cdot\delta\left(t-\tau\right)d\tau}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\overrightarrow{x}_{i}=\sum_{j}\overrightarrow{x}_{j}\cdot\delta_{ij}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\underset{\text{רוטקו}}{\underbrace{\overrightarrow{x}}}=\sum_{j}\underset{\text{רפסמ}}{\underbrace{\overrightarrow{x}_{j}}}\cdot\underset{\text{רוטקו}}{\underbrace{\overrightarrow{e_{j}}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T:\left\{ x\left(t\right)\right\} =T:\left\{ \intop_{-\infty}^{\infty}\underset{\text{רפסמ}}{\underbrace{x\left(\tau\right)}}\cdot\delta\left(t-\tau\right)d\tau\right\} =\intop_{-\infty}^{\infty}\underset{\text{םדקמ}}{\underbrace{x\left(\tau\right)}}\cdot T:\left\{ \delta\left(t-\tau\right)\right\} d\tau
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h\left(t,\tau\right)\equiv T:\left\{ \delta\left(t-\tau\right)\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\boxed{T:\left\{ x\left(t\right)\right\} =\intop_{-\infty}^{\infty}\underset{\text{םדקמ}}{\underbrace{x\left(\tau\right)}}\cdot\underset{\text{םלהל}\text{הבוגת}}{\underbrace{h\left(t,\tau\right)}}d\tau}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h\left(\underset{\text{הבוגתה}\text{תדידמ}\text{ןמז}}{\underbrace{t}},\underset{\text{םלהה}\text{ןמז}}{\underbrace{\tau}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\overrightarrow{y}_{t}=\left[T:\left\{ \overrightarrow{x}\right\} \right]_{t}=\sum_{\tau}\overrightarrow{x}_{\tau}\cdot h_{t,\tau}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\forall t<\tau:h\left(t,\tau\right)=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+F\left(t\right)=ma=m\ddot{x}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+F\left(t\right)=Ap\left(t\right)-\gamma\dot{x}-kx
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Ap_{1}\left(t\right)=m\ddot{x}_{1}+\gamma\dot{x}_{1}+kx_{1}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Ap_{2}\left(t\right)=m\ddot{x}_{2}+\gamma\dot{x}_{2}+kx_{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+F\left(t\right)=m\ddot{x}+\gamma\dot{x}+kx
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Ap\left(t\right)=m\ddot{x}+\gamma\dot{x}+kx
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\delta\left(t-\tau\right)=m\ddot{h}+\gamma\dot{h}+kh
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h\left(t,\tau\right)=\theta\left(t-\tau\right)\frac{1}{m\omega_{D}}e^{-\frac{\gamma}{2m}\left(t-\tau\right)}\sin\left(\omega_{D}\left(t-\tau\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{D}=\sqrt{\frac{k}{m}-\left(\frac{\gamma}{2m}\right)^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h\left(t,\tau\right)=h\left(t-\tau\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(0\right)=\dot{x}\left(0\right)=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p\left(t\right)=\alpha p_{1}\left(t\right)+\beta p_{2}\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Ap\left(t\right)=A\left[\alpha p_{1}\left(t\right)+\beta p_{2}\left(t\right)\right]=\alpha Ap_{1}\left(t\right)+\beta Ap_{2}\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\alpha\left(m\ddot{x}_{1}+\gamma\dot{x}_{1}+kx_{1}\right)+\beta\left(m\ddot{x}_{2}+\gamma\dot{x}_{2}+kx_{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=m\left(\alpha\ddot{x}_{1}+\beta\ddot{x}_{2}\right)+\gamma\left(\alpha\dot{x}_{1}+\beta\dot{x}_{2}\right)+k\left(\alpha x_{1}+\beta x_{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=m\frac{d^{2}}{dt^{2}}\left(\alpha x_{1}+\beta x_{2}\right)+\gamma\frac{d}{dt}\left(\alpha x_{1}+\beta x_{2}\right)+k\left(\alpha x_{1}+\beta x_{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T:\underset{p\left(t\right)}{\underbrace{\left\{ \alpha p_{1}\left(t\right)+\beta p_{2}\left(t\right)\right\} }}=\alpha x_{1}+\beta x_{2}=\alpha\underset{x_{1}\left(t\right)}{\underbrace{T:\left\{ p_{1}\left(t\right)\right\} }}+\beta\underset{x_{2}\left(t\right)}{\underbrace{T:\left\{ p_{2}\left(t\right)\right\} }}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+-\frac{t}{2\sigma^{2}}^{2}-i\omega t=-\left(\frac{t}{\sqrt{2}\sigma}+\frac{i\omega\sigma}{\sqrt{2}}\right)^{2}-\frac{\omega^{2}\sigma^{2}}{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h\left(t,\tau\right)=\sum_{i}\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h\left(t\right)=\sum\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T:\left\{ x\left(t\right)\right\} =\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t,\tau\right)d\tau=\intop_{-\infty}^{\infty}x\left(\tau\right)\sum_{i}\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\right)\right)d\tau
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\sum_{i}\alpha_{i}\intop_{-\infty}^{\infty}x\left(\tau\right)\delta\left(t-\tau-\frac{d_{i}}{c}\right)d\tau=\sum_{i}\alpha_{i}x\left(t-\frac{d_{i}}{c}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T:\left\{ x\left(t\right)\right\} \underset{Linear}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t,\tau\right)d\tau\underset{Time-Intariant}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau\equiv x\left(t\right)\ast h\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T:\left\{ x\left(t\right)\right\} =x\left(t\right)\ast h\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t\right)\ast h\left(t\right)\equiv\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t\right)=\sum_{n=0}^{\infty}a_{n}t^{n}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+E\propto\intop_{-\infty}^{\infty}\left|x\left(t\right)\right|^{2}dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{F}\left[x\left(t\right)\right]\equiv\tilde{X}\left(\omega\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}x\left(t\right)e^{-i\omega t}dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\underset{\text{םימדקמ}}{\underbrace{\tilde{X}\left(\omega\right)}}e^{i\omega t}dt=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\left(\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}d\tau\right)e^{i\omega t}dt=
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\underset{\text{היצרגטניא}-\text{רדס}-\text{ףילחנ}}{\underbrace{=}}\frac{1}{2\pi}\intop_{-\infty}^{\infty}x\left(\tau\right)\left(\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}dt\right)d\tau=\frac{1}{2\pi}\intop_{-\infty}^{\infty}x\left(\tau\right)\left(2\pi\delta\left(t-\tau\right)\right)d\tau=x\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}dt=\begin{cases}
+0 & t\ne\tau\\
+\infty & t=\tau
+\end{cases}\propto\delta\left(t-\tau\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{Y}\left(\omega\right)\equiv\mathcal{F}\left[x\left(t\right)\ast h\left(t\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{Y}\left(\omega\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}y\left(t\right)e^{-i\omega t}dt=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}x\left(t\right)\ast h\left(t\right)e^{-i\omega t}dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau e^{-i\omega t}dt=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)e^{-i\omega t}dtd\tau
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\underset{u=t-\tau}{\underbrace{=}}\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(u\right)e^{-i\omega\left(u+\tau\right)}dud\tau=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}h\left(u\right)e^{-i\omega u}dtd\tau
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{1}{\sqrt{2\pi}}\left(\intop_{-\infty}^{\infty}h\left(u\right)e^{-i\omega u}dt\right)\left(\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}d\tau\right)=\sqrt{2\pi}\tilde{H}\left(\omega\right)\tilde{X}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\boxed{y\left(t\right)=x\left(t\right)\ast h\left(t\right)\Longleftrightarrow\tilde{Y}\left(\omega\right)=\sqrt{2\pi}\tilde{X}\left(\omega\right)\tilde{H}\left(\omega\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\underset{\text{תרוסמתה}-\text{תייצקנופ}}{\underbrace{\tilde{H}\left(\omega\right)}}\equiv\mathcal{F}\left[h\left(t\right)\right]=\mathcal{F}\left[T:\left\{ \delta\left(t\right)\right\} \right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{X}\left(\omega_{0}\right)=0\Rightarrow\tilde{Y}\left(\omega_{0}\right)=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{\Re}\left[\tilde{H}\left(\omega\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Im\left[\tilde{H}\left(\omega\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(-\omega\right)=\tilde{H}^{\ast}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Ap\left(t\right)=m\ddot{x}+\gamma\dot{x}+kx
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{F}\left[Ap\left(t\right)\right]=A\tilde{P}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{F}\left[m\ddot{x}+\gamma\dot{x}+kx\right]=m\left(i\omega\right)^{2}\tilde{X}\left(\omega\right)+\gamma\left(i\omega\right)\tilde{X}\left(\omega\right)+k\tilde{X}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\left(-m\omega^{2}+i\gamma\omega+k\right)\tilde{X}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)=\frac{\tilde{X}\left(\omega\right)}{\tilde{P}\left(\omega\right)}=\frac{A}{-m\omega^{2}+i\gamma\omega+k}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{D}=\sqrt{\frac{k}{m}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta\omega
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t\right)=e^{i\omega_{0}t}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t\right)=\cos\left(\omega_{0}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+y\left(t\right)=\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\delta\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+y\left(t\right)=T:\left\{ x\left(t\right)\right\} =T:\left\{ \cos\left(\omega_{0}t\right)\right\} =T:\left\{ \frac{e^{i\omega_{0}t}-e^{-i\omega_{0}t}}{2}\right\} =
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{1}{2}\left(T:\left\{ e^{i\omega_{0}t}\right\} -T:\left\{ e^{-i\omega_{0}t}\right\} \right)=\frac{1}{2}\left(\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}-\tilde{H}\left(-\omega_{0}\right)e^{-i\omega_{0}t}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{1}{2}\left(\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}-\tilde{H}^{\ast}\left(\omega_{0}\right)e^{-i\omega_{0}t}\right)\underset{\varphi=\arg\left(\tilde{H}\left(\omega_{0}\right)\right)}{\underbrace{=}}\frac{1}{2}\left(\left|\tilde{H}\left(\omega_{0}\right)\right|e^{i\varphi}e^{i\omega_{0}t}-\left|\tilde{H}\left(\omega_{0}\right)\right|e^{-i\varphi}e^{-i\omega_{0}t}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{\left|\tilde{H}\left(\omega_{0}\right)\right|}{2}\left(e^{i\left(\omega_{0}t+\varphi\right)}-e^{-i\left(\omega_{0}t+\varphi\right)}\right)=\left|\tilde{H}\left(\omega_{0}\right)\right|\cos\left(\omega_{0}t+\varphi\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T:\left\{ \cos\left(\omega_{0}t+\phi_{0}\right)\right\} =T:\left\{ \cos\left(\omega_{0}\left(t+\frac{\phi_{0}}{\omega_{0}}\right)\right)\right\} \underset{Time-Invariant}{\underbrace{=}}\left|\tilde{H}\left(\omega_{0}\right)\right|\cos\left(\omega_{0}\left(t+\frac{\phi_{0}}{\omega_{0}}\right)+\varphi\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+T\left(\alpha\vec{v_{1}}+\beta\vec{v_{2}}\right)=T\left(\alpha\vec{v_{1}}\right)+T\left(\beta\vec{v_{2}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[\vec{v}\right]_{j}=\sum_{i}\left[\vec{v}\right]_{i}\delta_{ij}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[\vec{e_{i}}\right]_{j}=\begin{cases}
+1 & i=j\\
+0 & else
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\delta\left(t-\tau\right)=\begin{cases}
+\infty & t=\tau\\
+0 & else
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[T\left(\vec{v}\right)\right]_{i}=\sum_{j}h_{ij}\left[\vec{v}\right]_{j}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t\right)=\intop_{-\infty}^{\infty}x\left(\tau\right)\cdot\delta\left(t-\tau\right)d\tau
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T:\left\{ x\left(t\right)\right\} =\intop_{-\infty}^{\infty}x\left(\tau\right)\cdot h\left(t,\tau\right)d\tau
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[T\left(\vec{v}\right)\right]_{i}=\sum_{j}h_{ij}\vec{v}_{j}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle \vec{v}|\vec{u}\right\rangle =\sum_{i}\left[\vec{v}\right]_{i}\cdot\left[\vec{u}\right]_{i}^{\ast}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle x\left(t\right)|g\left(t\right)\right\rangle =\intop_{-\infty}^{\infty}x\left(t\right)\cdot g^{\ast}\left(t\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle \vec{b_{i}}|\vec{b_{j}}\right\rangle =\delta_{ij}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\intop_{-\infty}^{\infty}g_{\alpha}\left(t\right)\cdot g_{\beta}^{\ast}\left(t\right)dt=\delta\left(\alpha-\beta\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+g_{\omega}\left(t\right)=\frac{1}{\sqrt{2\pi}}e^{i\omega t}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\intop_{-\infty}^{\infty}e^{i\omega_{i}t}\cdot e^{-i\omega_{j}t}dt=\delta\left(\omega_{i}-\omega_{j}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\vec{v}=\sum_{i}\left[\vec{v}\right]_{i}\vec{b_{i}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t\right)=\intop_{-\infty}^{\infty}X\left(\alpha\right)g_{\alpha}\left(t\right)d\alpha
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[\vec{v}\right]_{i}=\left\langle \vec{v}|\vec{b_{i}}\right\rangle =\sum_{j}\left[\vec{v}\right]_{j}\cdot\left[\vec{b}_{i}\right]_{j}^{\ast}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+X\left(\alpha\right)=\left\langle x\left(t\right)|g_{\alpha}\left(t\right)\right\rangle =\intop_{-\infty}^{\infty}x\left(t\right)g_{\alpha}^{\ast}\left(t\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T\left(\vec{v}_{i}\right)=\lambda_{i}\vec{v}_{i}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T:\left\{ x_{\alpha}\left(t\right)\right\} =\lambda\left(\alpha\right)x_{\alpha}\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T:\left\{ e^{i\omega_{0}t}\right\} =\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\forall\omega\in\mathbb{R}:\underset{\text{ימצע}-\text{ךרע}}{\underbrace{\tilde{H}\left(\omega\right)}}\ne0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}_{inv}\left(\omega\right)=\frac{1}{\tilde{H}\left(\omega\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h_{inv}\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}_{inv}\left(\omega\right)=\frac{1}{\tilde{H}\left(\omega\right)}\underset{\text{הזזה}}{\underbrace{e^{i\omega\tau}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left|\tilde{H}\left(\omega\right)\right|^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{\partial^{2}u}{\partial t^{2}}-c^{2}\nabla^{2}u=S\left(\vec{r},t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h_{\vec{r},\vec{r}^{\prime}}\left(t\right)=\frac{\delta\left(t-\frac{\left|\vec{r}-\vec{r}^{\prime}\right|}{c}\right)}{\left|\vec{r}-\vec{r}^{\prime}\right|}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}_{\vec{r},\vec{r}^{\prime}}\left(\omega\right)=\frac{e^{i\omega\frac{\left|\vec{r}-\vec{r}^{\prime}\right|}{c}}}{\left|\vec{r}-\vec{r}^{\prime}\right|}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h\left(t\right)=\alpha_{1}\delta\left(t-\tau_{1}\right)+\alpha_{2}\delta\left(t-\tau_{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)=\frac{\alpha_{1}}{\sqrt{2\pi}}e^{i\omega\tau_{1}}+\frac{\alpha_{2}}{\sqrt{2\pi}}e^{i\omega\tau_{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\alpha_{1}=\alpha_{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)=\frac{\alpha_{1}}{\sqrt{2\pi}}e^{i\omega\frac{\tau_{1}+\tau_{2}}{2}}\left(e^{i\omega\frac{\tau_{1}-\tau_{2}}{2}}+e^{-i\omega\frac{\tau_{1}-\tau_{2}}{2}}\right)=\sqrt{\frac{2}{\pi}}\alpha_{1}e^{i\omega\frac{\tau_{1}+\tau_{2}}{2}}\cos\left(\omega\frac{\tau_{1}-\tau_{2}}{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left|\tilde{H}\left(\omega\right)\right|=\sqrt{\frac{2}{\pi}}\left|\alpha_{1}\right|\cos\left(\omega\frac{\tau_{1}-\tau_{2}}{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\arg\left(\tilde{H}\left(\omega\right)\right)=\arg\left(\alpha_{1}\right)+\omega\frac{\tau_{1}+\tau_{2}}{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{R}\left(t\right)=R\cdot I\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Z\left(\omega\right)=\tilde{H}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{C}\left(t\right)=\frac{1}{C}\cdot Q\left(t\right)=\frac{1}{C}\cdot\intop_{-\infty}^{t}I\left(\tau\right)d\tau
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{L}\left(t\right)=L\frac{d}{dt}I\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V_{R}}\left(\omega\right)=R\cdot\tilde{I}\left(\omega\right)\Rightarrow Z_{R}=R
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V_{C}}\left(\omega\right)=\frac{1}{i\omega C}\tilde{I}\left(\omega\right)\Rightarrow Z_{C}=\frac{1}{i\omega C}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V_{L}}\left(\omega\right)=i\omega L\tilde{I}\left(\omega\right)\Rightarrow Z_{L}=i\omega L
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Z\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R\delta\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+L\frac{d}{dt}\delta\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{C}\cdot\intop_{-\infty}^{t}\delta\left(\tau\right)d\tau=\frac{1}{C}\theta\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\nabla\times\vec{E}=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{in}\left(t\right)=V_{R}\left(t\right)+V_{C}\left(t\right)=RI\left(t\right)+\frac{1}{C}\intop_{-\infty}^{t}I\left(t^{\prime}\right)dt^{\prime}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V_{in}}\left(\omega\right)=R\tilde{I}\left(\omega\right)+\frac{1}{i\omega C}\tilde{I}\left(\omega\right)=\left(R+\frac{1}{i\omega C}\right)\tilde{I}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{I}\left(\omega\right)=\frac{1}{R+\frac{1}{i\omega C}}\tilde{V_{in}}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}_{out}\left(\omega\right)=\tilde{V_{C}}\left(\omega\right)=\frac{1}{i\omega C}\tilde{I}\left(\omega\right)=\frac{1}{i\omega C}\cdot\frac{1}{R+\frac{1}{i\omega C}}\tilde{V_{in}}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)=\frac{1}{i\omega C}\cdot\frac{1}{R+\frac{1}{i\omega C}}=\frac{1}{1+i\omega RC}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\tau=RC
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)=\frac{1}{1+i\omega\tau}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+10\log_{10}\left(\frac{size}{ref}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left|\tilde{H}\left(\omega\right)\right|^{2}=\left|\frac{1}{1+i\omega\tau}\right|^{2}=\frac{1}{1+\left(\omega\tau\right)^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+10\log_{10}\left(\left|\tilde{H}\left(\omega\right)\right|^{2}\right)=10\log_{10}\left(\frac{1}{1+\left(\omega\tau\right)^{2}}\right)=-10\log_{10}\left(1+\left(\omega\tau\right)^{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+10\log_{10}\left(\left|\tilde{H}\left(\omega\right)\right|^{2}\right)\underset{\omega\tau\gg1}{\underbrace{\approx}}-20\log_{10}\left(\omega\tau\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+-\infty
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{c}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left|\tilde{H}\left(\omega\right)\right|\approx1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h\left(t\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\tilde{H}\left(\omega\right)e^{i\omega t}dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\delta\left(t\right)=V_{in}\left(t\right)=V_{R}\left(t\right)+V_{C}\left(t\right)=RI\left(t\right)+\frac{1}{C}\intop_{-\infty}^{t}I\left(t^{\prime}\right)dt^{\prime}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{out}\left(t\right)=V_{C}\left(t\right)=\frac{1}{C}\intop_{-\infty}^{t}I\left(t^{\prime}\right)dt^{\prime}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(t\right)=C\frac{d}{dt}V_{out}\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\delta\left(t\right)=RC\frac{d}{dt}V_{out}\left(t\right)+V_{out}\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{out}\left(t\right)=\theta\left(t\right)\cdot f\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{d}{dt}V_{out}\left(t\right)=\delta\left(t\right)\cdot f\left(t\right)+\theta\left(t\right)\cdot\frac{d}{dt}f\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\delta\left(t\right)=RC\left[\delta\left(t\right)\cdot f\left(t\right)+\theta\left(t\right)\cdot\frac{d}{dt}f\left(t\right)\right]+\theta\left(t\right)\cdot f\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Downarrow
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\delta\left(t\right)=RC\delta\left(t\right)\cdot f\left(t\right)+\theta\left(t\right)\cdot\left[RC\frac{d}{dt}f\left(t\right)+f\left(t\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(0\right)=\frac{1}{RC}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+RC\frac{d}{dt}f\left(t\right)+f\left(t\right)=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(t\right)=\frac{1}{RC}e^{-\frac{t}{RC}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{out}\left(t\right)=h\left(t\right)=\frac{1}{RC}\theta\left(t\right)e^{-\frac{t}{RC}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)=\frac{1}{1+i\omega RC}\underset{\frac{1}{RC}\ll\omega}{\underbrace{\approx}}\frac{1}{RC}\frac{1}{i\omega}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}_{out}\left(\omega\right)=\tilde{V}_{R}\left(\omega\right)=\tilde{V}_{in}\left(\omega\right)-\tilde{V}_{C}\left(\omega\right)=\tilde{V}_{in}\left(\omega\right)-\frac{\tilde{V}_{in}\left(\omega\right)}{1+i\omega RC}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}_{out}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}\cdot\tilde{V}_{in}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}=\frac{1}{1+\frac{1}{i\omega RC}}\underset{\omega\ll\frac{1}{RC}}{\underbrace{\approx}}RC\cdot i\omega
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}_{HPF}\left(\omega\right)=1-\tilde{H}_{LPF}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h_{HPF}\left(t\right)=\delta\left(t\right)-h_{LPF}\left(t\right)=\delta\left(t\right)-\frac{1}{RC}\theta\left(t\right)e^{-\frac{t}{RC}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{0}=91.8MHz,\Delta f=100kHz
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{in}\left(t\right)=V_{R}\left(t\right)+V_{C}\left(t\right)+V_{L}\left(t\right)=RI\left(t\right)+L\frac{d}{dt}I\left(t\right)+\frac{1}{C}\intop_{-\infty}^{t}I\left(t^{\prime}\right)dt^{\prime}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\dot{x}\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{in}\left(t\right)=\frac{1}{C}Q+R\dot{Q}+L\ddot{Q}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+F\left(t\right)=kx+\gamma\dot{x}+m\ddot{x}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}_{in}\left(\omega\right)=\underset{Z\left(\omega\right)}{\underbrace{\left(R+i\omega L+\frac{1}{i\omega C}\right)}}\tilde{I}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}_{out}\left(\omega\right)=\tilde{V_{R}}\left(\omega\right)=R\tilde{I}\left(\omega\right)=\frac{R}{R+i\omega L+\frac{1}{i\omega C}}\tilde{V}_{in}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)=\frac{R}{R+i\omega L+\frac{1}{i\omega C}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Im\left[Z\left(\omega_{res}\right)\right]=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Downarrow
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left(\omega_{res}L-\frac{1}{\omega_{res}C}\right)=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{res}=\frac{1}{\sqrt{LC}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(0\right)=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)\underset{\frac{1}{RC},\frac{R}{L}\ll\omega}{\underbrace{\approx}}\frac{R}{L}\frac{1}{i\omega}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)\underset{\omega\ll\frac{R}{L},\frac{1}{RC},}{\underbrace{\approx}}RC\cdot i\omega
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P_{-3dB}=\frac{1}{2}P_{max}\Rightarrow V_{-3dB}=\frac{1}{\sqrt{2}}V_{max}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{\pm}=\omega_{res}\pm\frac{\Delta\omega}{2},\left|\tilde{H}\left(\omega_{\pm}\right)\right|=\frac{1}{\sqrt{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega_{res}\right)=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{2}=\frac{R^{2}}{R^{2}+\left(\omega L-\frac{1}{\omega C}\right)^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega^{2}-\frac{1}{LC}=\omega\frac{R}{L}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega^{2}-\omega\frac{R}{L}-\omega_{res}^{2}=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega\approx\omega_{res}+a
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+-\frac{b}{2}\pm\sqrt{\frac{b}{4}^{2}-ac}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{+}-\omega_{-}=\sqrt{\left(\frac{R}{L}\right)^{2}+4\omega_{res}^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta\omega\approx\frac{R}{L}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{0}=2\pi f_{0}=576.8\cdot10^{6},\Delta\omega=628\cdot10^{3}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+C=1nF
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+L=\frac{1}{C\cdot\omega_{res}^{2}}=3\cdot10^{-9}=3nH\Rightarrow R=L\cdot\Delta\omega=1.9m\Omega
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Q=\frac{\omega_{0}}{\Delta\omega}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Q=\frac{100\cdot10^{6}}{100\cdot10^{3}}=1000
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Q\approx10^{3}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Q<1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{0}=2\pi\cdot\underset{10KHz}{\underbrace{10^{4}}},\Delta\omega=2\pi\cdot\underset{20KHz}{\underbrace{20\cdot10^{3}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Q=\frac{1}{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Q=\frac{1}{R}\sqrt{\frac{L}{C}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\delta\left(t\right)=V_{in}\left(t\right)=L\frac{dI}{dt}+RI+\frac{1}{C}\intop_{-\infty}^{t}I\left(t^{\prime}\right)dt^{\prime}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\delta\left(t\right)=L\frac{d^{2}q}{dt^{2}}+R\frac{dq}{dt}+\frac{1}{C}q
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+q\left(t\right)=f\left(t\right)\cdot\begin{cases}
+t & t>0\\
+0 & t\le0
+\end{cases}=f\left(t\right)\cdot ReLU\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{dq}{dt}=\frac{df}{dt}ReLU\left(t\right)+f\cdot\theta\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{d^{2}q}{dt^{2}}=\frac{d^{2}f}{dt^{2}}ReLU\left(t\right)+2\frac{df}{dt}\theta\left(t\right)+f\cdot\delta\left(t\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\delta\left(t\right)=L\left(\frac{d^{2}f}{dt^{2}}ReLU\left(t\right)+2\frac{df}{dt}\theta\left(t\right)+f\cdot\delta\left(t\right)\right)+R\left(\frac{df}{dt}ReLU\left(t\right)+f\cdot\theta\left(t\right)\right)+\frac{1}{C}f\cdot ReLU\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\delta\left(t\right)=\delta\left(t\right)\cdot L\cdot f+\theta\left(t\right)\cdot\left[2L\frac{df}{dt}+Rf\right]+ReLU\left(t\right)\cdot\left[L\frac{d^{2}f}{dt^{2}}+R\frac{df}{dt}+\frac{1}{C}f\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(0\right)=\frac{1}{L}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{df}{dt}\left(0\right)=-\frac{R}{2L}f\left(0\right)=-\frac{R}{2L^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+L\frac{d^{2}f}{dt^{2}}+R\frac{df}{dt}+\frac{1}{C}f=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h\left(t\right)\propto\theta\left(t\right)e^{-\frac{R}{2L}t}\cos\left(\omega_{D}t+\phi\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{D}=\sqrt{\omega_{0}^{2}-\left(\frac{R}{2L}\right)^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h\left(t\right)\propto e^{-\frac{R}{2L}t}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{R}{R+i\omega L+\frac{1}{i\omega C}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+q\left(t\right)=e^{-\frac{R}{2L}t}\cos\left(\omega_{D}t+\phi\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(t\right)\propto-e^{-\frac{R}{2L}t}\cos\left(\omega_{D}t+\phi\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+i\omega\frac{1}{\omega^{2}L+iR\omega+\frac{1}{C}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h\left(t\right)=A\frac{d}{dt}\left(\theta\left(t\right)e^{-\frac{t}{\tau}}\sin\left(\omega_{D}t\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+H\left(\omega\right)=iA\omega\left(\mathcal{F}\left[\theta\left(t\right)e^{-\frac{t}{\tau}}\right]\ast\frac{1}{2i}\left(\delta\left(\omega-\omega_{D}\right)-\delta\left(\omega+\omega_{D}\right)\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=iA\omega\left(\frac{1}{\sqrt{2\pi}}\frac{1}{\frac{1}{\tau}+i\omega}\ast\frac{1}{2i}\left(\delta\left(\omega-\omega_{D}\right)-\delta\left(\omega+\omega_{D}\right)\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{A\omega}{2\sqrt{2\pi}}\left(\frac{1}{\frac{1}{\tau}+i\left(\omega-\omega_{D}\right)}-\frac{1}{\frac{1}{\tau}+i\left(\omega+\omega_{D}\right)}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{A\omega}{2\sqrt{2\pi}}\left(\frac{\frac{1}{\tau}+i\left(\omega+\omega_{D}\right)-\frac{1}{\tau}-i\left(\omega-\omega_{D}\right)}{\left(\frac{1}{\tau}+i\left(\omega-\omega_{D}\right)\right)\left(\frac{1}{\tau}+i\left(\omega+\omega_{D}\right)\right)}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{A\omega}{2\sqrt{2\pi}}\left(\frac{2i\omega_{D}}{\frac{1}{\tau^{2}}+\frac{i}{\tau}\left[\left(\omega-\omega_{D}\right)+\left(\omega+\omega_{D}\right)\right]-\left(\omega-\omega_{D}\right)\left(\omega+\omega_{D}\right)}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{A\omega}{\sqrt{2\pi}}\left(\frac{i\omega_{D}}{\frac{1}{\tau^{2}}+\frac{2i\omega}{\tau}-\omega^{2}+\omega_{D}^{2}}\right)=\frac{A\omega}{\sqrt{2\pi}}\frac{i\omega_{D}\frac{1}{i\omega}}{\frac{2}{\tau}-\frac{\omega^{2}}{i\omega}+\frac{\frac{1}{\tau^{2}}+\omega_{D}^{2}}{i\omega}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{A\omega_{D}}{\sqrt{2\pi}}\frac{1}{\frac{2}{\tau}-\frac{\omega^{2}}{i\omega}+\frac{\frac{1}{\tau^{2}}+\omega_{D}^{2}}{i\omega}}=\frac{AL\omega_{D}}{\sqrt{2\pi}}\frac{1}{\frac{2L}{\tau}+i\omega L+\frac{\left(\frac{1}{\tau^{2}}+\omega_{D}^{2}\right)L}{i\omega}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{2L}{\tau}=R\Rightarrow\boxed{\tau=\frac{2L}{R}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left(\frac{1}{\tau^{2}}+\omega_{D}^{2}\right)L=\frac{1}{C}\Rightarrow\boxed{\omega_{D}=\sqrt{\frac{1}{LC}-\frac{R^{2}}{4L^{2}}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{AL\omega_{D}}{\sqrt{2\pi}}=R\Rightarrow\boxed{A=\frac{2\sqrt{2\pi}}{\tau\omega_{D}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left|\mathcal{F}\left[\theta\left(t\right)e^{-\frac{t}{\tau}}\right]\right|^{2}=\left|\frac{1}{\frac{1}{\tau}+i\omega}\right|^{2}=\frac{1}{\frac{1}{\tau^{2}}+\omega^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{\pm}=\frac{1}{\tau}\Rightarrow\Delta\omega\approx2\frac{1}{\tau}=\frac{R}{L}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{D}\approx\omega_{0}=\frac{1}{\sqrt{LC}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Q=\frac{\omega_{0}}{\Delta\omega}\approx\frac{\omega_{D}}{2\frac{1}{\tau}}=\frac{2\pi\frac{1}{T}}{2\frac{1}{\tau}}=\underset{\text{הכיאד}-\text{ןמזב}-\text{תויצליסוא}-\text{תומכ}}{\pi\underbrace{\frac{\tau}{T}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{\pi}{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Q\equiv2\pi\frac{E_{store}}{E_{lost-per-T}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Q=2\pi\frac{E_{store}}{E_{lost-per-cycle}}=\frac{2\pi\frac{1}{2}LI_{max}^{2}}{TRI_{rms}^{2}}=\frac{2\pi L}{TR}=\frac{\omega_{0}}{\Delta\omega}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+E\left(t\right)=\frac{1}{2}LI^{2}\left(t\right)+\frac{1}{2}CV_{C}^{2}\left(t\right)=
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{1}{2}LI^{2}\left(t\right)+\frac{1}{2}\frac{1}{C}\left[\intop_{-\infty}^{t}I\left(t^{\prime}\right)dt^{\prime}\right]^{2}=\frac{1}{2}L\left(I^{2}\left(t\right)+\omega_{0}^{2}\left[\intop_{-\infty}^{t}I\left(t^{\prime}\right)dt^{\prime}\right]^{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{d}{dt}\left(\theta\left(t\right)e^{-\frac{t}{\tau}}\sin\left(\omega_{D}t\right)\right)=\delta\left(t\right)e^{-\frac{t}{\tau}}\sin\left(\omega_{D}t\right)+\theta\left(t\right)\frac{d}{dt}\left(e^{-\frac{t}{\tau}}\sin\left(\omega_{D}t\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\theta\left(t\right)e^{-\frac{t}{\tau}}\left(-\tau\sin\left(\omega_{D}t\right)+\omega_{D}\cos\left(\omega_{D}t\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+E\left(t\right)=\left(\theta\left(t\right)e^{-\frac{t}{\tau}}\right)^{2}\left[\left(-\tau\sin\left(\omega_{D}t\right)+\omega_{D}\cos\left(\omega_{D}t\right)\right)^{2}+\omega_{0}^{2}\sin^{2}\left(\omega_{D}t\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Z\left(\omega\right)=R\left(\omega\right)+i\chi\left(\omega\right)=\left|Z\left(\omega\right)\right|e^{i\phi\left(\omega\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P\left(t\right)=I\left(t\right)\cdot V\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left(t\right)=V_{0}\cos\left(\omega_{0}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{Z\left(\omega\right)}=\frac{1}{\left|Z\left(\omega\right)\right|}e^{-\phi\left(\omega\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Downarrow
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(t\right)=\frac{1}{\left|Z\left(\omega_{0}\right)\right|}V_{0}\cos\left(\omega_{0}t-\phi\left(\omega_{0}\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P\left(t\right)=\frac{V_{0}^{2}}{\left|Z\left(\omega_{0}\right)\right|}\cos\left(\omega_{0}t\right)\cos\left(\omega_{0}t-\phi\left(\omega_{0}\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\boxed{P\left(t\right)=\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|}\left[\cos\left(2\omega_{0}t-\phi\left(\omega_{0}\right)\right)+\cos\left(\phi\left(\omega_{0}\right)\right)\right]}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P_{avg}\equiv\left\langle P\left(t\right)\right\rangle \equiv\overline{P\left(t\right)}=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}P\left(t\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P\left(t\right)\right\rangle =\frac{1}{T}\intop_{0}^{T}P\left(t\right)dt=\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|}\underset{\frac{1}{T}}{\underbrace{\frac{\omega_{0}}{2\pi}}}\intop_{0}^{\frac{2\pi}{\omega_{0}}}\underset{0}{\underbrace{\cos\left(2\omega_{0}t-\phi\left(\omega_{0}\right)\right)}}+\cos\left(\phi\left(\omega_{0}\right)\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P\left(t\right)\right\rangle =\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|}\cos\left(\phi\left(\omega_{0}\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\phi=\phi\left(2\pi\cdot50\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\cos\left(\phi\left(\omega_{0}\right)\right)=0\Rightarrow\phi\left(\omega_{0}\right)=\frac{\pi}{2}+k\pi\Rightarrow\boxed{\Re\left[Z\left(\omega_{0}\right)\right]=0}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\cos\left(\phi\left(\omega_{0}\right)\right)<0\Rightarrow\Re\left[Z\left(\omega_{0}\right)\right]<0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Z=R\Rightarrow\phi=0\Rightarrow\cos\left(\phi\right)=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Z=i\chi\left(\omega\right)\Rightarrow\phi\in\left\{ \frac{\pi}{2},\frac{3\pi}{2}\right\} \Rightarrow\cos\left(\phi\right)=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Z\left(\omega\right)=i\omega L+R
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+L\gg R\Rightarrow\left|\cos\left(\phi\right)\right|\ll1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\cos\left(\phi\right)=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Z\left(\omega\right)=i\left(\omega L-\frac{1}{\omega C}\right)+R
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{0}=\frac{1}{\sqrt{LC}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{0}=2\pi\cdot50
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Z_{L}=Z_{L}\left(\omega_{0}\right),Z_{S}=Z_{S}\left(\omega_{0}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(t\right)=\frac{1}{\left|Z_{L}+Z_{S}\right|}V_{0}\cos\left(\omega_{0}t+\phi_{L+S}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P_{L}\left(t\right)=V_{L}\left(t\right)\cdot I\left(t\right)=\frac{V_{L}\left(t\right)}{V_{L}\left(t\right)+V_{S}\left(t\right)}\left(V_{L}\left(t\right)+V_{S}\left(t\right)\right)\cdot I\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{V_{L}\left(t\right)}{V_{L}\left(t\right)+V_{S}\left(t\right)}=
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left(t\right)=V_{0}e^{i\omega_{0}t}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(t\right)=\frac{V_{0}}{\left|Z\right|}e^{i\left(\omega_{0}t+\phi\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P\right\rangle \equiv\frac{1}{2}\Re\left[V\left(t\right)I^{\ast}\left(t\right)\right]=\frac{1}{2}\Re\left[\frac{V_{0}^{2}}{\left|Z\right|}e^{i\phi}\right]=\frac{V_{0}^{2}}{2\left|Z\right|}\cos\left(\phi\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left(t\right)=V_{0}\cos\left(\omega_{0}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(t\right)=\frac{V_{0}}{\left|Z\right|}\cos\left(\omega_{0}t+\phi_{Z}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P\right\rangle =\frac{V_{0}^{2}}{2\left|Z\right|}\cos\left(\phi_{Z}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left(t\right)=V_{0}e^{i\omega_{0}t}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(t\right)=\frac{V_{0}}{\left|Z\right|}e^{i\left(\omega_{0}t+\phi_{Z}\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P\right\rangle =\frac{1}{2}\Re\left[V\left(t\right)I^{\ast}\left(t\right)\right]=\frac{1}{2}\Re\left[\frac{V_{0}^{2}}{\left|Z\right|}e^{i\phi_{Z}}\right]=\frac{V_{0}^{2}}{2\left|Z\right|}\cos\left(\phi_{Z}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(t\right)=\frac{V_{0}e^{i\omega_{0}t}}{Z_{L}+Z_{S}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{L}\left(t\right)=Z_{L}I\left(t\right)=\frac{Z_{L}}{Z_{L}+Z_{S}}V_{0}e^{i\omega_{0}t}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P_{L}\right\rangle =\frac{1}{2}\Re\left[V_{L}\left(t\right)I^{\ast}\left(t\right)\right]=\frac{1}{2}\Re\left[\frac{Z_{L}}{Z_{L}+Z_{S}}V_{0}e^{i\omega_{0}t}\left(\frac{V_{0}e^{i\omega_{0}t}}{Z_{L}+Z_{S}}\right)^{\ast}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{1}{2}\Re\left[\frac{Z_{L}}{\left(Z_{L}+Z_{S}\right)\left(Z_{L}+Z_{S}\right)^{\ast}}\left|V_{0}\right|^{2}e^{i\omega_{0}t}e^{-i\omega_{0}t}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{1}{2}\Re\left[\frac{Z_{L}}{\left|Z_{L}+Z_{S}\right|^{2}}\left|V_{0}\right|^{2}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P_{L}\right\rangle =\frac{\left|V_{0}\right|^{2}}{2}\frac{\Re\left[Z_{L}\right]}{\left|Z_{L}+Z_{S}\right|^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Im\left[Z_{L}\right]=-\Im\left[Z_{S}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P_{L}\right\rangle =\frac{\left|V_{0}\right|^{2}}{2}\frac{\Re\left[Z_{L}\right]}{\left(\Re\left[Z_{L}\right]+\Re\left[Z_{S}\right]\right)^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Re\left[Z_{L}\right]=\Re\left[Z_{S}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Z_{L}=Z_{S}^{\ast}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{S}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{L}=R_{S}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P_{L}\left(Z_{L}=Z_{S}^{\ast}\right)=\frac{\left|V_{0}\right|^{2}}{2}\frac{R_{S}}{\left(R_{S}+R_{S}\right)^{2}}=\frac{\left|V_{0}\right|^{2}}{8R_{S}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(t\right)\omega_{0}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{F}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+g_{AM}\left(t\right)=\underset{A\left(t\right)}{\underbrace{\left[1+mf\left(t\right)\right]}}\cos\left(\omega{}_{0}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+g_{AM}\left(t\right)=\left[1+mf\left(t\right)\right]\cos\left(\omega{}_{0}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{2\pi}{\omega_{0}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{0}\gg\omega_{max}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{max}=2\pi\cdot20KHz\approx120\cdot10^{3}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+1+mf\left(t\right)>0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{G}\left(\omega\right)=\mathcal{F}\left[\left(1+mf\left(t\right)\right)\cos\left(\omega{}_{0}t\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\mathcal{F}\left[1+mf\left(t\right)\right]\ast\mathcal{F}\left[\cos\left(\omega{}_{0}t\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\left(\delta\left(\omega\right)+m\tilde{F}\left(\omega\right)\right)\ast\frac{1}{2}\left(\delta\left(\omega-\omega_{0}\right)+\delta\left(\omega+\omega_{0}\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Downarrow
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\boxed{\tilde{G}\left(\omega\right)=\frac{1}{2}\left[\left(\delta\left(\omega-\omega_{0}\right)+m\tilde{F}\left(\omega-\omega_{0}\right)\right)+\left(\delta\left(\omega+\omega_{0}\right)+m\tilde{F}\left(\omega+\omega_{0}\right)\right)\right]}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+-\omega_{0}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta\omega=2\omega_{max}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(V\right)=I_{0}\left(e^{bV}-1\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(V\right)\approx I\left(V_{0}\right)+\left(V-V_{0}\right)\left.\frac{dI}{dV}\right|_{V_{0}}+\frac{1}{2}\left(V-V_{0}\right)^{2}\left.\frac{d^{2}I}{dV^{2}}\right|_{V_{0}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(V\right)\approx I_{0}+\alpha V+\beta V^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I_{0},\alpha,\beta
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V=\cos\left(\omega_{0}t\right)+f\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I=I_{0}+\alpha\left[\cos\left(\omega_{0}t\right)+f\left(t\right)\right]+\beta\left[\cos\left(\omega_{0}t\right)+f\left(t\right)\right]^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=I_{0}+\alpha\cos\left(\omega_{0}t\right)+\alpha f\left(t\right)+\beta\left[\cos^{2}\left(\omega_{0}t\right)+f^{2}\left(t\right)+2f\left(t\right)\cos\left(\omega_{0}t\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{I}\left(\omega\right)=I_{0}\delta\left(\omega\right)+\frac{\alpha}{2}\left[\delta\left(\omega-\omega_{0}\right)+\delta\left(\omega+\omega_{0}\right)\right]+\alpha\tilde{F}\left(\omega\right)+
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
++\beta\left[\frac{1}{2}\delta\left(\omega\right)+\frac{1}{4}\left(\delta\left(\omega-2\omega_{0}\right)+\delta\left(\omega+2\omega_{0}\right)\right)+\tilde{F}\left(\omega\right)\ast\tilde{F}\left(\omega\right)+\tilde{F}\left(\omega-\omega_{0}\right)+\tilde{F}\left(\omega+\omega_{0}\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\cos^{2}\left(\omega_{0}t\right)=\frac{1}{2}\left[1+\cos\left(2\omega_{0}t\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{0}\gg\omega_{max}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+BPF_{\omega_{0}}\left[I\right]=\left(2\beta f\left(t\right)+\alpha\right)\cos\left(\omega_{0}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{out}\propto V_{in}^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\cos\left(\omega_{0}t\right),\cos\left(\omega_{0}t+\frac{\pi}{2}\right)=\sin\left(\omega_{0}t\right),\cos\left(\omega_{0}t+\pi\right)=-\cos\left(\omega_{0}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{D}<0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{D}>0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{out}=V_{C}=V_{in}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{C}=V_{out}<V_{in}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tau=RC
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{2\pi}{\omega_{0}}\ll RC
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+RC\ll\frac{2\pi}{\omega_{max}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\boxed{\frac{2\pi}{\omega_{0}}\ll RC\ll\frac{2\pi}{\omega_{max}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{max}\ll\omega_{0}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+e^{i\omega_{LO}t}\cos\left(\omega_{LO}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+A\left(t\right)\cos\left(\omega_{0}t\right)\cos\left(\omega_{LO}t\right)=\frac{A\left(t\right)}{2}\left[\underset{Low-frequency}{\underbrace{\cos\left(\left(\omega_{0}-\omega_{LO}\right)t\right)}}+\underset{high-frequency}{\underbrace{\cos\left(\left(\omega_{0}+\omega_{LO}\right)t\right)}}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{LO}=\omega_{0}-\omega_{IF}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+A\left(t\right)\cos\left(\omega_{0}t+\underset{\text{הזאפ}}{\underbrace{\phi_{0}}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r\left(t\right)\approx A\left(t\right)\cos\left(\left(\omega_{0}+\omega_{d}\right)t+\phi_{0}\right)=A\left(t\right)\cos\left(\omega_{0}t+\underset{\omega_{d}t+\phi_{0}}{\underbrace{\phi\left(t\right)}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+A\left(t\right)\cos\left(\omega_{0}t+\phi_{0}\right)\cos\left(\omega_{0}t\right)=\frac{A\left(t\right)}{2}\left[\cos\left(\phi_{0}\right)+\cos\left(2\omega_{0}t+\phi_{0}\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+2\omega_{max}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{cutoff}=\omega_{max}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r\left(t\right)=\frac{A\left(t\right)}{2}\cos\left(\phi_{0}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+A\left(t\right)\cos\left(\omega_{0}t+\phi_{0}\right)\cos\left(\omega_{0}t+\phi_{0}\right)=\frac{A\left(t\right)}{2}\left[1+\cos\left(2\left(\omega_{0}t+\phi_{0}\right)\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\hat{\phi}_{0}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\boxed{r\left(t\right)=\frac{A\left(t\right)}{2}\cos\left(\phi_{0}-\hat{\phi}_{0}\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{\pi}{2}\cos\left(\omega_{0}t\right)\sin\left(\omega_{0}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+g_{PM}\left(t\right)=\cos\left(\omega_{0}t+\phi_{0}+mf\left(t\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega\left(t\right)\equiv\frac{d\phi\left(t\right)}{dt}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\underset{\text{ןמזב}}{\underbrace{\omega\left(t\right)}}\ne\underset{\text{רדתב}}{\underbrace{\tilde{F}\left(\omega\right)}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega\left(t\right)=\omega_{0}+mf\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Downarrow
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\phi\left(t\right)=\intop_{0}^{t}\omega_{0}+mf\left(t\right)dt+\phi_{0}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+g_{FM}\left(t\right)=\cos\left(\omega_{0}t+\phi_{0}+\intop_{0}^{t}mf\left(t\right)dt\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\cos\left(\phi\left(t\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\phi\left(t_{0}+\Delta t\right)=\phi\left(t_{0}\right)+t\left.\frac{d\phi\left(t\right)}{dt}\right|_{t_{0}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\cos\left(\phi\left(t\right)\right)+i\sin\left(\phi\left(t\right)\right)=e^{i\phi\left(t\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\cos\left(\phi\left(t\right)\right)=\frac{1}{2}\left[e^{i\phi\left(t\right)}+e^{-i\phi\left(t\right)}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\cos\left(-\omega_{0}t\right)=\cos\left(\omega_{0}t\right),\sin\left(-\omega_{0}t\right)=\sin\left(\omega_{0}t+\pi\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left|\frac{de^{i\phi\left(t\right)}}{dt}\right|=\left|\frac{d\phi\left(t\right)}{dt}e^{i\phi\left(t\right)}\right|=\left|\frac{d\phi\left(t\right)}{dt}\right|=\frac{d\phi\left(t\right)}{dt}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{a}\left(t\right)=\left|A\left(t\right)\right|e^{i\phi\left(t\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{d\phi\left(t\right)}{dt}=\left|\frac{d}{dt}\left(\frac{f_{a}\left(t\right)}{\left|f_{a}\left(t\right)\right|}\right)\right|
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(t\right)=\Re\left[\left|A\left(t\right)\right|e^{i\phi\left(t\right)}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+A\left(t\right)\cos\left(\phi\left(t\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{a}\left(t\right)=\left|A\left(t\right)\right|e^{i\phi\left(t\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{F}_{a}\left(\omega\right)=\mathcal{F}\left[f_{a}\left(t\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Downarrow
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{F}\left(\omega\right)=\mathcal{F}\left[\Re\left[f_{a}\left(t\right)\right]\right]=\begin{cases}
+\tilde{F}_{a}\left(\omega\right) & \omega>0\\
+\tilde{F}_{a}^{\ast}\left(\omega\right) & \omega<0
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{a}\left(t\right)=f\left(t\right)+i\mathcal{H}\left[f\left(t\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathcal{F}\left[\mathcal{H}\left[f\left(t\right)\right]\right]=\begin{cases}
+\tilde{F}_{a}\left(\omega\right) & \omega>0\\
+-\tilde{F}_{a}^{\ast}\left(\omega\right) & \omega<0
+\end{cases}=sgn\left(\omega\right)\cdot\tilde{F}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{F}\left(\omega\right)e^{i\omega t}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+X_{STFT}\left(\omega,t\right)=\intop_{t-T}^{t}f\left(t\right)e^{-i\omega t^{\prime}}dt^{\prime}=\intop_{-\infty}^{\infty}Rect_{T}\left(t^{\prime}-t\right)f\left(t\right)e^{-i\omega t^{\prime}}dt^{\prime}=
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\mathcal{F}\left[Rect_{T}\left(t^{\prime}-t\right)\right]\ast F\left(\omega\right)=e^{i\omega t}sinc\left(T\omega\right)\ast F\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta t=T
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta\omega=\frac{2\pi}{T}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta t\cdot\Delta f=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{d}{dt}g_{FM}\left(t\right)=\frac{d}{dt}\cos\left(\omega_{0}t+\phi_{0}+\intop_{0}^{t}mf\left(t\right)dt\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{d}{dt}\left(\omega_{0}t+\phi_{0}+\intop_{0}^{t}mf\left(t\right)dt\right)\sin\left(\omega_{0}t+\phi_{0}+\intop_{0}^{t}mf\left(t\right)dt\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\underset{A\left(t\right)}{\underbrace{\left(\omega_{0}+mf\left(t\right)\right)}}\sin\left(\omega_{0}t+\phi_{0}+\intop_{0}^{t}mf\left(t\right)dt\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{d\phi\left(t\right)}{dt}\ll\omega_{0}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left(t\right)=\cos\left(\omega_{0}t\right)\left[Rect\left(\frac{t+T}{T}\right)-Rect\left(\frac{t-T}{T}\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{F}\left(\omega\right)=\left[\frac{\delta\left(\omega-\omega_{0}\right)+\delta\left(\omega+\omega_{0}\right)}{2}\right]\ast\left[\frac{\left(e^{i\omega T}-e^{-i\omega T}\right)}{\sqrt{2\pi}}Tsinc\left(\omega\frac{T}{2\pi}\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\left[\frac{\delta\left(\omega-\omega_{0}\right)+\delta\left(\omega+\omega_{0}\right)}{2}\right]\ast\left[2\frac{\sin\left(\omega T\right)}{\sqrt{2\pi}}Tsinc\left(\omega\frac{T}{2\pi}\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\boxed{\tilde{F}\left(\omega_{0}\right)=0}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\phi\left(t\right)=\sin\left(\omega_{m}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+g_{PM}\left(t\right)=\cos\left(\omega_{0}t+\beta\sin\left(\omega_{m}t\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+g_{PM}\left(t\right)=\cos\left(\omega_{0}t\right)\cos\left(\beta\sin\left(\omega_{m}t\right)\right)+\sin\left(\omega_{0}t\right)\sin\left(\beta\sin\left(\omega_{m}t\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{F}\left[\cos\left(\omega_{0}t\right)\cos\left(\beta\sin\left(\omega_{m}t\right)\right)\right]=\left[\frac{\delta\left(\omega-\omega_{0}\right)+\delta\left(\omega+\omega_{0}\right)}{2}\right]\ast\mathcal{F}\left[\underset{\text{ירוזחמ}}{\underbrace{\cos\left(\beta\sin\left(\omega_{m}t\right)\right)}}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\left[\frac{\delta\left(\omega-\omega_{0}\right)+\delta\left(\omega+\omega_{0}\right)}{2}\right]\ast\left(\sum_{n=-\infty}^{\infty}J_{n}\left(\beta\right)\delta\left(\omega-n\cdot\omega_{m}\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta\omega=2\omega_{max}\left(\beta+1\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\beta\ll1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+g\left(t\right)=s\left(t\right)\cos\left(\omega_{0}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+s\left(t\right)=\sum_{n}a_{n}Rect\left(\frac{t-nT_{s}}{T_{s}}\right)=\left[\sum_{n}a_{n}\delta\left(t-nT_{s}\right)\right]\ast Rect\left(\frac{t}{T_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{G}\left(\omega\right)=\underset{\text{ליגרכ}}{\underbrace{\left[\frac{\delta\left(\omega-\omega_{0}\right)+\delta\left(\omega+\omega_{0}\right)}{2}\right]}}\ast\left[\mathcal{F}\left[\sum_{n}a_{n}\delta\left(t-nT_{s}\right)\right]\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+sinc\left(x\right)=\frac{\sin\left(\pi x\right)}{\pi x}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta\omega=\frac{4\pi}{T_{s}}\Rightarrow\Delta f=\frac{2}{T_{s}}=2bps
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+1M\frac{bit}{sec}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+1\frac{MB}{sec}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T_{s}=\frac{1ms}{1023}\approx10^{-6}s
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\underset{s_{1}}{\underbrace{00}}\underset{s_{2}}{\underbrace{01}}\underset{s_{3}}{\underbrace{10}}\underset{s_{4}}{\underbrace{11}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\log_{2}M
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+bps=\frac{1}{T_{s}}\log_{2}M=\frac{\Delta f}{2}\log_{2}M
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\pm1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+1=e^{i\cdot0},-1=e^{i\pi}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+s\left(t\right)=\left[\sum_{n}s_{n}\delta\left(t-nT_{s}\right)\right]\ast Rect\left(\frac{t}{T_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+s_{n}=\begin{cases}
+1 & b_{n}=1\\
+-1 & b_{n}=0
+\end{cases}=2b_{n}-1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+b\left(t\right)\equiv\frac{s\left(t\right)+1}{2}=\left[\sum_{n}b_{n}\delta\left(t-nT_{s}\right)\right]\ast Rect\left(\frac{t}{T_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+g_{BPSK}\left(t\right)=s\left(t\right)\cos\left(\omega_{0}t\right)=\left(2b\left(t\right)-1\right)\cos\left(\omega_{0}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+bps=\frac{1}{T_{s}}=\frac{\Delta f}{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta f=\frac{2}{T_{s}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+s_{n}\in\left\{ e^{2\pi i\frac{m}{M}}\right\} _{m=0}^{M-1}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\cos\left(\omega_{0}t+\arg\left(s_{n}\right)\right)\cdot Rect\left(\frac{t}{T_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\cos\left(\omega_{0}t\right),\cos\left(\omega_{0}t+\frac{\pi}{2}\right)=-\sin\left(\omega_{0}t\right),\cos\left(\omega_{0}t+\pi\right)=-\cos\left(\omega_{0}t\right),\cos\left(\omega_{0}t+\frac{3\pi}{2}\right)=-\sin\left(\omega_{0}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z\left(t\right)e^{i\omega_{0}t}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Re\left[z\left(t\right)e^{i\omega_{0}t}\right]=\Re\left[\left(\Re\left[z\left(t\right)\right]+i\Im\left[z\left(t\right)\right]\right)\left(\cos\left(\omega_{0}t\right)+i\sin\left(\omega_{0}t\right)\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\Re\left[z\left(t\right)\right]\cos\left(\omega_{0}t\right)-\Im\left[z\left(t\right)\right]\sin\left(\omega_{0}t\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+I\left(t\right)\equiv\Re\left[z\left(t\right)\right],Q\left(t\right)\equiv\Im\left[z\left(t\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\boxed{\Re\left[z\left(t\right)e^{i\omega_{0}t}\right]=I\left(t\right)\cos\left(\omega_{0}t\right)-Q\left(t\right)\sin\left(\omega_{0}t\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z\left(t\right)=I\left(t\right)+iQ\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+t_{n}=n\cdot T_{s}+\varepsilon
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z\left(t\right)=\left[\sum_{n}s_{n}\delta\left(t-nT_{s}\right)\right]\ast Rect\left(\frac{t}{T_{s}}\right),s_{n}\in\left\{ e^{2\pi i\frac{m}{M}}\right\} _{m=0}^{M-1}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+s_{n}=e^{2\pi i\frac{m}{M}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r\left(t_{n}\right)=\begin{pmatrix}I\left(t_{n}\right)\\
+Q\left(t_{n}\right)
+\end{pmatrix}=\begin{pmatrix}\Re\left[z\left(t_{n}\right)\right]\\
+\Im\left[z\left(t_{n}\right)\right]
+\end{pmatrix}=\begin{pmatrix}\Re\left[s_{n}\right]\\
+\Im\left[s_{n}\right]
+\end{pmatrix}=\begin{pmatrix}\cos\left(2\pi\frac{m}{M}\right)\\
+\sin\left(2\pi\frac{m}{M}\right)
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(t\right)\cos\left(\omega_{0}t+\phi_{0}\right)-Q\left(t\right)\sin\left(\omega_{0}t+\phi_{0}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r\left(t\right)=\begin{pmatrix}I\left(t\right)\cos\left(\phi_{0}\right)\\
+Q\left(t\right)\sin\left(\phi_{0}\right)
+\end{pmatrix}\Rightarrow r_{c}\left(t\right)=z\left(t\right)e^{i\phi_{0}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z_{FSK}\left(t\right)=\sum_{n}e^{i\omega_{n}t}Rect\left(\frac{t-nT_{s}}{T_{s}}\right),\omega_{n}\in\left\{ \omega_{k}\right\} _{k=1}^{K}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+g_{FSK}\left(t\right)=\sum_{n}\left[\Re\left[e^{i\omega_{n}t}\right]\cos\left(\omega_{0}t\right)+\Im\left[e^{i\omega_{n}t}\right]\sin\left(\omega_{0}t\right)\right]Rect\left(\frac{t-nT_{s}}{T_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\sum_{n}\left[\cos\left(\omega_{n}t\right)\cos\left(\omega_{0}t\right)+\sin\left(\omega_{n}t\right)\sin\left(\omega_{0}t\right)\right]Rect\left(\frac{t-nT_{s}}{T_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\sum_{n}\left[\cos\left(\omega_{0}t-\omega_{n}t\right)\right]Rect\left(\frac{t-nT_{s}}{T_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+g_{BFSK}\left(t\right)=b\left(t\right)\cos\left(\left(\omega_{0}+\Delta\omega\right)t\right)+\left(1-b\left(t\right)\right)\cos\left(\left(\omega_{0}-\Delta\omega\right)t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+T_{S}=2T_{b}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{F}\left[z_{QPSK}\left(t\right)\right]=\mathcal{F}\left[\sum_{n}e^{i\phi_{n}}Rect\left(\frac{t-nT_{s}}{T_{s}}\right)\right]=\mathcal{F}\left[\sum_{n}e^{i\phi_{n}}\delta\left(t-nT_{s}\right)\right]\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\left(\mathcal{F}\left[\sum_{n}\cos\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]+i\mathcal{F}\left[\sum_{n}\sin\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]\right)\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{F}\left[z_{OQPSK}\left(t\right)\right]=\left(\mathcal{F}\left[\sum_{n}\cos\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]+i\mathcal{F}\left[\sum_{n}\sin\left(\phi_{n}\right)\delta\left(t-n\left(T_{s}-\frac{T_{s}}{2}\right)\right)\right]\right)\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\left(\mathcal{F}\left[\sum_{n}\cos\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]+ie^{i\omega\frac{T_{s}}{2}}\mathcal{F}\left[\sum_{n}\sin\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]\right)\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta\phi
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r\left(t\right)=\begin{pmatrix}I\left(t\right)\cos\left(\Delta\phi\right)\\
+Q\left(t\right)\sin\left(\Delta\phi\right)
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+r\left(t\right)=z\left(t\right)e^{i\Delta\phi}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left(r\left(t\right)\right)^{2}=\left(z\left(t\right)\right)^{2}e^{2i\Delta\phi}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left(z\left(t\right)\right)^{2}=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta\phi=\frac{1}{2}\arg\left(\left(r\left(t\right)\right)^{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+2\pi
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r_{n}=\sum_{k=0}^{\infty}h_{k}s_{n-k}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r_{n}\approx\sum_{k=0}^{K-1}h_{k}s_{n-k}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+s_{n}=\begin{cases}
+0 & 0\le n\le K-1\\
+1 & K\le n\le2K-1
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+r_{K+l}=\sum_{k=0}^{K-1}h_{k}s_{K+l-k}=\sum_{k=l+1}^{K-1}h_{k}\underset{0}{\underbrace{s_{K+l-k}}}+\sum_{k=0}^{l}h_{k}\underset{1}{\underbrace{s_{K+l-k}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r_{K+l}-r_{K+l-1}=\sum_{k=0}^{l}h_{k}-\sum_{k=0}^{l-1}h_{k}=h_{l}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+s_{m}\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+g_{m}\left(t\right),g_{n}\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle g_{m}\left(t\right),g_{n}\left(t\right)\right\rangle =\intop_{-\infty}^{\infty}g_{m}\left(t\right)\cdot g_{n}\left(t\right)dt=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)dt\right]=\Re\left[\intop_{-\infty}^{\infty}\left[g_{m}\left(t\right)+i\hat{g}_{m}\left(t\right)\right]\cdot\left[g_{n}\left(t\right)-i\hat{g}_{n}\left(t\right)\right]dt\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt+\intop_{-\infty}^{\infty}\hat{g}_{m}\left(t\right)\hat{g}_{n}\left(t\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\intop_{-\infty}^{\infty}\hat{g}_{m}\left(t\right)\hat{g}_{n}\left(t\right)dt=\intop_{-\infty}^{\infty}\mathcal{H}\left[g_{m}\left(t\right)\right]\mathcal{H}\left[g_{n}\left(t\right)\right]dt\underset{parseval}{\underbrace{=}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\intop_{-\infty}^{\infty}\underset{1}{\underbrace{\left|isgn\left(\omega\right)\right|^{2}}}G_{m}\left(\omega\right)G_{n}^{\ast}\left(\omega\right)d\omega=\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt=\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)\right]=E_{n}\delta_{mn}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z_{1}\left(t\right)=I\left(t\right),z_{2}\left(t\right)=iQ\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}I\left(t\right)\cdot\left[-iQ\left(t\right)\right]\right]=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z\left(t\right)\in\left\{ I_{m}\left(t\right)Rect\left(\frac{t-mT_{s}}{T_{s}}\right),iQ_{m}\left(t\right)Rect\left(\frac{t-mT_{s}}{T_{s}}\right)\right\} _{m=-\infty}^{\infty}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z_{km}\left(t\right)\in\left\{ e^{i\omega_{k}t}Rect\left(\frac{t-mT_{s}}{T_{s}}\right)\right\} _{m=-\infty}^{\infty}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Re\left[\intop_{-\infty}^{\infty}z_{k0}\left(t\right)z_{l0}^{\ast}\left(t\right)dt\right]=\Re\left[\intop_{0}^{T_{s}}e^{i\omega_{k}t}e^{-i\omega_{l}t}dt\right]=\Re\left[\intop_{0}^{T_{s}}e^{i\left(\omega_{k}-\omega_{l}\right)t}dt\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\Re\left[\left[\frac{1}{i\left(\omega_{k}-\omega_{l}\right)}e^{i\left(\omega_{k}-\omega_{l}\right)t}\right]_{0}^{T_{s}}\right]=\Re\left[-i\frac{e^{i\left(\omega_{k}-\omega_{l}\right)T_{s}}-1}{\left(\omega_{k}-\omega_{l}\right)}\right]=\frac{\sin\left[\left(\omega_{k}-\omega_{l}\right)T_{s}\right]}{\omega_{k}-\omega_{l}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{k}-\omega_{l}=n\frac{\pi}{T_{s}},n\in\mathbb{N}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Re\left[\intop_{-\infty}^{\infty}z_{k0}\left(t\right)z_{l0}^{\ast}\left(t\right)dt\right]=\Re\left[\intop_{0}^{T_{s}}e^{i\left(\omega_{k}t+\phi_{k}\right)}e^{-i\left(\omega_{l}t+\phi_{l}\right)}dt\right]=\Re\left[\intop_{0}^{T_{s}}e^{i\left[\left(\omega_{k}-\omega_{l}\right)t+\phi_{k}-\phi_{l}\right]}dt\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{k}-\omega_{l}=n\frac{\pi}{T_{s}},n\in\mathbb{N}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z_{km}\left(t\right)\in\left\{ e^{i\left(\omega_{k}t+\phi_{k}\right)}Rect\left(\frac{t-mT_{s}}{T_{s}}\right)\right\} _{m=-\infty}^{\infty}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\Re\left[\left[\frac{1}{i\left(\omega_{k}-\omega_{l}\right)}e^{i\left[\left(\omega_{k}-\omega_{l}\right)t+\phi_{k}-\phi_{l}\right]}\right]_{0}^{T_{s}}\right]=\Re\left[-i\frac{e^{i\left(\omega_{k}-\omega_{l}\right)T_{s}+i\left(\phi_{k}-\phi_{l}\right)}-e^{i\left(\phi_{k}-\phi_{l}\right)}}{\left(\omega_{k}-\omega_{l}\right)}\right]=\frac{\sin\left[\left(\omega_{k}-\omega_{l}\right)T_{s}+\phi_{k}-\phi_{l}\right]-\sin\left[\phi_{k}-\phi_{l}\right]}{\omega_{k}-\omega_{l}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{\sin\left[\left(\omega_{k}-\omega_{l}\right)T_{s}+\phi_{k}-\phi_{l}\right]-\sin\left[\phi_{k}-\phi_{l}\right]}{\omega_{k}-\omega_{l}}=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{k}-\omega_{l}=n\frac{2\pi}{T_{s}},n\in\mathbb{N}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sin\left[\left(\omega_{k}-\omega_{l}\right)\left(m+1\right)T_{s}\right]=\sin\left[\left(\omega_{k}-\omega_{l}\right)mT_{s}\right]\cos\left[\left(\omega_{k}-\omega_{l}\right)T_{s}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z_{n}\left(t\right)Rect\left(\frac{t-mT_{s}}{T_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{2}\Re\left[\intop_{0}^{T_{s}}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)\right]=E_{n}\delta_{mn}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z\left(t\right)=s_{1m}z_{1}\left(t\right)Rect\left(\frac{t-mT_{s}}{T_{s}}\right)+s_{2m}z_{2}\left(t\right)Rect\left(\frac{t-mT_{s}}{T_{s}}\right)+s_{3m}z_{3}\left(t\right)Rect\left(\frac{t-mT_{s}}{T_{s}}\right)+s_{4m}z_{4}\left(t\right)Rect\left(\frac{t-mT_{s}}{T_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}z\left(t\right)\cdot z_{n}^{\ast}\left(t\right)Rect\left(\frac{t-mT_{s}}{T_{s}}\right)dt\right]=\frac{1}{2}\Re\left[\intop_{mT_{s}}^{\left(m+1\right)T_{s}}z\left(t\right)\cdot z_{n}^{\ast}\left(t\right)dt\right]=s_{nm}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+z_{n}\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{n}=V\left(t_{n}\right)=V\left(n\cdot\Delta t\right)=V\left(\frac{n}{f_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}\left(\left|f\right|>f_{max}\right)=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{max}<\frac{f_{s}}{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\underset{\text{ירוקמה}-\text{תואה}}{\underbrace{V\left(t\right)}}=\sum_{n=-\infty}^{\infty}\underset{\text{תומיגדה}}{\underbrace{V_{n}}}\underset{sinc\left(f_{s}\left(t-n\Delta t\right)\right)}{\underbrace{\frac{\sin\left(\pi f_{s}\left(t-n\Delta t\right)\right)}{\pi f_{s}\left(t-n\Delta t\right)}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\underset{\text{ירוקמה}-\text{תואה}}{\underbrace{V\left(t\right)}}=\sum_{n=-\infty}^{\infty}\underset{\text{תומיגדה}}{\underbrace{V_{n}}}sinc\left(f_{s}\left(t-n\Delta t\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+sinc\left(f_{s}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}\left(f\right)=\underset{\text{תוירוזחמ}-\text{ילב}}{\underbrace{Rect\left(\frac{f}{f_{s}}\right)}}\cdot\sum_{n=-\infty}^{\infty}\alpha_{n}e^{2\pi i\frac{n}{f_{s}}f}=Rect\left(\frac{f}{f_{s}}\right)\cdot\sum_{n=-\infty}^{\infty}V_{n}e^{2\pi in\frac{f}{f_{s}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left(t\right)=\mathcal{F}^{-1}\left[Rect\left(\frac{f}{f_{s}}\right)\cdot\sum_{n=-\infty}^{\infty}V_{n}e^{2\pi in\frac{f}{f_{s}}}\right]=sinc\left(f_{s}\cdot t\right)\ast\sum_{n=-\infty}^{\infty}V_{n}\delta\left(t-\frac{n}{f_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[-\frac{f_{s}}{2},\frac{f_{s}}{2}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{s}\left(t\right)=\sum_{n=-\infty}^{\infty}V_{n}\delta\left(t-n\Delta t\right)=V\left(t\right)\cdot comb\left(\frac{t}{\Delta t}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}_{s}\left(\omega\right)=\frac{1}{\sqrt{2\pi}}\tilde{V}\left(\omega\right)\ast\frac{\sqrt{2\pi}}{\Delta t}comb\left(\frac{\omega}{2\pi}\Delta t\right)=f_{s}\tilde{V}\left(\omega\right)\ast comb\left(\frac{\omega}{2\pi f_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+2\pi\cdot\left(2f_{max}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}\left(\omega\right)=\tilde{V}_{s}\left(\omega\right)\cdot\frac{1}{f_{s}}Rect\left(\frac{\omega}{2\pi f_{s}}\right)=\sqrt{2\pi}\tilde{V}_{s}\left(\omega\right)\cdot\frac{1}{\sqrt{2\pi}f_{s}}Rect\left(\frac{\omega}{2\pi f_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\forall\omega\in\left[-\pi f_{s},\pi f_{s}\right]:\tilde{V}\left(\omega\right)=\Delta t\tilde{V}_{s}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{s}\left(t\right)=\sum_{n=-\infty}^{\infty}V_{n}\delta\left(t-n\Delta t\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\boxed{\tilde{V}\left(\theta\right)\equiv\tilde{V}_{s}\left(\omega=\frac{\theta}{\Delta t}\right)=\frac{1}{\Delta t}\tilde{V}\left(\omega=\frac{\theta}{\Delta t}\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}_{s}\left(\theta\right)=\mathcal{F}\left[\sum_{n=-\infty}^{\infty}V_{n}\delta\left(t-n\Delta t\right)\right]=\frac{1}{\sqrt{2\pi}}\sum_{n=-\infty}^{\infty}V_{n}e^{i\omega n\Delta t}\underset{\omega=\frac{\theta}{\Delta t}}{\underbrace{=}}\frac{1}{\sqrt{2\pi}}\sum_{n=-\infty}^{\infty}V_{n}e^{i\theta n}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}_{s}\left(\omega\right)=\mathcal{F}\left[\sum_{n=-\infty}^{\infty}V_{n}\delta\left(t-n\Delta t\right)\right]=\frac{1}{\sqrt{2\pi}}\sum_{n=-\infty}^{\infty}V_{n}e^{-i\omega n\Delta t}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}\left(\theta\right)\equiv\tilde{V}_{s}\left(\omega=\frac{\theta}{\Delta t}\right)=\frac{1}{\sqrt{2\pi}}\sum_{n=-\infty}^{\infty}V_{n}e^{-i\theta n}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\boxed{\tilde{V}\left(\theta\right)=\frac{1}{\sqrt{2\pi}}\sum_{n=-\infty}^{\infty}V_{n}e^{-i\theta n}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}\left(\theta+2\pi\right)=\tilde{V}\left(\theta\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left(t\right)=f_{s}^{2}V_{s}\left(t\right)\ast sinc\left(f_{s}\cdot t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left(t\right)=V_{s}\left(t\right)\ast sinc\left(f_{s}\cdot t\right)=\sum_{n=-\infty}^{\infty}V_{n}\delta\left(t-n\Delta t\right)\ast sinc\left(f_{s}\cdot t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+sinc\left(f_{s}t\right)=\frac{\sin\left(\pi f_{s}t\right)}{\pi f_{s}t}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left(t\right)=\sum_{n=-\infty}^{\infty}V_{n}sinc\left(f_{s}\left(t-n\Delta t\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left(t\right)=\cos\left(2\pi f_{0}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{s}\left(t\right)\equiv V\left(t\right)\cdot comb\left(\frac{t}{\Delta t}\right)=\cos\left(2\pi f_{0}t\right)\cdot comb\left(\frac{t}{\Delta t}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{s}\left(\omega\right)=\frac{1}{\sqrt{2\pi}}\frac{1}{2}\left(\delta\left(\omega-2\pi f_{0}\right)+\delta\left(\omega+2\pi f_{0}\right)\right)\ast\sqrt{2\pi}f_{s}comb\left(\frac{\omega}{2\pi f_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{s}\left(\omega\right)=\frac{f_{s}}{2}\left(\delta\left(\omega-2\pi f_{0}\right)+\delta\left(\omega+2\pi f_{0}\right)\right)\ast comb\left(\frac{\omega}{2\pi f_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{0}<\frac{f_{s}}{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega\in\left[-\frac{2\pi f_{s}}{2},\frac{2\pi f_{s}}{2}\right]\Rightarrow V_{s}\left(\omega\right)=\frac{f_{s}}{2}\left(\delta\left(\omega-2\pi f_{0}\right)+\delta\left(\omega+2\pi f_{0}\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{0}=\frac{f_{s}}{2}+\Delta f
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{0}=2\pi f_{0}=2\pi\frac{f_{s}}{2}+2\pi\Delta f
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\pm\omega_{0}=\pm\left(2\pi\frac{f_{s}}{2}+2\pi\Delta f\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{0}-2\pi f_{s}=2\pi\left(-\frac{f_{s}}{2}+\Delta f\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+-\omega_{0}+2\pi f_{s}=2\pi\left(\frac{f_{s}}{2}-\Delta f\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega\in\left[-\frac{2\pi f_{s}}{2},\frac{2\pi f_{s}}{2}\right]\Rightarrow V_{s}\left(\omega\right)=\frac{f_{s}}{2}\left(\delta\left(\omega-2\pi\left(\frac{f_{s}}{2}-\Delta f\right)\right)+\delta\left(\omega+2\pi\left(\frac{f_{s}}{2}-\Delta f\right)\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\theta\equiv\frac{\omega}{f_{s}}=\frac{2\pi f}{f_{s}}\in\left[-\pi,\pi\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left[n\right]\underset{\mathcal{F}}{\leftrightarrow}\tilde{V}\left(\theta\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{s}^{1},f_{s}^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{max}<\frac{f_{s}^{1}}{2}<\frac{f_{s}^{2}}{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Longleftrightarrow
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+N
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left[n\right]\ast comb\left[\frac{n}{N}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{F}\left[V\left[n\right]\ast comb\left[\frac{n}{N}\right]\right]=\sqrt{2\pi}N\cdot V\left(\theta\right)\cdot comb\left[\frac{\theta}{2\pi}N\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{s}\left(t\right)=\left[\sum_{n=0}^{N-1}V_{n}\delta\left(t-n\Delta t\right)\right]\ast comb\left(\frac{t}{N\Delta t}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}_{s}\left(\omega\right)=\sqrt{2\pi}\left[\frac{1}{\sqrt{2\pi}}\sum_{n=0}^{N-1}V_{n}e^{-i\omega n\Delta t}\right]\cdot\left[\frac{\sqrt{2\pi}}{N\Delta t}comb\left(\frac{\omega N\Delta t}{2\pi}\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\left[\sum_{n=0}^{N-1}V_{n}e^{-i\omega n\Delta t}\right]\cdot\left[\frac{\sqrt{2\pi}}{N\Delta t}comb\left(\frac{\omega N\Delta t}{2\pi}\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta\omega=\frac{2\pi}{N\Delta t}=\frac{2\pi}{T}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta t=\frac{1}{f_{s}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+t\in\left[0,T\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega\in\left[-\pi f_{s},\pi f_{s}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{2\pi}{\Delta t}=2\pi f_{s}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}_{s}\left(\omega+\frac{2\pi}{\Delta t}\right)=\sum_{n=0}^{N-1}V_{n}e^{-i\left(\omega+\frac{2\pi}{\Delta t}\right)n\Delta t}\cdot\frac{\sqrt{2\pi}}{N\Delta t}comb\left(\frac{\left(\omega+\frac{2\pi}{\Delta t}\right)N\Delta t}{2\pi}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\left[\sum_{n=0}^{N}V_{n}e^{-i\omega n\Delta t}\underset{1}{\underbrace{e^{-2\pi in}}}\right]\cdot\frac{\sqrt{2\pi}}{N\Delta t}comb\left(\frac{\omega N\Delta t}{2\pi}+N\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\left[\sum_{n=0}^{N}V_{n}e^{-i\omega n\Delta t}\right]\cdot\frac{\sqrt{2\pi}}{N\Delta t}comb\left(\frac{\omega N\Delta t}{2\pi}\right)=\tilde{V}_{s}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\theta\equiv\frac{\omega}{f_{s}}=\omega\Delta t\in\left[-\pi,\pi\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}\left(\theta\right)\equiv\tilde{V}_{s}\left(\omega=\frac{\theta}{\Delta t}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}\left(\theta\right)=\left[\sum_{n=0}^{N-1}V_{n}e^{-i\theta n}\right]\cdot\frac{\sqrt{2\pi}}{N\Delta t}comb\left(\frac{\theta}{2\pi}N\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}_{k}\equiv\frac{N\Delta t}{\sqrt{2\pi}}\tilde{V}\left(\theta=\frac{2\pi}{N}k\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}_{k}=\sum_{n=0}^{N-1}V_{n}e^{-i\frac{2\pi k}{N}n}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\forall k\in\left[0,N-1\right]:\tilde{V}_{k}\equiv\frac{1}{N}\sum_{n=0}^{N-1}V_{n}e^{-i\frac{2\pi k}{N}n}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{V}\left(\theta\right)=\frac{1}{\sqrt{2\pi}}\sum_{n=0}^{N-1}\tilde{V}_{k}\delta\left(\theta-\frac{2\pi k}{N}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\forall n\in\left[0,N-1\right]:V_{n}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{n}=\frac{1}{N}\sum_{k=0}^{N-1}V_{k}e^{i\frac{2\pi n}{N}k}\leftrightarrows\tilde{V}_{k}=\sum_{n=0}^{N-1}V_{n}e^{-i\frac{2\pi k}{N}n}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{cases}
+1 & x<1\\
+0 & x\le1
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{N}{2\pi f_{s}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega_{k}=f_{s}\theta_{k}=k\frac{2\pi f_{s}}{N}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{2\pi f_{s}}{N}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{0}\left(t\right)=Rect\left(\frac{t-\frac{\Delta t}{2}}{\Delta t}\right)\ast V_{s}\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{0}\left(\omega\right)=\sqrt{2\pi}e^{-i\omega\frac{\Delta t}{2}}\frac{\Delta t}{\sqrt{2\pi}}sinc\left(\frac{\omega}{2\pi}\Delta t\right)\cdot V_{s}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{0}\left(\omega\right)=\Delta te^{-i\omega\frac{\Delta t}{2}}sinc\left(\frac{\omega}{2\pi}\Delta t\right)\cdot V_{s}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{1}\left(t\right)=V_{0}\left(t\right)\ast\frac{1}{\Delta t}Rect\left(\frac{t+\frac{\Delta t}{2}}{\Delta t}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{1}\left(\omega\right)=V_{0}\left(\omega\right)e^{-i\omega\frac{\Delta t}{2}}sinc\left(\frac{\omega}{2\pi}\Delta t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{1}\left(\omega\right)=\Delta t\left[sinc\left(\frac{\omega}{2\pi}\Delta t\right)\right]^{2}\cdot V_{s}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{n}\in\left[-1,1\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[V_{min},V_{max}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+2^{N_{bits}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta=\frac{V_{max}-V_{min}}{2^{N_{bits}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+bps=f_{s}N_{bits}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta=LSB
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{q}\left[n\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left[n\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+e\left[n\right]\equiv V_{q}\left[n\right]-V\left[n\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left|e\left[n\right]\right|\le\frac{\Delta}{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{q}\left[n\right]=V\left[n\right]+e\left[n\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\boxed{SNR\equiv\frac{P_{signal}}{P_{noise}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+SNR_{dB}\equiv10\log_{10}\frac{P_{signal}}{P_{noise}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+SNR\equiv\frac{\left\langle P_{signal}\right\rangle }{\left\langle P_{noise}\right\rangle }=\frac{\frac{1}{N}\sum_{n=0}^{N}\left(V\left[n\right]\right)^{2}}{\frac{1}{N}\sum_{n=0}^{N}\left(e\left[n\right]\right)^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sqrt{N}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=0}^{N}\left(e\left[n\right]\right)^{2}=\mathbb{E}\left[\left(e\left[n\right]\right)^{2}\right]=\mathbb{V}\left[e\left[n\right]\right]+\mathbb{E}\left[e\left[n\right]\right]^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+e\left[n\right]\sim U\left[-\frac{\Delta}{2},\frac{\Delta}{2}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{E}\left[e\left[n\right]\right]=0,\mathbb{V}\left[e\left[n\right]\right]=\frac{\Delta^{2}}{12}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=0}^{N}\left(e\left[n\right]\right)^{2}=\frac{\Delta^{2}}{12}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\pm\frac{\Delta}{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=0}^{N}\left(e\left[n\right]\right)^{2}=\mathbb{E}\left[\left(e\left[n\right]\right)^{2}\right]=\frac{\Delta^{2}}{4}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V\left[n\right]=A\cos\left(\frac{\omega_{0}}{f_{s}}n\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{N}\sum_{n=0}^{N}\left(V\left[n\right]\right)^{2}\approx\frac{1}{T}\intop_{0}^{T}\left(A\cos\left(\omega_{0}t\right)\right)^{2}dt=\frac{A^{2}}{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+SNR=\frac{6A^{2}}{\Delta^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+SNR_{dB}=20\log_{10}\left(\frac{\sqrt{6}A}{\Delta}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta=\frac{A_{max}-A_{min}}{2^{N_{bits}}}=\frac{2A_{max}}{2^{N_{bits}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+SNR_{dB}=20\log_{10}\left(\frac{\sqrt{6}A}{\frac{2A_{max}}{2^{N_{bits}}}}\right)=20\log_{10}\left(\frac{\sqrt{6}2^{N_{bits}}}{2}\right)+20\log_{10}\left(\frac{A}{A_{max}}\right)=N_{bits}20\log_{10}\left(2\right)-10\log_{10}\left(\frac{4}{6}\right)-20\log_{10}\left(\frac{A_{max}}{A}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+SNR_{dB}=6N_{bits}+1.76-20\log_{10}\left(\frac{A_{max}}{A}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+20\log_{10}\left(\frac{A_{max}}{A}\right)=10\log_{10}\left(\frac{P_{strong}}{P_{weak}}\right)=70
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+SNR\approx3
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P_{Rx}=\left(\frac{\lambda}{4\pi r}\right)^{2}P_{Tx}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lambda=\frac{c}{f}=\frac{3\cdot10^{8}}{1575.42\cdot10^{6}}=1.9\cdot10^{-1}=19cm
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+10\log_{10}\left(\frac{P_{Rx}}{P_{Tx}}\right)=20\log_{10}\left(\frac{\lambda}{4\pi r}\right)=20\log_{10}\left(\frac{0.19}{4\pi\cdot10^{4}}\right)=-104
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+DR_{dB}=10\log_{10}\left(\frac{P_{max}}{P_{min}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\underset{\text{הטילקב}}{\underbrace{V_{r}\left(t\right)}}=\underset{\text{יקנ}-\text{תוא}}{\underbrace{V_{s}\left(t\right)}}+\underset{\text{שער}}{\underbrace{n\left(t\right)}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sin\left(\omega_{0}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+t_{i}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t_{i}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p_{X}\left(x\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left(x_{1}<X<x_{2}\right)=\intop_{x_{1}}^{x_{2}}p_{X}\left(x\right)dx
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p_{X}\left(x\right)\ge0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\intop_{\Omega}p_{X}\left(x\right)dx=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\intop_{-\infty}^{\infty}p_{X}\left(x\right)dx=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p_{X}\left(x\right)=\sqrt{\frac{1}{2\pi\sigma^{2}}}e^{-\frac{\left(x-\mu\right)^{2}}{2\sigma^{2}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\intop_{-\infty}^{\infty}e^{-\frac{x^{2}}{2\sigma^{2}}}dx=\sqrt{\intop_{-\infty}^{\infty}e^{-\frac{y^{2}}{2\sigma^{2}}}dy\intop_{-\infty}^{\infty}e^{-\frac{x^{2}}{2\sigma^{2}}}dx}=\sqrt{\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}e^{-\frac{x^{2}+y^{2}}{2\sigma^{2}}}dxdy}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\sqrt{\intop_{0}^{\infty}\intop_{0}^{2\pi}re^{-\frac{r^{2}}{2\sigma^{2}}}d\theta dr}=\sqrt{2\pi}\sqrt{\left.\frac{2\sigma^{2}}{-2}e^{-\frac{r^{2}}{2\sigma^{2}}}\right|_{0}^{\infty}}=\sqrt{2\pi}\sigma
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\underset{\text{תפתושמ}-\text{תוגלפתה}}{\underbrace{p_{x\left(t\right)}\left(x_{1},x_{2},x_{3},...;t_{1},t_{2},t_{3},...\right)}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\left(x_{1}^{\prime}<x\left(t_{1}\right)<x_{1}^{\prime\prime}\right)\land\left(x_{2}^{\prime}<x\left(t_{2}\right)<x_{2}^{\prime\prime}\right)...\right)=\intop_{x_{1}^{\prime}}^{x_{1}^{\prime\prime}}\intop_{x_{2}^{\prime}}^{x_{2}^{\prime\prime}}...p_{x\left(t\right)}\left(x_{1},x_{2},...;t_{1},t_{2},...\right)...dx_{1}dx_{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\forall\tau\in\mathbb{R},\forall n\in\mathbb{N}:p_{x\left(t\right)}\left(x_{1},x_{2},...,x_{n};t_{1},t_{2},...t_{n}\right)=p_{x\left(t\right)}\left(x_{1},x_{2},...,x_{n};t_{1}+\tau,t_{2}+\tau,...t_{n}+\tau\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\boxed{\forall\tau\in\mathbb{R}:p_{x\left(t\right)}\left(x_{1};t_{1}\right)=p_{x\left(t\right)}\left(x_{1};t_{1}+\tau\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{E}\left[x\left(t\right)\right]=\left\langle x\left(t\right)\right\rangle 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\underset{\mu_{x}}{\underbrace{\intop_{-\infty}^{\infty}x\cdot\mathbb{P}\left(x\right)dx}}=\underset{\left\langle x\left(t\right)\right\rangle }{\underbrace{\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{0}^{T}x\left(t\right)dt}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{3.5+6.5}{2}=5
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mu_{x}=\intop_{-\infty}^{\infty}x\cdot\mathbb{P}\left(x\right)dx=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{0}^{T}x\left(t\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sigma_{x}^{2}=\mathbb{E}\left[\left(x\left(t\right)-\mu_{x}\right)^{2}\right]=\mathbb{E}\left[x\left(t\right)^{2}-2\mu_{x}x\left(t\right)+\mu_{x}^{2}\right]=\mathbb{E}\left[x\left(t\right)^{2}\right]-2\mu_{x}\mathbb{E}\left[x\left(t\right)\right]+\mu_{x}^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\mathbb{E}\left[x\left(t\right)^{2}\right]-2\mu_{x}^{2}+\mu_{x}^{2}=\mathbb{E}\left[x\left(t\right)^{2}\right]-\mu_{x}^{2}=\left\langle x\left(t\right)^{2}\right\rangle -\mu_{x}^{2}=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{0}^{T}x\left(t\right)^{2}dt-\left(\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{0}^{T}x\left(t\right)dt\right)^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mu_{x}=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sigma_{x}^{2}\propto\left\langle P_{x}\right\rangle 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p_{x}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Cov\left(x_{i},x_{j}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Cov\left(x_{i},x_{j}\right)=\mathbb{E}\left[\left(x_{i}-\mu_{x_{i}}\right)\left(x_{j}-\mu_{x_{j}}\right)^{\ast}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\boxed{Cov\left(x_{i},x_{j}\right)=\mathbb{E}\left[x_{i}\cdot x_{j}^{\ast}\right]}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Cov\left(x_{i},x_{j}\right)=\mathbb{E}\left[\left(x_{i}-\mu_{x_{i}}\right)\left(x_{j}-\mu_{x_{j}}\right)^{\ast}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Cov\left(x\left(t_{i}\right),x\left(t_{j}\right)\right)=\mathbb{E}\left[x\left(t_{i}\right)\cdot x^{\ast}\left(t_{j}\right)\right]=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(t_{j}-t_{i}\right)\right]\underset{\tau=t_{j}-t_{i}}{\underbrace{=}}\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(\tau\right)\equiv\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(\tau\right)\equiv\left\langle x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right\rangle 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(t_{i},t_{j}\right)\equiv\left\langle x\left(t_{i}\right)\cdot x^{\ast}\left(t_{j}\right)\right\rangle 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(t_{i},t_{j}\right)\equiv\mathbb{E}\left[x\left(t_{i}\right)\cdot x^{\ast}\left(t_{j}\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(t,t+\tau\right)\approx\frac{1}{T}\intop_{t}^{t+T}x\left(t^{\prime}\right)x\left(t^{\prime}+\tau\right)dt^{\prime}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle x\left(t_{i}\right)\right\rangle =\underset{\text{עובק}}{\underbrace{\mu_{x}}}\Rightarrow\boxed{\mathbb{E}\left[x\left(t_{i}\right)\right]=\underset{\text{עובק}}{\underbrace{\mu_{x}}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle x\left(t_{i}\right)\cdot x^{\ast}\left(t_{j}\right)\right\rangle =\left\langle x\left(0\right)\cdot x^{\ast}\left(t_{j}-t_{i}\right)\right\rangle \Rightarrow\boxed{R_{x}\left(t_{i},t_{j}\right)=R_{x}\left(t_{j}-t_{i}\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(t_{1},t_{2}\right)=R_{x}\left(0,t_{2}-t_{1}\right)=R_{x}\left(\tau\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(\tau\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]=Cov\left(x\left(0\right),x\left(\tau\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(0\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(0\right)\right]\underset{\text{ישממ}}{\underbrace{=}}\mathbb{E}\left[\left(x\left(0\right)\right)^{2}\right]=\sigma_{x}^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sigma_{x}^{2}=\mathbb{E}\left[\left(x\left(0\right)-\mu_{x}\right)^{2}\right]=\mathbb{E}\left[\left(x\left(0\right)\right)^{2}\right]-\mu_{x}^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(0\right)=\sigma_{x}^{2}+\mu_{x}^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R_{x}\left(-\tau\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(-\tau\right)\right]=\mathbb{E}\left[x\left(\tau\right)\cdot x^{\ast}\left(0\right)\right]=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)^{\ast}\right]=R_{x}^{\ast}\left(\tau\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(-\tau\right)=R_{x}^{\ast}\left(\tau\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\forall t:R_{x}\left(0\right)=\mathbb{E}\left[\left|x\left(t\right)\right|^{2}\right]\in\mathbb{R}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(0\right)<\left|R_{x}\left(\tau>0\right)\right|
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left|R_{x}\left(\tau>0\right)\right|=\left|\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right]\right|\le max\left(\left|\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(0\right)\right]\right|,\left|\mathbb{E}\left[x\left(\tau\right)\cdot x^{\ast}\left(\tau\right)\right]\right|\right)=max\left(R_{x}\left(0\right),R_{x}\left(0\right)\right)=R_{x}\left(0\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\forall\tau>0:\left|R_{x}\left(\tau\right)\right|\le R_{x}\left(0\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{R_{x}\left(\tau\right)}{R_{x}\left(0\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t\right)=A\sin\left(\omega t+\phi_{0}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(\tau\right)=\left\langle x\left(t\right),x^{\ast}\left(t+\tau\right)\right\rangle \underset{T=\frac{2\pi}{\omega}}{\underbrace{=}}\frac{1}{T}\intop_{0}^{T}\left(A\sin\left(\omega t+\phi_{0}\right)\right)\left(A\sin\left(\omega\left(t+\tau\right)+\phi_{0}\right)\right)dt=
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{A^{2}}{T}\intop_{0}^{T}\left(\sin\left(\omega t+\phi_{0}\right)\right)\left(\sin\left(\omega t+\phi_{0}\right)\cos\left(\omega\tau\right)+\cos\left(\omega t+\phi_{0}\right)\sin\left(\omega\tau\right)\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{A^{2}\cos\left(\omega\tau\right)}{T}\underset{\frac{T}{2}}{\underbrace{\intop_{0}^{T}\sin^{2}\left(\omega t+\phi_{0}\right)dt}}+\frac{A^{2}\sin\left(\omega\tau\right)}{T}\underset{0}{\underbrace{\intop_{0}^{T}\frac{1}{2}\sin\left(2\omega t+2\phi_{0}\right)dt}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{A^{2}\cos\left(\omega\tau\right)}{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{T}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(\tau\right)=\left\langle x\left(t\right),x^{\ast}\left(t+\tau\right)\right\rangle =\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)x^{\ast}\left(t+\tau\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(\tau\right)=\left\langle x\left(t\right),x^{\ast}\left(t+\tau\right)\right\rangle =\lim_{T\rightarrow\infty}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)x^{\ast}\left(t+\tau\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(t_{i},t_{j}\right)=R_{x}\left(t_{i}-t_{j}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mu_{x}\left(t\right)=\mathbb{E}\left[x\left(t\right)\right]=\underset{\text{עובק}}{\underbrace{\mu_{x}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Cov\left(x\left(t_{i}\right),x\left(t_{j}\right)\right)=\mathbb{E}\left[\left(x\left(t_{i}\right)-\mu_{x}\right)\left(x\left(t_{j}\right)-\mu_{x}\right)^{\ast}\right]=\mathbb{E}\left[x\left(t_{i}\right),x^{\ast}\left(t_{j}\right)\right]-\mu_{x}^{2}=R_{x}\left(t_{i}-t_{j}\right)-\mu_{x}^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sigma_{x}\left(t\right)=\sqrt{Cov\left(x\left(t\right),x\left(t\right)\right)}=R_{x}\left(0\right)-\mu_{x}^{2}=\underset{\text{עובק}}{\underbrace{\sigma_{x}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(\tau\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)x^{\ast}\left(t+\tau\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mu_{x}\left(t\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t\right)=\underset{\text{תוא}}{\underbrace{s\left(t\right)}}+\underset{\text{שער}}{\underbrace{n\left(t\right)}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{X}\left(\omega\right)=\tilde{S}\left(\omega\right)+\tilde{N}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(\tau\right)=\intop_{-\infty}^{\infty}x\left(t\right)x^{\ast}\left(t+\tau\right)=\intop_{-\infty}^{\infty}x\left(t\right)x^{\ast}\left(\tau-\left(-t\right)\right)dt=x\left(t\right)\ast x\left(-t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{S}_{xx}\left(\omega\right)=\mathcal{F}\left[R_{x}\left(\tau\right)\right]=\mathcal{F}\left[x\left(t\right)\ast x\left(-t\right)\right]=\sqrt{2\pi}\tilde{X}\left(\omega\right)\cdot\tilde{X}^{\ast}\left(\omega\right)=\sqrt{2\pi}\left|\tilde{X}\left(\omega\right)\right|^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x_{T}\left(t\right)=Rect\left(\frac{t}{T}\right)\cdot x\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[-\frac{T}{2},\frac{T}{2}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mu_{x}=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\right]\right|^{2}\right]=\tilde{S}_{xx}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\right]\right|^{2}\right]=G\left(\omega,T\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{W}{Hz}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(\tau\right)=\sigma^{2}\delta\left(\tau\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Longleftrightarrow
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tau=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{S}_{xx}\left(\omega\right)=\frac{\sigma^{2}}{\sqrt{2\pi}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tau_{0\rightarrow1}\sim\exp\left(\lambda_{0}\right)=\begin{cases}
+\lambda_{0}e^{-\lambda_{0}t} & t\ge0\\
+0 & t<0
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tau_{1\rightarrow0}\sim\exp\left(\lambda_{1}\right)=\begin{cases}
+\lambda_{1}e^{-\lambda_{1}t} & t\ge0\\
+0 & t<0
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)\right]=\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]\cdot\mathbb{P}\left(x\left(0\right)=1\right)+\underset{0}{\underbrace{\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=0\right]}}\cdot\mathbb{P}\left(x\left(0\right)=0\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]\cdot\mathbb{P}\left(x\left(0\right)=1\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]=1\cdot\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)+0\cdot\mathbb{P}\left(x\left(t\right)=0|x\left(0\right)=1\right)=\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]=\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+W=\begin{pmatrix}-\lambda_{0} & \lambda_{1}\\
+\lambda_{0} & -\lambda_{1}
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{pmatrix}a\\
+b
+\end{pmatrix}=e^{Wt}\begin{pmatrix}0\\
+1
+\end{pmatrix}=\left(I+W\frac{1-e^{-2\lambda t}}{2\lambda}\right)\begin{pmatrix}0\\
+1
+\end{pmatrix}=\begin{pmatrix}0\\
+1
+\end{pmatrix}+\begin{pmatrix}\lambda_{1}\\
+-\lambda_{1}
+\end{pmatrix}\frac{1-e^{-2\lambda t}}{2\lambda}=\begin{pmatrix}\lambda_{1}\frac{1-e^{-2\lambda t}}{2\lambda}\\
+1-\lambda_{1}\frac{1-e^{-2\lambda t}}{2\lambda}
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=1-\frac{\lambda_{1}}{\lambda_{0}+\lambda_{1}}\left(1-e^{-\left(\lambda_{0}+\lambda_{1}\right)t}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=\frac{\lambda_{0}+\lambda_{1}e^{-\left(\lambda_{0}+\lambda_{1}\right)t}}{\lambda_{0}+\lambda_{1}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(0\right)=1\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=0\right)=\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)\right]=\underset{\mathbb{E}\left[x\left(t\right)\cdot x\left(0\right)|x\left(0\right)=1\right]}{\underbrace{\frac{\lambda_{0}+\lambda_{1}e^{-\left(\lambda_{0}+\lambda_{1}\right)t}}{\lambda_{0}+\lambda_{1}}}}\cdot\underset{\mathbb{P}\left(x\left(0\right)=1\right)}{\underbrace{\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\boxed{R_{x}\left(\tau\right)=\mathbb{E}\left[x\left(\tau\right)\cdot x\left(0\right)\right]=\frac{\lambda_{0}^{2}+\lambda_{1}\lambda_{0}e^{-\left(\lambda_{0}+\lambda_{1}\right)\left|\tau\right|}}{\left(\lambda_{0}+\lambda_{1}\right)^{2}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{E}\left[x\left(t\right)\right]=1\cdot\mathbb{P}\left(x\left(t\right)=1\right)+0\cdot\mathbb{P}\left(x\left(0\right)=0\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\boxed{\mu_{x}=\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{\tau\rightarrow\infty}R_{x}\left(\tau\right)=\left(\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}\right)^{2}=\mu_{x}^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\vec{p}=\begin{pmatrix}\mathbb{P}\left(x\left(t\right)=0\right)\\
+\mathbb{P}\left(x\left(t\right)=1\right)
+\end{pmatrix}=\begin{pmatrix}\frac{\lambda_{1}}{\lambda_{0}+\lambda_{1}}\\
+\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{S}_{xx}\left(\omega\right)=\frac{\sigma^{2}}{\omega_{c}\sqrt{2\pi}}Rect\left(\frac{\omega}{\omega_{c}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(\tau\right)=\sigma^{2}sinc\left(\frac{\omega_{c}}{2\pi}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{\sqrt{2\pi}}Rect\left(\frac{\omega}{2\pi f_{c}}\right)\rightarrow\frac{\omega_{c}}{2\pi}sinc\left(\frac{\omega_{c}}{2\pi}t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+y\left(t\right)=\underset{\text{יארקא}-\text{תוא}}{\underbrace{x\left(t\right)}}\ast\underset{\text{ןנסמ}}{\underbrace{h\left(t\right)}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{F}\left[\mathbb{E}\left[\left(x\ast h\right)\left(t\right),\left(x\ast h\right)\left(0\right)\right]\right]=?
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{S}_{yy}\left(\omega\right)=\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\ast h\left(t\right)\right]\right|^{2}\right]=\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\left[\sqrt{2\pi}\tilde{X}_{T}\left(\omega\right)\cdot\tilde{H}\left(\omega\right)\right]\right|^{2}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=2\pi\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\left[\tilde{X}_{T}\left(\omega\right)\right]\right|^{2}\right]\cdot\left|\tilde{H}\left(\omega\right)\right|^{2}=2\pi\tilde{S}_{xx}\left(\omega\right)\cdot\left|\tilde{H}\left(\omega\right)\right|^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{S}_{yy}\left(\omega\right)=2\pi\tilde{S}_{xx}\left(\omega\right)\cdot\left|\tilde{H}\left(\omega\right)\right|^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x+y}\left(\tau\right)=\mathbb{E}\left[\left(x\left(\tau\right)+y\left(\tau\right)\right)\cdot\left(x\left(0\right)+y\left(0\right)\right)\right]=\mathbb{E}\left[x\left(\tau\right)\cdot x\left(0\right)\right]+\mathbb{E}\left[y\left(\tau\right)\cdot y\left(0\right)\right]+\mathbb{E}\left[y\left(\tau\right)\cdot x\left(0\right)+x\left(\tau\right)\cdot y\left(0\right)\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=R_{x}\left(\tau\right)+R_{y}\left(\tau\right)+\underset{0?}{\underbrace{\mathbb{E}\left[y\left(\tau\right)\cdot x\left(0\right)+x\left(\tau\right)\cdot y\left(0\right)\right]}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x+y}\left(\tau\right)=R_{x}\left(\tau\right)+R_{y}\left(\tau\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{S}_{x+y,x+y}\left(\omega\right)=\tilde{S}_{xx}\left(\omega\right)+\tilde{S}_{yy}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R_{x}\left(0\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mu_{x}=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sigma_{x}=\sqrt{R_{x}\left(0\right)},\sigma_{y}=\sqrt{R_{y}\left(0\right)}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sigma_{x+y}=\sqrt{\sigma_{x}^{2}+\sigma_{y}^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sigma_{s}=\sqrt{\sum_{i=1}^{N}\sigma_{i}^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sqrt{N}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{\sqrt{N}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[-1,1\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I\left(t\right)=q\sum_{n}\delta\left(t-t_{n}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\underset{\text{םינעטמ}\text{סמ}}{\underbrace{N\left(T\right)}}=\frac{1}{q}\intop_{-\frac{T}{2}}^{\frac{T}{2}}I\left(t\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle I\right\rangle _{T}\left(t\right)=q\cdot N\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+N\left(T\right)\sim Pois\left(\lambda\cdot T\right)\Rightarrow\left\langle I\right\rangle _{T}=\intop_{-\frac{T}{2}}^{\frac{T}{2}}I\left(t\right)dt\sim q\cdot Pois\left(\lambda\cdot T\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle I\right\rangle _{T}\left(t\right)=\intop_{-\frac{T}{2}}^{\frac{T}{2}}I\left(t\right)dt=q\intop_{-\frac{T}{2}}^{\frac{T}{2}}\sum_{n}\delta\left(t-t_{n}\right)dt
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle I\right\rangle _{T}\sim q\cdot Pois\left(\lambda\cdot T\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+q\lambda T\underset{\mathbb{E}\left[Pois\left(\alpha\right)\right]=\alpha}{\underbrace{=}}\mathbb{E}\left[\left\langle I\right\rangle _{T}\right]=\mathbb{E}\left[\intop_{-\frac{T}{2}}^{\frac{T}{2}}I\left(t\right)dt\right]=T\cdot\left\langle I\right\rangle 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lambda=\frac{\left\langle I\right\rangle }{q}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x\left(t\right)=I\left(t\right)-\left\langle I\right\rangle 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x_{T}\left(t\right)=Rect\cdot\left(\frac{t}{T}\right)x\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I_{T}\left(\omega=0\right)=\mathcal{F}\left[Rect\cdot\left(\frac{t}{T}\right)I\left(t\right)\right]\left(\omega=0\right)=\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}I\left(t\right)dt=\left\langle I\right\rangle _{T}\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+S_{xx}\left(\omega\right)=S_{xx}\left(0\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\right]\left(\omega=0\right)\right|^{2}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{F}\left[x_{T}\left(t\right)\right]\left(\omega=0\right)=\intop_{-\infty}^{\infty}Rect\cdot\left(\frac{t}{T}\right)x\left(t\right)dt=\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)dt=\left(\left\langle I\right\rangle _{T}\left(t\right)-T\left\langle I\right\rangle \right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+S_{xx}\left(0\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\mathbb{E}\left[\left(\left\langle I\right\rangle _{T}\left(t\right)-T\left\langle I\right\rangle \right)^{2}\right]=\lim_{T\rightarrow\infty}\frac{1}{T}\left(\mathbb{V}\left[\left\langle I\right\rangle _{T}\left(t\right)\right]\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\left(q^{2}\lambda T\right)=q\left\langle I\right\rangle 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\boxed{S_{xx}\left(f\right)=q\left\langle I\right\rangle }
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta f=f_{2}-f_{1}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P\right\rangle =2q\left\langle I\right\rangle \Delta f
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P\right\rangle =2qR\left\langle I\right\rangle \Delta f
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P\right\rangle =qR\left\langle I\right\rangle \Delta f
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[f_{1},f_{2}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left[-f_{2},-f_{1}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+SNR=\frac{\left\langle P_{sig}\right\rangle }{\left\langle P_{noise}\right\rangle }=\frac{R\left\langle I\right\rangle ^{2}}{eR\left\langle I\right\rangle \Delta f}=\frac{\left\langle I\right\rangle }{e\Delta f}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{2}mu_{x}^{2}=\frac{1}{2}k_{B}T
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P\right\rangle \propto\left\langle I\right\rangle ^{2}\propto\left\langle u_{x}^{2}\right\rangle \propto k_{B}T
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P\right\rangle =RS_{II}\left(f\right)=4k_{B}T\Delta f
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\min_{\tilde{H}\left(\omega\right)}\intop_{-\infty}^{\infty}\left(y\left(t\right)-s\left(t\right)\right)^{2}dt=\min_{\tilde{H}\left(\omega\right)}\intop_{-\infty}^{\infty}\left|\tilde{Y}\left(\omega\right)-\tilde{S}\left(\omega\right)\right|^{2}d\omega=\min_{\tilde{H}\left(\omega\right)}\intop_{-\infty}^{\infty}\left|\tilde{H}\left(\omega\right)\left(\tilde{S}\left(\omega\right)+\tilde{N}\left(\omega\right)\right)-\tilde{S}\left(\omega\right)\right|^{2}d\omega
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)=\frac{\tilde{S}\left(\omega\right)}{\tilde{S}\left(\omega\right)+\tilde{N}\left(\omega\right)}=\frac{1}{1+\frac{\tilde{N}\left(\omega\right)}{\tilde{S}\left(\omega\right)}}=\frac{1}{1+\frac{1}{SNR\left(\omega\right)}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+SNR\left(\omega\right)\gg1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+SNR\left(\omega\right)\ll1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h\left(t\right)=s\left(-t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{H}\left(\omega\right)=\tilde{S}^{\ast}\left(\omega\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+s_{match}\left(t\right)=h\left(t\right)\ast s\left(t-t_{0}\right)=\intop_{-\infty}^{\infty}h\left(t-\tau\right)s\left(\tau-t_{0}\right)d\tau\left(t\right)=\intop_{-\infty}^{\infty}s\left(\tau-t\right)s\left(\tau-t_{0}\right)d\tau
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+n_{match}\left(t\right)=\intop_{-\infty}^{\infty}s\left(\tau-t\right)n\left(\tau\right)d\tau
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\max_{h\left(t\right)}\frac{\max_{t}\left[h\left(t\right)\ast\left[s\left(t-t_{0}\right)+n\left(t\right)\right]\right]}{\mathbb{E}\left[h\left(t\right)\ast\left[s\left(t-t_{0}\right)+n\left(t\right)\right]\right]}=\max_{h\left(t\right)}\frac{\max_{t}\left[h\left(t\right)\ast\left[s\left(t-t_{0}\right)+n\left(t\right)\right]\right]}{\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}h\left(t\right)\ast\left[s\left(t-t_{0}\right)+n\left(t\right)\right]dt}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+E_{s}=\intop_{-\infty}^{\infty}\left[s\left(t\right)\right]^{2}dt=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\max_{t}\left[h\left(t\right)\ast\left[s\left(t-t_{0}\right)+n\left(t\right)\right]\right]=\max_{t}\left[\intop_{-\infty}^{\infty}s\left(\tau-t\right)s\left(\tau-t_{0}\right)d\tau+\intop_{-\infty}^{\infty}s\left(\tau-t\right)n\left(\tau\right)d\tau\right]=\intop_{-\infty}^{\infty}\left[s\left(\tau-t_{0}\right)\right]^{2}d\tau=E_{s}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}h\left(t\right)\ast\left[s\left(t-t_{0}\right)+n\left(t\right)\right]dt=\underset{0}{\underbrace{\lim_{T\rightarrow\infty}\frac{1}{T}\underset{\le E_{s}}{\underbrace{\intop_{-\frac{T}{2}}^{\frac{T}{2}}s\left(\tau-t\right)s\left(\tau-t_{0}\right)d\tau}}}}+\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}s\left(\tau-t\right)n\left(\tau\right)d\tau
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}s\left(\tau-t\right)n\left(\tau\right)d\tau=
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left(V_{ask}|"1"\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left(V_{ask}|"0"\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P_{d}=\intop_{V_{th}}^{\infty}\mathbb{P}\left(V|"1"\right)dV
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P_{FA}=\intop_{V_{th}}^{\infty}\mathbb{P}\left(V|"0"\right)dV
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P_{d}=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P_{FA}=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P_{d}=P_{FA}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+FAR=P_{FA}\cdot f
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{H}_{0}:r\left(t\right)=\xi\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{H}_{1}:r\left(t\right)=s\left(t\right)+\xi\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r_{match}=\intop_{-\infty}^{\infty}r\left(t\right)\cdot s^{\ast}\left(t\right)dt=\mathbb{E}\left[r\left(t\right)\cdot s^{\ast}\left(t\right)\right]=\begin{cases}
+E_{s}+\mathbb{E}\left[r\left(t\right)\cdot\xi^{\ast}\left(t\right)\right] & \mathcal{H}_{1}\\
+\mathbb{E}\left[r\left(t\right)\cdot\xi^{\ast}\left(t\right)\right] & \mathcal{H}_{0}
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+s\left[n\right]+\xi\left[n\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\xi\left[n\right]\sim\mathcal{N}\left(0,\sigma^{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r_{match}=\sum_{n=0}^{N-1}r\left[n\right]\cdot s^{\ast}\left[n\right]=\begin{cases}
+\sum_{n=0}^{N-1}\left|s\left[n\right]\right|^{2}+\sum_{n=0}^{N-1}\xi\left[n\right]\cdot s^{\ast}\left[n\right] & \mathcal{H}_{1}\\
+\sum_{n=0}^{N-1}\xi\left[n\right]\cdot s^{\ast}\left[n\right] & \mathcal{H}_{0}
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{E}\left[\sum_{n=0}^{N-1}\xi\left[n\right]\cdot s^{\ast}\left[n\right]\right]=\sum_{n=0}^{N-1}\underset{0}{\underbrace{\mathbb{E}\left[\xi\left[n\right]\right]}}\cdot\mathbb{E}\left[s^{\ast}\left[n\right]\right]=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{V}\left[\sum_{n=0}^{N-1}\xi\left[n\right]\cdot s^{\ast}\left[n\right]\right]=\sum_{n=0}^{N-1}\mathbb{\mathbb{V}}\left[\xi\left[n\right]\cdot s^{\ast}\left[n\right]\right]=\sum_{n=0}^{N-1}\left(s^{\ast}\left[n\right]\right)^{2}\underset{\sigma^{2}}{\underbrace{\mathbb{\mathbb{V}}\left[\xi\left[n\right]\right]}}\underset{s^{\ast}\left[n\right]\in\mathbb{R}}{\underbrace{=}}\sigma^{2}\sum_{n=0}^{N-1}\left(s\left[n\right]\right)^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+E_{s}\equiv\sum_{n=0}^{N-1}\left(s\left[n\right]\right)^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r_{match}=\begin{cases}
+E_{s}+\xi_{N} & \mathcal{H}_{1}\\
+\xi_{N} & \mathcal{H}_{0}
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\xi_{N}\sim\mathcal{N}\left(0,\sigma^{2}\cdot E_{s}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{r_{match}}{E_{s}}=\begin{cases}
+1+\zeta & \mathcal{H}_{1}\\
+\zeta & \mathcal{H}_{0}
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\zeta\sim\mathcal{N}\left(0,\frac{\sigma^{2}}{E_{s}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sqrt{E_{s}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathcal{H}_{1}:r\left(t\right)=s\left(t-t_{0}\right)+n\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P_{d},FAR
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V_{th}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r_{match}\left(t\right)=\intop_{-\infty}^{\infty}r\left(\tau\right)\cdot s^{\ast}\left(\tau-t\right)d\tau=r\left(t\right)\ast s\left(-t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+h\left(t\right)=s\left(-t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{r_{match}\left(t\right)}{E_{s}}=\begin{cases}
+\frac{s\left(t-t_{0}\right)\ast s\left(-t\right)}{E_{s}}+\frac{\xi\left(t\right)\ast s\left(-t\right)}{E_{s}} & \mathcal{H}_{1}\\
+\frac{\xi\left(t\right)\ast s\left(-t\right)}{E_{s}} & \mathcal{H}_{0}
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\zeta\left(t\right)=\frac{\xi\left(t\right)\ast s\left(-t\right)}{E_{s}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\tilde{S}_{\zeta\zeta}\left(\omega\right)=\tilde{S}_{\xi\xi}\left(\omega\right)\left|\frac{S^{\ast}\left(\omega\right)}{E_{s}}\right|^{2}=\frac{1}{E_{s}^{2}}\tilde{S}_{\xi\xi}\left(\omega\right)\left|S\left(\omega\right)\right|^{2}\underset{white-noise}{\underbrace{=}}\frac{1}{E_{s}^{2}}\sigma^{2}\left|S\left(\omega\right)\right|^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P_{\zeta}\right\rangle =R_{\zeta}\left(0\right)=\intop_{-\infty}^{\infty}\tilde{S}_{\zeta\zeta}\left(\omega\right)d\omega=\intop_{-\infty}^{\infty}\frac{1}{E_{s}^{2}}\sigma^{2}\left|S\left(\omega\right)\right|^{2}d\omega=\frac{1}{E_{s}^{2}}\sigma^{2}\underset{E_{s}}{\underbrace{\intop_{-\infty}^{\infty}\left|S\left(\omega\right)\right|^{2}d\omega}}=\frac{\sigma^{2}}{E_{s}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r_{match}\left(t\right)=E_{s}\left(\frac{R\left(t-t_{0}\right)}{E_{s}}+\zeta\left(t\right)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P_{\zeta}\right\rangle =\frac{\sigma^{2}}{E_{s}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\max_{t}\frac{R\left(t-t_{0}\right)}{E_{s}}=\frac{R\left(0\right)}{E_{s}}=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+s\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P_{d},P_{FA}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r\left[n\right]=\begin{cases}
+A\cdot s\left[n-n_{0}\right]+\xi\left[n\right] & \mathcal{H}_{1}\\
+\xi\left[n\right] & \mathcal{H}_{0}
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r_{match}=\max_{0\le n\le N-1}r\left[n\right]\ast s\left[-n\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left(V_{ask}|"1"\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left(V_{ask}|"0"\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P_{d}=\intop_{r_{th}}^{\infty}\mathbb{P}\left(r_{match}|\mathcal{H}_{1}\right)dr_{match}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P_{FA}=\intop_{r_{th}}^{\infty}\mathbb{P}\left(r_{match}|\mathcal{H}_{0}\right)dr_{match}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+r_{match}=\left.r\left[n\right]\ast s\left[-n\right]\right|_{n_{0}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x_{n}=\frac{1}{N}\sum_{k=0}^{N-1}\tilde{X}_{k}e^{i\frac{2\pi n}{N}k}\leftrightarrows\tilde{X}_{k}=\sum_{n=0}^{N-1}x_{n}e^{-i\frac{2\pi k}{N}n}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\omega=e^{-i\frac{2\pi}{N}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+D_{kn}=e^{-i\frac{2\pi k}{N}n}=\omega^{kn}\Rightarrow\tilde{X}_{k}=\sum_{n=0}^{N-1}D_{kn}x_{n}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+D\in\mathbb{C}_{N\times N}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+D=D^{T}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+DD^{\dagger}=N\cdot I_{N\times N}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+D_{4}\in\mathbb{C}_{4\times4}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+D_{4}=\begin{pmatrix}\omega^{0} & \omega^{0} & \omega^{0} & \omega^{0}\\
+\omega^{0} & \omega^{1} & \omega^{2} & \omega^{3}\\
+\omega^{0} & \omega^{2} & \omega^{4} & \omega^{6}\\
+\omega^{0} & \omega^{3} & \omega^{6} & \omega^{9}
+\end{pmatrix}=\begin{pmatrix}1 & 1 & 1 & 1\\
+1 & -i & -1 & i\\
+1 & -1 & 1 & -1\\
+1 & i & -1 & -i
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{pmatrix}1\\
+-1\\
+1\\
+-1\\
+\vdots\\
+-1
+\end{pmatrix}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{2}{5}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{3}{5}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+N=8
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left(\vec{x}\circledast\vec{y}\right)\left[m\right]=\sum_{n=0}^{N-1}x\left[n\right]\cdot y\left[\left(m-n\right)\mod N\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+D\left(\vec{x}\circledast\vec{y}\right)\left[k\right]=\underset{D\vec{x}}{\underbrace{\tilde{X}\left[k\right]}}\cdot\underset{D\vec{y}}{\underbrace{\tilde{Y}\left[k\right]}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\arg\left(\tilde{X}_{k}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Dx_{\left(n-n_{0}\right)\mod N}=\sum_{n=0}^{N-1}x_{\left(n-n_{0}\right)\mod N}e^{-i\frac{2\pi k}{N}n}=\sum_{n=0}^{N-1}x_{\left(n-n_{0}\right)\mod N}e^{-i\frac{2\pi k}{N}\left(n-n_{0}\right)}e^{i\frac{2\pi k}{N}n_{0}}=e^{i\frac{2\pi k}{N}n_{0}}\tilde{X}_{k}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\log_{2}M
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+N\left(T\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+t_{n}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+N\left(T\right)=\sum_{n}N\left(T-t_{n}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sum_{n}X^{-t_{n}}=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+X_{0}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{T\rightarrow\infty}N\left(T\right)=X_{0}^{T}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\lim_{T\rightarrow\infty}\log_{2}N\left(T\right)=T\log_{2}X_{0}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+C=\lim_{T\rightarrow\infty}\frac{\log_{2}N\left(T\right)}{T}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{\log_{2}p\left(B\right)}{N}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+H
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p_{i}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p_{A}=\frac{1}{2},p_{B}=\frac{1}{3},p_{C}=\frac{1}{6}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+H\left(\frac{1}{2},\frac{1}{3},\frac{1}{6}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+H\left(\frac{1}{2},\frac{1}{2}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+H\left(\frac{2}{3},\frac{1}{3}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+H\left(\frac{1}{2},\frac{1}{3},\frac{1}{6}\right)=H\left(\frac{1}{2},\frac{1}{2}\right)+\frac{1}{2}H\left(\frac{2}{3},\frac{1}{3}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+H\left(p_{1},...,p_{N}\right)=-K\sum_{i=1}^{N}p_{i}\log_{2}p_{i}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+-\sum_{i=1}^{N}p_{i}\log_{2}p_{i}=\sum_{i=1}^{N}p_{i}\log_{2}\frac{1}{p_{i}}=\mathbb{E}\left[\log_{2}\frac{1}{p_{i}}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p_{i}\approx\frac{1}{M}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+H\left(p_{1},...,p_{N}\right)=\mathbb{E}\left[\log_{2}\frac{1}{p_{i}}\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+H\left(p,1-p\right)=-p\log_{2}p-\left(1-p\right)\log_{2}\left(1-p\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p=\frac{1}{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+p=0,p=1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+H\left(0.11,0.89\right)=0.5
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left("AA"\right)=0.11^{2}=0.0121
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left("AB"\right)=\mathbb{P}\left("BA"\right)=0.11\cdot0.89=0.0979
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left("BB"\right)=0.89^{2}=0.7921
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{E}\left[\frac{\#bits}{symbols}\right]=\frac{1}{2}\left(1\cdot0.7921+2\cdot0.0979+3\cdot0.0979+3\cdot0.0121\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{E}\left[\frac{\#bits}{symbols}\right]=0.65895
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{E}\left[\frac{\#bits}{symbols}\right]=H
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+2\cdot0.0979
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\hat{p}\rightarrow2^{-N\cdot H}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\varepsilon>0,\delta>0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+N_{0}\in\mathbb{N}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+N>N_{0}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left|\frac{-\log_{2}p}{N}-H\right|<\delta
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+M^{N}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+N\cdot H
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f_{max}=\Delta f
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta f
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+SNR=\frac{\left\langle P_{sig}\right\rangle }{\left\langle P_{n}\right\rangle }
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Delta t=\frac{1}{f_{s}}\le\frac{1}{2f_{max}}=\frac{1}{2\Delta f}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+N_{samples}=\frac{T}{\Delta t}=2T\Delta f
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+s\left(t\right)=\sum_{n=1}^{2T\Delta f}x_{n}sinc\left(f_{s}\left(t-\Delta t\cdot n\right)\right)=\sum_{n=1}^{2T\Delta f}x_{n}sinc\left(2\Delta f\cdot t-\cdot n\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+E=\intop_{-\infty}^{\infty}s\left(t\right)^{2}dt=\intop_{-\infty}^{\infty}\left(\sum_{n=1}^{2T\Delta f}x_{n}sinc\left(2\Delta f\cdot t-\cdot n\right)\right)^{2}dt=
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\intop_{-\infty}^{\infty}\sum_{n=1}^{2T\Delta f}\sum_{m=1}^{2T\Delta f}\left(x_{n}sinc\left(2\Delta f\cdot t-\cdot n\right)\right)\left(x_{m}sinc\left(2\Delta f\cdot t-\cdot m\right)\right)dt=
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\sum_{n=1}^{2T\Delta f}\sum_{m=1}^{2T\Delta f}x_{n}x_{m}\intop_{-\infty}^{\infty}\left(sinc\left(2\Delta f\cdot t-\cdot n\right)\right)\left(sinc\left(2\Delta f\cdot t-\cdot m\right)\right)dt=
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\sum_{n=1}^{2T\Delta f}\sum_{m=1}^{2T\Delta f}\delta_{mn}\frac{x_{n}x_{m}}{2\Delta f}=\frac{1}{2\Delta f}\sum_{n=1}^{2T\Delta f}x_{n}^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P_{sig}\right\rangle =\frac{E}{T}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+2T\Delta f\left\langle P_{sig}\right\rangle =\sum_{n=1}^{2T\Delta f}x_{n}^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+y_{n}\equiv\frac{x_{n}}{\sqrt{2T\Delta f}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+R=\sum_{n=1}^{2T\Delta f}y_{n}^{2}=\left\langle P_{sig}\right\rangle 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\xi_{1},...\xi_{2T\Delta f}\right)=\prod_{n=1}^{2T\Delta f}\frac{1}{\sqrt{2\pi\cdot2T\Delta f\left\langle P_{noise}\right\rangle }}e^{-\frac{\xi_{n}^{2}}{2T\Delta f\left\langle P_{noise}\right\rangle }}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+=\frac{1}{\left(2\pi\cdot2T\Delta f\left\langle P_{noise}\right\rangle \right)^{T\Delta f}}e^{-\frac{1}{2T\Delta f\left\langle P_{noise}\right\rangle }\sum_{n=1}^{2T\Delta f}\xi_{n}^{2}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\xi_{n}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\zeta_{n}\equiv\frac{\xi_{n}}{\sqrt{2T\Delta f}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+s_{n}=y_{n}+\zeta_{n}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{1}{2\Delta f}\sigma^{2}=E=T\left\langle P_{noise}\right\rangle 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sigma^{2}=\left\langle P_{noise}\right\rangle 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{P}\left(\sum_{n=1}^{2T\Delta f}\xi_{n}^{2}=r^{2}\right)=?
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P_{noise}\right\rangle \pm\varepsilon
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{E}\left[\sum_{n=1}^{2T\Delta f}\zeta_{n}^{2}\right]=\mathbb{E}\left[\frac{1}{2T\Delta f}\sum_{n=1}^{2T\Delta f}\xi_{n}^{2}\right]=\frac{1}{2T\Delta f}\sum_{n=1}^{2T\Delta f}\mathbb{E}\left[\xi_{n}^{2}\right]=\frac{1}{2T\Delta f}\sum_{n=1}^{2T\Delta f}\mathbb{V}\left[\xi_{n}\right]=\left\langle P_{noise}\right\rangle 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbb{V}\left[\sum_{n=1}^{2T\Delta f}\zeta_{n}^{2}\right]=\mathbb{V}\left[\frac{1}{2T\Delta f}\sum_{n=1}^{2T\Delta f}\zeta_{n}^{2}\right]=\left(\frac{1}{2T\Delta f}\right)^{2}\mathbb{V}\left[\sum_{n=1}^{2T\Delta f}\xi_{n}^{2}\right]=\frac{\mathbb{V}\left[\xi_{n}^{2}\right]}{2\Delta fT}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\vec{y}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\vec{\zeta}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\sqrt{\frac{\mathbb{V}\left[\xi_{n}^{2}\right]}{2\Delta fT}}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left\langle P_{sig}\right\rangle +\left\langle P_{noise}\right\rangle 
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+N\left(T\right)=\frac{V_{r=\sqrt{\left\langle P_{sig}\right\rangle +\left\langle P_{noise}\right\rangle }}}{V_{r=\sqrt{\left\langle P_{noise}\right\rangle }}}=\left(\frac{\sqrt{\left\langle P_{sig}\right\rangle +\left\langle P_{noise}\right\rangle }}{\sqrt{\left\langle P_{noise}\right\rangle }}\right)^{2\Delta fT}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+C=\lim_{T\rightarrow\infty}\frac{\log_{2}N\left(T\right)}{T}=\Delta f\log_{2}\left(\frac{\left\langle P_{sig}\right\rangle +\left\langle P_{noise}\right\rangle }{\left\langle P_{noise}\right\rangle }\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+C=\Delta f\log_{2}\left(1+SNR\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+m\ddot{x}+\gamma\dot{x}+kx=\delta\left(t\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left|\tilde{H}\left(\omega\right)\right|^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+f\left[Hz\right]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\left|H\left(\omega\right)\right|^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

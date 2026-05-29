@@ -1,0 +1,253 @@
+<!DOCTYPE html><meta charset="utf-8">
+<title>Sampling & Aliasing — Stylish</title>
+<style>
+  /* --- Design tokens ------------------------------------------------------ */
+  :root{
+    --bg: #ffffff;
+    --card: #f9fafb;
+    --ink: #0f172a;      /* slate-900 */
+    --muted: #475569;    /* slate-600 */
+    --line: #e5e7eb;     /* gray-200 */
+    --brand: #1e90ff;    /* blue for original sine */
+    --accent: #ff7f0e;   /* orange for alias sine */
+    --good: #2e8b57;     /* green for fs marker */
+    --danger: #c1121f;   /* red for Nyquist marker */
+    --chip: #eef2ff;     /* subtle legend chips */
+    --shadow: 0 6px 20px rgba(2,6,23,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0b1020;
+      --card:#0f162b;
+      --ink:#e5e7eb;
+      --muted:#94a3b8;
+      --line:#1f2937;
+      --brand:#7cb8ff;
+      --accent:#ffb061;
+      --good:#63d297;
+      --danger:#ff6b6b;
+      --chip:#131c35;
+      --shadow: 0 8px 26px rgba(0,0,0,.35);
+    }
+  }
+
+  /* Let UA know we support dark/light palettes */
+  :root { color-scheme: light dark; }
+
+  /* --- Layout & typography ------------------------------------------------ */
+  html,body{height:100%}
+  body{
+    margin:0; padding:32px;
+    background:radial-gradient(1200px 700px at -5% -10%, rgba(30,144,255,.07), transparent 60%),
+               radial-gradient(800px 600px at 110% 10%, rgba(255,127,14,.04), transparent 60%),
+               var(--bg);
+    font: 15px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Noto Color Emoji","Segoe UI Emoji", sans-serif;
+    color:var(--ink);
+  }
+  .shell{max-width:1100px; margin:0 auto;}
+  h2{margin:0 0 10px 0; letter-spacing:.2px; font-weight:700}
+  p{margin:6px 0 14px 0; color:var(--muted)}
+  .grid{display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:18px; align-items:start}
+  @media (max-width:980px){ .grid{grid-template-columns:1fr} }
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:16px;
+  }
+  canvas{display:block; width:100%; height:auto; border-radius:12px; background:#fff0; border:1px solid var(--line)}
+  .gauge-wrap{margin-top:10px}
+
+  /* --- Controls ----------------------------------------------------------- */
+  .controls{display:grid; gap:12px; margin-top:10px}
+  .row{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+  .row label{font-weight:600}
+  .val{min-width:48px; text-align:right; font-variant-numeric:tabular-nums; color:var(--muted)}
+  input[type="range"]{width: 220px; -webkit-appearance:none; appearance:none; height:4px; background:var(--line); border-radius:999px; outline:none}
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none;
+    width:18px; height:18px; border-radius:50%;
+    background:linear-gradient(180deg, #fefefe, #ddd);
+    border:1px solid #b9c1d0; box-shadow:0 1px 1px rgba(0,0,0,.12);
+    cursor:pointer;
+  }
+  @media (prefers-color-scheme:dark){
+    input[type="range"]{background:#22314d}
+    input[type="range"]::-webkit-slider-thumb{
+      background:linear-gradient(180deg, #162032, #0f182a);
+      border:1px solid #2a3b5c;
+    }
+  }
+
+  .legend{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:8px}
+  .chip{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:var(--chip); border:1px solid var(--line)}
+  .dot{width:10px; height:10px; border-radius:50%}
+  .dot.blue{background:var(--brand)}
+  .dot.black{background:#111}
+  .dot.orange{background:var(--accent)}
+
+  .note{color:var(--muted); margin-top:8px}
+  .mini{font-size:12px}
+
+  /* Nyquist gauge ticks */
+  .tick-label{font-size:12px; fill: var(--muted)}
+</style>
+
+<div class="shell">
+  <h2>Sampling & Aliasing</h2>
+  <p>Blue = original sine, black dots = samples, <strong style="color:var(--accent)">orange = analytic alias sine</strong> (matches sample values exactly).</p>
+
+  <div class="grid">
+    <!-- LEFT: charts -->
+    <div>
+      <div class="card">
+        <div class="legend">
+          <span class="chip"><span class="dot blue"></span>Original sine f</span>
+          <span class="chip"><span class="dot black"></span>Samples n/f<sub>s</sub></span>
+          <span class="chip"><span class="dot orange"></span>Alias sine |f − round(f/f<sub>s</sub>)·f<sub>s</sub>|</span>
+        </div>
+        <canvas id="main" width="980" height="300"></canvas>
+        <div class="gauge-wrap">
+          <canvas id="gauge" width="980" height="64"></canvas>
+          <div class="mini">Gauge (0–20 Hz): <span style="color:var(--brand)">blue = f</span>, <span style="color:var(--good)">green = f<sub>s</sub></span>, <span style="color:var(--danger)">red = f<sub>s</sub>/2</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: controls -->
+    <div class="card">
+      <div class="controls">
+        <div class="row">
+          <label for="f">Signal f (Hz)</label>
+          <input id="f" type="range" min="0.5" max="20" step="0.5" value="14">
+          <span id="fl" class="val">14.0</span>
+        </div>
+        <div class="row">
+          <label for="fs">Sampling f<sub>s</sub> (Hz)</label>
+          <input id="fs" type="range" min="8" max="20" step="0.5" value="18.5">
+          <span id="fsl" class="val">18.5</span>
+        </div>
+        <div id="nyq" class="note"></div>
+        <div id="alias" class="note"></div>
+        <p class="note mini">Built with the user’s color-scheme preference in mind; colors target WCAG AA contrast.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* geometry + helpers */
+  const main = document.getElementById('main'), g = main.getContext('2d');
+  const gauge = document.getElementById('gauge'), gg = gauge.getContext('2d');
+  const fIn = document.getElementById('f'), fsIn = document.getElementById('fs');
+  const fl = document.getElementById('fl'), fsl = document.getElementById('fsl');
+
+  const W=main.width, H=main.height, L=40, R=W-20, T=2.0, A=1.0;
+  const X = t => L + (t/T)*(R-L);
+  const Y = y => H/2 - y*(H*0.35);
+
+  /* CSS variables to JS */
+  function CSS(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  let C = {
+    brand: CSS('--brand'),
+    accent: CSS('--accent'),
+    line: CSS('--line'),
+    good: CSS('--good'),
+    danger: CSS('--danger'),
+    muted: CSS('--muted')
+  };
+
+  function draw(){
+    const f=+fIn.value, fs=+fsIn.value;
+    fl.textContent=f.toFixed(1);
+    fsl.textContent=fs.toFixed(1);
+
+    /* --- main plot --- */
+    g.clearRect(0,0,W,H);
+    // axis
+    g.strokeStyle=C.line; g.lineWidth=1;
+    g.beginPath(); g.moveTo(L,H/2); g.lineTo(R,H/2); g.stroke();
+
+    // original sine
+    g.strokeStyle=C.brand; g.lineWidth=2;
+    g.beginPath();
+    for(let px=L; px<=R; px++){
+      const t=(px-L)/(R-L)*T;
+      const y=Math.sin(2*Math.PI*f*t);
+      const yy=Y(y);
+      if(px===L) g.moveTo(px,yy); else g.lineTo(px,yy);
+    } g.stroke();
+
+    // samples
+    const Ts=1/fs, N=Math.floor(T/Ts)+1;
+    const samples=new Array(N);
+    g.fillStyle = "#111";
+    for(let n=0;n<N;n++){
+      const t=n*Ts, y=Math.sin(2*Math.PI*f*t);
+      samples[n]=y;
+      g.beginPath(); g.arc(X(t), Y(y), 3, 0, 2*Math.PI); g.fill();
+    }
+
+    // alias sine (passes through sample points)
+    const k = Math.round(f/fs);
+    const diff = f - k*fs;
+    const fa = Math.abs(diff);
+    const sgn = (diff >= 0) ? 1 : -1;
+
+    g.strokeStyle=C.accent; g.lineWidth=2;
+    g.beginPath();
+    for(let px=L; px<=R; px++){
+      const t=(px-L)/(R-L)*T;
+      const y= sgn * Math.sin(2*Math.PI*fa*t);
+      const yy=Y(y);
+      if(px===L) g.moveTo(px,yy); else g.lineTo(px,yy);
+    } g.stroke();
+
+    /* --- gauge (0–20 Hz) --- */
+    gg.clearRect(0,0,gauge.width,gauge.height);
+    const GW=gauge.width, GH=gauge.height, pad=42, bandMax=20;
+    const gx = f0 => pad + (f0/bandMax)*(GW-2*pad);
+    // baseline
+    gg.strokeStyle=C.line; gg.lineWidth=1;
+    gg.beginPath(); gg.moveTo(pad, GH/2); gg.lineTo(GW-pad, GH/2); gg.stroke();
+    // ticks + labels
+    gg.fillStyle=C.muted; gg.textAlign="center"; gg.textBaseline="top";
+    for(let hz=0; hz<=20; hz+=5){
+      const x=gx(hz);
+      gg.beginPath(); gg.moveTo(x, GH/2-6); gg.lineTo(x, GH/2+6); gg.stroke();
+      gg.fillText(hz.toString(), x, GH/2+8);
+    }
+    function mark(freq, color, label){
+      const x=gx(Math.min(Math.max(freq,0),20));
+      gg.strokeStyle=color; gg.lineWidth=2;
+      gg.beginPath(); gg.moveTo(x, 10); gg.lineTo(x, GH-10); gg.stroke();
+      gg.fillStyle=color; gg.textBaseline="bottom";
+      gg.fillText(label, x, 8);
+      gg.textBaseline="top";
+    }
+    mark(f, C.brand, "f");
+    mark(fs, C.good, "fs");
+    mark(fs/2, C.danger, "fs/2");
+
+    // readouts
+    const ny = fs/2;
+    document.getElementById('nyq').innerHTML =
+      `Nyquist = ${ny.toFixed(2)} Hz. ` +
+      (f >= ny ? `<b style="color:${C.danger}">Aliasing (f ≥ f<sub>s</sub>/2).</b>`
+               : `No aliasing for a band-limited sine (ideal), since f < f<sub>s</sub>/2.`);
+    document.getElementById('alias').innerHTML =
+      `Apparent (aliased) frequency = <b>${fa.toFixed(3)} Hz</b> (sign ${sgn>0?'+':'−'}).`;
+  }
+
+  [fIn, fsIn].forEach(el=>el.addEventListener('input', draw));
+  // redraw if user flips OS theme (keeps colors in sync)
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ()=>{ 
+    // re-pull CSS variables in new scheme
+    ['--brand','--accent','--line','--good','--danger','--muted'].forEach(k=>C[k.slice(2)] = getComputedStyle(document.documentElement).getPropertyValue(k).trim());
+    draw();
+  });
+
+  draw();
+</script>

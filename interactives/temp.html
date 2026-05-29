@@ -1,0 +1,213 @@
+<!DOCTYPE html><meta charset="utf-8">
+<title>Series RLC — Bode Plotter (Band-Pass across R)</title>
+<style>
+  :root{
+    --bg:#ffffff; --card:#f9fafb; --ink:#0f172a; --muted:#475569; --line:#e5e7eb;
+    --mag:#1e90ff; --phase:#ff7f0e; --mark:#c1121f; --good:#2e8b57; --shadow:0 6px 20px rgba(2,6,23,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0b1020; --card:#10172a; --ink:#e5e7eb; --muted:#94a3b8; --line:#1f2937;
+           --mag:#7cb8ff; --phase:#ffb061; --mark:#ff6b6b; --good:#63d297; --shadow:0 8px 26px rgba(0,0,0,.35) }
+  }
+  :root{ color-scheme: light dark }
+  body{margin:0;padding:28px;background:var(--bg);color:var(--ink);
+       font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
+  .wrap{max-width:1100px;margin:0 auto}
+  h2{margin:0 0 8px 0}
+  p{margin:6px 0 14px 0;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px}
+  @media (max-width:980px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px}
+  .charts{display:grid;gap:12px}
+  canvas{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:12px}
+  .controls{display:grid;gap:10px}
+  .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .row label{font-weight:600}
+  input[type=range]{width:200px;-webkit-appearance:none;appearance:none;height:4px;background:var(--line);border-radius:999px}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;border:1px solid #b9c1d0;background:linear-gradient(#fff,#ddd)}
+  @media (prefers-color-scheme:dark){
+    input[type=range]{background:#22314d}
+    input[type=range]::-webkit-slider-thumb{border:1px solid #2a3b5c;background:linear-gradient(#162032,#0f182a)}
+  }
+  .val{min-width:70px;text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 8px}
+  .chip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;border:1px solid var(--line)}
+  .dot{width:10px;height:10px;border-radius:50%}
+  .dot.mag{background:var(--mag)} .dot.phase{background:var(--phase)}
+  .mini{font-size:12px;color:var(--muted)}
+</style>
+
+<div class="wrap">
+  <h2>Series RLC — Bode Plotter (output across R)</h2>
+  <p>Magnitude (dB) and phase (deg) vs frequency. Orange markers show <b>f₀</b>, and green markers show the estimated <b>−3 dB bandwidth</b> around the peak (f₁,f₂). Formulas: f₀=1/(2π√LC), Q=ω₀L/R, Δf=f₀/Q=R/(2πL). </p>
+
+  <div class="grid">
+    <div class="card charts">
+      <div class="legend">
+        <span class="chip"><span class="dot mag"></span> |H(jω)| (dB)</span>
+        <span class="chip"><span class="dot phase"></span> ∠H(jω) (deg)</span>
+      </div>
+      <canvas id="mag" width="980" height="280"></canvas>
+      <canvas id="phs" width="980" height="220"></canvas>
+      <div class="mini">Frequency axis is logarithmic (10 Hz → 100 kHz). Output is the voltage across R in a series RLC driven by a source.</div>
+    </div>
+
+    <div class="card">
+      <div class="controls">
+        <div class="row">
+          <label>R (Ω)</label>
+          <input id="R" type="range" min="1" max="500" step="1" value="100">
+          <span id="Rval" class="val">100.0 Ω</span>
+        </div>
+        <div class="row">
+          <label>L (mH)</label>
+          <input id="L" type="range" min="0.1" max="200" step="0.1" value="10">
+          <span id="Lval" class="val">10.0 mH</span>
+        </div>
+        <div class="row">
+          <label>C (µF)</label>
+          <input id="C" type="range" min="0.01" max="100" step="0.01" value="1">
+          <span id="Cval" class="val">1.00 µF</span>
+        </div>
+        <div id="read" class="mini"></div>
+        <div class="mini">
+          References: Series RLC resonance & Q (ω₀, Q, bandwidth) and Bode plot basics. 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- helpers ---------- */
+const mag = document.getElementById('mag'), gM = mag.getContext('2d');
+const phs = document.getElementById('phs'), gP = phs.getContext('2d');
+const Rsl = document.getElementById('R'), Lsl = document.getElementById('L'), Csl = document.getElementById('C');
+const Rval = document.getElementById('Rval'), Lval = document.getElementById('Lval'), Cval = document.getElementById('Cval');
+const read = document.getElementById('read');
+
+const M = mag.width, MH = mag.height, PH = phs.height, Lm=50, Rm=M-20; // plot margins
+function css(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+let color = { grid: css('--line'), mag: css('--mag'), phase: css('--phase'), mark: css('--mark'), good: css('--good'), txt: css('--muted') };
+
+function logspace(f1,f2,N){
+  const a = Math.log10(f1), b = Math.log10(f2), arr = new Float64Array(N);
+  for(let i=0;i<N;i++) arr[i] = Math.pow(10, a + (b-a)*i/(N-1));
+  return arr;
+}
+function drawGrid(ctx,H,dbTicks,deg=false){
+  ctx.strokeStyle = color.grid; ctx.lineWidth=1;
+  // vertical log ticks (decades)
+  const decades = [10,100,1e3,1e4,1e5];
+  decades.forEach(f=>{
+    const x = Lm + (Math.log10(f)-1)/(5-1)*(Rm-Lm);
+    ctx.beginPath(); ctx.moveTo(x,10); ctx.lineTo(x,H-10); ctx.stroke();
+  });
+  // horizontal ticks
+  ctx.fillStyle = color.txt; ctx.textAlign='right'; ctx.textBaseline='middle';
+  dbTicks.forEach(v=>{
+    const y = H/2 - (v/dbTicks.range)*(H/2-16);
+    ctx.beginPath(); ctx.moveTo(Lm,y); ctx.lineTo(Rm,y); ctx.stroke();
+    ctx.fillText((deg? v.toFixed(0): v.toFixed(0)), Lm-6, y);
+  });
+  // x labels
+  ctx.textAlign='center'; ctx.textBaseline='top';
+  decades.forEach(f=>{
+    const x = Lm + (Math.log10(f)-1)/(5-1)*(Rm-Lm);
+    ctx.fillText(f>=1000? (f/1000+'kHz') : (f+'Hz'), x, H-16);
+  });
+}
+
+function bode(){
+  const R = +Rsl.value;
+  const L = (+Lsl.value) * 1e-3;  // mH → H
+  const C = (+Csl.value) * 1e-6;  // µF → F
+
+  // resonance & figures of merit
+  const w0 = 1/Math.sqrt(L*C);
+  const f0 = w0/(2*Math.PI);
+  const Q  = w0*L/R;                  // series RLC
+  const df = f0 / Q;                  // -3 dB bandwidth (approx)
+  const f1 = Math.max(10, f0 - df/2);
+  const f2 = Math.min(100e3, f0 + df/2);
+
+  Rval.textContent = R.toFixed(1) + ' Ω';
+  Lval.textContent = (+Lsl.value).toFixed(1) + ' mH';
+  Cval.textContent = (+Csl.value).toFixed(2) + ' µF';
+  read.innerHTML = `f₀ ≈ <b>${f0.toFixed(1)} Hz</b> &nbsp; Q ≈ <b>${Q.toFixed(2)}</b> &nbsp; Δf ≈ <b>${df.toFixed(1)} Hz</b> (≈ f₀/Q).`;
+
+  // frequency sweep (10 Hz → 100 kHz)
+  const F = logspace(10, 100e3, 600);
+  const magdB = new Float64Array(F.length);
+  const phase = new Float64Array(F.length);
+
+  for(let i=0;i<F.length;i++){
+    const w = 2*Math.PI*F[i];
+    const Z = { re: R, im: (w*L - 1/(w*C)) };       // Z_total = R + j(ωL - 1/ωC)
+    const Z2 = Z.re*Z.re + Z.im*Z.im;
+    const H = { re: R/Z.re, im: 0 };                // voltage divider across R: H = R / (R + jX) ⇒ complex division
+    // Proper complex division: H = R / (R + jX) = R*(R - jX)/(|Z|^2) = (R^2/|Z|^2) - j(RX/|Z|^2)
+    const Hr = (R*R)/Z2;
+    const Hi = (-R*Z.im)/Z2;
+    const mag = Math.hypot(Hr,Hi);
+    const ph  = Math.atan2(Hi,Hr) * 180/Math.PI;
+    magdB[i] = 20*Math.log10(mag);
+    phase[i] = ph;
+  }
+
+  // draw magnitude
+  gM.clearRect(0,0,mag.width,mag.height);
+  const dbRange = 30; // +/- around 0 dB for visualization
+  drawGrid(gM, MH, Object.assign([ -30,-20,-10,0,10 ],{range: dbRange}), false);
+  gM.strokeStyle = color.mag; gM.lineWidth=2; gM.beginPath();
+  for(let i=0;i<F.length;i++){
+    const x = Lm + (Math.log10(F[i])-1)/(5-1)*(Rm-Lm);
+    const y = MH/2 - (magdB[i]/dbRange)*(MH/2-16);
+    if(i===0) gM.moveTo(x,y); else gM.lineTo(x,y);
+  } gM.stroke();
+
+  // draw phase
+  gP.clearRect(0,0,phs.width,phs.height);
+  drawGrid(gP, PH, Object.assign([ -90,-45,0,45,90 ],{range: 90}), true);
+  gP.strokeStyle = color.phase; gP.lineWidth=2; gP.beginPath();
+  for(let i=0;i<F.length;i++){
+    const x = Lm + (Math.log10(F[i])-1)/(5-1)*(Rm-Lm);
+    const y = PH/2 - (phase[i]/90)*(PH/2-16);
+    if(i===0) gP.moveTo(x,y); else gP.lineTo(x,y);
+  } gP.stroke();
+
+  // markers: f0 (orange/red) and bandwidth (green)
+  function vx(f){ return Lm + (Math.log10(f)-1)/(5-1)*(Rm-Lm); }
+  gM.strokeStyle = color.mark; gM.setLineDash([6,6]); gM.beginPath();
+  const x0 = vx(f0); gM.moveTo(x0,10); gM.lineTo(x0,MH-10); gM.stroke(); gM.setLineDash([]);
+  gP.strokeStyle = color.mark; gP.setLineDash([6,6]); gP.beginPath();
+  gP.moveTo(x0,10); gP.lineTo(x0,PH-10); gP.stroke(); gP.setLineDash([]);
+
+  gM.strokeStyle = color.good; gM.setLineDash([2,6]); gM.beginPath();
+  const xl = vx(f1), xr = vx(f2);
+  gM.moveTo(xl,10); gM.lineTo(xl,MH-10);
+  gM.moveTo(xr,10); gM.lineTo(xr,MH-10); gM.stroke(); gM.setLineDash([]);
+
+  gP.strokeStyle = color.good; gP.setLineDash([2,6]); gP.beginPath();
+  gP.moveTo(xl,10); gP.lineTo(xl,PH-10);
+  gP.moveTo(xr,10); gP.lineTo(xr,PH-10); gP.stroke(); gP.setLineDash([]);
+
+  // labels
+  gM.fillStyle = color.txt; gM.textAlign='center'; gM.textBaseline='top';
+  gM.fillText('f₀', x0, 6);
+  gM.fillText('f₁', xl, 6);
+  gM.fillText('f₂', xr, 6);
+  gP.fillStyle = color.txt; gP.textAlign='center'; gP.textBaseline='top';
+  gP.fillText('f₀', x0, 6);
+  gP.fillText('f₁', xl, 6);
+  gP.fillText('f₂', xr, 6);
+}
+
+[Rsl,Lsl,Csl].forEach(el=>el.addEventListener('input', bode));
+// re-pull theme colors if OS theme changes
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ()=>{ 
+  ['--line','--mag','--phase','--mark','--good','--muted'].forEach(k=>color[k.slice(2)] = css(k));
+  bode();
+});
+bode();
+</script>

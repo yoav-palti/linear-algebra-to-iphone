@@ -1,7 +1,22 @@
 # קוונטיזציה
 
 <details>
-  <summary>אמ;לק</summary>
+<summary>אמ;לק</summary>
+
+קוונטיזציה = עיגול הדגימות לרמות בדידות.
+
+$\Delta = \frac{V_{max}-V_{min}}{2^{N_{bits}}}$
+
+שגיאה מקסימלית לדגימה: 
+
+$|e[n]| \le \Delta/2$
+
+בקירוב:
+
+ $SNR_{dB} \approx 6N_{bits} + 1.76 - 20\log_{10}(A_{max}/A)$
+
+כל ביט מוסיף ~6dB אם מנצלים את כל הטווח.
+קצב נתונים: $bps = f_s N_{bits}$
 
 </details>
 

@@ -1,5 +1,24 @@
 # תגובת בתדר
 
+<details>
+<summary>אמ;לק</summary>
+
+מערכת LTI מקיימת:
+
+$y=x*h$ ↔ $\tilde{Y}(\omega)=\tilde{H}(\omega)\tilde{X}(\omega)\sqrt{2\pi}$
+
+. אקספוננטים מרוכבים הם פונקציות עצמיות → פירוק פורייה מפשט ניתוח.
+
+מערכת לינארית לא מייצרת תדרים חדשים אלא רק מגבירה או מנחיתה תדרים קיימים.
+ 
+  המערכת רק משנה אמפליטודה/פאזה. פונקציית התמסורת 
+  
+  $\tilde{H}(\omega)=\mathcal{F}[h(t)]$
+  
+   היא האנלוג של מטריצה בבסיס עצמי. כלומר מלוכסנת.
+
+</details>
+
 ### פירוק לתדרים
 
 עם האינטואיציה שמערכות לינאריות מאפשרות לנו לפרק אות מורכב לסכום (או אינטגרל) של אותות פשוטים פירקנו את האות לפונקציות
@@ -36,6 +55,8 @@ $$\mathcal{F}\left[x\left(t\right)\right]\equiv\tilde{X}\left(\omega\right)=\fra
 
 זה טרנספורם פורייה (לא ההפוך) כמו שלרוב מכירים. כלומר טרנספורם פורייה הוא דרך לחשב את מקדמי הפריסה של האות.
 
+הערת מוטיבציה: למה דווקא אקספוננטים מרוכבים $e^{i\omega t}$? כי עבור מערכות LTI הם פונקציות עצמיות (eigenfunctions): נכנסים ויוצאים באותו תדר, רק עם שינוי אמפליטודה ופאזה. זה עושה את האנליזה פשוטה מאוד ונראה זאת בהמשך.
+
 נבדוק שהנוסחא באמת נכונה:
 
 $$\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\underset{\text{םימדקמ}}{\underbrace{\tilde{X}\left(\omega\right)}}e^{i\omega t}dt=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\left(\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}d\tau\right)e^{i\omega t}dt=$$
@@ -65,7 +86,7 @@ $$=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left
 $$\underset{u=t-\tau}{\underbrace{=}}\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(u\right)e^{-i\omega\left(u+\tau\right)}dud\tau=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}h\left(u\right)e^{-i\omega u}dtd\tau$$
 $$=\frac{1}{\sqrt{2\pi}}\left(\intop_{-\infty}^{\infty}h\left(u\right)e^{-i\omega u}dt\right)\left(\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}d\tau\right)=\sqrt{2\pi}\tilde{H}\left(\omega\right)\tilde{X}\left(\omega\right)$$
 
-בקצרה קיבלנו כי:
+בקצרה קיבלנו כי (הטריק המרכזי: מחליפים סדר אינטגרציה ומגדירים $u=t-\tau$ כדי לחשוף את המכפלה בתדר):
 
 $$\boxed{y\left(t\right)=x\left(t\right)\ast h\left(t\right)\Longleftrightarrow\tilde{Y}\left(\omega\right)=\sqrt{2\pi}\tilde{X}\left(\omega\right)\tilde{H}\left(\omega\right)}$$
 (את הכיוון ההפוך אתם מוזמנים לעשות וזה חישוב מאוד דומה)
@@ -79,13 +100,18 @@ $$\underset{\text{תרוסמתה}-\text{תייצקנופ}}{\underbrace{\tilde{H}
 נרשום את זה בדיאגרמה כמו מקודם
 ![lti_freq_diagram.png](images/lti_freq_diagram.png)
 
-קיבלנו שמערכת LTI היא equalizer. היא מגבירה או מנמיכה תדרים מסויימים.
+קיבלנו שמערכת LTI היא equalizer: היא מגבירה או מנמיכה תדרים מסוימים, ומסיתה פאזה – בלי ליצור תדרים חדשים.
 
 כמה מסקנות חשובות נובעות מזה:
 
 * אין יצירת תדרים חדשים: $\tilde{X}\left(\omega_{0}\right)=0\Rightarrow\tilde{Y}\left(\omega_{0}\right)=0$
 * משפט הקונבולוציה: קונבולוציה בזמן היא מכפלה בתדר והפוך
 * ניתן לעבוד לגמרי במרחב התדר. כל מערכת LTI ניתן לאפיין לחלוטין במרחב התדר
+
+```{admonition} סיכום קצר – אנלוגיה לאלגברה לינארית
+:class: tip
+אותות ↔ וקטורים; מערכות ↔ אופרטורים; תגובת להלם h(t) ↔ מטריצה; בסיס התדר $e^{i\omega t}$ ↔ בסיס עצמי; קונבולוציה ↔ מכפלה בתדר.
+```
 
 ### תכונות של פונקציית התמסורת
 
@@ -115,7 +141,7 @@ $$\tilde{H}\left(\omega\right)=\frac{\tilde{X}\left(\omega\right)}{\tilde{P}\lef
 <iframe src="https://www.geogebra.org/material/iframe/id/ydttts6y" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
 <a href="https://www.geogebra.org/material/iframe/id/ydttts6y" target="_blank">לפתיחה בחלון נפרד</a>
 
-נסו לשחק קצת עם האילוסטרציה. מה ה-ם הפרמטרים הכי טובים אם אנחנו רוצים לתכנן מיקרופון?
+נסו לשחק קצת עם האילוסטרציה. מהם הפרמטרים הכי טובים אם אנחנו רוצים לתכנן מיקרופון?
 נסו לגרום לרוחב של התמסורת להיות כמה שיותר רחבה
 
 * אם רוצים למקסם את התגובה בתדרים נמוכים נרצה $A$ גדול ו$k$ קטן
@@ -193,9 +219,14 @@ $$\forall\omega\in\mathbb{R}:\underset{\text{ימצע}-\text{ךרע}}{\underbrac
 
 $$\tilde{H}_{inv}\left(\omega\right)=\frac{1}{\tilde{H}\left(\omega\right)}$$
 
-אבל כאן נכנסת הבעיה. מי אמר שההופכי הוא קוזאלי? מה שאפשר לעשות הוא "להקל על עצמנו" ולהזיז את $h_{inv}\left(t\right)$ קדימה בזמן ככה שמה שיהיה בזמן שלילי זניח. נקבל כי:
+אבל כאן נכנסת הבעיה: לא בהכרח קיים הופכי קוזאלי. לעיתים מזיזים את $h_{inv}(t)$ קדימה בזמן כדי להפוך את החלק השלילי לבלתי משמעותי (דיליי קטן):
 
 $$\tilde{H}_{inv}\left(\omega\right)=\frac{1}{\tilde{H}\left(\omega\right)}\underset{\text{הזזה}}{\underbrace{e^{i\omega\tau}}}$$
 
 עוד בעיה שלרוב קיימת היא רעש. אנחנו נגיע לזה בהמשך הקורס.
+
+```{admonition} סיכום מושגי
+:class: tip
+תגובת התדר אומרת איך המערכת מטפלת ב"גווני הצליל": היא לא יוצרת גוונים חדשים, רק משנה עוצמות ופאזות. זהו כלי תכנון מרכזי למסננים, מיקרופונים ומערכות תקשורת.
+```
 

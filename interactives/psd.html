@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Noise Generator with PSD Shaping (Single File)</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 16px; }
+    h1 { font-size: 18px; margin: 0 0 12px; }
+    .row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; }
+    .card {
+      border: 1px solid rgba(127,127,127,0.35);
+      border-radius: 10px;
+      padding: 12px;
+      max-width: 1100px;
+    }
+    label { font-size: 12px; opacity: 0.85; display: block; margin-bottom: 4px; }
+    select, input, button {
+      font: inherit;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(127,127,127,0.45);
+      background: transparent;
+    }
+    button { cursor: pointer; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .field { min-width: 210px; }
+    .field small { display: block; opacity: 0.75; margin-top: 4px; }
+    .plots { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    canvas {
+      width: 100%;
+      height: 260px;
+      border-radius: 10px;
+      border: 1px solid rgba(127,127,127,0.35);
+      background: rgba(127,127,127,0.06);
+    }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .status { margin-top: 10px; font-size: 12px; opacity: 0.85; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } }
+    
+    /* Modal styles */
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); }
+    .modal.open { display: flex; align-items: center; justify-content: center; }
+    .modal-content { background: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid rgba(127,127,127,0.35); max-width: 600px; max-height: 80vh; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+    @media (prefers-color-scheme: dark) { .modal-content { background: #1e1e1e; color: #e0e0e0; } }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .modal-header h2 { margin: 0; }
+    .modal-close { cursor: pointer; font-size: 24px; font-weight: bold; opacity: 0.7; background: none; border: none; padding: 0; }
+    .modal-close:hover { opacity: 1; }
+    .param-field { margin-bottom: 12px; }
+    .param-field.hidden { display: none; }
+  </style>
+</head>
+
+<body>
+  <h1>Noise generator with selectable PSD shape (frequency-domain shaping)</h1>
+
+  <div class="card">
+    <div class="row">
+      <div class="field">
+        <label for="psdShape">PSD shape</label>
+        <select id="psdShape">
+          <option value="white">White (flat)</option>
+          <option value="pink">Pink (1/f^α)</option>
+          <option value="lowpass">Low-pass</option>
+          <option value="highpass">High-pass</option>
+          <option value="bandpass">Band-pass</option>
+          <option value="notch">Notch</option>
+        </select>
+        <small>Noise is synthesized by shaping complex Gaussian spectrum and IFFT.</small>
+      </div>
+
+      <div class="field">
+        <label for="N">FFT size N (power of 2)</label>
+        <select id="N">
+          <option>1024</option>
+          <option>2048</option>
+          <option selected>4096</option>
+          <option>8192</option>
+          <option>16384</option>
+        </select>
+        <small>Higher N gives smoother PSD, costs more CPU.</small>
+      </div>
+
+      <div class="field">
+        <label for="Fs">Sample rate Fs (Hz)</label>
+        <input id="Fs" type="number" min="100" step="100" value="2000" />
+        <small>Only used for frequency axis labels.</small>
+      </div>
+
+      <div class="field">
+        <label for="seedMode">Randomness</label>
+        <select id="seedMode">
+          <option value="mathrandom" selected>Math.random()</option>
+          <option value="crypto">crypto.getRandomValues()</option>
+        </select>
+        <small>crypto is slower but more uniform.</small>
+      </div>
+
+    </div>
+
+    <hr style="border:none;border-top:1px solid rgba(127,127,127,0.35);margin:12px 0;">
+
+    <div class="grid2">
+      <div class="card" style="margin:0;">
+        <div class="mono" style="font-size:12px;margin-bottom:8px;">Shape parameters</div>
+        <div class="row">
+          <div class="field">
+            <label>&nbsp;</label>
+            <button id="btnParams">Configure parameters</button>
+            <small>Open modal to adjust shape.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin:0;">
+        <div class="mono" style="font-size:12px;margin-bottom:8px;">Display options</div>
+        <div class="row">
+          <div class="field">
+            <label for="viewSamples">Time plot samples shown</label>
+            <input id="viewSamples" type="number" min="128" step="128" value="1024" />
+            <small>Only affects the plot, not synthesis.</small>
+          </div>
+
+          <div class="field">
+            <label for="psdAvg">PSD smoothing (bins)</label>
+            <input id="psdAvg" type="number" min="1" step="1" value="8" />
+            <small>Moving-average on periodogram (visual only).</small>
+          </div>
+
+          <div class="field">
+            <label>&nbsp;</label>
+            <button id="btnReplot">Replot (no regen)</button>
+            <small>Use after changing display options.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="status mono" id="status">Ready.</div>
+  </div>
+
+  <!-- Parameter Modal -->
+  <div id="paramModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Shape Parameters</h2>
+        <button class="modal-close" id="closeModalBtn">&times;</button>
+      </div>
+      <div id="paramFields"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div class="field">
+        <label>&nbsp;</label>
+        <button id="btnGen">Generate realization</button>
+        <small>Each click makes a new realization.</small>
+      </div>
+
+      <div class="field">
+        <label>&nbsp;</label>
+        <button id="btnPlay">Play audio</button>
+        <small>Play the generated noise signal.</small>
+      </div>
+
+      <div class="field">
+        <label>&nbsp;</label>
+        <button id="btnDownload">Download CSV (time, x[t])</button>
+        <small>Exports the current realization.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="card plots">
+    <div>
+      <div class="mono" style="font-size:12px;margin-bottom:6px;">Time-domain realization x[t]</div>
+      <canvas id="timeCanvas" width="1100" height="260"></canvas>
+    </div>
+    <div>
+      <div class="mono" style="font-size:12px;margin-bottom:6px;">Estimated PSD (periodogram), and target PSD shape</div>
+      <canvas id="psdCanvas" width="1100" height="260"></canvas>
+    </div>
+  </div>
+
+<script>
+/* ============
+   Utilities
+   ============ */
+
+function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+
+// Smooth step from 0 to 1 over [a,b]
+function smoothstep(a, b, x) {
+  if (x <= a) return 0;
+  if (x >= b) return 1;
+  const t = (x - a) / (b - a);
+  return t * t * (3 - 2 * t);
+}
+
+// Fast-ish Gaussian RNG (Box–Muller)
+function makeGaussianRng(uniform01) {
+  let spare = null;
+  return function gaussian() {
+    if (spare !== null) {
+      const v = spare; spare = null; return v;
+    }
+    let u = 0, v = 0;
+    // Avoid log(0)
+    while (u === 0) u = uniform01();
+    while (v === 0) v = uniform01();
+    const mag = Math.sqrt(-2.0 * Math.log(u));
+    const z0 = mag * Math.cos(2 * Math.PI * v);
+    const z1 = mag * Math.sin(2 * Math.PI * v);
+    spare = z1;
+    return z0;
+  };
+}
+
+function makeUniform01(mode) {
+  if (mode === "crypto" && window.crypto && window.crypto.getRandomValues) {
+    const buf = new Uint32Array(1);
+    return () => {
+      crypto.getRandomValues(buf);
+      // Map to (0,1); +1 to avoid exact 0
+      return (buf[0] + 1) / (0xFFFFFFFF + 2);
+    };
+  }
+  return () => {
+    // Map to (0,1) avoid exact 0
+    const r = Math.random();
+    return r === 0 ? 1e-12 : r;
+  };
+}
+
+/* ============
+   FFT (radix-2, in-place)
+   Arrays: re[], im[] length N
+   Forward FFT uses sign = -1
+   Inverse FFT uses sign = +1 then divides by N
+   ============ */
+
+function bitReverseIndices(N) {
+  const rev = new Uint32Array(N);
+  const bits = Math.round(Math.log2(N));
+  for (let i = 0; i < N; i++) {
+    let x = i, y = 0;
+    for (let b = 0; b < bits; b++) {
+      y = (y << 1) | (x & 1);
+      x >>= 1;
+    }
+    rev[i] = y;
+  }
+  return rev;
+}
+
+function fftInPlace(re, im, inverse=false) {
+  const N = re.length;
+  const rev = fftInPlace._revCache?.get(N) ?? null;
+  let revIdx;
+  if (rev) {
+    revIdx = rev;
+  } else {
+    revIdx = bitReverseIndices(N);
+    if (!fftInPlace._revCache) fftInPlace._revCache = new Map();
+    fftInPlace._revCache.set(N, revIdx);
+  }
+
+  // Bit-reversal permutation
+  for (let i = 0; i < N; i++) {
+    const j = revIdx[i];
+    if (j > i) {
+      [re[i], re[j]] = [re[j], re[i]];
+      [im[i], im[j]] = [im[j], im[i]];
+    }
+  }
+
+  const sign = inverse ? +1 : -1;
+
+  for (let len = 2; len <= N; len <<= 1) {
+    const half = len >>> 1;
+    const ang = sign * (2 * Math.PI / len);
+    const wlenRe = Math.cos(ang);
+    const wlenIm = Math.sin(ang);
+
+    for (let i = 0; i < N; i += len) {
+      let wRe = 1, wIm = 0;
+      for (let j = 0; j < half; j++) {
+        const uRe = re[i + j];
+        const uIm = im[i + j];
+        const vRe = re[i + j + half] * wRe - im[i + j + half] * wIm;
+        const vIm = re[i + j + half] * wIm + im[i + j + half] * wRe;
+
+        re[i + j] = uRe + vRe;
+        im[i + j] = uIm + vIm;
+        re[i + j + half] = uRe - vRe;
+        im[i + j + half] = uIm - vIm;
+
+        // w *= wlen
+        const nextWRe = wRe * wlenRe - wIm * wlenIm;
+        const nextWIm = wRe * wlenIm + wIm * wlenRe;
+        wRe = nextWRe; wIm = nextWIm;
+      }
+    }
+  }
+
+  if (inverse) {
+    for (let i = 0; i < N; i++) { re[i] /= N; im[i] /= N; }
+  }
+}
+
+/* ============
+   PSD shaping
+   ============ */
+
+function targetPSD(f, Fs, shape, params) {
+  // Returns *power spectral density* (arbitrary units), nonnegative.
+  const { alpha, fc, bw, rolloff } = params;
+
+  // For DC handling in 1/f^α, set a small floor frequency
+  const f0 = Math.max(f, 0.5 * Fs / 1e6); // tiny >0
+
+  if (shape === "white") {
+    return 1.0;
+  }
+
+  if (shape === "pink") {
+    // PSD ~ 1 / f^alpha
+    return 1.0 / Math.pow(f0, clamp(alpha, 0, 4));
+  }
+
+  // Smooth filter-like shapes. Use smoothstep transitions.
+  const r = Math.max(rolloff, 1e-9);
+
+  if (shape === "lowpass") {
+    // passband: f < fc, transition width ~ r
+    const t = smoothstep(fc, fc + r, f);
+    // t=0 in passband, t=1 in stopband
+    return Math.pow(1.0 - t, 2);
+  }
+
+  if (shape === "highpass") {
+    // stopband: f < fc, transition width ~ r
+    const t = smoothstep(fc - r, fc, f);
+    return Math.pow(t, 2);
+  }
+
+  if (shape === "bandpass") {
+    // pass between [fc-bw/2, fc+bw/2] with rolloff edges
+    const lo = Math.max(0, fc - bw / 2);
+    const hi = Math.min(Fs / 2, fc + bw / 2);
+
+    const t1 = smoothstep(lo - r, lo, f);  // rises 0->1
+    const t2 = smoothstep(hi, hi + r, f);  // rises 0->1 after hi
+    // Inside passband: t1≈1 and t2≈0 => ~1
+    const pass = t1 * (1.0 - t2);
+    return Math.pow(pass, 2);
+  }
+
+  if (shape === "notch") {
+    // notch (stop) between [fc-bw/2, fc+bw/2]
+    const lo = Math.max(0, fc - bw / 2);
+    const hi = Math.min(Fs / 2, fc + bw / 2);
+
+    const t1 = smoothstep(lo - r, lo, f);  // 0->1 entering notch
+    const t2 = smoothstep(hi, hi + r, f);  // 0->1 leaving notch
+    // notch region indicator ~ t1*(1-t2)
+    const notch = t1 * (1.0 - t2);
+    return Math.pow(1.0 - notch, 2);
+  }
+
+  return 1.0;
+}
+
+function synthesizeNoise(N, Fs, shape, params, uniform01) {
+  // Build Hermitian-symmetric spectrum with desired PSD, then IFFT.
+  const gauss = makeGaussianRng(uniform01);
+
+  const Xre = new Float64Array(N);
+  const Xim = new Float64Array(N);
+
+  // k=0 (DC) and k=N/2 (Nyquist) must be purely real for real signal.
+  // We generate them as real Gaussians with appropriate scaling.
+  function ampAtBin(k) {
+    const f = (k * Fs) / N;
+    const psd = Math.max(0, targetPSD(f, Fs, shape, params));
+    // We want |X[k]|^2 proportional to PSD(f). For Gaussian spectrum, scale by sqrt(PSD).
+    return Math.sqrt(psd);
+  }
+
+  // DC
+  {
+    const a = ampAtBin(0);
+    Xre[0] = gauss() * a;
+    Xim[0] = 0;
+  }
+
+  // Positive freqs: k = 1..N/2-1
+  const half = N >>> 1;
+  for (let k = 1; k < half; k++) {
+    const a = ampAtBin(k);
+
+    // Complex Gaussian: (g1 + i g2) / sqrt(2) gives unit variance per complex sample.
+    const g1 = gauss() / Math.SQRT2;
+    const g2 = gauss() / Math.SQRT2;
+
+    Xre[k] = g1 * a;
+    Xim[k] = g2 * a;
+
+    // Hermitian symmetry
+    const km = N - k;
+    Xre[km] = Xre[k];
+    Xim[km] = -Xim[k];
+  }
+
+  // Nyquist bin (only if N even, which it is)
+  {
+    const a = ampAtBin(half);
+    Xre[half] = gauss() * a;
+    Xim[half] = 0;
+  }
+
+  // IFFT to time domain
+  const xre = Xre.slice(); // copy
+  const xim = Xim.slice();
+  fftInPlace(xre, xim, true);
+
+  // Apply gain; return real part
+  const gain = params.gain ?? 1.0;
+  const x = new Float64Array(N);
+  for (let i = 0; i < N; i++) x[i] = gain * xre[i];
+
+  return { x, Xre, Xim };
+}
+
+function periodogram(x, Fs) {
+  const N = x.length;
+  const re = new Float64Array(N);
+  const im = new Float64Array(N);
+  re.set(x);
+  // FFT
+  fftInPlace(re, im, false);
+  // One-sided PSD estimate (not rigorously normalized; intended for visualization)
+  const half = N >>> 1;
+  const P = new Float64Array(half + 1);
+  for (let k = 0; k <= half; k++) {
+    const mag2 = re[k]*re[k] + im[k]*im[k];
+    P[k] = mag2 / N; // simple scale
+  }
+  return P; // bins 0..N/2
+}
+
+function movingAverage(arr, win) {
+  const n = arr.length;
+  const w = Math.max(1, Math.floor(win));
+  if (w === 1) return arr.slice();
+  const out = new Float64Array(n);
+  let sum = 0;
+  let q = [];
+  for (let i = 0; i < n; i++) {
+    sum += arr[i];
+    q.push(arr[i]);
+    if (q.length > w) sum -= q.shift();
+    out[i] = sum / q.length;
+  }
+  return out;
+}
+
+/* ============
+   Plotting
+   ============ */
+
+function clearCanvas(ctx, w, h) {
+  ctx.clearRect(0, 0, w, h);
+}
+
+function drawAxes(ctx, w, h, pad=36) {
+  ctx.save();
+  ctx.globalAlpha = 0.9;
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = "rgba(127,127,127,0.55)";
+  ctx.fillStyle = "rgba(127,127,127,0.85)";
+  ctx.font = "12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace";
+
+  // Axes rectangle
+  ctx.strokeRect(pad, 10, w - pad - 10, h - 20);
+
+  ctx.restore();
+  return { x0: pad, y0: 10, x1: w - 10, y1: h - 10 };
+}
+
+function plotTimeSeries(canvas, x, Fs, viewSamples) {
+  const ctx = canvas.getContext("2d");
+  const w = canvas.width, h = canvas.height;
+  clearCanvas(ctx, w, h);
+  const ax = drawAxes(ctx, w, h, 48);
+
+  const n = x.length;
+  const m = clamp(Math.floor(viewSamples), 16, n);
+  // Extract first m samples
+  let xmin = Infinity, xmax = -Infinity;
+  for (let i = 0; i < m; i++) { xmin = Math.min(xmin, x[i]); xmax = Math.max(xmax, x[i]); }
+  const span = (xmax - xmin) || 1;
+
+  function X(i) { return ax.x0 + (i / (m - 1)) * (ax.x1 - ax.x0); }
+  function Y(v) { return ax.y1 - ((v - xmin) / span) * (ax.y1 - ax.y0); }
+
+  ctx.save();
+  ctx.lineWidth = 1.6;
+  ctx.strokeStyle = "rgba(30,120,220,0.95)";
+  ctx.beginPath();
+  for (let i = 0; i < m; i++) {
+    const px = X(i);
+    const py = Y(x[i]);
+    if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+
+  // Labels
+  ctx.fillStyle = "rgba(127,127,127,0.95)";
+  ctx.font = "12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace";
+  const dur = (m / Fs);
+  ctx.fillText(`t: 0 → ${dur.toFixed(3)} s   (showing ${m}/${n} samples)`, ax.x0, h - 6);
+  ctx.fillText(`min=${xmin.toExponential(2)} max=${xmax.toExponential(2)}`, ax.x0, 18);
+
+  ctx.restore();
+}
+
+function plotPSD(canvas, P_est, P_target, Fs) {
+  const ctx = canvas.getContext("2d");
+  const w = canvas.width, h = canvas.height;
+  clearCanvas(ctx, w, h);
+  const ax = drawAxes(ctx, w, h, 58);
+
+  const K = P_est.length;
+  const eps = 1e-16;
+
+  // Convert to dB
+  const estdB = new Float64Array(K);
+  const tardB = new Float64Array(K);
+  let yMin = Infinity, yMax = -Infinity;
+
+  for (let k = 0; k < K; k++) {
+    estdB[k] = 10 * Math.log10(Math.max(eps, P_est[k]));
+    tardB[k] = 10 * Math.log10(Math.max(eps, P_target[k]));
+    yMin = Math.min(yMin, estdB[k], tardB[k]);
+    yMax = Math.max(yMax, estdB[k], tardB[k]);
+  }
+  // Keep a reasonable vertical span
+  if (!isFinite(yMin) || !isFinite(yMax) || yMax - yMin < 1) { yMin = -100; yMax = 20; }
+  const padY = 6;
+  yMin -= padY; yMax += padY;
+
+  function X(k) { return ax.x0 + (k / (K - 1)) * (ax.x1 - ax.x0); }
+  function Ydb(db) { return ax.y1 - ((db - yMin) / (yMax - yMin)) * (ax.y1 - ax.y0); }
+
+  // Draw target PSD (dashed)
+  ctx.save();
+  ctx.lineWidth = 1.2;
+  ctx.setLineDash([6, 4]);
+  ctx.strokeStyle = "rgba(220,120,30,0.95)";
+  ctx.beginPath();
+  for (let k = 0; k < K; k++) {
+    const px = X(k);
+    const py = Ydb(tardB[k]);
+    if (k === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Draw estimated PSD
+  ctx.lineWidth = 1.6;
+  ctx.strokeStyle = "rgba(30,180,120,0.95)";
+  ctx.beginPath();
+  for (let k = 0; k < K; k++) {
+    const px = X(k);
+    const py = Ydb(estdB[k]);
+    if (k === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+
+  // Labels
+  ctx.fillStyle = "rgba(127,127,127,0.95)";
+  ctx.font = "12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace";
+  ctx.fillText(`f: 0 → ${(Fs/2).toFixed(1)} Hz`, ax.x0, h - 6);
+  ctx.fillText(`dB range: [${yMin.toFixed(1)}, ${yMax.toFixed(1)}]`, ax.x0, 18);
+
+  // Legend
+  const lx = ax.x1 - 290, ly = 18;
+  ctx.fillStyle = "rgba(127,127,127,0.9)";
+  ctx.fillText("Target PSD", lx + 24, ly);
+  ctx.fillText("Estimated PSD", lx + 24, ly + 16);
+
+  ctx.strokeStyle = "rgba(220,120,30,0.95)";
+  ctx.setLineDash([6,4]);
+  ctx.beginPath(); ctx.moveTo(lx, ly-4); ctx.lineTo(lx+20, ly-4); ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.strokeStyle = "rgba(30,180,120,0.95)";
+  ctx.beginPath(); ctx.moveTo(lx, ly+12); ctx.lineTo(lx+20, ly+12); ctx.stroke();
+
+  ctx.restore();
+}
+
+/* ============
+   Modal & Parameter Display
+   ============ */
+
+const paramDefinitions = {
+  alpha: {
+    label: "α (power exponent)",
+    type: "number",
+    step: "0.1",
+    min: "0",
+    max: "4",
+    description: "α=1 is classic 'pink'; α=2 resembles 'brown'.",
+    shapes: ["pink"],
+    value: "1.0"
+  },
+  fc: {
+    label: "Cutoff / Center fc (Hz)",
+    type: "number",
+    step: "10",
+    min: "0",
+    description: "Low/high-pass cutoff; band-pass/notch center.",
+    shapes: ["lowpass", "highpass", "bandpass", "notch"],
+    value: "200"
+  },
+  bw: {
+    label: "Bandwidth bw (Hz)",
+    type: "number",
+    step: "10",
+    min: "1",
+    description: "Band-pass / notch width.",
+    shapes: ["bandpass", "notch"],
+    value: "200"
+  },
+  rolloff: {
+    label: "Rolloff (Hz)",
+    type: "number",
+    step: "10",
+    min: "1",
+    description: "Smooth transition width for filters.",
+    shapes: ["lowpass", "highpass", "bandpass", "notch"],
+    value: "60"
+  },
+  gain: {
+    label: "Overall gain",
+    type: "number",
+    step: "0.1",
+    min: "0",
+    description: "Multiplies the time-domain signal amplitude.",
+    shapes: ["white", "pink", "lowpass", "highpass", "bandpass", "notch"],
+    value: "1.0"
+  }
+};
+
+function updateParameterModal() {
+  const shape = el("psdShape").value;
+  const fieldsContainer = el("paramFields");
+  fieldsContainer.innerHTML = "";
+  
+  for (const [key, def] of Object.entries(paramDefinitions)) {
+    const isRelevant = def.shapes.includes(shape);
+    const div = document.createElement("div");
+    div.className = "param-field" + (isRelevant ? "" : " hidden");
+    
+    let html = `<label for="${key}">${def.label}</label>`;
+    html += `<input id="${key}" type="${def.type}"`;
+    if (def.step) html += ` step="${def.step}"`;
+    if (def.min) html += ` min="${def.min}"`;
+    if (def.max) html += ` max="${def.max}"`;
+    // Read from the hidden input field (which persists between modal opens/closes)
+    const hiddenInput = document.getElementById(`hidden_${key}`);
+    const currentVal = hiddenInput ? hiddenInput.value : def.value;
+    html += ` value="${currentVal}" />`;
+    html += `<small>${def.description}</small>`;
+    
+    div.innerHTML = html;
+    fieldsContainer.appendChild(div);
+  }
+}
+
+function openParameterModal() {
+  updateParameterModal();
+  el("paramModal").classList.add("open");
+}
+
+function closeParameterModal() {
+  handleParamChange();  // Save values before closing
+  el("paramModal").classList.remove("open");
+}
+
+function handleParamChange() {
+  // Store values back from modal to hidden inputs
+  for (const key of Object.keys(paramDefinitions)) {
+    const modalInput = el("paramFields").querySelector(`#${key}`);
+    const hiddenInput = document.getElementById(`hidden_${key}`);
+    if (modalInput && hiddenInput) {
+      hiddenInput.value = modalInput.value;
+    }
+  }
+}
+
+/* ============
+   UI glue
+   ============ */
+
+const el = (id) => document.getElementById(id);
+
+const timeCanvas = el("timeCanvas");
+const psdCanvas  = el("psdCanvas");
+const statusEl   = el("status");
+
+let current = {
+  x: null,
+  Fs: 2000,
+  N: 4096,
+  shape: "white",
+  params: { alpha: 1.0, fc: 200, bw: 200, rolloff: 60, gain: 1.0 }
+};
+
+// Create hidden input fields for all parameters
+function createHiddenParamInputs() {
+  const container = document.createElement("div");
+  container.style.display = "none";
+  for (const [key, def] of Object.entries(paramDefinitions)) {
+    const input = document.createElement("input");
+    input.id = `hidden_${key}`;
+    input.type = "hidden";
+    input.value = def.value;
+    container.appendChild(input);
+  }
+  document.body.appendChild(container);
+}
+
+function readParams() {
+  const shape = el("psdShape").value;
+  const N = parseInt(el("N").value, 10);
+  const Fs = parseFloat(el("Fs").value);
+  const seedMode = el("seedMode").value;
+
+  const params = {
+    alpha: parseFloat(document.getElementById("hidden_alpha").value),
+    fc: parseFloat(document.getElementById("hidden_fc").value),
+    bw: parseFloat(document.getElementById("hidden_bw").value),
+    rolloff: parseFloat(document.getElementById("hidden_rolloff").value),
+    gain: parseFloat(document.getElementById("hidden_gain").value)
+  };
+
+  // Clamp some values to reduce foot-guns
+  params.alpha = clamp(params.alpha, 0, 4);
+  params.fc = clamp(params.fc, 0, Fs/2);
+  params.bw = clamp(params.bw, 1, Fs);
+  params.rolloff = clamp(params.rolloff, 1e-6, Fs);
+  params.gain = clamp(params.gain, 0, 1e6);
+
+  const viewSamples = clamp(parseInt(el("viewSamples").value, 10), 16, N);
+  const psdAvg = clamp(parseInt(el("psdAvg").value, 10), 1, 2048);
+
+  return { shape, N, Fs, seedMode, params, viewSamples, psdAvg };
+}
+
+function computeTargetArray(N, Fs, shape, params) {
+  const half = N >>> 1;
+  const P = new Float64Array(half + 1);
+  for (let k = 0; k <= half; k++) {
+    const f = (k * Fs) / N;
+    P[k] = Math.max(0, targetPSD(f, Fs, shape, params));
+  }
+  // Normalize target for display (optional) — scale so max is 1
+  let mx = 0;
+  for (let k = 0; k < P.length; k++) mx = Math.max(mx, P[k]);
+  if (mx > 0) for (let k = 0; k < P.length; k++) P[k] /= mx;
+  return P;
+}
+
+function regenerate() {
+  const t0 = performance.now();
+  const { shape, N, Fs, seedMode, params, viewSamples, psdAvg } = readParams();
+  const uniform01 = makeUniform01(seedMode);
+
+  statusEl.textContent = "Generating...";
+  // Synthesize
+  const { x } = synthesizeNoise(N, Fs, shape, params, uniform01);
+
+  // Periodogram and smooth
+  let P = periodogram(x, Fs);
+  P = movingAverage(P, psdAvg);
+
+  // Target
+  const Ptar = computeTargetArray(N, Fs, shape, params);
+
+  current = { x, Fs, N, shape, params, P, Ptar, viewSamples, psdAvg };
+
+  plotTimeSeries(timeCanvas, current.x, current.Fs, current.viewSamples);
+  plotPSD(psdCanvas, current.P, current.Ptar, current.Fs);
+
+  const t1 = performance.now();
+  statusEl.textContent =
+    `Done. shape=${shape}, N=${N}, Fs=${Fs} Hz, params=${JSON.stringify(params)}  |  compute ${(t1 - t0).toFixed(1)} ms`;
+}
+
+function replotOnly() {
+  if (!current.x) return;
+  const { viewSamples, psdAvg } = readParams();
+  current.viewSamples = viewSamples;
+
+  // Recompute smoothing only (visual)
+  let P = periodogram(current.x, current.Fs);
+  P = movingAverage(P, psdAvg);
+  current.P = P;
+  current.psdAvg = psdAvg;
+
+  plotTimeSeries(timeCanvas, current.x, current.Fs, current.viewSamples);
+  plotPSD(psdCanvas, current.P, current.Ptar, current.Fs);
+  statusEl.textContent = "Replotted (no regeneration).";
+}
+
+function downloadCSV() {
+  if (!current.x) { statusEl.textContent = "Nothing to download yet—generate first."; return; }
+  const N = current.x.length;
+  const Fs = current.Fs;
+
+  let csv = "t_seconds,x\n";
+  for (let i = 0; i < N; i++) {
+    const t = i / Fs;
+    csv += `${t},${current.x[i]}\n`;
+  }
+
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `noise_${current.shape}_N${N}_Fs${Fs}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  statusEl.textContent = "Downloaded CSV.";
+}
+
+/* ============
+   Audio playback
+   ============ */
+
+let audioContext = null;
+let audioSource = null;
+
+function playAudio() {
+  if (!current.x) { 
+    statusEl.textContent = "Nothing to play yet—generate first."; 
+    return; 
+  }
+
+  // Stop any currently playing audio
+  if (audioSource) {
+    audioSource.stop();
+    audioSource = null;
+  }
+
+  // Create audio context if needed
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  // Resume audio context (required by browsers)
+  if (audioContext.state === 'suspended') {
+    audioContext.resume();
+  }
+
+  const x = current.x;
+  const N = x.length;
+  const origFs = current.Fs;
+  
+  // Use standard audio sample rate for playback
+  const playbackFs = 44100;
+  
+  // Simple resampling: repeat or skip samples to match target rate
+  const ratio = playbackFs / origFs;
+  const newN = Math.floor(N * ratio);
+  const resampledData = new Float32Array(newN);
+  
+  for (let i = 0; i < newN; i++) {
+    const srcIdx = Math.floor(i / ratio);
+    resampledData[i] = x[Math.min(srcIdx, N - 1)];
+  }
+  
+  // Normalize to prevent clipping
+  let maxAbs = 0;
+  for (let i = 0; i < newN; i++) {
+    maxAbs = Math.max(maxAbs, Math.abs(resampledData[i]));
+  }
+  const scale = maxAbs > 0 ? 0.5 / maxAbs : 1.0;
+  
+  console.log(`Audio: origFs=${origFs}, playbackFs=${playbackFs}, origN=${N}, newN=${newN}, maxAbs=${maxAbs}, scale=${scale}`);
+
+  // Create audio buffer at standard sample rate
+  const audioBuffer = audioContext.createBuffer(1, newN, playbackFs);
+  const channelData = audioBuffer.getChannelData(0);
+  
+  for (let i = 0; i < newN; i++) {
+    channelData[i] = resampledData[i] * scale;
+  }
+
+  // Create gain node for volume control
+  const gainNode = audioContext.createGain();
+  gainNode.gain.value = 1.0;
+
+  // Create and play source
+  audioSource = audioContext.createBufferSource();
+  audioSource.buffer = audioBuffer;
+  audioSource.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+  audioSource.onended = () => {
+    audioSource = null;
+    el("btnPlay").textContent = "Play audio";
+    statusEl.textContent = "Playback finished.";
+  };
+  
+  audioSource.start(0);
+  el("btnPlay").textContent = "Stop audio";
+  statusEl.textContent = `Playing ${(newN/playbackFs).toFixed(2)}s at ${playbackFs} Hz (resampled from ${origFs} Hz)`;
+}
+
+function togglePlayAudio() {
+  if (audioSource) {
+    // Stop playing
+    audioSource.stop();
+    audioSource = null;
+    el("btnPlay").textContent = "Play audio";
+    statusEl.textContent = "Playback stopped.";
+  } else {
+    // Start playing
+    playAudio();
+  }
+}
+
+/* ============
+   Wire events
+   ============ */
+
+createHiddenParamInputs();
+
+el("btnParams").addEventListener("click", openParameterModal);
+el("closeModalBtn").addEventListener("click", closeParameterModal);
+el("paramModal").addEventListener("click", (e) => {
+  if (e.target === el("paramModal")) closeParameterModal();
+});
+el("paramFields").addEventListener("change", handleParamChange);
+
+el("btnGen").addEventListener("click", regenerate);
+el("btnPlay").addEventListener("click", togglePlayAudio);
+el("btnReplot").addEventListener("click", replotOnly);
+el("btnDownload").addEventListener("click", downloadCSV);
+
+// Regenerate automatically when changing shape
+el("psdShape").addEventListener("change", () => {
+  regenerate();
+});
+
+// Initialize
+regenerate();
+</script>
+</body>
+</html>

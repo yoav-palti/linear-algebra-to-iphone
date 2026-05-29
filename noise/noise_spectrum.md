@@ -23,7 +23,7 @@ $$\tilde{X}\left(\omega\right)=\tilde{S}\left(\omega\right)+\tilde{N}\left(\omeg
 נשים לב שהאוטוקורלציה של האות מאוד מזכירה לנו קונבולוציה
 רק שלא הופכים את אחת הפונקציות:
 
-$$R_{x}\left(\tau\right)=\intop_{-\infty}^{\infty}x\left(t\right)x^{\ast}\left(t+\tau\right)=\intop_{-\infty}^{\infty}x\left(t\right)x^{\ast}\left(\tau-\left(-t\right)\right)dt=x\left(t\right)\ast x\left(-t\right)$$
+$$R_{x}\left(\tau\right)=\intop_{-\infty}^{\infty}x\left(t\right)x^{\ast}\left(t+\tau\right)dt=\intop_{-\infty}^{\infty}x\left(t\right)x^{\ast}\left(\tau-\left(-t\right)\right)dt=x\left(t\right)\ast x\left(-t\right)$$
 $$\tilde{S}_{xx}\left(\omega\right)=\mathcal{F}\left[R_{x}\left(\tau\right)\right]=\mathcal{F}\left[x\left(t\right)\ast x\left(-t\right)\right]=\sqrt{2\pi}\tilde{X}\left(\omega\right)\cdot\tilde{X}^{\ast}\left(\omega\right)=\sqrt{2\pi}\left|\tilde{X}\left(\omega\right)\right|^{2}$$
 
 ### PSD
@@ -46,10 +46,10 @@ $$\tilde{S}_{xx}\left(\omega\right)=\mathcal{F}\left[R_{x}\left(\tau\right)\righ
 $$R_{x}\left(\tau\right)=\sigma^{2}\delta\left(\tau\right)$$
 $$\mu_{x}=0$$
 
-יש כאן נקודה עדינה. אם האוטוקורלציה היא אינסוף ב$\tau=0$ איך נראה המשתנה המקרי?
+יש כאן נקודה עדינה. אם האוטוקורלציה היא אינסוף ב-$\tau=0$ איך נראה המשתנה המקרי?
 אני לא אכנס לזה כאן. מוזמנים לקרוא את
 [הבלוג הזה לדוגמא ואת הספר שהוא מפנה אליו](https://https://danshiebler.com/2020-01-09-white-noise/)
-בכל מקרה נמשיך עם זה ש שהאוטוקורלציה שלנו מוגדרת ואנחנו לא מפחדים!
+בכל מקרה נמשיך עם זה שהאוטוקורלציה שלנו מוגדרת ואנחנו לא מפחדים!
 
 איך יראה ה-PSD $\tilde{S}_{xx}\left(\omega\right)$?
 
@@ -66,7 +66,7 @@ $$\tilde{S}_{xx}\left(\omega\right)=\frac{\sigma^{2}}{\sqrt{2\pi}}$$
 שלא הנחנו כלום על ה-PDF של הרעש בכל זמן ומה שהיה חשוב כדי שהוא יהיה לבן
 זה שהוא יהיה חסר קורלציה.
 
-יכולים להיות רעשים לבנים כל התפלגות שאתם יכולים לחשוב עליה
+יכולים להיות רעשים לבנים עם כל התפלגות שאתם יכולים לחשוב עליה
 
 ```
 
@@ -208,7 +208,7 @@ $$\sigma_{x+y}=\sqrt{\sigma_{x}^{2}+\sigma_{y}^{2}}$$
 
 $$\sigma_{s}=\sqrt{\sum_{i=1}^{N}\sigma_{i}^{2}}$$
 
-מה יקרה אם נשעה N מדידות שונות לאותו האות ונמצע אותן?
+מה יקרה אם נעשה N מדידות שונות לאותו האות ונמצע אותן?
 האמפליטודה של חיבור הרעשים תהיה רק $\sqrt{N}$ חזקה יותר
 לאומת האמפליטודה של האות שתגדל ב-$N$. ולכן בממוצע האות ישאר
 כמו שהוא אבל הרעש יחלש (באמפליטודה) ב$\frac{1}{\sqrt{N}}$

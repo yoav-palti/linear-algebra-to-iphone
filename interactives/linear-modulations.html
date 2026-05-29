@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Modulations — ASK/PSK/QAM (Baseband & Passband)</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --card: #f8fafc;
+            --ink: #0f172a;
+            --muted: #475569;
+            --line: #e5e7eb;
+            --i: #1e90ff;
+            --q: #7c3aed;
+            --pb: #ff7f0e;
+            --dot: #111;
+            --accent: #0ea5e9;
+            --ok: #16a34a;
+            --bad: #dc2626;
+            --shadow: 0 6px 20px rgba(2, 6, 23, .08);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0b1020;
+                --card: #0f162b;
+                --ink: #e5e7eb;
+                --muted: #94a3b8;
+                --line: #1e293b;
+                --i: #7cb8ff;
+                --q: #c3a6ff;
+                --pb: #ffb061;
+                --dot: #e5e7eb;
+                --accent: #67e8f9;
+                --ok: #63d297;
+                --bad: #ff6b6b;
+                --shadow: 0 8px 26px rgba(0, 0, 0, .35);
+            }
+        }
+
+        :root {
+            color-scheme: light dark;
+        }
+
+        body {
+            margin: 0;
+            padding: 28px;
+            background: var(--bg);
+            color: var(--ink);
+            font: 15px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            margin: 0 0 6px 0;
+        }
+
+        p {
+            margin: 4px 0 12px 0;
+            color: var(--muted);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 320px;
+            gap: 18px;
+        }
+
+        @media (max-width: 980px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 4px 0 8px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+        }
+
+        .d {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .d.i { background: var(--i); }
+        .d.q { background: var(--q); }
+        .d.pb { background: var(--pb); }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            margin: 8px 0;
+        }
+
+        .charts {
+            display: grid;
+            gap: 20px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .controls {
+            display: grid;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        input[type=range] {
+            width: 210px;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            background: var(--line);
+            border-radius: 999px;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 1px solid #b9c1d0;
+            background: linear-gradient(#fff, #ddd);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            input[type=range] {
+                background: #22314d;
+            }
+            input[type=range]::-webkit-slider-thumb {
+                border: 1px solid #2a3b5c;
+                background: linear-gradient(#162032, #0f182a);
+            }
+        }
+
+        .val {
+            min-width: 64px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+            color: var(--muted);
+        }
+
+        .mini {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: .1rem .45rem;
+            border-radius: 8px;
+            background: rgba(14, 165, 233, .15);
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .ser {
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h2>Linear Modulations — Baseband (I/Q) and Passband</h2>
+        <p>Pick a scheme and watch how bits map to constellation points (I/Q) and to a real passband signal. Add noise and see symbol errors.</p>
+        <div class="grid">
+            <!-- LEFT: plots -->
+            <div class="card charts">
+                <div class="legend">
+                    <span class="chip"><span class="d i"></span> I(t)</span>
+                    <span class="chip"><span class="d q"></span> Q(t)</span>
+                    <span class="chip"><span class="d pb"></span> Passband s(t) = I·cos(2πf<sub>c</sub>t) − Q·sin(2πf<sub>c</sub>t)</span>
+                </div>
+                <canvas id="ct" width="980" height="280"></canvas>
+                <canvas id="pass" width="980" height="180"></canvas>
+                <canvas id="const" width="980" height="320"></canvas>
+                <div class="mini">Constellation shows noisy received samples at symbol centers; color indicates the decided symbol region. Estimated SER updates live.</div>
+            </div>
+            <!-- RIGHT: controls -->
+            <div class="card">
+                <div class="controls">
+                    <div class="row">
+                        <label for="mod">Modulation</label>
+                        <select id="mod">
+                            <option>BPSK</option>
+                            <option>QPSK</option>
+                            <option>16-QAM</option>
+                        </select>
+                        <span class="badge">linear</span>
+                    </div>
+
+                    <div class="row">
+                        <label>SNR (E<sub>s</sub>/N<sub>0</sub>)</label>
+                        <input id="snr" type="range" min="-2" max="30" step="0.5" value="12">
+                        <span id="snrl" class="val">12.0 dB</span>
+                    </div>
+
+                    <div class="row">
+                        <label>Carrier f<sub>c</sub> (Hz)</label>
+                        <input id="fc" type="range" min="50" max="400" step="10" value="180">
+                        <span id="fcl" class="val">180</span>
+                    </div>
+
+                    <div class="row">
+                        <label>Number of symbols</label>
+                        <input id="nsym" type="range" min="4" max="150" step="4" value="4">
+                        <span id="nsyml" class="val">4</span>
+                    </div>
+
+                    <div class="row">
+                        <button id="regen">Regenerate bits</button>
+                        <span class="mini">Adjustable N symbols</span>
+                    </div>
+
+                    <div class="row">
+                        <span>Estimated SER:</span>
+                        <span id="ser" class="ser">—</span>
+                    </div>
+
+                    <p class="mini">Notes: Baseband complex signal is x(t)=I(t)+jQ(t). Passband uses s(t)=I cos−Q sin (I/Q upconversion). Uses NRZ (rectangular) pulses. Noise is AWGN on baseband samples; coherent detection with nearest-neighbor decision.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ========= helpers ========= */
+        const ct = document.getElementById('ct'), gI = ct.getContext('2d');
+        const cp = document.getElementById('pass'), gP = cp.getContext('2d');
+        const cc = document.getElementById('const'), gC = cc.getContext('2d');
+        const modSel = document.getElementById('mod');
+        const snrSl = document.getElementById('snr'), snrLbl = document.getElementById('snrl');
+        const fcSl = document.getElementById('fc'), fcLbl = document.getElementById('fcl');
+        const nsymSl = document.getElementById('nsym'), nsymLbl = document.getElementById('nsyml');
+        const serOut = document.getElementById('ser');
+
+        document.getElementById('regen').addEventListener('click', () => {
+            bits = null;
+            sim();
+        });
+
+        function css(name) {
+            return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        }
+
+        const COL = {
+            grid: css('--line'),
+            i: css('--i'),
+            q: css('--q'),
+            pb: css('--pb'),
+            dot: css('--dot'),
+            ok: css('--ok'),
+            bad: css('--bad'),
+            muted: css('--muted')
+        };
+
+        function randn() {
+            // Box–Muller
+            let u = 0, v = 0;
+            while (u === 0) u = Math.random();
+            while (v === 0) v = Math.random();
+            return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+        }
+
+        /* ========= constellation & mapping ========= */
+        function mapSymbols(mod, bits) {
+            // Gray mappings for QPSK & 16-QAM to minimize bit flips between neighbors.
+            let M, pts = [], bitsPerSym;
+            if (mod === 'BPSK') {
+                M = 2;
+                bitsPerSym = 1;
+                pts = [-1, +1].map(x => ({ re: x, im: 0, b: [x < 0 ? 0 : 1] }));
+            }
+            if (mod === 'QPSK') {
+                M = 4;
+                bitsPerSym = 2;
+                // Gray: 00->(+1,+1), 01->(-1,+1), 11->(-1,-1), 10->(+1,-1) (unit energy after /√2)
+                const s = 1 / Math.SQRT2;
+                pts = [
+                    { b: [0, 0], re: +s, im: +s },
+                    { b: [0, 1], re: -s, im: +s },
+                    { b: [1, 1], re: -s, im: -s },
+                    { b: [1, 0], re: +s, im: -s }
+                ];
+            }
+            if (mod === '16-QAM') {
+                M = 16;
+                bitsPerSym = 4;
+                // Gray per axis: 00→+3, 01→+1, 11→−1, 10→−3 (normalized to unit Es)
+                const axis = [[0, 0, +3], [0, 1, +1], [1, 1, -1], [1, 0, -3]];
+                const A = 1 / Math.sqrt(10); // avg Es=1 for 16-QAM
+                pts = [];
+                for (const qi of axis) {
+                    for (const ii of axis) {
+                        pts.push({
+                            b: [ii[0], ii[1], qi[0], qi[1]],
+                            re: A * ii[2],
+                            im: A * qi[2]
+                        });
+                    }
+                }
+            }
+            const N = Math.floor(bits.length / bitsPerSym);
+            let syms = new Array(N);
+            for (let n = 0; n < N; n++) {
+                const b = bits.slice(n * bitsPerSym, (n + 1) * bitsPerSym);
+                // find matching point
+                let p = pts.find(p => p.b.every((bb, i) => bb === b[i]));
+                syms[n] = { re: p.re, im: p.im, b: b };
+            }
+            return { syms, bitsPerSym, pts };
+        }
+
+        /* ========= constellation & mapping ========= */
+        function mapSymbols(mod, bits) {
+            // Gray mappings for QPSK & 16-QAM to minimize bit flips between neighbors.
+            let M, pts = [], bitsPerSym;
+            if (mod === 'BPSK') {
+                M = 2;
+                bitsPerSym = 1;
+                pts = [-1, +1].map(x => ({ re: x, im: 0, b: [x < 0 ? 0 : 1] }));
+            }
+            if (mod === 'QPSK') {
+                M = 4;
+                bitsPerSym = 2;
+                // Gray: 00->(+1,+1), 01->(-1,+1), 11->(-1,-1), 10->(+1,-1) (unit energy after /√2)
+                const s = 1 / Math.SQRT2;
+                pts = [
+                    { b: [0, 0], re: +s, im: +s },
+                    { b: [0, 1], re: -s, im: +s },
+                    { b: [1, 1], re: -s, im: -s },
+                    { b: [1, 0], re: +s, im: -s }
+                ];
+            }
+            if (mod === '16-QAM') {
+                M = 16;
+                bitsPerSym = 4;
+                // Gray per axis: 00→+3, 01→+1, 11→−1, 10→−3 (normalized to unit Es)
+                const axis = [[0, 0, +3], [0, 1, +1], [1, 1, -1], [1, 0, -3]];
+                const A = 1 / Math.sqrt(10); // avg Es=1 for 16-QAM
+                pts = [];
+                for (const qi of axis) {
+                    for (const ii of axis) {
+                        pts.push({
+                            b: [ii[0], ii[1], qi[0], qi[1]],
+                            re: A * ii[2],
+                            im: A * qi[2]
+                        });
+                    }
+                }
+            }
+            const N = Math.floor(bits.length / bitsPerSym);
+            let syms = new Array(N);
+            for (let n = 0; n < N; n++) {
+                const b = bits.slice(n * bitsPerSym, (n + 1) * bitsPerSym);
+                // find matching point
+                let p = pts.find(p => p.b.every((bb, i) => bb === b[i]));
+                syms[n] = { re: p.re, im: p.im, b: b };
+            }
+            return { syms, bitsPerSym, pts };
+        }
+
+        /* ========= main simulation ========= */
+        let bits = null;
+
+        function sim() {
+            const mod = modSel.value;
+            const SNRdB = +snrSl.value;
+            snrLbl.textContent = SNRdB.toFixed(1) + ' dB';
+            const fc = +fcSl.value;
+            fcLbl.textContent = fc.toFixed(0);
+            const Rs = 40; // Fixed symbol rate
+            const Nsym = +nsymSl.value;
+            nsymLbl.textContent = Nsym.toFixed(0);
+
+            // data
+            if (!bits || bits.length !== Nsym * (mod === 'BPSK' ? 1 : mod === 'QPSK' ? 2 : 4)) {
+                bits = Array.from({ length: Nsym * (mod === 'BPSK' ? 1 : mod === 'QPSK' ? 2 : 4) }, _ => Math.random() < .5 ? 0 : 1);
+            }
+            const { syms, bitsPerSym, pts } = mapSymbols(mod, bits);
+
+            // samples per symbol for drawing
+            const M = 40; // time oversampling for smooth plots
+            const dt = 1 / (Rs * M);
+
+            // Generate NRZ rectangular pulses directly
+            const Ns = syms.length * M;
+            const I = new Float32Array(Ns);
+            const Q = new Float32Array(Ns);
+            
+            // Create rectangular pulses by filling M samples per symbol
+            for (let n = 0; n < syms.length; n++) {
+                for (let k = 0; k < M; k++) {
+                    const idx = n * M + k;
+                    if (idx < Ns) {
+                        I[idx] = syms[n].re;
+                        Q[idx] = syms[n].im;
+                    }
+                }
+            }
+
+            const Ib = I;
+            const Qb = Q;
+
+            // AWGN at symbol sampling instants (baseband): Es=1 → per-dimension σ^2 = (N0/2) with Es/N0 = SNR
+            const SNR = Math.pow(10, SNRdB / 10);
+            const N0 = 1 / SNR;
+            const sigma = Math.sqrt(N0 / 2);
+
+            // symbol decision at exact symbol centers (no filter delay for NRZ)
+            const sampIdx = Array.from({ length: syms.length }, (_, n) => n * M + Math.floor(M/2));
+            const rxI = [], rxQ = [];
+            for (const k of sampIdx) {
+                const ni = sigma * randn(), nq = sigma * randn();
+                rxI.push(Ib[k] + ni);
+                rxQ.push(Qb[k] + nq);
+            }
+
+            // decisions (nearest neighbor)
+            function decide(mod, re, im) {
+                if (mod === 'BPSK') {
+                    return { re: re >= 0 ? +1 : -1, im: 0 };
+                }
+                if (mod === 'QPSK') {
+                    const s = 1 / Math.SQRT2;
+                    return { re: re >= 0 ? s : -s, im: im >= 0 ? s : -s };
+                }
+                if (mod === '16-QAM') {
+                    // thresholds at ±2A and 0, with A=1/√10
+                    const A = 1 / Math.sqrt(10);
+                    function slicer(x) {
+                        return x >= +2 * A ? +3 * A : (x >= 0 ? +1 * A : (x >= -2 * A ? -1 * A : -3 * A));
+                    }
+                    return { re: slicer(re), im: slicer(im) };
+                }
+            }
+
+            let errors = 0;
+            for (let n = 0; n < syms.length; n++) {
+                const d = decide(mod, rxI[n], rxQ[n]);
+                if (Math.abs(d.re - syms[n].re) > 1e-6 || Math.abs(d.im - syms[n].im) > 1e-6) errors++;
+            }
+            const SER = errors / syms.length;
+            serOut.textContent = SER.toFixed(3);
+
+            /* ===== draw time-domain I/Q ===== */
+            const W = ct.width, H = ct.height, Lm = 40, Rm = W - 20;
+            function X(n) { return Lm + (n / (Ns - 1)) * (Rm - Lm); }
+            function YI(y) { return H * 0.28 - y * (H * 0.22); }  // More space for I signal
+            function YQ(y) { return H * 0.75 - y * (H * 0.22); }  // More space for Q signal
+
+            gI.clearRect(0, 0, W, H);
+            gI.strokeStyle = COL.grid;
+            gI.beginPath();
+            gI.moveTo(Lm, H * 0.28);  // I signal baseline
+            gI.lineTo(Rm, H * 0.28);
+            gI.moveTo(Lm, H * 0.75);  // Q signal baseline
+            gI.lineTo(Rm, H * 0.75);
+            gI.stroke();
+
+            gI.strokeStyle = COL.i;
+            gI.lineWidth = 2;
+            gI.beginPath();
+            for (let n = 0; n < Ns; n++) {
+                const x = X(n), y = YI(Ib[n]);
+                if (n === 0) gI.moveTo(x, y);
+                else gI.lineTo(x, y);
+            }
+            gI.stroke();
+
+            gI.strokeStyle = COL.q;
+            gI.lineWidth = 2;
+            gI.beginPath();
+            for (let n = 0; n < Ns; n++) {
+                const x = X(n), y = YQ(Qb[n]);
+                if (n === 0) gI.moveTo(x, y);
+                else gI.lineTo(x, y);
+            }
+            gI.stroke();
+
+            /* ===== passband ===== */
+            const Wp = cp.width, Hp = cp.height, Lp = 40, Rp = Wp - 20;
+            const Ts = 1 / (Rs * M);
+            
+            // Use higher resolution for passband to make it smooth
+            const passM = M * 8; // 8x higher sampling for smooth passband
+            const passNs = syms.length * passM;
+            const passTs = 1 / (Rs * passM);
+            
+            function Xp(n) { return Lp + (n / (passNs - 1)) * (Rp - Lp); }
+            function Yp(y) { return Hp / 2 - y * (Hp * 0.35); }
+
+            gP.clearRect(0, 0, Wp, Hp);
+            gP.strokeStyle = COL.grid;
+            gP.beginPath();
+            gP.moveTo(Lp, Hp / 2);
+            gP.lineTo(Rp, Hp / 2);
+            gP.stroke();
+
+            gP.strokeStyle = COL.pb;
+            gP.lineWidth = 2;
+            gP.beginPath();
+            for (let n = 0; n < passNs; n++) {
+                const t = n * passTs;
+                // Sample the rectangular pulses at higher resolution
+                const symIdx = Math.floor(n / passM);
+                const I_val = (symIdx < syms.length) ? syms[symIdx].re : 0;
+                const Q_val = (symIdx < syms.length) ? syms[symIdx].im : 0;
+                
+                // Clean transmitted signal (no noise)
+                const s = I_val * Math.cos(2 * Math.PI * fc * t) - Q_val * Math.sin(2 * Math.PI * fc * t);
+                const x = Xp(n), y = Yp(s);
+                if (n === 0) gP.moveTo(x, y);
+                else gP.lineTo(x, y);
+            }
+            gP.stroke();
+
+            /* ===== constellation (samples with noise) ===== */
+            const Wc = cc.width, Hc = cc.height, Cx = Wc / 2, Cy = Hc / 2, S = (mod === '16-QAM' ? 140 : 160);
+            function Xc(r) { return Cx + r * S; }
+            function Yc(i) { return Cy - i * S; }
+
+            gC.clearRect(0, 0, Wc, Hc);
+
+            // axes + grid
+            gC.strokeStyle = COL.grid;
+            gC.beginPath();
+            gC.moveTo(20, Cy);
+            gC.lineTo(Wc - 20, Cy);
+            gC.moveTo(Cx, 20);
+            gC.lineTo(Cx, Hc - 20);
+            gC.stroke();
+
+            // decision regions (optional soft guide)
+            gC.fillStyle = 'rgba(14,165,233,0.06)';
+            if (mod === 'BPSK') {
+                gC.fillRect(Cx, 20, Wc - Cx - 20, Hc - 40);
+                gC.fillRect(20, 20, Cx - 20, Hc - 40);
+            }
+            if (mod === 'QPSK') {
+                gC.fillRect(Cx, 20, Wc - Cx - 20, Cy - 20);
+                gC.fillRect(20, 20, Cx - 20, Cy - 20);
+                gC.fillRect(20, Cy, Cx - 20, Hc - Cy - 20);
+                gC.fillRect(Cx, Cy, Wc - Cx - 20, Hc - Cy - 20);
+            }
+            if (mod === '16-QAM') {
+                const A = 1 / Math.sqrt(10), th = [-2 * A, 0, 2 * A];
+                gC.fillRect(20, 20, Wc - 40, Hc - 40); // base tint
+                gC.clearRect(Xc(th[0]), 20, Xc(th[1]) - Xc(th[0]), Hc - 40);
+                gC.clearRect(Xc(th[2]), 20, Xc(3) - Xc(th[2]), Hc - 40);
+                gC.clearRect(20, Yc(th[1]), Wc - 40, Yc(th[0]) - Yc(th[1]));
+                gC.clearRect(20, Yc(3), Wc - 40, 20);
+            }
+
+            // ideal points
+            gC.fillStyle = COL.dot;
+            const ideals = pts.map(p => ({ x: Xc(p.re), y: Yc(p.im) }));
+            ideals.forEach(p => {
+                gC.beginPath();
+                gC.arc(p.x, p.y, 3, 0, 2 * Math.PI);
+                gC.fill();
+            });
+
+            // noisy samples + coloring if error
+            for (let n = 0; n < rxI.length; n++) {
+                const d = decide(mod, rxI[n], rxQ[n]);
+                const ok = (Math.abs(d.re - syms[n].re) < 1e-6 && Math.abs(d.im - syms[n].im) < 1e-6);
+                gC.fillStyle = ok ? COL.ok : COL.bad;
+                gC.beginPath();
+                gC.arc(Xc(rxI[n]), Yc(rxQ[n]), 2.5, 0, 2 * Math.PI);
+                gC.fill();
+            }
+        }
+
+        [modSel, snrSl, fcSl, nsymSl].forEach(el => el.addEventListener('input', sim));
+        sim();
+    </script>
+</body>
+</html>
