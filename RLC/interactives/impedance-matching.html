@@ -1,0 +1,35 @@
+<section id="impedance-matching" class="course-interactive" aria-labelledby="matching-title">
+  <h4 id="matching-title">הספק על העומס ותיאום עכבות</h4>
+  <p class="ci-status" role="status">טוענים את הגרף…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+CourseInteractives.mount("impedance-matching",{
+  original:"https://www.geogebra.org/material/iframe/id/qpb4yvjq",
+  initial:{rs:3.6,xs:2.6,xl:-2.6,rl:3.6},
+  equation:String.raw`Z_S=R_S+iX_S,\quad Z_L=R_L+iX_L,\qquad\frac{2\langle P_L\rangle}{|V_0|^2}=\frac{R_L}{(R_S+R_L)^2+(X_S+X_L)^2}`,
+  setup(c) {
+    const {state:s,models:m,colors:k}=c;
+    c.control("rs","התנגדות המקור",String.raw`R_S`,1,8,0.01);
+    c.control("xs","ריאקטנס המקור",String.raw`X_S`,-5,5,0.01);
+    c.control("xl","ריאקטנס העומס",String.raw`X_L`,-5,5,0.01);
+    c.control("rl","התנגדות העומס",String.raw`R_L`,0,15,0.01);
+    c.button("תיאום מלא",()=>{s.xl=-s.xs;s.rl=s.rs;});
+    c.preset("ללא פיצוי ריאקטיבי",{xl:0});c.preset("איפוס",{rs:3.6,xs:2.6,xl:-2.6,rl:3.6});
+    const power=rl=>m.loadPower(rl,s.rs,s.xs,s.xl), optimum=()=>m.optimalResistance(s.rs,s.xs,s.xl);
+    const board=c.board("power",String.raw`\frac{2\langle P_L\rangle}{|V_0|^2}`,String.raw`R_L`,[-2.5,0.28,15.6,-0.065],{negativeX:false,negativeY:false,height:290});
+    c.curve(board,power,0,15,k.teal);
+    c.segment(board,[0,()=>1/(4*s.rs)],[15,()=>1/(4*s.rs)],{strokeColor:k.gray});
+    c.label(board,14,()=>1/(4*s.rs),String.raw`\frac1{4R_S}`,{anchorX:"right",anchorY:"bottom",offset:[0,5],strokeColor:k.gray});
+    c.point(board,()=>s.rl,()=>power(s.rl),k.blue);c.segment(board,[()=>s.rl,0],[()=>s.rl,()=>power(s.rl)],{strokeColor:k.blue});
+    c.label(board,()=>s.rl,0,String.raw`R_L`,{offset:[0,-28],strokeColor:k.blue});
+    c.point(board,optimum,()=>power(optimum()),k.teal,{size:2});
+    c.label(board,optimum,()=>power(optimum()),String.raw`R_L^{\star}`,{anchorX:"left",anchorY:"bottom",offset:[7,6],strokeColor:k.teal});
+    c.metric("optimum","התנגדות מיטבית עבור הריאקטנס הנבחר",String.raw`R_L^{\star}=\sqrt{R_S^2+(X_S+X_L)^2}`);
+    c.metric("power","הספק יחסי",String.raw`\frac{2\langle P_L\rangle}{|V_0|^2}`);
+    c.metric("efficiency","יחס להספק הזמין",String.raw`\frac{\langle P_L\rangle}{P_{\mathrm{available}}}`);
+    c.note("צירים קבועים · יחידות יחסיות · תיאום מלא: ",String.raw`Z_L=Z_S^*`);
+    return {update(){c.value("optimum",c.format(optimum()));c.value("power",c.format(power(s.rl),4));c.value("efficiency",c.format(100*power(s.rl)*4*s.rs,1)+"%");}};
+  }
+});
+</script>

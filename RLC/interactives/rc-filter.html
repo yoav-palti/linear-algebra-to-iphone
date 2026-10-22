@@ -1,0 +1,32 @@
+<section id="rc-filter" class="course-interactive" aria-labelledby="rc-title">
+  <h4 id="rc-title">מסנן RC מעביר נמוכים</h4>
+  <p class="ci-status" role="status">טוענים את הגרפים…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+CourseInteractives.mount("rc-filter",{
+  original:"https://www.geogebra.org/material/iframe/id/ta47hhwh",
+  initial:{tau:0.1691},equation:String.raw`\tilde H(\omega)=\frac{1}{1+i\omega\tau},\qquad\tau=RC`,
+  setup(c) {
+    const {state:s,models:m,colors:k}=c;
+    c.control("tau","קבוע הזמן",String.raw`\tau\;[\mathrm{ms}]`,0.05,1,0.0001,4);
+    c.preset("תגובה מהירה",{tau:0.1});c.preset("תגובה איטית",{tau:0.6});c.preset("איפוס",{tau:0.1691});
+    const half=()=>Math.sqrt(3)/s.tau, cutoff=()=>1/s.tau;
+    const unit=String.raw`\omega\;[10^3\,\mathrm{rad}\,\mathrm{s}^{-1}]`;
+    const magnitude=c.board("magnitude",String.raw`|\tilde H(\omega)|`,unit,[-4,1.2,21,-0.23],{negativeX:false,negativeY:false});
+    const phase=c.board("phase",String.raw`\arg\tilde H(\omega)\;[\mathrm{rad}]`,unit,[-4,0.25,21,-1.85],{negativeX:false});
+    c.curve(magnitude,w=>m.rc(w,s.tau).magnitude,0,20,k.orange);
+    c.curve(phase,w=>m.rc(w,s.tau).phase,0,20,k.teal);
+    c.segment(magnitude,[0,0.5],[half,0.5],{strokeColor:k.orange,lastArrow:{type:1,size:4}});
+    c.point(magnitude,half,0.5,k.orange,{size:2,visible:()=>half()<=20});
+    c.label(magnitude,0,0.5,String.raw`\frac12`,{anchorX:"right",anchorY:"bottom",offset:[-6,4],strokeColor:k.orange});
+    c.label(magnitude,half,0.5,String.raw`\Delta\omega`,{anchorX:"left",anchorY:"bottom",offset:[7,4],visible:()=>half()<18,strokeColor:k.orange});
+    c.segment(magnitude,[cutoff,0],[cutoff,1/Math.sqrt(2)]);
+    c.label(magnitude,cutoff,0,String.raw`\omega_c`,{offset:[0,-28],visible:()=>cutoff()<=20});
+    c.metric("cutoff","תדר חיתוך",String.raw`\omega_c=\frac1\tau\;[10^3\,\mathrm{rad}\,\mathrm{s}^{-1}]`);
+    c.metric("width","רוחב בחצי גובה",String.raw`\Delta\omega=\frac{\sqrt3}{\tau}\;[10^3\,\mathrm{rad}\,\mathrm{s}^{-1}]`);
+    c.note("צירים קבועים · חצי גובה אמפליטודה; תדר החיתוך מוגדר בחצי הספק");
+    return {update(){c.value("cutoff",c.format(cutoff()));c.value("width",c.format(half()));}};
+  }
+});
+</script>

@@ -1,0 +1,213 @@
+<!-- Shared by chapter-local raw includes. No configuration or build step is required. -->
+<style>
+  .course-interactive { --ci-ink:#172f43; --ci-muted:#526779; --ci-line:#dce5eb; color:var(--ci-ink); background:#f6f9fb; border:1px solid var(--ci-line); border-radius:18px; margin:26px 0; padding:22px; font:15px/1.6 system-ui,sans-serif; direction:rtl; color-scheme:light; }
+  .course-interactive * { box-sizing:border-box; }
+  .course-interactive h4 { margin:0 0 14px; font-size:23px; color:var(--ci-ink); background:transparent; }
+  .course-interactive .ci-equation { text-align:center; overflow-x:auto; direction:ltr; margin:8px 0 16px; padding:6px; }
+  .course-interactive .ci-controls { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin:12px 0; }
+  .course-interactive .ci-control { background:white; border:1px solid var(--ci-line); border-radius:10px; padding:10px; min-width:0; }
+  .course-interactive label { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:4px 8px; margin:0 0 6px; font-size:13px; font-weight:650; }
+  .course-interactive output { direction:ltr; unicode-bidi:isolate; font-variant-numeric:tabular-nums; }
+  .course-interactive input[type=range] { display:block; direction:ltr; width:100%; accent-color:#087e85; cursor:pointer; min-height:28px; margin:0; }
+  .course-interactive button, .course-interactive select { font:inherit; color:var(--ci-ink); background:white; border:1px solid #b7cbd6; border-radius:8px; padding:7px 11px; cursor:pointer; }
+  .course-interactive select { width:100%; max-width:100%; }
+  .course-interactive button:hover { background:#e7f1f5; }
+  .course-interactive :is(button,input,select):focus-visible { outline:3px solid #168c9a; outline-offset:3px; }
+  .course-interactive .ci-buttons { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 18px; }
+  .course-interactive .ci-plots { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .course-interactive .ci-plot { background:white; border:1px solid var(--ci-line); border-radius:12px; padding:10px 7px 7px; min-width:0; }
+  .course-interactive .ci-plot:only-child { grid-column:1 / -1; }
+  .course-interactive h5 { margin:0 8px 4px; color:var(--ci-ink); font-size:14px; }
+  .course-interactive .ci-board { width:100%; height:265px; direction:ltr; overflow:hidden; position:relative; touch-action:pan-y; }
+  .course-interactive .ci-board > svg { max-width:none; }
+  .course-interactive .ci-caption { text-align:center; direction:ltr; font-size:12px; color:var(--ci-muted); }
+  .course-interactive .ci-math-label { direction:ltr; background:transparent; white-space:nowrap; padding:0 2px; }
+  .course-interactive .ci-metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:8px; margin:14px 0 0; }
+  .course-interactive .ci-metric { background:#eaf1f5; border-radius:9px; padding:10px; font-size:12px; color:var(--ci-muted); min-width:0; }
+  .course-interactive .ci-metric strong { display:block; font-size:18px; font-weight:650; color:var(--ci-ink); direction:ltr; unicode-bidi:isolate; margin-top:3px; }
+  .course-interactive .ci-note, .course-interactive .ci-status { color:var(--ci-muted); font-size:12px; margin:10px 0 0; }
+  .course-interactive .ci-error { color:#9b351b; }
+  .course-interactive a { color:#086b78; }
+  @media(max-width:700px) {
+    .course-interactive { padding:15px; }
+    .course-interactive .ci-plots, .course-interactive .ci-metrics { grid-template-columns:1fr; }
+    .course-interactive .ci-controls { grid-template-columns:1fr; gap:6px; }
+    .course-interactive .ci-control { display:grid; grid-template-columns:minmax(110px,145px) minmax(0,1fr); align-items:center; gap:10px; padding:8px; }
+    .course-interactive label { margin:0; }
+    .course-interactive .ci-metric strong { display:inline-block; margin-inline-start:10px; }
+  }
+  @media print { .course-interactive .ci-controls,.course-interactive .ci-buttons { display:none; } }
+</style>
+<script>
+(() => {
+  "use strict";
+  if (window.CourseInteractives) return;
+  const colors = { orange:"#c35c18", teal:"#087e85", blue:"#2463a7", purple:"#8756b7", ink:"#172f43", gray:"#758a99" };
+  const TAU = 2 * Math.PI;
+  const models = {
+    rc(w, tau) { return { magnitude:1 / Math.hypot(1,w * tau), phase:-Math.atan(w * tau) }; },
+    rlc(w, r, l, c) {
+      if (w === 0) return { magnitude:0, phase:Math.PI / 2 };
+      const x = w * l - 1 / (w * c);
+      return { magnitude:r / Math.hypot(r,x), phase:-Math.atan2(x,r) };
+    },
+    rlcParameters(r,l,c) {
+      const discriminant = Math.hypot(r,2 * Math.sqrt(l / c));
+      return { resonance:1 / Math.sqrt(l * c), lower:2 / (c * (discriminant + r)),
+        upper:(discriminant + r) / (2 * l), bandwidth:r / l, q:Math.sqrt(l / c) / r };
+    },
+    room(w, delta, sum, a2) {
+      const t1 = (sum - delta) / 2, t2 = (sum + delta) / 2;
+      const re = (0.5 * Math.cos(w * t1) + a2 * Math.cos(w * t2)) / Math.sqrt(TAU);
+      const im = (-0.5 * Math.sin(w * t1) - a2 * Math.sin(w * t2)) / Math.sqrt(TAU);
+      const magnitude = Math.hypot(re,im);
+      return { magnitude, phase:magnitude < 1e-10 ? NaN : Math.atan2(im,re), re, im };
+    },
+    gaussian(x,mean,sigma) { return Math.exp(-0.5 * ((x - mean) / sigma) ** 2) / (Math.sqrt(TAU) * sigma); },
+    telegraph(l0,l1) {
+      const mean = l0 / (l0 + l1), variance = mean * (1 - mean);
+      return { mean, variance, correlationTime:1 / (l0 + l1),
+        correlation:t => mean * mean + variance * Math.exp(-(l0 + l1) * Math.abs(t)),
+        conditional:t => mean + (1 - mean) * Math.exp(-(l0 + l1) * t) };
+    },
+    loadPower(rl,rs,xs,xl) { return rl / ((rs + rl) ** 2 + (xs + xl) ** 2); },
+    optimalResistance(rs,xs,xl) { return Math.hypot(rs,xs + xl); },
+    // Delta and impulse-train choices use explicitly labelled finite Gaussian approximations.
+    signal(kind,width,amplitude,t) {
+      switch (kind) {
+        case "triangle": return amplitude * Math.max(0,1 - Math.abs(t) / width);
+        case "rectangle": return amplitude * (Math.abs(Math.abs(t)-width)<1e-10 ? 0.5 : Math.abs(t)<width ? 1 : 0);
+        case "gaussian":
+        case "impulse": return amplitude * Math.exp(-((t / width) ** 2)) / (width * Math.sqrt(Math.PI));
+        case "train": {
+          let result = 0;
+          for (let n=-3;n<=3;n++) result += Math.exp(-(((t - 2.5 * n) / width) ** 2));
+          return amplitude * result / (width * Math.sqrt(Math.PI));
+        }
+        case "ramp": return Math.abs(t) < width ? amplitude * (t + width) / (2 * width) : 0;
+        default: throw new Error("Unknown signal: " + kind);
+      }
+    },
+    convolution(f,g,{bound=20,step=0.02,min=-6,max=6}={}) {
+      const count = Math.round(2 * bound / step), firstShift = Math.round(min / step), lastShift = Math.round(max / step);
+      const a = new Float64Array(count + 1), b = new Float64Array(count + 1);
+      for (let i=0;i<=count;i++) { const x = -bound + i * step; a[i]=f(x); b[i]=g(x); }
+      const times=[], values=[];
+      for (let shift=firstShift;shift<=lastShift;shift++) {
+        let value=0;
+        for (let i=Math.max(0,shift);i<=Math.min(count,count + shift);i++) {
+          const j=count + shift - i;
+          value += a[i] * b[j] * ((i===0 || i===count) ? 0.5 : 1);
+        }
+        times.push(shift * step); values.push(value * step);
+      }
+      return { times, values, at(t) {
+        const position=(t - min) / step, i=Math.floor(position), fraction=position-i;
+        if (i < 0 || i >= values.length - 1) return values[Math.max(0,Math.min(values.length-1,i))];
+        return values[i] * (1 - fraction) + values[i + 1] * fraction;
+      } };
+    }
+  };
+  let library;
+  async function ready() {
+    if (document.readyState === "loading") await new Promise(resolve => document.addEventListener("DOMContentLoaded",resolve,{once:true}));
+    await window.MathJax?.startup?.promise;
+    if (!window.MathJax?.typesetPromise) throw new Error("MathJax unavailable");
+    if (window.JXG) return;
+    if (!library) library=new Promise((resolve,reject) => {
+      const script=document.createElement("script");
+      script.src="https://cdn.jsdelivr.net/npm/jsxgraph@1.14.0/distrib/jsxgraphcore.js";
+      script.onload=resolve; script.onerror=reject; document.head.appendChild(script);
+    });
+    await library;
+  }
+  function node(tag,parent,text,className) {
+    const element=document.createElement(tag);
+    if (className) element.className=className;
+    if (text !== undefined) element.textContent=text;
+    if (parent) parent.appendChild(element);
+    return element;
+  }
+  function math(parent,tex) { const span=node("span",parent,"\\(" + tex + "\\)","math notranslate"); span.dir="ltr"; return span; }
+  async function mount(id,options) {
+    const root=document.getElementById(id);
+    if (!root || root.dataset.initialized) return;
+    root.dataset.initialized="true";
+    const status=root.querySelector(".ci-status");
+    try {
+      await ready();
+      const state={...options.initial}, boards=[], controls=new Map(), metrics=new Map();
+      if (options.equation) math(node("div",root,undefined,"ci-equation"),options.equation);
+      const controlBox=node("div",root,undefined,"ci-controls"), buttons=node("div",root,undefined,"ci-buttons");
+      const plots=node("div",root,undefined,"ci-plots"), metricBox=node("div",root,undefined,"ci-metrics");
+      let update=()=>{};
+      const context={ root,state,colors,models,boards,math,node,
+        format:(value,digits=2)=>Number(value).toFixed(digits),
+        control(key,text,tex,min,max,step,digits=2) {
+          const card=node("div",controlBox,undefined,"ci-control"), label=node("label",card,text);
+          const input=node("input",card); input.type="range"; input.min=min; input.max=max; input.step=step;
+          input.id=id + "-" + key; input.setAttribute("aria-label",text); label.htmlFor=input.id;
+          if (tex) math(label,tex);
+          const output=node("output",label); output.setAttribute("for",input.id);
+          input.addEventListener("input",()=>{state[key]=Number(input.value); update(key);});
+          controls.set(key,{input,output,digits}); return input;
+        },
+        select(key,text,choices) {
+          const card=node("div",controlBox,undefined,"ci-control"), label=node("label",card,text), select=node("select",card);
+          select.id=id + "-" + key; label.htmlFor=select.id;
+          choices.forEach(([value,title])=>{const option=node("option",select,title); option.value=value;});
+          select.value=state[key]; select.addEventListener("change",()=>{state[key]=select.value;update(key);});
+          controls.set(key,{input:select}); return select;
+        },
+        button(text,callback) { const button=node("button",buttons,text); button.type="button"; button.addEventListener("click",()=>{const key=callback();update(typeof key==="string"?key:"preset");}); return button; },
+        preset(text,values) { return this.button(text,()=>Object.assign(state,values)); },
+        metric(key,text,tex) { const card=node("div",metricBox,text,"ci-metric"); if(tex) math(card,tex); const value=node("strong",card,"—"); metrics.set(key,value); return value; },
+        value(key,value) { metrics.get(key).textContent=value; },
+        note(text,tex) { const paragraph=node("p",root,text,"ci-note"); if(tex) math(paragraph,tex); return paragraph; },
+        board(key,title,caption,box,settings={}) {
+          const card=node("div",plots,undefined,"ci-plot"); math(node("h5",card),title);
+          const container=node("div",card,undefined,"ci-board"); container.id=id + "-" + key;
+          container.setAttribute("aria-label",settings.description || root.querySelector("h4").textContent);
+          if(settings.height) container.style.height=settings.height + "px";
+          if(caption) math(node("div",card,undefined,"ci-caption"),caption);
+          const board=window.JXG.JSXGraph.initBoard(container.id,{boundingbox:box,axis:false,grid:false,
+            showCopyright:false,showNavigation:false,keepaspectratio:false,pan:{enabled:false},zoom:{enabled:false,wheel:false},resize:{enabled:true}});
+          const axis={strokeColor:"#9cabb6",strokeWidth:1,highlight:false,fixed:true,
+            ticks:{minorTicks:0,drawLabels:true,strokeColor:"#bdcbd4",label:{fontSize:11,strokeColor:"#526779"}}};
+          board.create("axis",[[0,0],[1,0]],{...axis,ticks:{...axis.ticks,drawNegative:settings.negativeX!==false}});
+          board.create("axis",[[0,0],[0,1]],{...axis,ticks:{...axis.ticks,drawNegative:settings.negativeY!==false}});
+          boards.push(board); return board;
+        },
+        curve(board,fn,min,max,color=colors.orange,attributes={}) { return board.create("functiongraph",[fn,min,max],{strokeColor:color,strokeWidth:2.7,highlight:false,numberPointsHigh:1600,...attributes}); },
+        sampled(board,data,color=colors.orange,attributes={}) {
+          const curve=board.create("curve",[[],[]],{strokeColor:color,strokeWidth:2.7,highlight:false,...attributes});
+          curve.updateDataArray=()=>{const points=data();curve.dataX=points.x;curve.dataY=points.y;}; return curve;
+        },
+        segment(board,a,b,attributes={}) { return board.create("segment",[a,b],{strokeColor:colors.gray,strokeWidth:1.3,dash:2,fixed:true,highlight:false,
+          point1:{visible:false},point2:{visible:false},...attributes}); },
+        point(board,x,y,color=colors.orange,attributes={}) { return board.create("point",[x,y],{size:3,name:"",fixed:true,highlight:false,showInfobox:false,strokeColor:color,fillColor:color,...attributes}); },
+        label(board,x,y,tex,attributes={}) {
+          // Standalone JSXGraph text does not apply point-label offsets. Convert pixels explicitly.
+          const {offset=[0,0],...style}=attributes;
+          const value=coordinate=>typeof coordinate==="function"?coordinate():coordinate;
+          return board.create("text",[()=>value(x)+offset[0]/board.unitX,()=>value(y)+offset[1]/board.unitY,"\\(" + tex + "\\)"],{
+            fixed:true,highlight:false,fontSize:13,display:"html",useMathJax:true,parse:false,
+            cssClass:"ci-math-label",anchorX:"middle",anchorY:"top",strokeColor:colors.ink,...style});
+        },
+        update:(key="external")=>update(key),
+        sync() { controls.forEach(({input,output,digits},key)=>{ input.value=state[key]; if(output) output.value=Number(state[key]).toFixed(digits); }); }
+      };
+      const implementation=options.setup(context);
+      update=(key)=>{implementation.update(key);context.sync();boards.forEach(board=>board.update());};
+      update("initial");
+      await window.MathJax.typesetPromise([root]);
+      status.hidden=true;
+    } catch(error) {
+      console.error("Interactive " + id,error); status.hidden=false; status.classList.add("ci-error");
+      status.textContent="לא ניתן לטעון את ההדגמה. בדקו את החיבור לרשת. ";
+      if(options.original) { const link=node("a",status,"ההדגמה המקורית");link.href=options.original;link.target="_blank";link.rel="noopener"; }
+    }
+  }
+  window.CourseInteractives={mount,models,colors};
+})();
+</script>

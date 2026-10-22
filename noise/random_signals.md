@@ -71,7 +71,11 @@ $$\mathbb{P}\left(x_{1}<X<x_{2}\right)=\intop_{x_{1}}^{x_{2}}p_{X}\left(x\right)
 
 ```
 
-```{admonition} דוגמא - התפלגות נורמלית
+```{raw} html
+:file: ../LTI/interactives/runtime.html
+```
+
+````{admonition} דוגמא - התפלגות נורמלית
 :class: dropdown
 
 פונקציית צפיפות הסתברות שנעבוד איתה הרבה והיא מאוד מאוד מאוד נפוצה היא גאוסיין. (לפעמים נקראת נורמלית)
@@ -81,8 +85,9 @@ $$p_{X}\left(x\right)=\sqrt{\frac{1}{2\pi\sigma^{2}}}e^{-\frac{\left(x-\mu\right
 כאשר $\mu$ היא הערך הממוצע ו$\sigma$ הסטיית תקן.
  מוזמנים לשחק עם הערכים כדי לראות אי ך הפונקצייה נראית. את ההתפלגות הנורמלית של ממוצע 0 וסטיית תקן 1 ציירתי בשחור
  
- <iframe src="https://www.geogebra.org/material/iframe/id/mb5n2gph" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/mb5n2gph" target="_blank">לפתיחה בחלון נפרד</a>
+```{raw} html
+:file: interactives/gaussian-density.html
+```
 
 מה מתפלג ככה? האמת שכמעט הכל (יש לזה סיבות טובות). לדוגמה גובה של אנשים:
 ![height-distribution.png](images/height-distribution.png)
@@ -90,7 +95,7 @@ $$p_{X}\left(x\right)=\sqrt{\frac{1}{2\pi\sigma^{2}}}e^{-\frac{\left(x-\mu\right
 מתוך הגרף הזה אתם יכולים לחשב לדוגמה מה הסיכוי שהגובה של גבר או אישה רנדומלים בעולם הם בין 170-175 .
 זה פשוט לחשב אינטגרל (או לשאול מה השטח מתחת לגרף)
 
-```
+````
 
 נרצה עכשיו להרחיב את ההגדרה של משתנה אקראי לתהליך אקראי או אות אקראי.
 נצטרך עכשיו לתת הסתברות לכל אפשרות. כלומר תהיה לנו פונקצייה $\underset{\text{תפתושמ}-\text{תוגלפתה}}{\underbrace{p_{x\left(t\right)}\left(x_{1},x_{2},x_{3},...;t_{1},t_{2},t_{3},...\right)}}$
@@ -308,7 +313,7 @@ $$\left|R_{x}\left(\tau>0\right)\right|=\left|\mathbb{E}\left[x\left(0\right)\cd
 > 
 > הרבה פעמים מה שנעשה הוא לצייר את הפונקצייה של האוטוקורלציה המנורמלת כלומר $\frac{R_{x}\left(\tau\right)}{R_{x}\left(0\right)}$
 
-```{admonition} דוגמא - רעש טלגרף (מערכת שני מצבים) 
+````{admonition} דוגמא - רעש טלגרף (מערכת שני מצבים)
 :class: dropdown
 
 ניקח את המערכת הכי פשוטה שאנחנו יכולים לחשוב עליה (כמעט). נניח שיש לנו שני מצבים. 0,1 
@@ -384,8 +389,9 @@ $$\lim_{\tau\rightarrow\infty}R_{x}\left(\tau\right)=\left(\frac{\lambda_{0}}{\l
 
 נסרטט:
 
- <iframe src="https://www.geogebra.org/material/iframe/id/entghwt6" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/entghwt6" target="_blank">לפתיחה בחלון נפרד</a>
+```{raw} html
+:file: interactives/telegraph-correlation.html
+```
 
 מה ההתפלגות של התהליך שלנו בכל זמן נתון? נשים לב שכאן אנחנו יכולים להיות רק בשני מצבין ולא באינסוף ולכן לא נצטרך PDF אלא פשוט
 וקטור שאומר מה הסיכוי להיות בכל מצב. במקרה שלנו:
@@ -398,7 +404,7 @@ $$\vec{p}=\begin{pmatrix}\mathbb{P}\left(x\left(t\right)=0\right)\\
 
 יש לנו את כל מה שאנחנו צריכים :)
 
-```
+````
 
 #### אוטוקורלציה עבור אותות לא אקראיים
 

@@ -1,0 +1,34 @@
+<section id="telegraph-correlation" class="course-interactive" aria-labelledby="telegraph-title">
+  <h4 id="telegraph-title">אוטוקורלציה של תהליך טלגרף</h4>
+  <p class="ci-status" role="status">טוענים את הגרפים…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+CourseInteractives.mount("telegraph-correlation",{
+  original:"https://www.geogebra.org/material/iframe/id/entghwt6",initial:{l0:2,l1:1},
+  equation:String.raw`R_x(\tau)=\mu_x^2+\sigma_x^2e^{-(\lambda_0+\lambda_1)|\tau|}`,
+  setup(c) {
+    const {state:s,models:m,colors:k}=c;
+    c.control("l0","קצב המעבר מאפס לאחת",String.raw`\lambda_0`,0.1,4,0.01);
+    c.control("l1","קצב המעבר מאחת לאפס",String.raw`\lambda_1`,0.1,4,0.01);
+    c.preset("תהליך מאוזן",{l0:1,l1:1});c.preset("מעברים איטיים",{l0:0.2,l1:0.1});
+    c.preset("מעברים מהירים",{l0:4,l1:2});c.preset("איפוס",{l0:2,l1:1});
+    const process=()=>m.telegraph(s.l0,s.l1);
+    const correlation=c.board("correlation",String.raw`R_x(\tau)`,String.raw`\tau`,[-5.6,1.14,5.6,-0.2],{negativeY:false});
+    const conditional=c.board("conditional",String.raw`\mathbb P(X(t)=1\mid X(0)=1)`,String.raw`t`,[-0.8,1.14,5.2,-0.2],{negativeX:false,negativeY:false});
+    c.curve(correlation,t=>process().correlation(t),-5,5,k.orange);
+    c.segment(correlation,[-5,()=>process().mean**2],[5,()=>process().mean**2],{strokeColor:k.teal});
+    c.label(correlation,4.7,()=>process().mean**2,String.raw`\mu_x^2`,{anchorX:"right",anchorY:"bottom",offset:[0,6],strokeColor:k.teal});
+    c.point(correlation,0,()=>process().mean,k.orange);
+    c.label(correlation,0,()=>process().mean,String.raw`R_x(0)=\mu_x`,{anchorX:"left",anchorY:"bottom",offset:[8,8],strokeColor:k.orange});
+    c.curve(conditional,t=>process().conditional(t),0,5,k.teal);
+    c.segment(conditional,[0,()=>process().mean],[5,()=>process().mean]);
+    c.label(conditional,4.7,()=>process().mean,String.raw`\mu_x`,{anchorX:"right",anchorY:"bottom",offset:[0,7],strokeColor:k.teal});
+    c.metric("mean","ממוצע",String.raw`\mu_x=\frac{\lambda_0}{\lambda_0+\lambda_1}`);
+    c.metric("variance","שונות",String.raw`\sigma_x^2=\frac{\lambda_0\lambda_1}{(\lambda_0+\lambda_1)^2}`);
+    c.metric("time","זמן קורלציה",String.raw`\tau_c=\frac1{\lambda_0+\lambda_1}`);
+    c.note("צירים קבועים · התהליך מקבל את הערכים אפס ואחת");
+    return {update(){const p=process();c.value("mean",c.format(p.mean,3));c.value("variance",c.format(p.variance,3));c.value("time",c.format(p.correlationTime,3));}};
+  }
+});
+</script>

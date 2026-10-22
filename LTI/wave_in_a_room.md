@@ -43,8 +43,13 @@ $$\tilde{H}\left(\omega\right)=\frac{\alpha_{1}}{\sqrt{2\pi}}e^{i\omega\frac{\ta
 $$\left|\tilde{H}\left(\omega\right)\right|=\sqrt{\frac{2}{\pi}}\left|\alpha_{1}\right|\cos\left(\omega\frac{\tau_{1}-\tau_{2}}{2}\right)$$
 $$\arg\left(\tilde{H}\left(\omega\right)\right)=\arg\left(\alpha_{1}\right)+\omega\frac{\tau_{1}+\tau_{2}}{2}$$
 
-<iframe src="https://www.geogebra.org/material/iframe/id/uxfzrrp5" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/uxfzrrp5" target="_blank">לפתיחה בחלון נפרד</a>
+```{raw} html
+:file: interactives/runtime.html
+```
+
+```{raw} html
+:file: interactives/room-reflections.html
+```
 
 נראה עכשיו איך זה נשמע
 

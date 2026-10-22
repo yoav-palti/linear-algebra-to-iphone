@@ -220,5 +220,10 @@ $$P_{L}\left(Z_{L}=Z_{S}^{\ast}\right)=\frac{\left|V_{0}\right|^{2}}{2}\frac{R_{
 
 מומזנים לנסות לתאם עכבות ולראות מה ההספק שנופל על העומס L
 
-<iframe src="https://www.geogebra.org/material/iframe/id/qpb4yvjq" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/qpb4yvjq" target="_blank">לפתיחה בחלון נפרד</a>
+```{raw} html
+:file: ../LTI/interactives/runtime.html
+```
+
+```{raw} html
+:file: interactives/impedance-matching.html
+```

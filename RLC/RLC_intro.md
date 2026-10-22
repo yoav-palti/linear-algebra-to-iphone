@@ -74,8 +74,13 @@ $$\omega_{res}=\frac{1}{\sqrt{LC}}$$
 
 נראה את זה בגרף
 
-<iframe src="https://www.geogebra.org/material/iframe/id/fsmc5gwz" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/fsmc5gwz" target="_blank">לפתיחה בחלון נפרד</a>
+```{raw} html
+:file: ../LTI/interactives/runtime.html
+```
+
+```{raw} html
+:file: interactives/rlc-filter.html
+```
 
 נסתכל על קצת גבולות של פונקציית התמסורת:
 * $\tilde{H}\left(0\right)=0$

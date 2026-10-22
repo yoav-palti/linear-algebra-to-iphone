@@ -138,8 +138,9 @@ $$A\tilde{P}\left(\omega\right)=\left(-m\omega^{2}+i\gamma\omega+k\right)\tilde{
 
 $$\tilde{H}\left(\omega\right)=\frac{\tilde{X}\left(\omega\right)}{\tilde{P}\left(\omega\right)}=\frac{A}{-m\omega^{2}+i\gamma\omega+k}$$
 
-<iframe src="https://www.geogebra.org/material/iframe/id/ydttts6y" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/ydttts6y" target="_blank">לפתיחה בחלון נפרד</a>
+```{raw} html
+:file: interactives/frequency-response.html
+```
 
 נסו לשחק קצת עם האילוסטרציה. מהם הפרמטרים הכי טובים אם אנחנו רוצים לתכנן מיקרופון?
 נסו לגרום לרוחב של התמסורת להיות כמה שיותר רחבה

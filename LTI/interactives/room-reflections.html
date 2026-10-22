@@ -1,0 +1,44 @@
+<section id="room-reflections" class="course-interactive" aria-labelledby="room-title">
+  <h4 id="room-title">התאבכות בין שני נתיבים</h4>
+  <p class="ci-status" role="status">טוענים את הגרפים…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+CourseInteractives.mount("room-reflections",{
+  original:"https://www.geogebra.org/material/iframe/id/uxfzrrp5",
+  initial:{delta:1.5,sum:3.1,a2:0.5},
+  equation:String.raw`\tilde H(\omega)=\frac{\frac12 e^{-i\omega\tau_1}+\alpha_2e^{-i\omega\tau_2}}{\sqrt{2\pi}}`,
+  setup(c) {
+    const {state:s,models:m,colors:k}=c;
+    c.control("delta","הפרש זמני הגעה",String.raw`\Delta\tau`,0.1,3,0.01);
+    c.control("sum","סכום זמני הגעה",String.raw`S_\tau`,3,8,0.01);
+    c.control("a2","עוצמת ההחזרה",String.raw`\alpha_2`,0,1,0.01);
+    c.preset("נתיבים שווים",{a2:0.5}); c.preset("ללא החזרה",{a2:0});
+    c.preset("החזרה חלשה",{a2:0.2}); c.preset("איפוס",{delta:1.5,sum:3.1,a2:0.5});
+    const response=w=>m.room(w,s.delta,s.sum,s.a2);
+    const magnitude=c.board("magnitude",String.raw`|\tilde H(\omega)|`,String.raw`\omega`,[-2,0.72,12.5,-0.21],{negativeX:false,negativeY:false});
+    const phase=c.board("phase",String.raw`\arg\tilde H(\omega)`,String.raw`\omega`,[-2,3.6,12.5,-3.7],{negativeX:false});
+    c.curve(magnitude,w=>response(w).magnitude,0,12,k.orange);
+    c.sampled(phase,()=>{
+      const x=[],y=[]; let previous=NaN;
+      for(let i=0;i<=1200;i++) {
+        const w=i/100, value=response(w).phase;
+        // Equal-path cancellations jump by pi, while phase wrapping jumps by 2*pi.
+        if(Number.isFinite(previous) && Math.abs(value-previous)>0.75*Math.PI) {x.push(w);y.push(NaN);}
+        x.push(w);y.push(value);previous=value;
+      }
+      return {x,y};
+    },k.teal);
+    c.metric("t1","הגעה ראשונה",String.raw`\tau_1=\frac{S_\tau-\Delta\tau}{2}`);
+    c.metric("t2","הגעה שנייה",String.raw`\tau_2=\frac{S_\tau+\Delta\tau}{2}`);
+    c.metric("spacing","מרווח בין שקעי התמסורת",String.raw`\Delta\omega=\frac{2\pi}{\Delta\tau}`);
+    for(let n=0;n<6;n++) {
+      const frequency=()=>(2*n+1)*Math.PI/s.delta;
+      c.point(magnitude,frequency,()=>response(frequency()).magnitude,k.orange,{size:2,visible:()=>frequency()<12 && s.a2>0});
+    }
+    c.label(magnitude,()=>Math.PI/s.delta,0,String.raw`\frac{\pi}{\Delta\tau}`,{offset:[0,-28],visible:()=>s.a2>0 && Math.PI/s.delta<12});
+    c.note("צירים קבועים · אותה נורמליזציית פורייה כמו בפרק");
+    return {update(){c.value("t1",c.format((s.sum-s.delta)/2));c.value("t2",c.format((s.sum+s.delta)/2));c.value("spacing",s.a2>0?c.format(2*Math.PI/s.delta):"אין התאבכות");}};
+  }
+});
+</script>

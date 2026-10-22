@@ -1,0 +1,102 @@
+<section id="convolution-lab" class="course-interactive" aria-labelledby="convolution-title">
+  <h4 id="convolution-title">קונבולוציה: הזזה, כפל ואינטגרציה</h4>
+  <p class="ci-status" role="status">טוענים את הגרפים…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+CourseInteractives.mount("convolution-lab",{
+  original:"https://phiresky.github.io/convolution-demo/",
+  initial:{f:"triangle",g:"rectangle",a:1,b:0.5,af:1,ag:1,t:-0.75},
+  equation:String.raw`y(t)=(x*h)(t)=\int_{-\infty}^{\infty}x(\tau)h(t-\tau)\,d\tau`,
+  setup(c) {
+    const {state:s,models:m,colors:k}=c;
+    const choices=[["triangle","משולש"],["rectangle","מלבן"],["gaussian","גאוסיין"],["impulse","הלם מקורב"],["train","רכבת הלמים מקורבת"],["ramp","שן מסור בודדת"]];
+    c.select("f","צורת הקלט",choices);c.select("g","צורת התגובה להלם",choices);
+    c.control("a","רוחב הקלט",String.raw`a`,0.3,2,0.01);
+    c.control("b","רוחב התגובה להלם",String.raw`b`,0.3,2,0.01);
+    c.control("af","אמפליטודת הקלט",String.raw`A_x`,0.2,1.2,0.01);
+    c.control("ag","אמפליטודת התגובה",String.raw`A_h`,0.2,1.2,0.01);
+    const timeSlider=c.control("t","הזזה בזמן",String.raw`t`,-6,6,0.01);
+    const f=t=>m.signal(s.f,s.a,s.af,t),g=t=>m.signal(s.g,s.b,s.ag,t);
+    let convolution=m.convolution(f,g), frame=0, previous=0;
+    const stop=()=>{if(frame)cancelAnimationFrame(frame);frame=0;previous=0;play.textContent="ניגון";};
+    const tick=now=>{
+      if(!frame)return;
+      if(previous)s.t=Math.min(6,s.t+Math.min(0.1,(now-previous)/1000));
+      previous=now;c.update("play");
+      if(s.t>=6){stop();return;} frame=requestAnimationFrame(tick);
+    };
+    const play=c.button("ניגון",()=>{if(frame){stop();return "play";}if(s.t>=6)s.t=-6;previous=0;frame=requestAnimationFrame(tick);play.textContent="עצירה";return "play";});
+    const preset=(text,values)=>c.button(text,()=>{stop();Object.assign(s,values);});
+    preset("מלבן צר",{f:"triangle",g:"rectangle",a:1,b:0.3,af:1,ag:1,t:0});
+    preset("מלבן רחב",{f:"triangle",g:"rectangle",a:1,b:2,af:1,ag:1,t:0});
+    preset("שני גאוסיינים",{f:"gaussian",g:"gaussian",a:0.7,b:0.7,af:1,ag:1,t:0});
+    preset("איפוס",{f:"triangle",g:"rectangle",a:1,b:0.5,af:1,ag:1,t:-0.75});
+    document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});
+    window.addEventListener("pagehide",stop,{once:true});
+    const input=c.board("input",String.raw`x(t)`,String.raw`t`,[-6.5,3.2,6.5,-0.55],{negativeY:false});
+    const response=c.board("response",String.raw`h(t)`,String.raw`t`,[-6.5,3.2,6.5,-0.55],{negativeY:false});
+    const overlap=c.board("overlap",String.raw`x(\tau),\quad h(t-\tau),\quad x(\tau)h(t-\tau)`,String.raw`\tau`,[-6.5,4,6.5,-0.7],{negativeY:false});
+    const result=c.board("result",String.raw`y(t)=(x*h)(t)`,String.raw`t`,[-6.5,4,6.5,-0.95],{negativeY:false});
+    function samples(fn,edges) {
+      const x=Array.from({length:601},(_,i)=>-6+i*0.02);
+      // Explicit one-sided samples preserve rectangle/ramp edges instead of omitting the jumps.
+      for(const edge of edges)if(edge>-6&&edge<6)x.push(edge-1e-8,edge,edge+1e-8);
+      x.sort((a,b)=>a-b);return {x,y:x.map(fn)};
+    }
+    c.sampled(input,()=>samples(f,[-s.a,s.a]),k.orange);
+    c.sampled(response,()=>samples(g,[-s.b,s.b]),k.blue);
+    c.sampled(overlap,()=>samples(f,[-s.a,s.a]),k.orange);
+    c.sampled(overlap,()=>samples(tau=>g(s.t-tau),[s.t-s.b,s.t+s.b]),k.blue);
+    c.sampled(overlap,()=>samples(tau=>f(tau)*g(s.t-tau),[-s.a,s.a,s.t-s.b,s.t+s.b]),k.purple,{strokeWidth:2});
+    c.sampled(overlap,()=>{
+      const x=[-6],y=[0];
+      for(let i=0;i<=600;i++){const tau=-6+i*0.02;x.push(tau);y.push(f(tau)*g(s.t-tau));}
+      x.push(6,-6);y.push(0,0);return {x,y};
+    },k.purple,{strokeWidth:0,fillColor:k.purple,fillOpacity:0.18});
+    c.sampled(result,()=>({x:convolution.times,y:convolution.values}),k.ink);
+    c.point(result,()=>s.t,()=>convolution.at(s.t),k.purple);
+    c.segment(result,[()=>s.t,0],[()=>s.t,()=>convolution.at(s.t)],{strokeColor:k.purple});
+    c.label(result,()=>s.t,0,String.raw`t`,{offset:[0,-28],strokeColor:k.purple});
+    c.label(input,-5.8,2.8,String.raw`x(t)`,{anchorX:"left",strokeColor:k.orange});
+    c.label(response,-5.8,2.8,String.raw`h(t)`,{anchorX:"left",strokeColor:k.blue});
+    c.metric("time","זמן",String.raw`t`);c.metric("value","שטח המכפלה",String.raw`y(t)`);
+    const definitions={
+      triangle:w=>String.raw`\max\!\left(1-\frac{|t|}{${w}},0\right)`,
+      rectangle:w=>String.raw`\mathbf 1_{\{|t|<${w}\}}`,
+      gaussian:w=>String.raw`\frac{e^{-\frac{t^2}{${w}^2}}}{${w}\sqrt\pi}`,
+      impulse:w=>String.raw`\delta_{${w}}(t)`,
+      train:w=>String.raw`\sum_{n=-3}^{3}\delta_{${w}}\!\left(t-\frac52 n\right)`,
+      ramp:w=>String.raw`\frac{t+${w}}{2\cdot${w}}\,\mathbf 1_{\{|t|<${w}\}}`
+    };
+    // Typeset symbolic definitions once per shape change, not on every playback frame.
+    const formula=node=>{const element=c.node("div",node,undefined,"ci-equation math notranslate");element.dir="ltr";return element;};
+    const formulas=formula(c.root);
+    c.note("צירים קבועים · סגול: המכפלה והשטח · הלמים מוצגים בקירוב גאוסי בעל שטח יחידה");
+    let formulaRevision=0;
+    function updateFormula(){
+      const revision=++formulaRevision;
+      const impulseDefinition=[s.f,s.g].some(kind=>["impulse","train"].includes(kind))
+        ? String.raw`\qquad\delta_\epsilon(t)=\frac{e^{-\frac{t^2}{\epsilon^2}}}{\epsilon\sqrt\pi}` : "";
+      const tex=String.raw`x(t)=A_x\,${definitions[s.f]("a")},\qquad h(t)=A_h\,${definitions[s.g]("b")}`+impulseDefinition;
+      // Serialize MathJax changes so rapid select changes cannot leave stale equations.
+      Promise.resolve(window.MathJax.startup.promise).then(()=>{
+        if(revision!==formulaRevision)return;
+        window.MathJax.typesetClear([formulas]);formulas.textContent="\\("+tex+"\\)";
+        return window.MathJax.typesetPromise([formulas]);
+      }).catch(error=>console.error(error));
+    }
+    // Keep the time control below the plots, where it is visible while comparing them.
+    const timeControls=c.node("div",c.root,undefined,"ci-controls");
+    timeControls.appendChild(timeSlider.parentElement);
+    return {update(key){
+      if(key==="f"&&["impulse","train"].includes(s.f))s.a=0.3;
+      if(key==="g"&&["impulse","train"].includes(s.g))s.b=0.3;
+      if(!["initial","t","play","external"].includes(key))convolution=m.convolution(f,g);
+      if(["initial","f","g","preset"].includes(key))updateFormula();
+      if(key==="t"&&frame)stop();
+      c.value("time",c.format(s.t));c.value("value",c.format(convolution.at(s.t),3));
+    }};
+  }
+});
+</script>

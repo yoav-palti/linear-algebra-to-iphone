@@ -1,0 +1,260 @@
+<!-- Included directly by frequency_response.md; no iframe or build configuration needed. -->
+<section id="microphone-response" dir="rtl" aria-labelledby="fr-title">
+  <style>
+    #microphone-response { --fr-ink:#172f43; --fr-muted:#526779; --fr-line:#dce5eb; --fr-orange:#c35c18; --fr-teal:#087e85; color:var(--fr-ink); background:#f6f9fb; border:1px solid var(--fr-line); border-radius:18px; margin:28px 0; padding:24px; font:16px/1.6 system-ui,sans-serif; color-scheme:light; }
+    #microphone-response * { box-sizing:border-box; }
+    #microphone-response .fr-eyebrow { color:var(--fr-teal); font-size:12px; font-weight:750; letter-spacing:.06em; margin:0 0 5px; }
+    #microphone-response h4 { font-size:24px; color:var(--fr-ink); background:transparent; margin:0 0 6px; }
+    #microphone-response p { margin:0 0 14px; }
+    #microphone-response .fr-note { color:var(--fr-muted); font-size:12px; }
+    #microphone-response .fr-controls { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:18px 0 12px; }
+    #microphone-response .fr-control { background:white; border:1px solid var(--fr-line); border-radius:12px; padding:12px; min-width:0; }
+    #microphone-response label { display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:14px; font-weight:650; margin:0 0 8px; }
+    #microphone-response output, #microphone-response bdi { direction:ltr; unicode-bidi:isolate; font-variant-numeric:tabular-nums; }
+    #microphone-response input[type=range] { display:block; width:100%; margin:0; direction:ltr; accent-color:var(--fr-teal); cursor:pointer; min-height:28px; }
+    #microphone-response .fr-presets { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; }
+    #microphone-response button { background:white; color:var(--fr-ink); border:1px solid #b7cbd6; padding:7px 12px; border-radius:8px; cursor:pointer; font-size:13px; line-height:1.5; }
+    #microphone-response button:hover { background:#e7f1f5; }
+    #microphone-response button:focus-visible, #microphone-response input:focus-visible { outline:3px solid #168c9a; outline-offset:3px; }
+    #microphone-response .fr-plots { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    #microphone-response .fr-plot { border:1px solid var(--fr-line); background:white; border-radius:12px; padding:12px 8px 8px; min-width:0; }
+    #microphone-response .fr-plot h5 { font-size:15px; margin:0 8px 0; color:var(--fr-ink); }
+    #microphone-response .fr-board { height:255px; width:100%; direction:ltr; overflow:hidden; position:relative; touch-action:pan-y; }
+    #microphone-response .fr-board svg { max-width:none; }
+    #microphone-response .fr-axis-caption { text-align:center; color:var(--fr-muted); font-size:12px; direction:ltr; }
+    #microphone-response .fr-metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:14px 0; }
+    #microphone-response .fr-metric { background:#eaf1f5; border-radius:9px; padding:10px; font-size:12px; color:var(--fr-muted); }
+    #microphone-response .fr-metric strong { display:block; color:var(--fr-ink); font-size:18px; font-weight:650; margin-top:3px; }
+    #microphone-response .fr-graph-label { direction:ltr; background:transparent; padding:0 3px; white-space:nowrap; }
+    #microphone-response .fr-note { font-size:12px; margin:10px 0 0; }
+    #microphone-response .fr-error { color:#9b351b; }
+    #microphone-response a { color:#086b78; }
+    @media (max-width:700px) {
+      #microphone-response { padding:16px; }
+      #microphone-response .fr-plots { grid-template-columns:1fr; }
+      #microphone-response .fr-controls { grid-template-columns:1fr; gap:6px; }
+      #microphone-response .fr-control { padding:9px; }
+      #microphone-response .fr-controls .fr-control { display:grid; grid-template-columns:135px minmax(0,1fr); align-items:center; gap:10px; }
+      #microphone-response .fr-controls label { flex-wrap:nowrap; font-size:13px; margin:0; }
+      #microphone-response label { flex-wrap:wrap; gap:2px; }
+      #microphone-response .fr-metrics { grid-template-columns:1fr; }
+      #microphone-response .fr-metric strong { display:inline; margin-inline-start:8px; font-size:16px; }
+    }
+    @media print {
+      #microphone-response .fr-controls, #microphone-response .fr-presets { display:none; }
+      #microphone-response { break-inside:avoid; }
+    }
+  </style>
+  <p class="fr-eyebrow">מעבדת תדרים · המיקרופון כמערכת LTI</p>
+  <h4 id="fr-title">מה משתנה כשמשנים את המיקרופון?</h4>
+  <div class="fr-controls">
+    <div class="fr-control">
+      <label for="fr-mass">מסה <bdi class="math notranslate">\(m\)</bdi><output id="fr-mass-value" for="fr-mass">1.65</output></label>
+      <input id="fr-mass" type="range" min="0.2" max="4" step="0.01" value="1.65" aria-label="מסה m">
+    </div>
+    <div class="fr-control">
+      <label for="fr-damping">ריסון <bdi class="math notranslate">\(\gamma\)</bdi><output id="fr-damping-value" for="fr-damping">0.82</output></label>
+      <input id="fr-damping" type="range" min="0.1" max="8" step="0.01" value="0.82" aria-label="ריסון גמא">
+    </div>
+    <div class="fr-control">
+      <label for="fr-stiffness">קשיחות <bdi class="math notranslate">\(k\)</bdi><output id="fr-stiffness-value" for="fr-stiffness">3.32</output></label>
+      <input id="fr-stiffness" type="range" min="0.2" max="8" step="0.01" value="3.32" aria-label="קשיחות k">
+    </div>
+  </div>
+  <div class="fr-presets" role="group" aria-label="מצבים לדוגמה">
+    <button type="button" data-fr-preset="resonant">תהודה חדה</button>
+    <button type="button" data-fr-preset="damped">ריסון חזק</button>
+    <button type="button" data-fr-preset="stiff">קשיחות גבוהה</button>
+    <button type="button" data-fr-preset="reset">איפוס</button>
+  </div>
+  <p id="fr-loading" class="fr-note" role="status">טוענים את הגרפים…</p>
+  <div class="fr-plots">
+    <div class="fr-plot">
+      <h5 style="color:var(--fr-orange)">גודל התמסורת <bdi class="math notranslate">\(\left|\tilde{H}(\omega)\right|\)</bdi></h5>
+      <div id="fr-magnitude" class="fr-board" role="img" aria-label="גודל התמסורת כפונקציה של התדר הזוויתי, עם תדר השיא ורוחב בחצי גובה"></div>
+      <div class="fr-axis-caption math notranslate">\(\omega\;[\mathrm{rad}\,\mathrm{time}^{-1}]\)</div>
+    </div>
+    <div class="fr-plot">
+      <h5 style="color:var(--fr-teal)">פאזה <bdi class="math notranslate">\(\arg\tilde{H}(\omega)\;[\mathrm{rad}]\)</bdi></h5>
+      <div id="fr-phase" class="fr-board" role="img" aria-label="פאזת התמסורת ברדיאנים כפונקציה של התדר הזוויתי"></div>
+      <div class="fr-axis-caption math notranslate">\(\omega\;[\mathrm{rad}\,\mathrm{time}^{-1}]\)</div>
+    </div>
+  </div>
+  <div class="fr-metrics">
+    <div class="fr-metric">תדר טבעי <bdi class="math notranslate">\(\omega_0=\sqrt{\frac{k}{m}}\)</bdi><strong><bdi id="fr-natural">—</bdi></strong></div>
+    <div class="fr-metric">תדר שיא התגובה <bdi class="math notranslate">\(\omega_D=\sqrt{\frac{k}{m}-\frac{\gamma^2}{2m^2}}\)</bdi><strong><bdi id="fr-peak">—</bdi></strong></div>
+    <div class="fr-metric">רוחב בחצי גובה <bdi class="math notranslate">\(\Delta\omega\)</bdi><strong><bdi id="fr-width">—</bdi></strong></div>
+  </div>
+  <p class="fr-note"><bdi class="math notranslate">\(A=1\)</bdi> · יחידות יחסיות · צירים קבועים · רוחב בחצי גובה האמפליטודה</p>
+  <noscript><p>כדי להפעיל את ההדגמה יש לאפשר JavaScript. <a href="https://www.geogebra.org/material/iframe/id/ydttts6y" target="_blank" rel="noopener">פתיחת ההדגמה המקורית ב־GeoGebra</a></p></noscript>
+  <script>
+  (() => {
+    "use strict";
+    const root = document.getElementById("microphone-response");
+    if (!root || root.dataset.initialized) return;
+    root.dataset.initialized = "true";
+    const el = (name) => root.querySelector("#fr-" + name);
+    const status = el("loading");
+    const controls = ["mass", "damping", "stiffness"];
+    controls.forEach((name) => { el(name).disabled = true; });
+    root.querySelectorAll("button").forEach((button) => { button.disabled = true; });
+
+    async function initialize() {
+      // Jupyter Book loads MathJax with defer; wait before creating typeset graph labels.
+      if (document.readyState === "loading") {
+        await new Promise((resolve) => document.addEventListener("DOMContentLoaded",resolve,{once:true}));
+      }
+      await window.MathJax?.startup?.promise;
+      if (!window.MathJax?.typesetPromise) throw new Error("MathJax is unavailable");
+      const JXG = window.JXG;
+      const state = { mass:1.65, damping:0.82, stiffness:3.32 };
+      const presets = {
+        reset: { mass:1.65, damping:0.82, stiffness:3.32 },
+        resonant: { mass:1.65, damping:0.25, stiffness:3.32 },
+        damped: { mass:1.65, damping:5, stiffness:3.32 },
+        stiff: { mass:1.65, damping:0.82, stiffness:7 }
+      };
+      // Fixed viewing window: slider changes must remain visually comparable.
+      const xMax = 7;
+      const yMax = 3.5;
+      let peakFrequency = 0;
+      let halfGain = 0;
+      let leftHalf = 0;
+      let rightHalf = 0;
+      let hasPeak = false;
+      let hasWidth = false;
+      const gain = (omega) => 1 / Math.hypot(state.stiffness - state.mass * omega * omega, state.damping * omega);
+      const phase = (omega) => -Math.atan2(state.damping * omega, state.stiffness - state.mass * omega * omega);
+      const format = (value) => value.toFixed(2);
+
+      const boardOptions = {
+        boundingbox:[-2,yMax,1.06 * xMax,-0.15 * yMax], axis:false, grid:false,
+        showCopyright:false, showNavigation:false, keepaspectratio:false,
+        pan:{ enabled:false }, zoom:{ enabled:false, wheel:false },
+        resize:{ enabled:true }, renderer:"svg"
+      };
+      const magnitude = JXG.JSXGraph.initBoard("fr-magnitude", boardOptions);
+      const phaseBoard = JXG.JSXGraph.initBoard("fr-phase", {
+        ...boardOptions, boundingbox:[-2,0.5,1.06 * xMax,-3.65]
+      });
+      const axisStyle = { strokeColor:"#9cabb6", strokeWidth:1, highlight:false, fixed:true,
+        ticks:{ strokeColor:"#bdcbd4", minorTicks:0, drawLabels:true,
+          label:{ fontSize:11, strokeColor:"#526779" } } };
+      magnitude.create("axis", [[0,0],[1,0]], axisStyle);
+      magnitude.create("axis", [[0,0],[0,1]], axisStyle);
+      phaseBoard.create("axis", [[0,0],[1,0]], axisStyle);
+      phaseBoard.create("axis", [[0,0],[0,1]], axisStyle);
+      magnitude.create("functiongraph", [gain,0,() => xMax], {
+        strokeColor:"#c35c18", strokeWidth:3, highlight:false,
+        numberPointsHigh:1200
+      });
+      phaseBoard.create("functiongraph", [phase,0,() => xMax], {
+        strokeColor:"#087e85", strokeWidth:3, highlight:false,
+        numberPointsHigh:1200
+      });
+      const quietPoint = { visible:false, fixed:true, name:"" };
+      const segmentStyle = { strokeColor:"#94a7b5", strokeWidth:1.4, dash:2,
+        highlight:false, fixed:true, point1:quietPoint, point2:quietPoint };
+      magnitude.create("segment", [[() => peakFrequency,0], [() => peakFrequency,() => gain(peakFrequency)]], {
+        ...segmentStyle, visible:() => hasPeak
+      });
+      phaseBoard.create("segment", [[() => peakFrequency,0], [() => peakFrequency,-Math.PI]], {
+        ...segmentStyle, visible:() => hasPeak
+      });
+      const markerStyle = { size:3, strokeColor:"#c35c18", fillColor:"#c35c18", name:"", fixed:true, highlight:false };
+      magnitude.create("point", [() => peakFrequency,() => gain(peakFrequency)], {
+        ...markerStyle, visible:() => hasPeak, size:3, fillColor:"#c35c18", strokeColor:"#c35c18"
+      });
+      magnitude.create("segment", [[() => leftHalf,() => halfGain], [() => rightHalf,() => halfGain]], {
+        ...segmentStyle, visible:() => hasWidth, strokeColor:"#c35c18", strokeWidth:2,
+        firstArrow:{ type:1, size:4 }, lastArrow:{ type:1, size:4 }
+      });
+      magnitude.create("segment", [[0,() => halfGain], [() => leftHalf,() => halfGain]], {
+        ...segmentStyle, visible:() => hasWidth, strokeColor:"#c35c18"
+      });
+      const labelStyle = { fixed:true, highlight:false, fontSize:14, display:"html", useMathJax:true, parse:false,
+        cssClass:"fr-graph-label", anchorX:"middle", anchorY:"top", strokeColor:"#172f43" };
+      [magnitude,phaseBoard].forEach((board) => {
+        board.create("text", [() => peakFrequency,0,String.raw`\(\omega_D\)`], {
+          ...labelStyle, offset:[0,-18], visible:() => hasPeak
+        });
+      });
+      magnitude.create("text", [0,() => halfGain,String.raw`\(\dfrac{\left|\tilde{H}(\omega_D)\right|}{2}\)`], {
+        ...labelStyle, fontSize:12, anchorX:"right", anchorY:"bottom", offset:[-6,4],
+        strokeColor:"#c35c18", visible:() => hasWidth
+      });
+      magnitude.create("text", [() => rightHalf,() => halfGain,String.raw`\(\Delta\omega\)`], {
+        ...labelStyle, anchorX:"left", anchorY:"bottom", offset:[9,5], strokeColor:"#c35c18", visible:() => hasWidth
+      });
+      [() => leftHalf, () => rightHalf].forEach((coordinate) => {
+        magnitude.create("point", [coordinate,() => halfGain], {
+          ...markerStyle, visible:() => hasWidth, size:2, fillColor:"white", strokeColor:"#c35c18"
+        });
+      });
+
+      function update() {
+        const {mass:m, damping:gamma, stiffness:k} = state;
+        const natural = Math.sqrt(k / m);
+        // The maximum of displacement magnitude is not the damped free-oscillation frequency.
+        const peakSquared = k / m - gamma * gamma / (2 * m * m);
+        hasPeak = peakSquared > 0;
+        peakFrequency = hasPeak ? Math.sqrt(peakSquared) : 0;
+        const peakGain = gain(peakFrequency);
+        halfGain = peakGain / 2;
+        // Solve (k-m*omega^2)^2 + gamma^2*omega^2 = 4 / peakGain^2.
+        const minimumDenominator = 1 / (peakGain * peakGain);
+        const spread = Math.sqrt(3 * minimumDenominator) / m;
+        hasWidth = hasPeak && peakSquared - spread > 0;
+        leftHalf = hasWidth ? Math.sqrt(peakSquared - spread) : 0;
+        rightHalf = hasWidth ? Math.sqrt(peakSquared + spread) : 0;
+        controls.forEach((name) => {
+          el(name).value = state[name];
+          el(name + "-value").value = format(state[name]);
+        });
+        magnitude.update();
+        phaseBoard.update();
+        el("natural").textContent = format(natural);
+        el("peak").textContent = hasPeak ? format(peakFrequency) : "אין שיא בתדר חיובי";
+        el("width").textContent = hasWidth ? format(rightHalf - leftHalf) : "אין שני חיתוכים";
+      }
+      controls.forEach((name) => {
+        el(name).disabled = false;
+        el(name).addEventListener("input", () => {
+          state[name] = Number(el(name).value);
+          update();
+        });
+      });
+      root.querySelectorAll("[data-fr-preset]").forEach((button) => {
+        button.disabled = false;
+        button.addEventListener("click", () => {
+          Object.assign(state,presets[button.dataset.frPreset]);
+          update();
+        });
+      });
+      update();
+      status.hidden = true;
+    }
+
+    function failed() {
+      status.classList.add("fr-error");
+      status.textContent = "לא ניתן לטעון את הגרפים. בדקו את החיבור לרשת או פתחו את ההדגמה המקורית: ";
+      const link = document.createElement("a");
+      link.href = "https://www.geogebra.org/material/iframe/id/ydttts6y";
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "GeoGebra";
+      status.appendChild(link);
+    }
+    const launch = () => initialize().catch((error) => { console.error(error); failed(); });
+    if (window.JXG) {
+      launch();
+    } else {
+      const script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/npm/jsxgraph@1.14.0/distrib/jsxgraphcore.js";
+      script.onload = launch;
+      script.onerror = failed;
+      document.head.appendChild(script);
+    }
+  })();
+  </script>
+</section>

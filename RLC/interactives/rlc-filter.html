@@ -1,0 +1,47 @@
+<section id="rlc-filter" class="course-interactive" aria-labelledby="rlc-title">
+  <h4 id="rlc-title">תהודה ורוחב סרט במעגל RLC</h4>
+  <p class="ci-status" role="status">טוענים את הגרפים…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+CourseInteractives.mount("rlc-filter",{
+  original:"https://www.geogebra.org/material/iframe/id/fsmc5gwz",
+  initial:{r:43.65,l:0.47,c:69.18},equation:String.raw`\tilde H(\omega)=\frac{R}{R+i\omega L+\frac1{i\omega C}}`,
+  setup(c) {
+    const {state:s,models:m,colors:k}=c;
+    c.control("r","התנגדות",String.raw`R\;[\mathrm{m}\Omega]`,0.1,100,0.0001,4);
+    c.control("l","השראות",String.raw`L\;[\mathrm{nH}]`,0.1,2,0.01);
+    c.control("c","קיבול",String.raw`C\;[\mathrm{nF}]`,1,100,0.0001,4);
+    c.preset("פס צר",{r:5,l:0.47,c:69.18});c.preset("פס רחב",{r:90,l:0.47,c:69.18});
+    c.preset("רדיו: 91.8 MHz",{r:0.2953097094,l:0.47,c:1e9/((2*Math.PI*91.8e6)**2*0.47e-9)});
+    c.preset("איפוס",{r:43.65,l:0.47,c:69.18});
+    const parameters=()=>m.rlcParameters(s.r*1e-3,s.l*1e-9,s.c*1e-9);
+    const response=w=>m.rlc(w*1e8,s.r*1e-3,s.l*1e-9,s.c*1e-9);
+    const unit=String.raw`\omega\;[10^8\,\mathrm{rad}\,\mathrm{s}^{-1}]`;
+    const magnitude=c.board("magnitude",String.raw`|\tilde H(\omega)|`,unit,[-1.7,1.2,8.3,-0.3],{negativeX:false,negativeY:false});
+    const phase=c.board("phase",String.raw`\arg\tilde H(\omega)\;[\mathrm{rad}]`,unit,[-1.7,1.9,8.3,-1.95],{negativeX:false});
+    function samples(property) {
+      const p=parameters(),center=p.resonance/1e8,width=p.bandwidth/1e8;
+      const xs=Array.from({length:1601},(_,i)=>8*i/1600);
+      // Include a dense local grid so the narrow radio preset cannot disappear between samples.
+      for(let i=-150;i<=150;i++) {const w=center+i*width/25;if(w>=0&&w<=8)xs.push(w);}
+      xs.push(p.lower/1e8,p.upper/1e8);xs.sort((a,b)=>a-b);
+      return {x:xs,y:xs.map(w=>response(w)[property])};
+    }
+    c.sampled(magnitude,()=>samples("magnitude"),k.orange);c.sampled(phase,()=>samples("phase"),k.teal);
+    const resonance=()=>parameters().resonance/1e8,lower=()=>parameters().lower/1e8,upper=()=>parameters().upper/1e8;
+    c.segment(magnitude,[resonance,0],[resonance,1]);c.point(magnitude,resonance,1,k.orange,{visible:()=>resonance()<=8});
+    c.label(magnitude,resonance,0,String.raw`\omega_{\mathrm{res}}`,{offset:[0,-28],visible:()=>resonance()<=8});
+    c.segment(magnitude,[0,1/Math.sqrt(2)],[lower,1/Math.sqrt(2)],{strokeColor:k.orange});
+    c.segment(magnitude,[lower,1/Math.sqrt(2)],[upper,1/Math.sqrt(2)],{strokeColor:k.orange,firstArrow:{type:1,size:4},lastArrow:{type:1,size:4}});
+    c.label(magnitude,0,1/Math.sqrt(2),String.raw`\frac1{\sqrt2}`,{anchorX:"right",anchorY:"bottom",offset:[-6,3],strokeColor:k.orange});
+    c.label(magnitude,upper,1/Math.sqrt(2),String.raw`\Delta\omega`,{anchorX:"left",anchorY:"bottom",offset:[7,4],visible:()=>upper()<7.6,strokeColor:k.orange});
+    [lower,upper].forEach(x=>c.point(magnitude,x,1/Math.sqrt(2),k.orange,{size:2,visible:()=>x()<=8}));
+    c.metric("resonance","תדר תהודה",String.raw`f_{\mathrm{res}}=\frac1{2\pi\sqrt{LC}}\;[\mathrm{MHz}]`);
+    c.metric("bandwidth","רוחב בחצי הספק",String.raw`\Delta f=\frac{R}{2\pi L}\;[\mathrm{MHz}]`);
+    c.metric("q","מקדם איכות",String.raw`Q=\frac1R\sqrt{\frac LC}`);
+    c.note("צירים קבועים · רוחב בחצי הספק");
+    return {update(){const p=parameters();c.value("resonance",c.format(p.resonance/(2*Math.PI*1e6),3));c.value("bandwidth",c.format(p.bandwidth/(2*Math.PI*1e6),3));c.value("q",c.format(p.q));}};
+  }
+});
+</script>

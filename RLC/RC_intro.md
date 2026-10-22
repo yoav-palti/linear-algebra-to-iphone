@@ -91,8 +91,13 @@ $$\tilde{H}\left(\omega\right)=\frac{1}{i\omega C}\cdot\frac{1}{R+\frac{1}{i\ome
 
 $$\tilde{H}\left(\omega\right)=\frac{1}{1+i\omega\tau}$$
 
-<iframe src="https://www.geogebra.org/material/iframe/id/ta47hhwh" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/ta47hhwh" target="_blank">לפתיחה בחלון נפרד</a>
+```{raw} html
+:file: ../LTI/interactives/runtime.html
+```
+
+```{raw} html
+:file: interactives/rc-filter.html
+```
 
 נשים לב שקיבלנו מערכת שמעבירה תדרים נמוכים אבל לא תדרים גבוהים למערכת לינארית כזאת נקרא "מסנן מעביר נמוכים" או בשם המוכר יותר Low Pass Filter (LPF)
 

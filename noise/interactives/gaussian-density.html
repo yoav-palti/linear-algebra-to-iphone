@@ -1,0 +1,40 @@
+<section id="gaussian-density" class="course-interactive" aria-labelledby="gaussian-title">
+  <h4 id="gaussian-title">התפלגות נורמלית</h4>
+  <p class="ci-status" role="status">טוענים את הגרף…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+CourseInteractives.mount("gaussian-density",{
+  original:"https://www.geogebra.org/material/iframe/id/mb5n2gph",initial:{mean:-3.1,sigma:1.32},
+  equation:String.raw`p_X(x)=\frac1{\sqrt{2\pi}\sigma}\exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)`,
+  setup(c) {
+    const {state:s,models:m,colors:k}=c;
+    c.control("mean","ממוצע",String.raw`\mu`,-4,4,0.01);
+    c.control("sigma","סטיית תקן",String.raw`\sigma`,0.4,2.5,0.01);
+    c.preset("נורמלית סטנדרטית",{mean:0,sigma:1});c.preset("התפלגות צרה",{mean:0,sigma:0.5});
+    c.preset("התפלגות רחבה",{mean:0,sigma:2});c.preset("איפוס",{mean:-3.1,sigma:1.32});
+    const density=x=>m.gaussian(x,s.mean,s.sigma), reference=x=>m.gaussian(x,0,1);
+    const board=c.board("density",String.raw`p_X(x)`,String.raw`x`,[-8.5,1.13,8.5,-0.25],{negativeY:false,height:290});
+    // A closed curve shades the central one-standard-deviation probability, not the entire PDF.
+    c.sampled(board,()=>{
+      const x=[s.mean-s.sigma],y=[0];
+      for(let i=0;i<=100;i++){const value=s.mean-s.sigma+2*s.sigma*i/100;x.push(value);y.push(density(value));}
+      x.push(s.mean+s.sigma,s.mean-s.sigma);y.push(0,0);return {x,y};
+    },k.teal,{strokeWidth:0,fillColor:k.teal,fillOpacity:0.12});
+    c.curve(board,reference,-8,8,k.ink,{strokeWidth:1.8,dash:2});
+    c.curve(board,density,-8,8,k.teal);
+    c.label(board,2,0.43,String.raw`\mathcal N(0,1)`,{anchorX:"left",anchorY:"bottom",strokeColor:k.ink});
+    c.point(board,()=>s.mean,()=>density(s.mean),k.teal);
+    c.segment(board,[()=>s.mean,0],[()=>s.mean,()=>density(s.mean)]);
+    c.label(board,()=>s.mean,0,String.raw`\mu`,{offset:[0,-28],strokeColor:k.teal});
+    const height=()=>density(s.mean+s.sigma);
+    c.segment(board,[()=>s.mean-s.sigma,height],[()=>s.mean+s.sigma,height],{strokeColor:k.teal,firstArrow:{type:1,size:4},lastArrow:{type:1,size:4}});
+    c.label(board,()=>s.mean+s.sigma,height,String.raw`2\sigma`,{anchorX:"left",anchorY:"bottom",offset:[7,4],strokeColor:k.teal});
+    c.metric("variance","שונות",String.raw`\sigma^2`);
+    c.metric("peak","צפיפות בממוצע",String.raw`p_X(\mu)=\frac1{\sqrt{2\pi}\sigma}`);
+    c.metric("probability","השטח המסומן",String.raw`\mathbb P(\mu-\sigma<X<\mu+\sigma)`);
+    c.note("צירים קבועים · הקו השחור: ההתפלגות הסטנדרטית");
+    return {update(){c.value("variance",c.format(s.sigma*s.sigma));c.value("peak",c.format(density(s.mean),3));c.value("probability","0.6827");}};
+  }
+});
+</script>
