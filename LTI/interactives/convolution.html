@@ -3,6 +3,14 @@
   <p class="ci-status" role="status">טוענים את הגרפים…</p>
   <noscript>ההדגמה דורשת JavaScript.</noscript>
 </section>
+<style>
+  #convolution-lab .ci-playback { display:flex; align-items:center; gap:10px; margin-top:12px; }
+  #convolution-lab .ci-playback .ci-controls { flex:1; margin:0; min-width:0; }
+  #convolution-lab .ci-playback > button { flex:none; }
+  @media(max-width:700px) {
+    #convolution-lab .ci-playback .ci-control { display:block; }
+  }
+</style>
 <script>
 CourseInteractives.mount("convolution-lab",{
   original:"https://phiresky.github.io/convolution-demo/",
@@ -12,8 +20,8 @@ CourseInteractives.mount("convolution-lab",{
     const {state:s,models:m,colors:k}=c;
     const choices=[["triangle","משולש"],["rectangle","מלבן"],["gaussian","גאוסיין"],["impulse","הלם מקורב"],["train","רכבת הלמים מקורבת"],["ramp","שן מסור בודדת"]];
     c.select("f","צורת הקלט",choices);c.select("g","צורת התגובה להלם",choices);
-    c.control("a","רוחב הקלט",String.raw`a`,0.3,2,0.01);
-    c.control("b","רוחב התגובה להלם",String.raw`b`,0.3,2,0.01);
+    c.control("a","רוחב הקלט",String.raw`a`,0.03,2,0.01);
+    c.control("b","רוחב התגובה להלם",String.raw`b`,0.03,2,0.01);
     c.control("af","אמפליטודת הקלט",String.raw`A_x`,0.2,1.2,0.01);
     c.control("ag","אמפליטודת התגובה",String.raw`A_h`,0.2,1.2,0.01);
     const timeSlider=c.control("t","הזזה בזמן",String.raw`t`,-6,6,0.01);
@@ -34,10 +42,18 @@ CourseInteractives.mount("convolution-lab",{
     preset("איפוס",{f:"triangle",g:"rectangle",a:1,b:0.5,af:1,ag:1,t:-0.75});
     document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});
     window.addEventListener("pagehide",stop,{once:true});
-    const input=c.board("input",String.raw`x(t)`,String.raw`t`,[-6.5,3.2,6.5,-0.55],{negativeY:false});
-    const response=c.board("response",String.raw`h(t)`,String.raw`t`,[-6.5,3.2,6.5,-0.55],{negativeY:false});
-    const overlap=c.board("overlap",String.raw`x(\tau),\quad h(t-\tau),\quad x(\tau)h(t-\tau)`,String.raw`\tau`,[-6.5,4,6.5,-0.7],{negativeY:false});
-    const result=c.board("result",String.raw`y(t)=(x*h)(t)`,String.raw`t`,[-6.5,4,6.5,-0.95],{negativeY:false});
+    const plotSettings={negativeY:false,height:180};
+    const input=c.board("input",String.raw`x(t)`,String.raw`t`,[-6.5,2,6.5,-0.45],plotSettings);
+    const response=c.board("response",String.raw`h(t)`,String.raw`t`,[-6.5,2,6.5,-0.45],plotSettings);
+    const overlap=c.board("overlap",String.raw`x(\tau),\quad h(t-\tau),\quad x(\tau)h(t-\tau)`,String.raw`\tau`,[-6.5,2,6.5,-0.45],plotSettings);
+    const result=c.board("result",String.raw`y(t)=(x*h)(t)`,String.raw`t`,[-6.5,2,6.5,-0.45],plotSettings);
+    const titles=c.root.querySelectorAll(".ci-plot h5");
+    titles[0].style.color=k.orange; titles[1].style.color=k.blue; titles[3].style.color=k.ink;
+    titles[2].replaceChildren();
+    [[String.raw`x(\tau)`,k.orange],[String.raw`h(t-\tau)`,k.blue],[String.raw`x(\tau)h(t-\tau)`,k.purple]].forEach(([tex,color],index)=>{
+      if(index)c.node("span",titles[2]," · ");
+      c.math(titles[2],tex).style.color=color;
+    });
     function samples(fn,edges) {
       const x=Array.from({length:601},(_,i)=>-6+i*0.02);
       // Explicit one-sided samples preserve rectangle/ramp edges instead of omitting the jumps.
@@ -58,8 +74,6 @@ CourseInteractives.mount("convolution-lab",{
     c.point(result,()=>s.t,()=>convolution.at(s.t),k.purple);
     c.segment(result,[()=>s.t,0],[()=>s.t,()=>convolution.at(s.t)],{strokeColor:k.purple});
     c.label(result,()=>s.t,0,String.raw`t`,{offset:[0,-28],strokeColor:k.purple});
-    c.label(input,-5.8,2.8,String.raw`x(t)`,{anchorX:"left",strokeColor:k.orange});
-    c.label(response,-5.8,2.8,String.raw`h(t)`,{anchorX:"left",strokeColor:k.blue});
     c.metric("time","זמן",String.raw`t`);c.metric("value","שטח המכפלה",String.raw`y(t)`);
     const definitions={
       triangle:w=>String.raw`\max\!\left(1-\frac{|t|}{${w}},0\right)`,
@@ -87,11 +101,13 @@ CourseInteractives.mount("convolution-lab",{
       }).catch(error=>console.error(error));
     }
     // Keep the time control below the plots, where it is visible while comparing them.
-    const timeControls=c.node("div",c.root,undefined,"ci-controls");
+    const playback=c.node("div",c.root,undefined,"ci-playback");
+    playback.appendChild(play);
+    const timeControls=c.node("div",playback,undefined,"ci-controls");
     timeControls.appendChild(timeSlider.parentElement);
     return {update(key){
-      if(key==="f"&&["impulse","train"].includes(s.f))s.a=0.3;
-      if(key==="g"&&["impulse","train"].includes(s.g))s.b=0.3;
+      if(key==="f"&&["impulse","train"].includes(s.f))s.a=0.06;
+      if(key==="g"&&["impulse","train"].includes(s.g))s.b=0.06;
       if(!["initial","t","play","external"].includes(key))convolution=m.convolution(f,g);
       if(["initial","f","g","preset"].includes(key))updateFormula();
       if(key==="t"&&frame)stop();
