@@ -140,6 +140,24 @@ $$\boxed{\frac{2\pi}{\omega_{0}}\ll RC\ll\frac{2\pi}{\omega_{max}}}$$
 
 אנחנו רואים שחבויה כאן גם ההנחה שלנו כי $\omega_{max}\ll\omega_{0}$ הנחה זו נכונה ברוב מערכות התקשורת (כאשר משתמשים בגלים אלקטרומגנטים)
 
+נבדוק את הפשרה בין אדווה למעקב מעטפת באותו מעגל. לחיצה על כל רכיב מציגה את האות לפניו ואחריו; במצבי הקיצון אפשר גם לשמוע את העיוות.
+
+```{raw} html
+:file: ../LTI/interactives/runtime.html
+```
+
+```{raw} html
+:file: ../LTI/interactives/process-models.html
+```
+
+```{raw} html
+:file: ../LTI/interactives/process-lab.html
+```
+
+```{raw} html
+:file: interactives/envelope-detector.html
+```
+
 ### מקלט הטרודיין
 במקלט הפשוט שראינו עם גילוי המעטפת אפשר לברור בין תחנות על ידי סינון של האות מראש עם BPF. 
 
@@ -156,8 +174,11 @@ $$\boxed{\frac{2\pi}{\omega_{0}}\ll RC\ll\frac{2\pi}{\omega_{max}}}$$
 
 איך נזיז בתדר? נרצה להכפיל ב-$e^{i\omega_{LO}t}$ אבל אנחנו יכולים להכפיל רק במשהו ממשי ולכן נכפיל ב-$\cos\left(\omega_{LO}t\right)$
 
-הסרטוט של המקלט בשלבים ייראה ככה:
-![superheterodyne_receiver_diagram.png](images/superheterodyne_receiver_diagram.png)
+נעקוב אחרי שתי תחנות באותו מקלט. כיוון המתנד משנה את התחנה שמגיעה למסנן הביניים הקבוע; לחיצה על המיקסר או על המסנן מאפשרת לראות את ההזזה והברירה.
+
+```{raw} html
+:file: interactives/heterodyne.html
+```
 
 מה נקבל אחרי המיקסר?
 
@@ -191,10 +212,6 @@ $$r\left(t\right)\approx A\left(t\right)\cos\left(\left(\omega_{0}+\omega_{d}\ri
 ניקח השראה ממקלט הטרודיין אבל הפעם נבחר תדר ביניים שהוא תדר ה-0
 
 בתרשים הבא אפשר ללחוץ על רכיבי המקלט או על הנקודות שביניהם, ולבדוק איך האות משתנה בזמן ובתדר. חזית ה־RF מוצגת כאן כמעבר אידאלי בהגבר יחידה.
-
-```{raw} html
-:file: ../LTI/interactives/runtime.html
-```
 
 ```{raw} html
 :file: interactives/coherent-am.html

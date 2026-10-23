@@ -207,6 +207,24 @@ $$=-\underset{A\left(t\right)}{\underbrace{\left(\omega_{0}+mf\left(t\right)\rig
 AM אלא אפנון AM עם רעש פאזה משמעותי (כלומר הגל הנושא משנה את התדר שלו לפי המידע) ולכן
 צריך להשתמש בגילוי לא קוהרנטי אשר לא רגיש לפאזה!
 
+נראה איך הגזירה הופכת שינוי בתדר לשינוי במשרעת, ואיך גילוי המעטפת מחזיר את המידע. גלאי המעטפת כאן אידאלי; את השפעת מעגל ה־RC אפשר לבדוק בהדגמה בפרק AM.
+
+```{raw} html
+:file: ../LTI/interactives/runtime.html
+```
+
+```{raw} html
+:file: ../LTI/interactives/process-models.html
+```
+
+```{raw} html
+:file: ../LTI/interactives/process-lab.html
+```
+
+```{raw} html
+:file: interactives/fm-detector.html
+```
+
 ### רוחב סרט של אפנון PM
 נציין שהניתוח עבור אות כללי הוא מורכב אנליטית. ננסה לקחת אות פשוט 
 ולנתח אותו. ניקח:

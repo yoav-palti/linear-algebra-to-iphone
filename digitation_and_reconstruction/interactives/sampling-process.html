@@ -1,0 +1,29 @@
+<section id="sampling-process" class="course-interactive" aria-labelledby="sampling-process-title">
+  <h4 id="sampling-process-title">מהאות הרציף לדגימות ובחזרה</h4>
+  <p class="ci-status" role="status">טוענים את השרשרת…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+(() => {
+  const reconstruction=s=>s.method==="hold"?[[String.raw`y(t)=V_a\!\left(\frac{\lfloor f_st\rfloor}{f_s}\right)`]]:s.method==="linear"?[[String.raw`y(t)=(1-\alpha)V[n]+\alpha V[n+1]`],[String.raw`n=\lfloor f_st\rfloor,\quad\alpha=f_st-n`]]:[[String.raw`y(t)=\sum_{n=-\infty}^{\infty}V[n]\operatorname{sinc}(f_st-n)`],[String.raw`=\sum_j a_j\cos(2\pi f_{j,\mathrm{alias}}t)`,String.raw`f_{j,\mathrm{alias}}\in[-\frac{f_s}{2},\frac{f_s}{2})`]];
+  ProcessLab.mount("sampling-process",{
+    initial:{frequency:900,rate:2400,cutoff:1200,method:"sinc",message:"two",selection:"reconstruct"},model:ProcessModels.sampling,original:"original",frequencyTop:.8,limit:5,
+    diagram:{height:150},diagramLabel:"שרשרת דגימה ושחזור: מסנן נגד קיפול, דוגם ואינטרפולציה",
+    controls(c){c.select("message","אות הכניסה",[["tone","צליל יחיד בתדר שנבחר"],["two","תדר 250 Hz והתדר שנבחר"]]);c.control("frequency","תדר הצליל המשתנה",String.raw`f_2\;[\mathrm{Hz}]`,100,1800,50,0);c.select("rate","תדר הדגימה",[[1000,"1 kHz"],[1600,"1.6 kHz"],[2400,"2.4 kHz"],[4000,"4 kHz"]]);c.control("cutoff","מסנן נגד קיפול",String.raw`f_{\mathrm{cut}}\;[\mathrm{Hz}]`,200,2000,50,0);c.select("method","שיטת השחזור",[["sinc","sinc — שחזור אידאלי"],["hold","החזקה מסדר אפס"],["linear","אינטרפולציה לינארית"]]);},
+    presets:[["שחזור תקין",{frequency:900,rate:2400,cutoff:1200,method:"sinc"}],["קיפול תדרים",{frequency:900,rate:1000,cutoff:1200,method:"sinc"}],["הגנה לפני דגימה",{frequency:900,rate:1000,cutoff:400,method:"sinc"}],["החזקה מסדר אפס",{frequency:900,rate:2400,cutoff:1200,method:"hold"}]],
+    signals:{
+      original:{name:"האות הרציף המקורי",symbol:String.raw`V(t)`,equation:String.raw`V(t)=\sum_j a_j\cos(2\pi f_jt)`,note:"אות בדיקה שמורכב מצליל אחד או שניים. הסינון והדגימה פועלים על אותו אות."},
+      filtered:{name:"אחרי מסנן נגד קיפול",symbol:String.raw`V_a(t)`,equation:String.raw`V_a(t)=\sum_{f_j\le f_{\mathrm{cut}}}a_j\cos(2\pi f_jt)`,note:"המסנן האידאלי מסלק מראש רכיבים שלא רוצים לקפל. מידע שסולק כאן לא ישוחזר בהמשך."},
+      samples:{name:"הדגימות",symbol:String.raw`V[n]`,equation:String.raw`V[n]=V_a\!\left(\frac{n}{f_s}\right)=\sum_{f_j\le f_{\mathrm{cut}}}a_j\cos\left(2\pi\frac{f_j}{f_s}n\right)`,note:"בזמן מוצגות נקודות הדגימה בלבד. הספקטרום הוא DTFT מחזורי: מחוץ לתחום נייקוויסט רואים עותקים נוספים."},
+      recovered:{name:"האות המשוחזר",symbol:String.raw`y(t)`,equation:reconstruction,note:"sinc בוחר את העותק בבסיס הסרט. אחרי קיפול הוא משחזר אות שמתאים לדגימות, אך שונה מהכניסה המקורית."}
+    },
+    stages:[
+      {key:"antialias",name:"מסנן נגד קיפול",symbol:"lpf",input:"original",output:"filtered",equation:[[String.raw`V_a(t)=\operatorname{LPF}\{V(t)\}`],[String.raw`=\sum_{f_j\le f_{\mathrm{cut}}}a_j\cos(2\pi f_jt)`]],note:"כדי להבטיח שחזור צריך לסלק תדרים שמגיעים לגבול נייקוויסט או עוברים אותו. המסנן אינו יכול להחזיר מידע שסולק."},
+      {key:"sample",name:"דגימה",symbol:"sampler",input:"filtered",output:"samples",equation:[[String.raw`V[n]=V_a\!\left(\frac{n}{f_s}\right)`],[String.raw`=\sum_{f_j\le f_{\mathrm{cut}}}a_j\cos\left(2\pi\frac{f_j}{f_s}n\right)`]],note:"תדרים שהפרשם כפולה של תדר הדגימה נותנים אותן דגימות. ההדגמה אינה כוללת קוונטיזציה."},
+      {key:"reconstruct",name:"אינטרפולציה",symbol:"reconstruct",input:"samples",output:"recovered",equation:reconstruction,note:s=>s.method==="sinc"?"מוצג פתרון sinc האינסופי עבור צלילי הבדיקה, באמצעות קיפול מדויק לתחום נייקוויסט; אין חיתוך מלאכותי של סכום השחזור.":"משווים את הדגימות למדרגות או לקטעים לינאריים. גם בקצב דגימה תקין, האינטרפולציות הפשוטות משנות את צורת האות."}
+    ],
+    readout(data,s){const passed=(s.message==="tone"?[s.frequency]:[250,s.frequency]).filter(f=>f<=s.cutoff),alias=passed.some(f=>f>=Number(s.rate)/2);return !passed.length?"מסנן הכניסה סילק את כל רכיבי האות.":alias?"לפחות רכיב אחד מגיע לגבול נייקוויסט או עובר אותו: השחזור המקורי אינו מובטח.":"כל הרכיבים שנותרו אחרי המסנן נמוכים מתדר נייקוויסט; שחזור sinc מחזיר את האות המסונן.";},
+    note:"תדרים שלא עברו את מסנן הכניסה אינם חלק מהשחזור. בספקטרום הדגימות הוסרה יחידת תדר הדגימה לצורך השוואת משרעות; העותקים המחזוריים נשמרים."
+  });
+})();
+</script>

@@ -1,0 +1,26 @@
+<section id="fm-process" class="course-interactive" aria-labelledby="fm-process-title">
+  <h4 id="fm-process-title">מ־FM למידע: גזירה וגילוי מעטפת</h4>
+  <p class="ci-status" role="status">טוענים את הגלאי…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+ProcessLab.mount("fm-process",{
+  initial:{message:"two",deviation:600,selection:"differentiate"},model:ProcessModels.fm,original:"original",diagram:{height:150},
+  diagramLabel:"גלאי FM: גזירה בהגבר מוגדר, גילוי מעטפת והסרת היסט עם כיול הגבר",
+  controls(c){c.select("message","אות המידע",[["tone","צליל יחיד"],["two","שני צלילים"]]);c.control("deviation","סטיית התדר המרבית",String.raw`\Delta f\;[\mathrm{Hz}]`,100,1000,100,0);},
+  presets:[["סטייה קטנה",{deviation:100}],["סטייה בינונית",{deviation:600}],["סטייה גדולה",{deviation:1000}]],
+  signals:{
+    received:{name:"אות FM",symbol:String.raw`r(t)`,equation:[[String.raw`r(t)=\cos\phi(t)`],[String.raw`\phi(t)=\omega_0t+2\pi\Delta f\int_0^t f(\tau)\,d\tau`]],note:"המידע משנה את התדר הרגעי, בעוד המשרעת של אות ה־FM נשארת קבועה."},
+    differentiated:{name:"האות לאחר גזירה",symbol:String.raw`u(t)`,equation:String.raw`u(t)=\frac{r'(t)}{\omega_0}=-\left(1+\frac{\Delta f}{f_0}f(t)\right)\sin\phi(t)`,note:"אחרי גזירה המידע מופיע גם במשרעת. חלוקה בתדר הנושא הזוויתי היא הגבר קבוע ומוצהר של המגזר."},
+    detected:{name:"מעטפת הנגזרת",symbol:String.raw`e(t)`,equation:String.raw`e(t)=1+\frac{\Delta f}{f_0}f(t)`,note:"מוצג גלאי מעטפת אידאלי שעוקב אחרי משרעת הנגזרת. בכל טווח הבקרה התדר הרגעי חיובי."},
+    recovered:{name:"המידע המשוחזר",symbol:String.raw`y(t)`,equation:String.raw`y(t)=\frac{f_0}{\Delta f}[e(t)-1]=f(t)`,note:"מסירים את ההיסט ומכיילים בהגבר הידוע, ולכן מתקבל אות המידע המקורי."},
+    original:{name:"אות המידע",symbol:String.raw`f(t)`}
+  },
+  stages:[
+    {key:"differentiate",name:"מגזר בהגבר קבוע",symbol:"derivative",input:"received",output:"differentiated",equation:[[String.raw`u(t)=\frac{1}{\omega_0}\frac{d}{dt}\cos\phi(t)`],[String.raw`=-\left(1+\frac{\Delta f}{f_0}f(t)\right)\sin\phi(t)`]],note:"התדר הרגעי הופך למעטפת: תנודות צפופות יותר בכניסה יוצרות שיאים גבוהים יותר במוצא."},
+    {key:"detect",name:"גלאי מעטפת אידאלי",symbol:"envelope",input:"differentiated",output:"detected",equation:[[String.raw`e(t)=\left|1+\frac{\Delta f}{f_0}f(t)\right|`],[String.raw`=1+\frac{\Delta f}{f_0}f(t)\quad\text{since }\Delta f<f_0,\;|f(t)|\le1`]],note:"הגלאי האידאלי מסלק את התנודות המהירות ועוקב אחרי המשרעת. כאן מדגימים את העיקרון, בלי אדוות RC."},
+    {key:"calibrate",name:"הסרת היסט וכיול",symbol:"dc",input:"detected",output:"recovered",equation:String.raw`y(t)=\frac{f_0}{\Delta f}\left[1+\frac{\Delta f}{f_0}f(t)-1\right]=f(t)`,note:"זהו הגבר מכוון של המקלט, ולא נרמול אוטומטי של הגרף. אפשר להשוות בהאזנה למידע המקורי."}
+  ],
+  note:"תדר הנושא קבוע, שלושה קילוהרץ. סטיית תדר גדולה יותר מייצרת יותר פסי צד, למרות המשרעת הקבועה."
+});
+</script>

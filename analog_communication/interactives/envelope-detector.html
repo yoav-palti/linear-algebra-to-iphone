@@ -1,0 +1,26 @@
+<section id="envelope-process" class="course-interactive" aria-labelledby="envelope-process-title">
+  <h4 id="envelope-process-title">בתוך גלאי מעטפת: דיודה ו־RC</h4>
+  <p class="ci-status" role="status">טוענים את הגלאי…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+ProcessLab.mount("envelope-process",{
+  initial:{message:"two",depth:.6,tau:.45,selection:"hold"},model:ProcessModels.amEnvelope,original:"original",
+  diagramLabel:"גלאי מעטפת: יישור בדיודה, טעינה ופריקה במעגל RC והסרת רכיב קבוע",diagram:{height:150},
+  controls(c){c.select("message","אות המידע",[["tone","צליל יחיד"],["two","שני צלילים"]]);c.control("depth","עומק האפנון",String.raw`m`,.2,1.2,.1,1);c.control("tau","קבוע הזמן",String.raw`\tau=RC\;[\mathrm{ms}]`,.05,3,.05,2);},
+  presets:[["מעקב מעטפת",{tau:.45,depth:.6}],["אדווה חזקה",{tau:.05,depth:.6}],["פריקה אטית מדי",{tau:3,depth:.6}],["אפנון יתר",{tau:.45,depth:1.2}]],
+  signals:{
+    received:{name:"האות הנקלט",symbol:String.raw`r(t)`,equation:String.raw`r(t)=A(t)\cos(\omega_0t),\quad A(t)=1+mf(t)`,note:"המעטפת כוללת את המידע ואת ההיסט הקבוע. הגל הנושא קבוע בכל המצבים."},
+    rectified:{name:"אחרי הדיודה",symbol:String.raw`d(t)`,equation:String.raw`d(t)=\max\{0,[1+mf(t)]\cos(\omega_0t)\}`,note:"דיודה אידאלית מעבירה רק את החלק החיובי. זו נקודת ביניים מושגית לפני מנגנון אגירת המטען."},
+    held:{name:"מתח הקבל",symbol:String.raw`v_C(t)`,equation:[[String.raw`v_C[k]=\max\{d[k],e^{-\frac{\Delta t}{RC}}v_C[k-1]\}`],[String.raw`\approx |1+mf(t)|\quad\text{(ideal envelope)}`]],note:"בכל שיא הקבל נטען; בין השיאים הוא נפרק. קבוע זמן קצר משאיר אדווה, וקבוע זמן ארוך מדי מתקשה לעקוב אחרי הירידה במעטפת."},
+    recovered:{name:"המוצא ללא DC",symbol:String.raw`y(t)`,equation:[[String.raw`y(t)=v_C(t)-\langle v_C\rangle`],[String.raw`\approx mf(t)\quad\text{if }1+mf(t)>0`]],note:"הסרת הממוצע מסלקת את ההיסט, אך אינה מתקנת אדווה, פריקה אטית או אפנון יתר."},
+    original:{name:"אות המידע",symbol:String.raw`f(t)`}
+  },
+  stages:[
+    {key:"diode",name:"יישור בדיודה",symbol:"diode",input:"received",output:"rectified",equation:String.raw`d(t)=\max\{0,A(t)\cos(\omega_0t)\}`,note:"החלק השלילי נחסם. עדיין רואים תנודות מהירות, ולכן צריך גם אגירת מטען."},
+    {key:"hold",name:"טעינה ופריקה — RC",symbol:"rc",input:"rectified",output:"held",equation:[[String.raw`v_C[k]=\max\{d[k],e^{-\frac{\Delta t}{RC}}v_C[k-1]\}`],[String.raw`d[k]=\max\{0,[1+mf(k\Delta t)]\cos(\omega_0k\Delta t)\}`]],note:"זהו קירוב בזמן בדיד לדיודה אידאלית עם טעינה מיידית ופריקה מעריכית. משנים את RC כדי לראות את הפשרה בין אדווה למעקב מעטפת."},
+    {key:"remove",name:"הסרת רכיב קבוע",symbol:"dc",input:"held",output:"recovered",equation:[[String.raw`y(t)=v_C(t)-\langle v_C\rangle`],[String.raw`\approx [1+mf(t)]-1=mf(t)`]],note:"רק בגילוי מעטפת טוב וללא אפנון יתר המוצא בקירוב פרופורציוני למידע."}
+  ],
+  note:"תדר הנושא 4 kHz. באפנון יתר הגלאי עוקב אחרי הערך המוחלט של המעטפת, ולכן הסימן המקורי אובד."
+});
+</script>

@@ -1,0 +1,27 @@
+<section id="matched-process" class="course-interactive" aria-labelledby="matched-process-title">
+  <h4 id="matched-process-title">מוצאים פולס בתוך רעש</h4>
+  <p class="ci-status" role="status">טוענים את הגלאי…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+ProcessLab.mount("matched-process",{
+  initial:{noise:.3,arrival:60,threshold:.5,present:"yes",shape:"biphasic",seed:17,selection:"match"},model:ProcessModels.matched,
+  window:160,limit:4,frequencyTop:.4,audio:false,thresholdSignal:"correlated",diagram:{height:150},
+  diagramLabel:"שרשרת גילוי: הוספת רעש, מסנן מתואם וסף החלטה",
+  controls(c){c.select("shape","תבנית הפולס",[["biphasic","חצי חיובי וחצי שלילי"],["rect","פולס מלבני"]]);c.select("present","מה שודר",[["yes","פולס ורעש"],["no","רעש בלבד"]]);c.control("noise","סטיית תקן של הרעש",String.raw`\sigma`,0,.6,.05,2);c.control("arrival","זמן הגעת הפולס",String.raw`t_0\;[\mathrm{ms}]`,20,100,5,0);c.control("threshold","סף החלטה",String.raw`\gamma`,.1,1.2,.05,2);c.button("מימוש רעש נוסף",()=>{c.state.seed++;});},
+  presets:[["פולס נקי",{noise:0,present:"yes",threshold:.5}],["פולס ברעש",{noise:.6,present:"yes",threshold:.5}],["רעש בלבד",{noise:.6,present:"no",threshold:.1}],["סף גבוה מדי",{noise:.3,present:"yes",threshold:1.2}]],
+  signals:{
+    clean:{name:"הפולס ששודר",symbol:String.raw`s[n-n_0]`,equation:String.raw`x[n]=s[n-n_0]\quad(\mathcal H_1),\qquad x[n]=0\quad(\mathcal H_0)`,note:"הפולס ידוע, אך מועד ההגעה אינו ידוע למקלט. שינוי התבנית מעדכן גם את המסנן המתואם."},
+    received:{name:"האות ברעש",symbol:String.raw`r[n]`,equation:String.raw`r[n]=x[n]+\xi[n],\quad\xi[n]\sim\mathcal N(0,\sigma^2)`,note:"רעש גאוסייני לבן בדגימות. המימוש נשאר זהה כשמשנים את הסף או את זמן ההגעה, כדי לאפשר השוואה."},
+    correlated:{name:"מוצא המסנן המתואם",symbol:String.raw`v[n]`,equation:[[String.raw`v[n]=\frac{1}{E_s}\sum_{k=0}^{L-1}r[n-k]s[L-1-k]`],[String.raw`E_s=\sum_{k=0}^{L-1}s^2[k]`]],note:"התבנית הופכת בזמן כדי לקבל קונבולוציה סיבתית. השיא מתאחר באורך הפולס פחות דגימה אחת."},
+    decision:{name:"החלטת הסף",symbol:String.raw`d[n]`,equation:String.raw`d[n]=\mathbf1_{\{v[n]>\gamma\}}`,note:"1 פירושו חציית סף, ולא שחזור של צורת הפולס. מעלים את הסף כדי להפחית התרעות שווא, במחיר של החמצות."}
+  },
+  stages:[
+    {key:"channel",name:"ערוץ עם רעש",symbol:"noise",input:"clean",output:"received",equation:String.raw`r[n]=s[n-n_0]+\xi[n]\quad(\mathcal H_1)`,note:"הרעש מתווסף לאות. בכל שינוי פרמטר נשמר אותו מימוש; הכפתור המיועד מייצר מימוש נוסף."},
+    {key:"match",name:"מסנן מתואם",symbol:"matched",input:"received",output:"correlated",equation:[[String.raw`h[k]=\frac{s[L-1-k]}{E_s},\quad v[n]=(r*h)[n]`],[String.raw`=\frac{1}{E_s}\sum_{k=0}^{L-1}[x[n-k]+\xi[n-k]]s[L-1-k]`]],note:"הנרמול באנרגיית התבנית הוא חלק מהמסנן ומעמיד את השיא הנקי על 1. סקאלות הגרפים נשארות קבועות."},
+    {key:"decide",name:"השוואה לסף",symbol:"threshold",input:"correlated",output:"decision",equation:[[String.raw`d[n]=\begin{cases}1&v[n]>\gamma\\0&v[n]\le\gamma\end{cases}`],[String.raw`v[n]=\frac{1}{E_s}\sum_{k=0}^{L-1}r[n-k]s[L-1-k]`]],note:"הקו האופקי הוא סף ההחלטה. במצב רעש בלבד סף נמוך עלול ליצור חציות שווא; מימוש אחד אינו מדידת הסתברות גילוי."}
+  ],
+  readout(data,s){let index=0;for(let i=1;i<=1280;i++)if(data.correlated.values[i]>data.correlated.values[index])index=i;const peak=data.correlated.values[index],time=index/data.correlated.rate*1000,estimate=time-159/8;return (peak>s.threshold?"נמצאה חציית סף. ":"לא נמצאה חציית סף. ")+"שיא המסנן בחלון המוצג: "+peak.toFixed(2)+", בזמן "+time.toFixed(1)+" מילישניות; זמן ההגעה המשוער לאחר תיקון השהיה: "+estimate.toFixed(1)+" מילישניות.";},
+  note:"מודל בדיד בקצב 8 kHz, עם פולס באורך 160 דגימות (20 מילישניות). הקווים מחברים דגימות לנוחות הקריאה. ספקטרום הרעש הוא של מימוש סופי, ולא צפיפות ההספק התיאורטית של רעש לבן."
+});
+</script>

@@ -1,0 +1,135 @@
+<script>
+/* Shared numerical models. Signal amplitudes are never rescaled to fit a plot. */
+window.ProcessModels = (() => {
+  "use strict";
+  const TAU=2*Math.PI, RATE=25600, COUNT=4096;
+  const signal=(fn,rate=RATE,count=COUNT)=>({values:Float64Array.from({length:count},(_,i)=>fn(i/rate)),rate,periodic:true});
+  const like=(s,values,extra={})=>({...s,values:Float64Array.from(values),...extra});
+  const map=(s,fn)=>like(s,s.values.map((v,i)=>fn(v,i/s.rate,i)));
+  function fft(re,im,inverse=false) {
+    const n=re.length;
+    if(n<2 || (n&(n-1)))throw new Error("FFT requires a power of two");
+    for(let i=1,j=0;i<n;i++){
+      let bit=n>>1;for(;j&bit;bit>>=1)j^=bit;j^=bit;
+      if(i<j){[re[i],re[j]]=[re[j],re[i]];[im[i],im[j]]=[im[j],im[i]];}
+    }
+    for(let size=2;size<=n;size*=2){
+      const angle=(inverse?1:-1)*TAU/size,cr=Math.cos(angle),ci=Math.sin(angle);
+      for(let start=0;start<n;start+=size){
+        let wr=1,wi=0;
+        for(let j=0;j<size/2;j++){
+          const a=start+j,b=a+size/2,tr=wr*re[b]-wi*im[b],ti=wr*im[b]+wi*re[b];
+          re[b]=re[a]-tr;im[b]=im[a]-ti;re[a]+=tr;im[a]+=ti;
+          const next=wr*cr-wi*ci;wi=wr*ci+wi*cr;wr=next;
+        }
+      }
+    }
+    if(inverse)for(let i=0;i<n;i++){re[i]/=n;im[i]/=n;}
+  }
+  function filter(s,pass) {
+    const re=s.values.slice(),im=new Float64Array(re.length);fft(re,im);
+    for(let i=0;i<re.length;i++)if(!pass(Math.abs((i<=re.length/2?i:i-re.length)*s.rate/re.length))){re[i]=0;im[i]=0;}
+    fft(re,im,true);return like(s,re);
+  }
+  const lowpass=(s,cutoff)=>filter(s,f=>f<=cutoff+1e-8);
+  const dc=s=>{const mean=s.values.reduce((a,b)=>a+b,0)/s.values.length;return map(s,v=>v-mean);};
+  function envelope(s) {
+    const re=s.values.slice(),im=new Float64Array(re.length);fft(re,im);
+    for(let i=1;i<re.length;i++){const gain=i<re.length/2?2:i===re.length/2?1:0;re[i]*=gain;im[i]*=gain;}
+    fft(re,im,true);return like(s,re.map((v,i)=>Math.hypot(v,im[i])));
+  }
+  const message=(kind,t)=>kind==="two"?.6*Math.cos(TAU*250*t)+.4*Math.cos(TAU*375*t):Math.cos(TAU*250*t);
+  function diode(s,tau) {
+    const decay=Math.exp(-1/(s.rate*tau));let held=0;const out=new Float64Array(s.values.length);
+    // Warm up the periodic RC circuit; do not display a fictitious startup transient.
+    for(let cycle=0;cycle<3;cycle++)for(let i=0;i<out.length;i++){held=Math.max(0,s.values[i],held*decay);out[i]=held;}
+    return like(s,out);
+  }
+  function amEnvelope({message:kind="two",depth=.6,tau=.45}={}) {
+    const original=signal(t=>message(kind,t)),received=map(original,(v,t)=>(1+depth*v)*Math.cos(TAU*4000*t));
+    const rectified=map(received,v=>Math.max(0,v)),held=diode(received,tau/1000);
+    return {original,received,rectified,held,recovered:dc(held)};
+  }
+  function heterodyne({lo=1200,width=450}={}) {
+    const received=signal(t=>(1+.6*Math.cos(TAU*250*t))*Math.cos(TAU*2400*t)+.4*(1+.5*Math.cos(TAU*375*t))*Math.cos(TAU*3400*t));
+    const oscillator=signal(t=>Math.cos(TAU*lo*t)),mixed=map(received,(v,t)=>v*Math.cos(TAU*lo*t));
+    const intermediate=filter(mixed,f=>Math.abs(f-1200)<=width+1e-8),detected=envelope(intermediate);
+    return {received,rf:received,oscillator,mixed,intermediate,detected,recovered:dc(detected)};
+  }
+  function fm({deviation=600,message:kind="tone"}={}) {
+    const original=signal(t=>message(kind,t));
+    const integral=t=>kind==="two"?.6*Math.sin(TAU*250*t)/(TAU*250)+.4*Math.sin(TAU*375*t)/(TAU*375):Math.sin(TAU*250*t)/(TAU*250);
+    const phase=t=>TAU*3000*t+TAU*deviation*integral(t);
+    const received=signal(t=>Math.cos(phase(t)));
+    // Differentiator gain 1/omega_0 is explicit in the illustration.
+    const differentiated=signal(t=>-(1+deviation/3000*message(kind,t))*Math.sin(phase(t)));
+    const detected=signal(t=>1+deviation/3000*message(kind,t));
+    return {original,received,differentiated,detected,recovered:map(detected,v=>(v-1)*3000/deviation)};
+  }
+  function iq({phase=0,cutoff=650,input="both"}={}) {
+    const theta=phase*Math.PI/180;
+    const i=signal(t=>input==="q"?0:.75*Math.cos(TAU*250*t)),q=signal(t=>input==="i"?0:.55*Math.sin(TAU*375*t));
+    const received=map(i,(v,t,n)=>v*Math.cos(TAU*2400*t)-q.values[n]*Math.sin(TAU*2400*t));
+    const oscillator=signal(t=>2*Math.cos(TAU*2400*t+theta)),quadrature=signal(t=>-2*Math.sin(TAU*2400*t+theta));
+    const mixI=map(received,(v,t,n)=>v*oscillator.values[n]),mixQ=map(received,(v,t,n)=>v*quadrature.values[n]);
+    return {i,q,received,oscillator,quadrature,mixI,mixQ,outI:lowpass(mixI,cutoff),outQ:lowpass(mixQ,cutoff)};
+  }
+  const alias=(frequency,rate)=>((frequency+rate/2)%rate+rate)%rate-rate/2;
+  function sampling({frequency=900,rate=2400,cutoff=1200,method="sinc",message:kind="two"}={}) {
+    rate=Number(rate);
+    const terms=kind==="tone"?[[frequency,.8]]:[[250,.5],[frequency,.4]];
+    const passed=terms.filter(([f])=>f<=cutoff);
+    const evaluate=(components,t)=>components.reduce((v,[f,a])=>v+a*Math.cos(TAU*f*t),0);
+    const original=signal(t=>evaluate(terms,t)),filtered=signal(t=>evaluate(passed,t));
+    const samples=signal(t=>evaluate(passed,t),rate,Math.ceil(.16*rate));samples.discrete=true;
+    const recovered=signal(t=>{
+      if(method==="sinc")return evaluate(passed.map(([f,a])=>[alias(f,rate),a]),t);
+      const n=Math.floor(t*rate+1e-9),left=evaluate(passed,n/rate);
+      return method==="hold"?left:left+(t*rate-n)*(evaluate(passed,(n+1)/rate)-left);
+    });
+    return {original,filtered,samples,recovered};
+  }
+  function gaussian(seed,count) {
+    let x=(seed>>>0)||1;
+    const uniform=()=>{x^=x<<13;x^=x>>>17;x^=x<<5;return ((x>>>0)+1)/4294967297;};
+    return Float64Array.from({length:count},()=>Math.sqrt(-2*Math.log(uniform()))*Math.cos(TAU*uniform()));
+  }
+  function matched({noise=.3,arrival=60,threshold=.5,present="yes",shape="biphasic",seed=17}={}) {
+    const rate=8000,n=2048,length=160,start=Math.round(arrival*rate/1000);
+    const template=Float64Array.from({length},(_,i)=>shape==="rect"||i<length/2?1:-1);
+    const clean=signal((t)=>{const i=Math.round(t*rate)-start;return present==="yes"&&i>=0&&i<length?template[i]:0;},rate,n);clean.periodic=false;
+    const realization=gaussian(seed,n),received=map(clean,(v,t,i)=>v+noise*realization[i]);
+    const values=new Float64Array(n);
+    for(let i=0;i<n;i++)for(let j=0;j<length&&j<=i;j++)values[i]+=received.values[i-j]*template[length-1-j]/length;
+    const correlated=like(received,values),decision=map(correlated,v=>v>threshold?1:0);
+    return {clean,received,correlated,decision};
+  }
+  function valueAt(s,index) {
+    return s.periodic?s.values[((index%s.values.length)+s.values.length)%s.values.length]:(s.values[index]||0);
+  }
+  function timeData(s,startMs=0,durationMs=20) {
+    const first=Math.ceil(startMs*s.rate/1000-1e-8),last=Math.floor((startMs+durationMs)*s.rate/1000+1e-8),x=[],y=[];
+    for(let i=first;i<=last;i++){x.push(i/s.rate*1000-startMs);y.push(valueAt(s,i));}return {x,y};
+  }
+  function spectrum(s,startMs=0,durationMs=20,limit=5.5) {
+    const start=startMs/1000,duration=durationMs/1000;
+    if(s.discrete){
+      const samples=timeData(s,startMs,durationMs),x=[],y=[];
+      const weights=samples.x.map(t=>.5-.5*Math.cos(TAU*t/durationMs)),sum=weights.reduce((a,b)=>a+b,0)||1;
+      // Evaluate the continuous DTFT, including replicas outside the Nyquist interval.
+      const re=new Float64Array(2049),im=new Float64Array(2049),step=2*limit*1000/2048;
+      for(let j=0;j<samples.x.length;j++){
+        const t=samples.x[j]/1000,a=samples.y[j]*weights[j]/sum,angle=TAU*limit*1000*t,d=TAU*step*t,cr=Math.cos(d),ci=-Math.sin(d);
+        let wr=Math.cos(angle),wi=Math.sin(angle);
+        for(let k=0;k<re.length;k++){re[k]+=a*wr;im[k]+=a*wi;const next=wr*cr-wi*ci;wi=wr*ci+wi*cr;wr=next;}
+      }
+      for(let k=0;k<re.length;k++){x.push(-limit+2*limit*k/2048);y.push(Math.hypot(re[k],im[k]));}return {x,y};
+    }
+    const size=8192,re=new Float64Array(size),im=new Float64Array(size),count=Math.round(duration*s.rate);let area=0;
+    for(let i=0;i<count;i++){const w=.5-.5*Math.cos(TAU*i/count);re[i]=valueAt(s,Math.round(start*s.rate)+i)*w;area+=w;}
+    fft(re,im);const max=Math.min(size/2,Math.floor(limit*1000*size/s.rate)),x=[],y=[];
+    for(let k=-max;k<=max;k++){const j=(k+size)%size;x.push(k*s.rate/size/1000);y.push(Math.hypot(re[j],im[j])/area);}return {x,y};
+  }
+  return {signal,map,fft,lowpass,dc,envelope,diode,amEnvelope,heterodyne,fm,iq,sampling,matched,alias,timeData,spectrum,valueAt};
+})();
+</script>

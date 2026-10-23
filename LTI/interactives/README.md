@@ -27,3 +27,24 @@ node --test LTI/interactives/tests/models.test.cjs
 ```
 
 For browser verification, build the affected chapters with notebook execution disabled in a separate preview configuration. Inspect dropdowns after opening, presets, slider extremes, playback, fixed scales and phone width. A fresh build or touching the containing Markdown ensures edited raw HTML includes are re-read by incremental page builds.
+
+## Clickable process diagrams
+
+The coherent AM receiver remains the original reference. Six additional explorations share `process-models.html` (pure numerical models) and `process-lab.html` (accessible SVG components, coordinated JSXGraph plots, MathJax, legend and playback). Include those two fragments after `runtime.html`, once per page, before the chapter-local fragments.
+
+| Chapter | Chapter-local fragment | Main comparison |
+| --- | --- | --- |
+| AM | `analog_communication/interactives/envelope-detector.html` | Diode, RC peak tracking, DC removal; ripple versus envelope distortion |
+| AM | `analog_communication/interactives/heterodyne.html` | Two stations, tunable LO, fixed IF, ideal envelope detection |
+| PM/FM | `analog_communication/interactives/fm-detector.html` | Explicitly scaled differentiation, ideal envelope, calibrated message recovery |
+| Linear modulations | `digital_communication/interactives/iq-receiver.html` | Parallel I/Q mixers and filters, LO quadrature, phase crosstalk |
+| Interpolation | `digitation_and_reconstruction/interactives/sampling-process.html` | Antialias filtering, discrete samples, sinc/hold/linear reconstruction |
+| Detection | `noise/interactives/matched-detector.html` | Seeded sampled Gaussian noise, causal energy-normalized matched filter, threshold |
+
+Models return named real signals with `values`, `rate`, and `periodic`. `discrete` enables sample markers and a continuous periodic DTFT, including spectral replicas. Other spectra use a zero-padded FFT of the same Hann-windowed time segment, divided by the window area. This shared scale preserves amplitude differences; it is not the chapter's unwindowed symmetric Fourier transform. The sampling demo uses the exact infinite-sinc result for sinusoidal inputs, computed by folding each frequency into the Nyquist interval. Sample playback uses a zero-order hold. Audio in the communication and sampling demos uses fixed gain 0.12; the detection demo has no audio.
+
+The RC detector uses a discrete peak/decay recurrence with periodic warm-up, not the analytic-envelope model used in the IF and FM explorations. The matched filter uses a 160-sample real template at 8 kHz and explicitly accounts for its 159-sample causal delay. Changing its threshold does not generate a new noise realization.
+
+```powershell
+node --test LTI/interactives/tests/processes.test.cjs analog_communication/interactives/tests/coherent-am.test.cjs
+```

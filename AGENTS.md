@@ -58,9 +58,23 @@ Most student-facing content lives in Markdown (`.md`) and notebooks (`.ipynb`). 
   $$\omega_D=\sqrt{\frac{k}{m}-\frac{\gamma^2}{2m^2}}$$
 
   Here $\omega_0$ is the natural frequency and $\omega_D$ is the positive-frequency maximum of the displacement-response magnitude, when such a peak exists. Do not substitute the damped free-oscillation frequency for this maximum.
-- Label the half-height level on the magnitude axis with $\frac{|\tilde{H}(\omega_D)|}{2}$ and mark the corresponding horizontal width with $\Delta\omega$. Keep half-amplitude width distinct from half-power bandwidth.
+- In the microphone frequency-response illustration, measure the bandwidth at $\frac{|\tilde{H}(\omega_D)|}{\sqrt{2}}$ (half power), as in the later notes, and mark its horizontal width with $\Delta\omega$. Keep half-amplitude width distinct from half-power bandwidth.
 - Hide peak or bandwidth annotations when the corresponding quantity does not exist, and show a concise unavailable state in the numerical measurement. Do not display invalid square roots or misleading markers.
 - Preserve transparent backgrounds and fixed scales when adding math rendering. Wait for MathJax to be ready before creating typeset graph labels.
+
+### Clickable process illustrations
+
+- Use the coherent AM receiver in `analog_communication/interactives/coherent-am.html` as the interaction reference: an actual block diagram with recognizable component symbols (mixer cross, VCO sine, filter response, diode, sampler, etc.), rather than a row of generic text buttons or a static image.
+- Make both components and signal checkpoints clickable and keyboard accessible. A component selects its input and output for comparison; a checkpoint selects that signal alone. Use exactly two coordinated plots: time and frequency.
+- Give every intermediate signal a stable color. Use that color for its wire/checkpoint, producing component symbol, mathematical label, legend entry, and curves in both plots. Keep labels transparent.
+- Provide a clickable legend that independently hides or restores each signal in both plots when curves overlap. Preserve the physical gain and fixed axis scales when hiding curves or changing parameters; do not normalize signals individually.
+- Draw frequency spectra as continuous functions, showing both positive and negative frequencies. For finite observation windows, identify the windowed spectrum and its scaling. Represent discrete samples as samples; do not imply that they are continuous analog waveforms.
+- Keep the illustration compact vertically. Put the collapsible signal/parameter selector immediately above the plots and leave it closed by default. Keep time-position and playback controls near the plots they affect. Avoid decorative laboratory labels and unnecessary scrollbars; wrap long equations into readable rows.
+- Explain each selected stage with a short Hebrew sentence and rendered equations that expand the result in terms of the input signal. Do not stop at an opaque operator such as `v(t)=LPF{u(t)}`. Include assumptions and retain the filter operator when the simplified result is no longer valid (for example, a cutoff that removes part of the message).
+- Follow the chapter's notation. For AM, use $r(t)=A(t)\cos(\omega_0t+\phi_0)$ and explicitly show the mixer sum/difference terms and LO phase. Use $\mathrm{rad/sec}$ for angular-frequency units and the terms `צר סרט` / `רחב סרט`.
+- Where listening teaches the signal transformation, choose an audible default input and offer explicit play/stop controls for the selected signals. Generate sound from the same model as the plots, retain relative amplitude differences with a fixed playback gain, avoid autoplay, and stop old playback when the selection or parameters change.
+- Use meaningful presets (correct operation and a revealing failure case), not extra controls that duplicate an axis. Show numerical approximations honestly: distinguish an ideal envelope/filter from a simulated diode/RC circuit, and label finite-width approximations to impulses.
+- Preserve existing circuit drawings and derivations when adding a process exploration. Extend other course sections only when the user's scope authorizes it; a prototype alone does not authorize a course-wide replacement.
 
 ### Verification
 

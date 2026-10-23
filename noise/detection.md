@@ -182,6 +182,24 @@ $$r_{match}\left(t\right)=\intop_{-\infty}^{\infty}r\left(\tau\right)\cdot s^{\a
 
 כלומר פשוט מעבירים את הסיגנל דרך פילטר של $h\left(t\right)=s\left(-t\right)$ ואז מחפשים את המקסימום באות.
 
+נראה את התהליך על פולס ידוע עם זמן הגעה משתנה. המסנן המתואם בהדגמה סיבתי ומנורמל באנרגיית התבנית: השיא הנקי הוא 1, וזמן השיא כולל את השהיית המסנן. אחרי המסנן נוסיף סף החלטה, כדי להבדיל בין שיא לבין גילוי בפועל.
+
+```{raw} html
+:file: ../LTI/interactives/runtime.html
+```
+
+```{raw} html
+:file: ../LTI/interactives/process-models.html
+```
+
+```{raw} html
+:file: ../LTI/interactives/process-lab.html
+```
+
+```{raw} html
+:file: interactives/matched-detector.html
+```
+
 מה האות שמתקבל?
 אז האמת שאנחנו כבר יודעים את התשובה. ניתן לחזור על אותם החישובים אבל הפעם עם אינטגרלים וסינון רעשים במקום חישובים של תוחלת ושונות.
 

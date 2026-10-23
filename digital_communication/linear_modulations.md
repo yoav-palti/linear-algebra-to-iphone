@@ -211,7 +211,24 @@ $z\left(t\right)=I\left(t\right)+iQ\left(t\right)$ בתדר הנושא $\omega_{
 ומה בקליטה? למה לנו בכלל לדבר על האות המרוכב? נחזור להסתכל על המקלט הקוהרנטי שלנו 
 אבל הפעם נוסיף לו עוד ערוץ:
 
-![coherent_IQ_reciver.png](images/coherent_IQ_reciver.png)
+בהדגמה נשתמש בשני צלילי בדיקה שונים עבור $I(t)$ ו־$Q(t)$, כדי להבחין בין הערוצים לפני שעוברים לרצפי סמלים. אפשר לבחור כל מיקסר ומסנן בנפרד, ולבדוק מה שגיאת פאזה עושה להפרדה.
+
+```{raw} html
+:file: ../LTI/interactives/runtime.html
+```
+
+```{raw} html
+:file: ../LTI/interactives/process-models.html
+```
+
+```{raw} html
+:file: ../LTI/interactives/process-lab.html
+```
+
+```{raw} html
+:file: interactives/iq-receiver.html
+```
+
 כלומר אנחנו מקבלים שני פלטים אחד של $I\left(t\right)$ והשני של $Q\left(t\right)$
 
 ```{admonition} IQ:

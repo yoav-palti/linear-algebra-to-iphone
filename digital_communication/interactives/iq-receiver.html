@@ -1,0 +1,45 @@
+<section id="iq-process" class="course-interactive" aria-labelledby="iq-process-title">
+  <h4 id="iq-process-title">שני ערוצים במקלט I/Q</h4>
+  <p class="ci-status" role="status">טוענים את המקלט…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+(() => {
+  const iFormula=s=>s.cutoff>=375?[[String.raw`\hat I(t)=\operatorname{LPF}\{2r(t)\cos(\omega_0t+\theta)\}`],[String.raw`=I(t)\cos\theta+Q(t)\sin\theta`]]:[[String.raw`\hat I(t)=\operatorname{LPF}\{I(t)\cos\theta+Q(t)\sin\theta\}`]];
+  const qFormula=s=>s.cutoff>=375?[[String.raw`\hat Q(t)=\operatorname{LPF}\{-2r(t)\sin(\omega_0t+\theta)\}`],[String.raw`=-I(t)\sin\theta+Q(t)\cos\theta`]]:[[String.raw`\hat Q(t)=\operatorname{LPF}\{-I(t)\sin\theta+Q(t)\cos\theta\}`]];
+  ProcessLab.mount("iq-process",{
+    initial:{input:"both",phase:0,cutoff:650,selection:"filter-i"},model:ProcessModels.iq,frequencyTop:1.2,
+    diagramLabel:"מקלט I/Q: אות משותף מתפצל לשני מיקסרים ושני מסננים, עם מתנד מקומי והסטת פאזה של רבע מחזור",
+    controls(c){c.select("input","ערוצי המידע",[["both","שני הערוצים"],["i","ערוץ I בלבד"],["q","ערוץ Q בלבד"]]);c.control("phase","שגיאת פאזה במתנד",String.raw`\theta=\hat\phi_0-\phi_0\;[{}^\circ]`,-90,90,15,0);c.control("cutoff","תדר החיתוך",String.raw`f_{\mathrm{cut}}\;[\mathrm{Hz}]`,100,800,25,0);},
+    presets:[["סנכרון מלא",{phase:0,cutoff:650,input:"both"}],["ערבוב בין ערוצים",{phase:45,cutoff:650,input:"both"}],["רבע מחזור",{phase:90,cutoff:650,input:"both"}],["חיתוך ערוץ Q",{phase:0,cutoff:300,input:"both"}]],
+    signals:{
+      received:{name:"האות הנקלט",symbol:String.raw`r(t)`,equation:String.raw`r(t)=I(t)\cos(\omega_0t)-Q(t)\sin(\omega_0t)`,note:"לשני הערוצים תדר נושא אחד. כאן לכל ערוץ צליל שונה כדי שאפשר יהיה לראות ולשמוע הפרדה וערבוב."},
+      mixI:{name:"מוצא מיקסר I",symbol:String.raw`u_I(t)`,equation:[[String.raw`u_I(t)=2[I(t)\cos(\omega_0t)-Q(t)\sin(\omega_0t)]`],[String.raw`\cdot\cos(\omega_0t+\theta)`]],note:"כפל בקוסינוס מוריד את רכיב I לבסיס הסרט ומייצר גם רכיב בתדר כפול."},
+      outI:{name:"המוצא בערוץ I",symbol:String.raw`\hat I(t)`,equation:iFormula,note:"בסנכרון ובמסנן רחב מספיק מתקבל ערוץ I. שגיאת פאזה מכניסה גם את ערוץ Q."},
+      mixQ:{name:"מוצא מיקסר Q",symbol:String.raw`u_Q(t)`,equation:[[String.raw`u_Q(t)=-2[I(t)\cos(\omega_0t)-Q(t)\sin(\omega_0t)]`],[String.raw`\cdot\sin(\omega_0t+\theta)`]],note:"הענף השני משתמש במינוס סינוס, בהתאם לסימן שנבחר בנוסחת השידור."},
+      outQ:{name:"המוצא בערוץ Q",symbol:String.raw`\hat Q(t)`,equation:qFormula,note:"בסנכרון ובמסנן רחב מספיק מתקבל ערוץ Q. עם שגיאת פאזה נוצר סיבוב של זוג המוצאים."},
+      oscillator:{name:"מתנד מקומי — קוסינוס",symbol:String.raw`v_I(t)`,equation:String.raw`v_I(t)=2\cos(\omega_0t+\theta)`,note:"המשרעת 2 מפצה על הגבר החצי של המכפלה. זהו הגבר קבוע ומוצהר של המודל."},
+      quadrature:{name:"מתנד ברבע מחזור",symbol:String.raw`v_Q(t)`,equation:String.raw`v_Q(t)=2\cos(\omega_0t+\theta+\frac{\pi}{2})=-2\sin(\omega_0t+\theta)`,note:"הסטה של רבע מחזור מייצרת את מינוס הסינוס הדרוש לענף Q."},
+      i:{name:"המידע המקורי I",symbol:String.raw`I(t)`},q:{name:"המידע המקורי Q",symbol:String.raw`Q(t)`}
+    },
+    stages:[
+      {key:"mix-i",name:"מיקסר I",symbol:"mixer",input:"received",output:"mixI",equation:[[String.raw`u_I=I(t)[\cos\theta+\cos(2\omega_0t+\theta)]`],[String.raw`+Q(t)[\sin\theta-\sin(2\omega_0t+\theta)]`]],note:"רכיבי בסיס הסרט נשארים אחרי הסינון; הרכיבים סביב תדר כפול מסולקים."},
+      {key:"filter-i",name:"מסנן ערוץ I",symbol:"lpf",input:"mixI",output:"outI",equation:iFormula,note:s=>s.cutoff>=375?"המסנן מעביר את שני תדרי המידע. שגיאת הפאזה מסובבת את הזוג I/Q, גם כאשר הסינון מושלם.":"המסנן חותך חלק מתדרי המידע, ולכן אי אפשר להשמיט אותו מהנוסחה."},
+      {key:"mix-q",name:"מיקסר Q",symbol:"mixer",input:"received",output:"mixQ",equation:[[String.raw`u_Q=-I(t)[\sin\theta+\sin(2\omega_0t+\theta)]`],[String.raw`+Q(t)[\cos\theta-\cos(2\omega_0t+\theta)]`]],note:"הסימן של מתנד הסינוס נבחר כדי לשחזר את Q באותו סימן כמו בשידור."},
+      {key:"filter-q",name:"מסנן ערוץ Q",symbol:"lpf",input:"mixQ",output:"outQ",equation:qFormula,note:s=>s.cutoff>=375?"בסנכרון מתקבל Q בלבד. ברבע מחזור הערוצים מתחלפים ואחד מהם מתהפך בסימן.":"תדר חיתוך נמוך מדי מסלק מידע, גם כאשר הפאזה מסונכרנת."}
+    ],
+    diagram:{width:850,height:385,draw({line,part,probe,label}){
+      line("M25 75 H315","received");line("M180 75 V215 H315","received");probe("received",65,75);
+      part("mix-i",345,75,"mixer","mixI","מיקסר I");part("filter-i",570,75,"lpf","outI","מסנן ערוץ I");
+      line("M375 75 H522","mixI");probe("mixI",445,75);line("M618 75 H815","outI");probe("outI",745,75);
+      part("mix-q",345,215,"mixer","mixQ","מיקסר Q");part("filter-q",570,215,"lpf","outQ","מסנן ערוץ Q");
+      line("M375 215 H522","mixQ");probe("mixQ",445,215);line("M618 215 H815","outQ");probe("outQ",745,215);
+      part("oscillator",250,330,"oscillator","oscillator","מתנד מקומי");label(170,330,"oscillator",String.raw`\mathrm{VCO}`);
+      line("M250 302 V135 H345 V104","oscillator");label(360,156,"oscillator",String.raw`2\cos(\omega_0t+\theta)`);
+      line("M278 330 H373","oscillator");part("quadrature",420,330,"phase","quadrature","הסטת פאזה של רבע מחזור");
+      line("M467 330 H505 V270 H345 V244","quadrature");label(620,295,"quadrature",String.raw`-2\sin(\omega_0t+\theta)`);
+    }},
+    note:"תדר הנושא 2.4 kHz. מידע I הוא קוסינוס בתדר 250 Hz ומידע Q הוא סינוס בתדר 375 Hz. חזית RF אידאלית בהגבר יחידה הושמטה כדי להבליט את הפיצול לשני ענפים."
+  });
+})();
+</script>
