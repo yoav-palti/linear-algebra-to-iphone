@@ -12,7 +12,7 @@ CourseInteractives.mount("rlc-filter",{
     c.control("r","התנגדות",String.raw`R\;[\mathrm{m}\Omega]`,0.1,100,0.0001,4);
     c.control("l","השראות",String.raw`L\;[\mathrm{nH}]`,0.1,2,0.01);
     c.control("c","קיבול",String.raw`C\;[\mathrm{nF}]`,1,100,0.0001,4);
-    c.preset("פס צר",{r:5,l:0.47,c:69.18});c.preset("פס רחב",{r:90,l:0.47,c:69.18});
+    c.preset("צר סרט",{r:5,l:0.47,c:69.18});c.preset("רחב סרט",{r:90,l:0.47,c:69.18});
     c.preset("רדיו: 91.8 MHz",{r:0.2953097094,l:0.47,c:1e9/((2*Math.PI*91.8e6)**2*0.47e-9)});
     c.preset("איפוס",{r:43.65,l:0.47,c:69.18});
     const parameters=()=>m.rlcParameters(s.r*1e-3,s.l*1e-9,s.c*1e-9);

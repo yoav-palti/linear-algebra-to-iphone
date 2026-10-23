@@ -3,7 +3,6 @@
   <style>
     #microphone-response { --fr-ink:#172f43; --fr-muted:#526779; --fr-line:#dce5eb; --fr-orange:#c35c18; --fr-teal:#087e85; color:var(--fr-ink); background:#f6f9fb; border:1px solid var(--fr-line); border-radius:18px; margin:28px 0; padding:24px; font:16px/1.6 system-ui,sans-serif; color-scheme:light; }
     #microphone-response * { box-sizing:border-box; }
-    #microphone-response .fr-eyebrow { color:var(--fr-teal); font-size:12px; font-weight:750; letter-spacing:.06em; margin:0 0 5px; }
     #microphone-response h4 { font-size:24px; color:var(--fr-ink); background:transparent; margin:0 0 6px; }
     #microphone-response p { margin:0 0 14px; }
     #microphone-response .fr-note { color:var(--fr-muted); font-size:12px; }
@@ -45,7 +44,6 @@
       #microphone-response { break-inside:avoid; }
     }
   </style>
-  <p class="fr-eyebrow">מעבדת תדרים · המיקרופון כמערכת LTI</p>
   <h4 id="fr-title">מה משתנה כשמשנים את המיקרופון?</h4>
   <div class="fr-controls">
     <div class="fr-control">
@@ -71,7 +69,7 @@
   <div class="fr-plots">
     <div class="fr-plot">
       <h5 style="color:var(--fr-orange)">גודל התמסורת <bdi class="math notranslate">\(\left|\tilde{H}(\omega)\right|\)</bdi></h5>
-      <div id="fr-magnitude" class="fr-board" role="img" aria-label="גודל התמסורת כפונקציה של התדר הזוויתי, עם תדר השיא ורוחב בחצי גובה"></div>
+      <div id="fr-magnitude" class="fr-board" role="img" aria-label="גודל התמסורת כפונקציה של התדר הזוויתי, עם תדר השיא ורוחב בחצי הספק"></div>
       <div class="fr-axis-caption math notranslate">\(\omega\;[\mathrm{rad}\,\mathrm{time}^{-1}]\)</div>
     </div>
     <div class="fr-plot">
@@ -83,9 +81,9 @@
   <div class="fr-metrics">
     <div class="fr-metric">תדר טבעי <bdi class="math notranslate">\(\omega_0=\sqrt{\frac{k}{m}}\)</bdi><strong><bdi id="fr-natural">—</bdi></strong></div>
     <div class="fr-metric">תדר שיא התגובה <bdi class="math notranslate">\(\omega_D=\sqrt{\frac{k}{m}-\frac{\gamma^2}{2m^2}}\)</bdi><strong><bdi id="fr-peak">—</bdi></strong></div>
-    <div class="fr-metric">רוחב בחצי גובה <bdi class="math notranslate">\(\Delta\omega\)</bdi><strong><bdi id="fr-width">—</bdi></strong></div>
+    <div class="fr-metric">רוחב בחצי הספק <bdi class="math notranslate">\(\Delta\omega\)</bdi><strong><bdi id="fr-width">—</bdi></strong></div>
   </div>
-  <p class="fr-note"><bdi class="math notranslate">\(A=1\)</bdi> · יחידות יחסיות · צירים קבועים · רוחב בחצי גובה האמפליטודה</p>
+  <p class="fr-note"><bdi class="math notranslate">\(A=1\)</bdi> · יחידות יחסיות · צירים קבועים · רוחב בחצי הספק</p>
   <noscript><p>כדי להפעיל את ההדגמה יש לאפשר JavaScript. <a href="https://www.geogebra.org/material/iframe/id/ydttts6y" target="_blank" rel="noopener">פתיחת ההדגמה המקורית ב־GeoGebra</a></p></noscript>
   <script>
   (() => {
@@ -179,7 +177,7 @@
           ...labelStyle, offset:[0,-18], visible:() => hasPeak
         });
       });
-      magnitude.create("text", [0,() => halfGain,String.raw`\(\dfrac{\left|\tilde{H}(\omega_D)\right|}{2}\)`], {
+      magnitude.create("text", [0,() => halfGain,String.raw`\(\dfrac{\left|\tilde{H}(\omega_D)\right|}{\sqrt{2}}\)`], {
         ...labelStyle, fontSize:12, anchorX:"right", anchorY:"bottom", offset:[-6,4],
         strokeColor:"#c35c18", visible:() => hasWidth
       });
@@ -200,10 +198,10 @@
         hasPeak = peakSquared > 0;
         peakFrequency = hasPeak ? Math.sqrt(peakSquared) : 0;
         const peakGain = gain(peakFrequency);
-        halfGain = peakGain / 2;
-        // Solve (k-m*omega^2)^2 + gamma^2*omega^2 = 4 / peakGain^2.
+        halfGain = peakGain / Math.sqrt(2);
+        // Solve (k-m*omega^2)^2 + gamma^2*omega^2 = 2 / peakGain^2.
         const minimumDenominator = 1 / (peakGain * peakGain);
-        const spread = Math.sqrt(3 * minimumDenominator) / m;
+        const spread = Math.sqrt(minimumDenominator) / m;
         hasWidth = hasPeak && peakSquared - spread > 0;
         leftHalf = hasWidth ? Math.sqrt(peakSquared - spread) : 0;
         rightHalf = hasWidth ? Math.sqrt(peakSquared + spread) : 0;

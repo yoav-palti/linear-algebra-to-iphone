@@ -1,7 +1,5 @@
 # ⚡ Electrical Engineering 101 – Student Cheat Sheet
 
----
-
 ## 📊 Signals & Systems (LTI)
 
 **Key Ideas**

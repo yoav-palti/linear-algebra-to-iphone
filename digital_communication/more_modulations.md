@@ -1,5 +1,16 @@
 # פתרון בעיות שלא ידעתם שקיימות
 
+<details>
+<summary>אמ;לק</summary>
+
+בעולם האמיתי צריך להתמודד לא רק עם בחירת הסמלים אלא גם עם המעברים ביניהם ועם הערוץ:
+
+* OQPSK מזיז את ערוץ $Q$ בחצי זמן סימבול, כך ש-$I$ ו-$Q$ לא מחליפים סימן יחד.
+* הפרש פאזה מסובב את הקונסטלציה. ב-DBPSK המידע נמצא במעברים בין סמלים ולא בפאזה המוחלטת.
+* החזרות מערבבות סמלים סמוכים: $r_{n}=\sum_{k=0}^{K-1}h_{k}s_{n-k}$. בעזרת סמלים ידועים אפשר לשערך את הערוץ, ובהמשך לנסות לבטל את השפעתו.
+
+</details>
+
 הרבה מאוד מההבנה באיזה אפנון להשתמש בכל מערכת ולמה מהנדסים עבדו קשה
 כדי למצוא אפנונים חדשים ולהמציא דברים חדשים קשור לבעיות בעולם
 התקשורת שקצת קשה לשים לב אליהן מהתבוננות במשוואות. אני
@@ -20,10 +31,10 @@
 בטח ובטח שלא מתהפכת דרך ה-0.
 
 כדי לפתור את זה נשתמש בטריק כמובן. אפשר לחשוב על אפנון QPSK
-בתור שני אפנוני BASK. אבל אחד משדר על I אחד על Q.
+בתור שני אפנוני BPSK. אבל אחד משדר על I אחד על Q.
 כל אחד מהם מחליף סימן כל $T_{S}=2T_{b}$ וכמובן הם מתחלפים ביחד
-מה עם נזיז את הערוץ של Q $T_{b}$ קדימה בזמן? עכשיו הם אף פעם
-לא מתחלפים ביחד. אם מסתכלים כל התוצאה מקבלים משהו כזה:
+מה אם נזיז את הערוץ של Q $T_{b}$ קדימה בזמן? עכשיו הם אף פעם
+לא מתחלפים ביחד. אם מסתכלים על התוצאה מקבלים משהו כזה:
 
 ![OQPSK_vs_QPSK.png](images/OQPSK_vs_QPSK.png)
 
@@ -41,19 +52,19 @@ $$=\left(\mathcal{F}\left[\sum_{n}\cos\left(\phi_{n}\right)\delta\left(t-nT_{s}\
 
 ועבור OQPSK רק נזיז את הערוץ המדומה:
 
-$$\mathcal{F}\left[z_{OQPSK}\left(t\right)\right]=\left(\mathcal{F}\left[\sum_{n}\cos\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]+i\mathcal{F}\left[\sum_{n}\sin\left(\phi_{n}\right)\delta\left(t-n\left(T_{s}-\frac{T_{s}}{2}\right)\right)\right]\right)\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)$$
-$$=\left(\mathcal{F}\left[\sum_{n}\cos\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]+ie^{i\omega\frac{T_{s}}{2}}\mathcal{F}\left[\sum_{n}\sin\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]\right)\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)$$
+$$\mathcal{F}\left[z_{OQPSK}\left(t\right)\right]=\left(\mathcal{F}\left[\sum_{n}\cos\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]+i\mathcal{F}\left[\sum_{n}\sin\left(\phi_{n}\right)\delta\left(t-nT_{s}-\frac{T_{s}}{2}\right)\right]\right)\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)$$
+$$=\left(\mathcal{F}\left[\sum_{n}\cos\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]+ie^{-i\omega\frac{T_{s}}{2}}\mathcal{F}\left[\sum_{n}\sin\left(\phi_{n}\right)\delta\left(t-nT_{s}\right)\right]\right)\cdot T_{s}sinc\left(\omega\frac{T_{s}}{2\pi}\right)$$
 
 וכמו שראינו עד עכשיו ה-$sinc$ נשאר אותו הדבר ורוחב הסרט נשאר כמו שהוא.
 
 ### סנכרון פאזה
-כמו שראיתם בפרק הקודם שום דבר לא מבטיח שלנו שהמקלט הקוהרנטי שלנו יהיה בסנכרון
+כמו שראיתם בפרק הקודם שום דבר לא מבטיח לנו שהמקלט הקוהרנטי שלנו יהיה בסנכרון
 עם האות שמשודר. באופן כללי יש בינהם הפרש פאזה $\Delta\phi$
 
 זה אומר שהסימבולים שנקלוט יהיו:
 
-$$r\left(t\right)=\begin{pmatrix}I\left(t\right)\cos\left(\Delta\phi\right)\\
-Q\left(t\right)\sin\left(\Delta\phi\right)
+$$r\left(t\right)=\begin{pmatrix}I\left(t\right)\cos\left(\Delta\phi\right)-Q\left(t\right)\sin\left(\Delta\phi\right)\\
+I\left(t\right)\sin\left(\Delta\phi\right)+Q\left(t\right)\cos\left(\Delta\phi\right)
 \end{pmatrix}$$
 
 או בסימונים אחרים:
@@ -84,14 +95,14 @@ $$\Delta\phi=\frac{1}{2}\arg\left(\left(r\left(t\right)\right)^{2}\right)$$
 בכל החלק על תקשורת עד עכשיו דיברנו על מקלטים כאילו לא למדנו את כל החלק
 מערכות לינאריות. במציאות האות עובר החזרים ועובר דרך האוויר. כלומר הוא
 מועבר בפונקציית תמסורת!
-זה הרבה הרבה יותר גרוע מאשר רק הכפלה בפאזה. כל תדר מוכפל באפליטודה ופאזה משלו.
+זה הרבה הרבה יותר גרוע מאשר רק הכפלה בפאזה. כל תדר מוכפל באמפליטודה ופאזה משלו.
 מה עושים?
 
 נתחיל ממודל "פשוט" (האמת שלא צריך מודל יותר מסובך אבל יהיה קל יותר להבין את זה
 אחרי שנדבר על דגימה של אותות)
 
 המודל אומר שכל דגימה שאנחנו מקבלים היא סכום של הדגימה הנוכחית ועוד
-החזרות (כל אחת עם פאזה ואפליטודה) כלומר:
+החזרות (כל אחת עם פאזה ואמפליטודה) כלומר:
 
 $$r_{n}=\sum_{k=0}^{\infty}h_{k}s_{n-k}$$
 
@@ -124,7 +135,7 @@ $$r_{K+l}-r_{K+l-1}=\sum_{k=0}^{l}h_{k}-\sum_{k=0}^{l-1}h_{k}=h_{l}$$
 ואחריו צריך לבוא תהליך של "ביטול" ערוץ או חלוקה בפונקציית התמסורת.
 תהליך זה נקרא equalization.
 
-ראינו כאן שאחת הדרכים לבצע אותו הוא לשלוח כמות מסויימת של סימבולים ידועים
+ראינו כאן שאחת הדרכים לבצע אותו הוא לשלוח כמות מסוימת של סימבולים ידועים
 ולפתור סט של משוואות לינאריות
 
 

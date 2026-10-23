@@ -32,7 +32,7 @@ $|e[n]| \le \Delta/2$
 נרצה להצמיד לערך 1 וולט את המספר 127 ולערך מינוס 1 וולט את -127 או משהו בסגנון.
 
 ### קוונטיזציה לינארית
-זה השיטה הנפוצה ביותר והיא עושה בדיוק מה שאמרנו לפני רגע.
+זו השיטה הנפוצה ביותר והיא עושה בדיוק מה שאמרנו לפני רגע.
 נחלק את התחום $\left[V_{min},V_{max}\right]$ ל-$2^{N_{bits}}$ רמות שוות מרווחים.
 
 * המספר $N_{bits}$ נקרא עומק הקוונטיזציה
@@ -54,10 +54,10 @@ $$bps=f_{s}N_{bits}$$
 
 ### קביעת עומק הקוונטיזציה
 נרצה למדל את גודל השגיאות שלנו בתהליך הקוונטיזציה. הזכרנו כבר את גודל המדרגות $\Delta=LSB$
-שמייצג את גודל השינויי מההפיכה של הביט הכי פחות משמעותי (LSB)
+שמייצג את גודל השינוי מההפיכה של הביט הכי פחות משמעותי (LSB)
 
 בכמה אנחנו יכולים לטעות? אם נסמן את האות אחרי הקוונטיזציה
-ב-$V_{q}\left[n\right]$ ut ואת האות לפני ב-$V\left[n\right]$
+ב-$V_{q}\left[n\right]$ ואת האות לפני ב-$V\left[n\right]$
 נוכל לרשום:
 
 $$e\left[n\right]\equiv V_{q}\left[n\right]-V\left[n\right]$$
@@ -68,11 +68,11 @@ $$\left|e\left[n\right]\right|\le\frac{\Delta}{2}$$
 $$V_{q}\left[n\right]=V\left[n\right]+e\left[n\right]$$
 
 זה אומר שהאות שקיבלנו הוא האות המקורי ועוד סיגנל של שגיאה.
-.השגיאה הזו כיביכול אקראית ולכן נקרא לה **רעש הקוונטיזציה**
+.השגיאה הזו כביכול אקראית ולכן נקרא לה **רעש הקוונטיזציה**
 
 אבל כיצד נדע כמה חזק אנחנו מוכנים שיהיה רעש הקוונטיזציה?
 
-המדד הס=בסיסי (והחשוב ביותר) שמשתמשים בו הוא **SNR** (Signal to Noise Ratio)
+המדד הבסיסי (והחשוב ביותר) שמשתמשים בו הוא **SNR** (Signal to Noise Ratio)
 או במילים אחרות כמה חזק האות חלקי כמה חזק הרעש. חזק אנחנו מודדים באנרגיה לשנייה
 או במילים אחרות בהספק. ולכן נרשום:
 
@@ -85,7 +85,7 @@ $$\boxed{SNR\equiv\frac{P_{signal}}{P_{noise}}}$$
 
 נחשב את ה-SNR בין הסיגנל לרעש הקוונטיזציה:
 
-$$SNR\equiv\frac{\left\langle P_{signal}\right\rangle }{\left\langle P_{noise}\right\rangle }=\frac{\frac{1}{N}\sum_{n=0}^{N}\left(V\left[n\right]\right)^{2}}{\frac{1}{N}\sum_{n=0}^{N}\left(e\left[n\right]\right)^{2}}$$
+$$SNR\equiv\frac{\left\langle P_{signal}\right\rangle }{\left\langle P_{noise}\right\rangle }=\frac{\frac{1}{N}\sum_{n=0}^{N-1}\left(V\left[n\right]\right)^{2}}{\frac{1}{N}\sum_{n=0}^{N-1}\left(e\left[n\right]\right)^{2}}$$
 
 נסתכל על הביטוי התחתון. ממש מתחשק להתחיל להניח כל מיני הנחות על איך הוא מתפלג (נניח אחיד) אבל האמת שזה לא 
 מאוד משנה. אם נסכום לאורך מספיק דגימות נוכל להשתמש במשפט הגבול המרכזי.
@@ -95,7 +95,7 @@ $$SNR\equiv\frac{\left\langle P_{signal}\right\rangle }{\left\langle P_{noise}\r
 
 נקבל כי:
 
-$$\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=0}^{N}\left(e\left[n\right]\right)^{2}=\mathbb{E}\left[\left(e\left[n\right]\right)^{2}\right]=\mathbb{V}\left[e\left[n\right]\right]+\mathbb{E}\left[e\left[n\right]\right]^{2}$$
+$$\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=0}^{N-1}\left(e\left[n\right]\right)^{2}=\mathbb{E}\left[\left(e\left[n\right]\right)^{2}\right]=\mathbb{V}\left[e\left[n\right]\right]+\mathbb{E}\left[e\left[n\right]\right]^{2}$$
 
 כן כן הנחנו אי תלות בין שגיאות עוקבות אבל זו הנחה יחסית סבירה. ואם הן תלויות אז ניתן אפילו להקטין את הרעש ככה שאנחנו מחמירים.
 
@@ -104,32 +104,32 @@ $$\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=0}^{N}\left(e\left[n\right]\right)
 
 נקבל כי $\mathbb{E}\left[e\left[n\right]\right]=0,\mathbb{V}\left[e\left[n\right]\right]=\frac{\Delta^{2}}{12}$ ולכן
 
-$$\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=0}^{N}\left(e\left[n\right]\right)^{2}=\frac{\Delta^{2}}{12}$$
+$$\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=0}^{N-1}\left(e\left[n\right]\right)^{2}=\frac{\Delta^{2}}{12}$$
 
 משהו מעודד הוא שאנחנו יכולים גם לקבל חסם עליון. הכי גרוע יהיה אם השגיאה תמיד אחד משני הערכים  $\pm\frac{\Delta}{2}$
 במצב כזה נקבל:
 
-$$\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=0}^{N}\left(e\left[n\right]\right)^{2}=\mathbb{E}\left[\left(e\left[n\right]\right)^{2}\right]=\frac{\Delta^{2}}{4}$$
+$$\lim_{N\rightarrow\infty}\frac{1}{N}\sum_{n=0}^{N-1}\left(e\left[n\right]\right)^{2}=\mathbb{E}\left[\left(e\left[n\right]\right)^{2}\right]=\frac{\Delta^{2}}{4}$$
 
 ברור שהסיפור עבור האות יהיה זהה לחלוטין אבל אם לוקחים אות פשוט אפשר גם לחשב ישירות:
 
 $$V\left[n\right]=A\cos\left(\frac{\omega_{0}}{f_{s}}n\right)$$
-$$\frac{1}{N}\sum_{n=0}^{N}\left(V\left[n\right]\right)^{2}\approx\frac{1}{T}\intop_{0}^{T}\left(A\cos\left(\omega_{0}t\right)\right)^{2}dt=\frac{A^{2}}{2}$$
+$$\frac{1}{N}\sum_{n=0}^{N-1}\left(V\left[n\right]\right)^{2}\approx\frac{1}{T}\intop_{0}^{T}\left(A\cos\left(\omega_{0}t\right)\right)^{2}dt=\frac{A^{2}}{2}$$
 
 כלומר קיבלנו כי:
 
-$$SNR=\frac{A^{2}}{6\Delta^{2}}$$
+$$SNR=\frac{6A^{2}}{\Delta^{2}}$$
 
 או ביחידות יותר מוצלחות:
 
-$$SNR_{dB}=20\log_{10}\left(\frac{A}{\sqrt{6}\Delta}\right)$$
+$$SNR_{dB}=20\log_{10}\left(\frac{\sqrt{6}A}{\Delta}\right)$$
 
 נזכור כי:
 
 $$\Delta=\frac{A_{max}-A_{min}}{2^{N_{bits}}}=\frac{2A_{max}}{2^{N_{bits}}}$$
 
 המעבר האחרון הוא כי הרבה פעמים צריך לבחור את $A_{max},A_{min}$ מראש או אחרי קצת דגימות
-לרוב אותות הם סימטרים סביב 0 (חסרי DC) ולכן נבחר $A_{max}=A_{min}$
+לרוב אותות הם סימטרים סביב 0 (חסרי DC) ולכן נבחר $A_{max}=-A_{min}$
 
 ולכן:
 
@@ -137,7 +137,7 @@ $$SNR_{dB}=20\log_{10}\left(\frac{\sqrt{6}A}{\frac{2A_{max}}{2^{N_{bits}}}}\righ
 $$SNR_{dB}=6N_{bits}+1.76-20\log_{10}\left(\frac{A_{max}}{A}\right)$$
 
 כמה מסקנות חשובות:
-* כל ביט נוסף שנוסיף לעומק הקוונטיזציה יתן לנו 6bB זה ממש טוב
+* כל ביט נוסף שנוסיף לעומק הקוונטיזציה יתן לנו 6dB זה ממש טוב
 * אנחנו נענשים אם אנחנו לא מנצלים את כל הטווח הדינמי. על כל סדר גודל אנחנו נענשים ב20dB
 * אנחנו מתחילים ממספר חיובי שמגיע מכלל הפקטורים של ההתפלגות של הרעש. במקרה שלנו 1.76dB
   * אם היינו לוקחים את המקרה הממש מחמיר שלנו ($\mathbb{E}\left[\left(e\left[n\right]\right)^{2}\right]=\frac{\Delta^{2}}{4}$) האיבר הזה  יקטן ל-3.01- לא זניח אבל לא נורא
@@ -159,7 +159,7 @@ $$SNR_{dB}=6N_{bits}+1.76-20\log_{10}\left(\frac{A_{max}}{A}\right)$$
 
 רוצים מקרה אמיתי? נניח שאתם מנסים לקלוט GPS. בGPS יש טריק של להרוויח עוד 43dB אחרי
 הקליטה אבל זה בהנחה שהרעש לא קורלטיבי לאות מה שלא נכון אם יש רעש קוונטיזציה חזק.
-נניח לרגע את זה בצד. האות לש GPS מגיע לקרקע ב-125dBm. אם מישהו רוצה פשוט לדחוס אותנו ונניח שיש לנו מקלט 8bit הוא יכול לשדר ככה שאנחנו נקלוט אותו ב--77dBm.
+נניח לרגע את זה בצד. האות של GPS מגיע לקרקע ב-125dBm. אם מישהו רוצה פשוט לדחוס אותנו ונניח שיש לנו מקלט 8bit הוא יכול לשדר ככה שאנחנו נקלוט אותו ב--77dBm.
 נניח לרגע מודל אידאלי של ריק שבו הדאיכה של גל אלקטרומגנטי היא ריבועית במרחק
 (הדאיכה של האנרגיה, השדה דועך כמו $\frac{1}{r}$). נשתמש בנוסחה שתלמדו
 עליה בקורס הבא:

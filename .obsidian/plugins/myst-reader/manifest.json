@@ -1,0 +1,10 @@
+{
+  "id": "myst-reader",
+  "name": "MyST Reader",
+  "version": "1.0.5",
+  "minAppVersion": "1.7.2",
+  "description": "Render MyST Markdown admonitions, math, figures, roles, and nested directives directly in your notes while preserving source files.",
+  "author": "yoav-palti",
+  "authorUrl": "https://github.com/yoav-palti",
+  "isDesktopOnly": false
+}

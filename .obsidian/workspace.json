@@ -1,0 +1,219 @@
+{
+  "main": {
+    "id": "b03512ba2742f716",
+    "type": "split",
+    "children": [
+      {
+        "id": "b2818ebb9eec88ac",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b53e19c4ff68580a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "intro/intro.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "intro"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ea8cd282c57170fd",
+    "type": "split",
+    "children": [
+      {
+        "id": "69abef383480fca5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "00a3f65d84d043fc",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "0acbb43f42828b76",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "293294edb78b716d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d3883da443339d48",
+    "type": "split",
+    "children": [
+      {
+        "id": "8d2853f083e854a6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0bbebccf7565d6f8",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "5a7884da26b4351d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "f01f0235cc1681db",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "3edfa0f9c6f355de",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "00a3f65d84d043fc",
+  "lastOpenFiles": [
+    "_build/html/searchindex.js.tmp",
+    "_build/time-slider-compact/_build/_page/impulse_response/html/_images/room_impulse_response.png",
+    "_build/time-slider-compact/_build/_page/impulse_response/html/_images/sound_reflections.png",
+    "_build/time-slider-compact/_build/_page/impulse_response/html/_images/function_delta_decomposition.png",
+    "_build/time-slider-compact/_build/_page/impulse_response/html/_images/delta_function.png",
+    "_build/time-slider-compact/_build/_page/impulse_response/html/_images",
+    "_build/time-slider-compact/_build/_page/impulse_response/html/_sources/impulse_response.md",
+    "_build/time-slider-compact/_build/_page/impulse_response/html/_sources",
+    "analog_communication/interactives/tests/coherent-am.test.cjs",
+    "analog_communication/interactives/tests",
+    "_build/remove-microphone-label/_build/_page/frequency_response/html/_images/lti_freq_diagram.png",
+    "_build/remove-microphone-label/_build/_page/frequency_response/html/_images/LTI_exp_input.png",
+    "_build/remove-microphone-label/_build/_page/frequency_response/html/_images/freq_lti_response.png",
+    "_build/remove-microphone-label/_build/_page/frequency_response/html/_images",
+    "_build/remove-microphone-label/_build/_page/frequency_response/html/_sources/frequency_response.md",
+    "_build/remove-microphone-label/_build/_page/frequency_response/html/_sources",
+    "analog_communication/interactives/coherent-am.html",
+    "analog_communication/interactives",
+    "_build/remove-microphone-label/_build/_page/frequency_response/html/index.html",
+    "_build/remove-microphone-label/_build/_page/frequency_response/html/_static/copy-button.svg",
+    "_build/remove-microphone-label/_build/_page/frequency_response/html/_static/check-solid.svg",
+    "_build/remove-microphone-label/_build/_page/frequency_response/html/_static/images/logo_jupyterhub.svg",
+    "intro/_cheet_sheet.md",
+    "intro/_why-engineering.md",
+    "_course_review.md",
+    "_teaching_ideas.md",
+    "temp.md",
+    "_build/time-slider-check/_build/_page/impulse_response/html/_sources/impulse_response.md",
+    "_build/svg-default-fresh/html/_sources/temp.md",
+    "_build/svg-default-fresh/html/_sources/noise/random_signals.md",
+    "_build/svg-default-fresh/html/_sources/noise/physical_noises.md",
+    "_build/svg-default-fresh/html/_sources/noise/noise_spectrum.md",
+    "_build/svg-default-fresh/html/_sources/noise/noise_intro.md",
+    "_build/svg-default-fresh/html/_sources/noise/noise_filters.md",
+    "_build/svg-default-fresh/html/_sources/noise/detection.md",
+    "_build/svg-default-fresh/html/_sources/intro/intro.md",
+    "_build/svg-default-fresh/html/_sources/information/entropy.md",
+    "_build/svg-default-fresh/html/_sources/digitation_and_reconstruction/sampling.md",
+    "_build/svg-default-fresh/html/_sources/digitation_and_reconstruction/quantization.md",
+    "_build/svg-default-fresh/html/_sources/digitation_and_reconstruction/interpolation.md",
+    "_build/svg-default-fresh/html/_sources/digitation_and_reconstruction/digitation_intro.md",
+    "_build/svg-default-fresh/html/_sources/digital_communication/orthogonality.md",
+    "_build/svg-default-fresh/html/_sources/digital_communication/more_modulations.md",
+    "_build/svg-default-fresh/html/_sources/digital_communication/linear_modulations.md",
+    "_build/svg-default-fresh/html/_sources/digital_communication/FSK.md"
+  ]
+}

@@ -1,0 +1,34 @@
+.myst-reader-content {
+  overflow-wrap: anywhere;
+  line-height: var(--line-height-normal);
+}
+
+.myst-reader-content > :first-child { margin-block-start: 0; }
+.myst-reader-content p,
+.myst-reader-content .callout-title-inner { unicode-bidi: plaintext; }
+
+.myst-reader-content pre,
+.myst-reader-content .math-block,
+.myst-reader-content .math { direction: ltr; unicode-bidi: isolate; }
+
+.myst-reader-content img { max-width: 100%; height: auto; }
+
+.myst-reader-html { display: block; width: 100%; height: 720px; border: 0; }
+.myst-reader-html-error { color: var(--text-error); }
+
+.myst-reader-widget {
+  position: relative;
+  padding-block: var(--size-4-2);
+}
+
+.myst-reader-widget .myst-reader-edit {
+  position: absolute;
+  inset-block-start: var(--size-4-2);
+  inset-inline-end: var(--size-4-2);
+  z-index: 1;
+  font-size: var(--font-smallest);
+  opacity: 0;
+}
+
+.myst-reader-widget:hover .myst-reader-edit,
+.myst-reader-widget:focus-within .myst-reader-edit { opacity: 1; }

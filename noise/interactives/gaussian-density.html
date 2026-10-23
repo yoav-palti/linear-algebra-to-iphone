@@ -14,7 +14,7 @@ CourseInteractives.mount("gaussian-density",{
     c.preset("נורמלית סטנדרטית",{mean:0,sigma:1});c.preset("התפלגות צרה",{mean:0,sigma:0.5});
     c.preset("התפלגות רחבה",{mean:0,sigma:2});c.preset("איפוס",{mean:-3.1,sigma:1.32});
     const density=x=>m.gaussian(x,s.mean,s.sigma), reference=x=>m.gaussian(x,0,1);
-    const board=c.board("density",String.raw`p_X(x)`,String.raw`x`,[-8.5,1.13,8.5,-0.25],{negativeY:false,height:290});
+    const board=c.board("density",String.raw`p_X(x)`,String.raw`x`,[-8.5,1.13,8.5,-0.25],{negativeY:false,height:180});
     // A closed curve shades the central one-standard-deviation probability, not the entire PDF.
     c.sampled(board,()=>{
       const x=[s.mean-s.sigma],y=[0];

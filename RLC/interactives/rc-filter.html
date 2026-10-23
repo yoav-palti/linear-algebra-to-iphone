@@ -12,7 +12,7 @@ CourseInteractives.mount("rc-filter",{
     c.control("tau","קבוע הזמן",String.raw`\tau\;[\mathrm{ms}]`,0.05,1,0.0001,4);
     c.preset("תגובה מהירה",{tau:0.1});c.preset("תגובה איטית",{tau:0.6});c.preset("איפוס",{tau:0.1691});
     const half=()=>Math.sqrt(3)/s.tau, cutoff=()=>1/s.tau;
-    const unit=String.raw`\omega\;[10^3\,\mathrm{rad}\,\mathrm{s}^{-1}]`;
+    const unit=String.raw`\omega\;[10^3\,\frac{\mathrm{rad}}{\mathrm{sec}}]`;
     const magnitude=c.board("magnitude",String.raw`|\tilde H(\omega)|`,unit,[-4,1.2,21,-0.23],{negativeX:false,negativeY:false});
     const phase=c.board("phase",String.raw`\arg\tilde H(\omega)\;[\mathrm{rad}]`,unit,[-4,0.25,21,-1.85],{negativeX:false});
     c.curve(magnitude,w=>m.rc(w,s.tau).magnitude,0,20,k.orange);
@@ -23,8 +23,8 @@ CourseInteractives.mount("rc-filter",{
     c.label(magnitude,half,0.5,String.raw`\Delta\omega`,{anchorX:"left",anchorY:"bottom",offset:[7,4],visible:()=>half()<18,strokeColor:k.orange});
     c.segment(magnitude,[cutoff,0],[cutoff,1/Math.sqrt(2)]);
     c.label(magnitude,cutoff,0,String.raw`\omega_c`,{offset:[0,-28],visible:()=>cutoff()<=20});
-    c.metric("cutoff","תדר חיתוך",String.raw`\omega_c=\frac1\tau\;[10^3\,\mathrm{rad}\,\mathrm{s}^{-1}]`);
-    c.metric("width","רוחב בחצי גובה",String.raw`\Delta\omega=\frac{\sqrt3}{\tau}\;[10^3\,\mathrm{rad}\,\mathrm{s}^{-1}]`);
+    c.metric("cutoff","תדר חיתוך",String.raw`\omega_c=\frac1\tau\;[10^3\,\frac{\mathrm{rad}}{\mathrm{sec}}]`);
+    c.metric("width","רוחב בחצי גובה",String.raw`\Delta\omega=\frac{\sqrt3}{\tau}\;[10^3\,\frac{\mathrm{rad}}{\mathrm{sec}}]`);
     c.note("צירים קבועים · חצי גובה אמפליטודה; תדר החיתוך מוגדר בחצי הספק");
     return {update(){c.value("cutoff",c.format(cutoff()));c.value("width",c.format(half()));}};
   }

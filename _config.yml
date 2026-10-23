@@ -5,6 +5,12 @@ title: Linear Algebra to iPhone 1
 author: Yoav Palti
 logo: logo.png
 
+# Keep local dependencies and editor metadata out of the book build.
+exclude_patterns: [_build, .venv, .git, .idea, .obsidian, myst-reader, Thumbs.db, .DS_Store, "**.ipynb_checkpoints"]
+
+# Publish course chapters only; keep drafts and maintenance notes out of the site.
+only_build_toc_files: true
+
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
@@ -26,9 +32,17 @@ html:
   use_repository_button: true
 
 sphinx:
+  local_extensions:
+    course_assets: _ext
   config:
+    html_context:
+      default_mode: auto
     suppress_warnings:
       - myst.header
-    #mathjax3_config :
-    #  loader:
-    #    load: ['input/tex', 'output/svg']
+    # Use SVG by default so math accents render consistently on new devices.
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js
+    mathjax3_config:
+      options:
+        menuOptions:
+          settings:
+            renderer: SVG

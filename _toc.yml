@@ -6,9 +6,9 @@ parts:
     - file: LTI/intro_to_LTI
       title: "מבוא למערכות לינאריות"
     - file: LTI/impulse_response
-      title: "תגובת להלם"
+      title: "תגובה להלם"
     - file: LTI/frequency_response
-      title: "תגובת בתדר"
+      title: "תגובה בתדר"
     - file: LTI/wave_in_a_room
       title: "החזרות בחדר"
     - file: LTI/noise_removal_examples
@@ -74,5 +74,5 @@ parts:
     - file: information/entropy
       title: "למה אנטרופיה?"
     - file: temp
-      title: "בדיקת תוכן"
+      title: "דמו: דגימה ו-Aliasing"
 

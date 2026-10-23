@@ -49,7 +49,7 @@ $$V_{1}\left(t\right)=V_{0}\left(t\right)\ast\frac{1}{\Delta t}Rect\left(\frac{t
 
 או במרחב התדר:
 
-$$V_{1}\left(\omega\right)=V_{0}\left(\omega\right)e^{-i\omega\frac{\Delta t}{2}}sinc\left(\frac{\omega}{2\pi}\Delta t\right)$$
+$$V_{1}\left(\omega\right)=V_{0}\left(\omega\right)e^{i\omega\frac{\Delta t}{2}}sinc\left(\frac{\omega}{2\pi}\Delta t\right)$$
 $$V_{1}\left(\omega\right)=\Delta t\left[sinc\left(\frac{\omega}{2\pi}\Delta t\right)\right]^{2}\cdot V_{s}\left(\omega\right)$$
 
 נסכם בתמונה של איך הכל נראה בתדר

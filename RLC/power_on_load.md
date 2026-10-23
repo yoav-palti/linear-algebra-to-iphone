@@ -68,8 +68,8 @@ $$P\left(t\right)=I\left(t\right)\cdot V\left(t\right)$$
 נשים לב שאנחנו צריכים להיזהר כאן. יש לנו משוואה עם כפל ולכן לא נוכל באמת להחליף את הכל להיות במרחב התדר. אנחנו נקבל בצד שמאל קונבולוציה בין הזרם למתח.
 על מנת להיות מסוגלים לומר משהו חכם נתחיל ממקרה פשוט:
 
-$$V\left(t\right)=V_{0}\cos\left(\omega_{0}t+\phi\right)$$
-$$\frac{1}{Z\left(\omega\right)}=\frac{1}{\left|Z\left(\omega\right)\right|}e^{-\phi\left(\omega\right)}$$
+$$V\left(t\right)=V_{0}\cos\left(\omega_{0}t\right)$$
+$$\frac{1}{Z\left(\omega\right)}=\frac{1}{\left|Z\left(\omega\right)\right|}e^{-i\phi\left(\omega\right)}$$
 $$\Downarrow$$
 $$I\left(t\right)=\frac{1}{\left|Z\left(\omega_{0}\right)\right|}V_{0}\cos\left(\omega_{0}t-\phi\left(\omega_{0}\right)\right)$$
 
@@ -84,7 +84,7 @@ $$\boxed{P\left(t\right)=\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|
 נשים לב ששום דבר לא מונע מההספק להיות שלילי! מתי זה קורה? האם יכול להיות רכיב שבזמן מסויים "מחזיר" אנרגיה למעגל במקום לעלות אנרגיה?
 כמובן שכן, אנחנו מכירים פריקה וטעינה גם של קבל וגם של סליל
 
-נשאל שאלה יותר קשה. האם ההספק יכול להיות שלילי בבמוצע? נחשב
+נשאל שאלה יותר קשה. האם ההספק יכול להיות שלילי בממוצע? נחשב
 
 $$P_{avg}\equiv\left\langle P\left(t\right)\right\rangle \equiv\overline{P\left(t\right)}=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}P\left(t\right)dt$$
 
@@ -127,7 +127,7 @@ $$\cos\left(\phi\left(\omega_{0}\right)\right)<0\Rightarrow\Re\left[Z\left(\omeg
 נניח שיש לנו עומס עם חלק השראתי מאוד גדול:
 
 $$Z\left(\omega\right)=i\omega L+R$$
-$$L\gg R\Rightarrow\left|\cos\left(\phi\right)\right|\ll1$$
+$$\omega L\gg R\Rightarrow\left|\cos\left(\phi\right)\right|\ll1$$
 
 (נשים לב שזה תלוי תדר אבל נניח שאנחנו עובדים בתדר שבו זה באמת נכון)
 
@@ -164,13 +164,13 @@ $$Z\left(\omega\right)=i\left(\omega L-\frac{1}{\omega C}\right)+R$$
 
 ראינו כבר שאם המתח על עומס מסויים $Z$ הוא $V\left(t\right)=V_{0}\cos\left(\omega_{0}t\right)$ נקבל כי 
 
-$$I\left(t\right)=\frac{V_{0}}{\left|Z\right|}\cos\left(\omega_{0}t+\phi_{Z}\right)$$
+$$I\left(t\right)=\frac{V_{0}}{\left|Z\right|}\cos\left(\omega_{0}t-\phi_{Z}\right)$$
 $$\left\langle P\right\rangle =\frac{V_{0}^{2}}{2\left|Z\right|}\cos\left(\phi_{Z}\right)$$
 
 במקום לעבוד קשה ולעשות את האינטגרלים של הממוצע כל הזמן נגדיר:
 
 $$V\left(t\right)=V_{0}e^{i\omega_{0}t}$$
-$$I\left(t\right)=\frac{V_{0}}{\left|Z\right|}e^{i\left(\omega_{0}t+\phi_{Z}\right)}$$
+$$I\left(t\right)=\frac{V_{0}}{\left|Z\right|}e^{i\left(\omega_{0}t-\phi_{Z}\right)}$$
 
 ולכן כדי לחשב את ההספק הממוצע כל מה שנצטרך לחשב הוא:
 
@@ -218,7 +218,7 @@ $$P_{L}\left(Z_{L}=Z_{S}^{\ast}\right)=\frac{\left|V_{0}\right|^{2}}{2}\frac{R_{
 
 חשוב לציין שלמערכת יש אפשרות לתאם "בכל תדר" אבל רק בנפרד אלא אם העכבה שווה בכמה תדרים שונים.
 
-מומזנים לנסות לתאם עכבות ולראות מה ההספק שנופל על העומס L
+מוזמנים לנסות לתאם עכבות ולראות מה ההספק שנופל על העומס L
 
 ```{raw} html
 :file: ../LTI/interactives/runtime.html

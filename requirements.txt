@@ -1,3 +1,8 @@
-jupyter-book
+jupyter-book>=1,<2
+# Keep the verified Jupyter Book 1 sidebar/navigation implementation.
+sphinx-book-theme==1.1.4
 matplotlib
 numpy
+plotly
+scipy
+ipykernel

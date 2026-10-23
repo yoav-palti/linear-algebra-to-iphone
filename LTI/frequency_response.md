@@ -1,4 +1,4 @@
-# תגובת בתדר
+# תגובה בתדר
 
 <details>
 <summary>אמ;לק</summary>
@@ -10,12 +10,11 @@ $y=x*h$ ↔ $\tilde{Y}(\omega)=\tilde{H}(\omega)\tilde{X}(\omega)\sqrt{2\pi}$
 . אקספוננטים מרוכבים הם פונקציות עצמיות → פירוק פורייה מפשט ניתוח.
 
 מערכת לינארית לא מייצרת תדרים חדשים אלא רק מגבירה או מנחיתה תדרים קיימים.
- 
-  המערכת רק משנה אמפליטודה/פאזה. פונקציית התמסורת 
-  
-  $\tilde{H}(\omega)=\mathcal{F}[h(t)]$
-  
-   היא האנלוג של מטריצה בבסיס עצמי. כלומר מלוכסנת.
+המערכת משנה רק אמפליטודה ופאזה, ופונקציית התמסורת
+
+$\tilde{H}(\omega)=\mathcal{F}[h(t)]$
+
+היא האנלוג של מטריצה בבסיס עצמי. כלומר מלוכסנת.
 
 </details>
 
@@ -45,7 +44,7 @@ $$x\left(t\right)=\sum_{n=0}^{\infty}a_{n}t^{n}$$
 איזה פירוק כדאי לשקול? נתחיל מפשוט לגלות את התשובה ולאט לאט נבין למה בחרנו דווקא את הפירוק הזה.
 התשובה תהיה טרנספורם פורייה:
 
-$$x\left(t\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\underset{\text{םימדקמ}}{\underbrace{\tilde{X}\left(\omega\right)}}e^{i\omega t}dt$$
+$$x\left(t\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\underset{\text{םימדקמ}}{\underbrace{\tilde{X}\left(\omega\right)}}e^{i\omega t}d\omega$$
 
 למי שכבר יצא לראות את הנוסחה הזו הוא יזהה את זה דווקא בתור טרנספורם פורייה ההפוך אבל שימו לב שכל מה שכתבנו כאן הוא שהאות
 שלנו ניתן לכתיבה כסכום של הפונקציות $e^{i\omega t}$ ולכל פונקצייה יש מקדם $X\left(\omega\right)$ אשר מכפיל אותה. איך
@@ -59,14 +58,14 @@ $$\mathcal{F}\left[x\left(t\right)\right]\equiv\tilde{X}\left(\omega\right)=\fra
 
 נבדוק שהנוסחא באמת נכונה:
 
-$$\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\underset{\text{םימדקמ}}{\underbrace{\tilde{X}\left(\omega\right)}}e^{i\omega t}dt=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\left(\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}d\tau\right)e^{i\omega t}dt=$$
-$$\underset{\text{היצרגטניא}-\text{רדס}-\text{ףילחנ}}{\underbrace{=}}\frac{1}{2\pi}\intop_{-\infty}^{\infty}x\left(\tau\right)\left(\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}dt\right)d\tau=\frac{1}{2\pi}\intop_{-\infty}^{\infty}x\left(\tau\right)\left(2\pi\delta\left(t-\tau\right)\right)d\tau=x\left(t\right)$$
+$$\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\underset{\text{םימדקמ}}{\underbrace{\tilde{X}\left(\omega\right)}}e^{i\omega t}d\omega=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\left(\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}d\tau\right)e^{i\omega t}d\omega=$$
+$$\underset{\text{היצרגטניא}-\text{רדס}-\text{ףילחנ}}{\underbrace{=}}\frac{1}{2\pi}\intop_{-\infty}^{\infty}x\left(\tau\right)\left(\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}d\omega\right)d\tau=\frac{1}{2\pi}\intop_{-\infty}^{\infty}x\left(\tau\right)\left(2\pi\delta\left(t-\tau\right)\right)d\tau=x\left(t\right)$$
 
 ```{admonition} נשים לב
 :class: tip
-האינטגרל $\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}dt$ שווה 0 כאשר $t\ne\tau$ ואינסוף אחרת. כלומר:
+האינטגרל $\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}d\omega$ שווה 0 כאשר $t\ne\tau$ ואינסוף אחרת. כלומר:
 
-$$\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}dt=\begin{cases}
+$$\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}d\omega=\begin{cases}
 0 & t\ne\tau\\
 \infty & t=\tau
 \end{cases}\propto\delta\left(t-\tau\right)$$
@@ -83,8 +82,8 @@ $$\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}dt=\begin{cases}
 
 $$\tilde{Y}\left(\omega\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}y\left(t\right)e^{-i\omega t}dt=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}x\left(t\right)\ast h\left(t\right)e^{-i\omega t}dt$$
 $$=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau e^{-i\omega t}dt=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)e^{-i\omega t}dtd\tau$$
-$$\underset{u=t-\tau}{\underbrace{=}}\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(u\right)e^{-i\omega\left(u+\tau\right)}dud\tau=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}h\left(u\right)e^{-i\omega u}dtd\tau$$
-$$=\frac{1}{\sqrt{2\pi}}\left(\intop_{-\infty}^{\infty}h\left(u\right)e^{-i\omega u}dt\right)\left(\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}d\tau\right)=\sqrt{2\pi}\tilde{H}\left(\omega\right)\tilde{X}\left(\omega\right)$$
+$$\underset{u=t-\tau}{\underbrace{=}}\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(u\right)e^{-i\omega\left(u+\tau\right)}dud\tau=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}h\left(u\right)e^{-i\omega u}dud\tau$$
+$$=\frac{1}{\sqrt{2\pi}}\left(\intop_{-\infty}^{\infty}h\left(u\right)e^{-i\omega u}du\right)\left(\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}d\tau\right)=\sqrt{2\pi}\tilde{H}\left(\omega\right)\tilde{X}\left(\omega\right)$$
 
 בקצרה קיבלנו כי (הטריק המרכזי: מחליפים סדר אינטגרציה ומגדירים $u=t-\tau$ כדי לחשוף את המכפלה בתדר):
 
@@ -100,7 +99,7 @@ $$\underset{\text{תרוסמתה}-\text{תייצקנופ}}{\underbrace{\tilde{H}
 נרשום את זה בדיאגרמה כמו מקודם
 ![lti_freq_diagram.png](images/lti_freq_diagram.png)
 
-קיבלנו שמערכת LTI היא equalizer: היא מגבירה או מנמיכה תדרים מסוימים, ומסיתה פאזה – בלי ליצור תדרים חדשים.
+קיבלנו שמערכת LTI היא equalizer: היא מגבירה או מנמיכה תדרים מסוימים, ומסיטה פאזה – בלי ליצור תדרים חדשים.
 
 כמה מסקנות חשובות נובעות מזה:
 
@@ -110,7 +109,7 @@ $$\underset{\text{תרוסמתה}-\text{תייצקנופ}}{\underbrace{\tilde{H}
 
 ```{admonition} סיכום קצר – אנלוגיה לאלגברה לינארית
 :class: tip
-אותות ↔ וקטורים; מערכות ↔ אופרטורים; תגובת להלם h(t) ↔ מטריצה; בסיס התדר $e^{i\omega t}$ ↔ בסיס עצמי; קונבולוציה ↔ מכפלה בתדר.
+אותות ↔ וקטורים; מערכות ↔ אופרטורים; תגובה להלם h(t) ↔ מטריצה; בסיס התדר $e^{i\omega t}$ ↔ בסיס עצמי; קונבולוציה ↔ מכפלה בתדר.
 ```
 
 ### תכונות של פונקציית התמסורת
@@ -143,7 +142,7 @@ $$\tilde{H}\left(\omega\right)=\frac{\tilde{X}\left(\omega\right)}{\tilde{P}\lef
 ```
 
 נסו לשחק קצת עם האילוסטרציה. מהם הפרמטרים הכי טובים אם אנחנו רוצים לתכנן מיקרופון?
-נסו לגרום לרוחב של התמסורת להיות כמה שיותר רחבה
+נסו לגרום לרוחב של התמסורת להיות כמה שיותר רחב.
 
 * אם רוצים למקסם את התגובה בתדרים נמוכים נרצה $A$ גדול ו$k$ קטן
 * אם רוצים למקסם את התגובה בתדרים גבוהים נרצה $\sqrt{\frac{k}{m}}$ גדול
@@ -163,14 +162,14 @@ $$\tilde{H}\left(\omega\right)=\frac{\tilde{X}\left(\omega\right)}{\tilde{P}\lef
 כלומר שיש לנו שתי דרכים למדוד את $\tilde{H}\left(\omega_{0}\right)$
 
 * להכניס $\delta\left(t\right)$ למערכת ולעשות פורייה טרנספורם
-* להכניס למערכת  $\cos\left(\omega_{0}t\right)$ ולאות את שינוי האמפליטודה והפאזה
+* להכניס למערכת  $\cos\left(\omega_{0}t\right)$ ולראות את שינוי האמפליטודה והפאזה
 
 איך נראית המערכת כשאנחנו מכניסים אליה קוסינוס?
 
-$$y\left(t\right)=T:\left\{ x\left(t\right)\right\} =T:\left\{ \cos\left(\omega_{0}t\right)\right\} =T:\left\{ \frac{e^{i\omega_{0}t}-e^{-i\omega_{0}t}}{2}\right\} =$$
-$$=\frac{1}{2}\left(T:\left\{ e^{i\omega_{0}t}\right\} -T:\left\{ e^{-i\omega_{0}t}\right\} \right)=\frac{1}{2}\left(\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}-\tilde{H}\left(-\omega_{0}\right)e^{-i\omega_{0}t}\right)$$
-$$=\frac{1}{2}\left(\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}-\tilde{H}^{\ast}\left(\omega_{0}\right)e^{-i\omega_{0}t}\right)\underset{\varphi=\arg\left(\tilde{H}\left(\omega_{0}\right)\right)}{\underbrace{=}}\frac{1}{2}\left(\left|\tilde{H}\left(\omega_{0}\right)\right|e^{i\varphi}e^{i\omega_{0}t}-\left|\tilde{H}\left(\omega_{0}\right)\right|e^{-i\varphi}e^{-i\omega_{0}t}\right)$$
-$$=\frac{\left|\tilde{H}\left(\omega_{0}\right)\right|}{2}\left(e^{i\left(\omega_{0}t+\varphi\right)}-e^{-i\left(\omega_{0}t+\varphi\right)}\right)=\left|\tilde{H}\left(\omega_{0}\right)\right|\cos\left(\omega_{0}t+\varphi\right)$$
+$$y\left(t\right)=T:\left\{ x\left(t\right)\right\} =T:\left\{ \cos\left(\omega_{0}t\right)\right\} =T:\left\{ \frac{e^{i\omega_{0}t}+e^{-i\omega_{0}t}}{2}\right\} =$$
+$$=\frac{1}{2}\left(T:\left\{ e^{i\omega_{0}t}\right\} +T:\left\{ e^{-i\omega_{0}t}\right\} \right)=\frac{1}{2}\left(\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}+\tilde{H}\left(-\omega_{0}\right)e^{-i\omega_{0}t}\right)$$
+$$=\frac{1}{2}\left(\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}+\tilde{H}^{\ast}\left(\omega_{0}\right)e^{-i\omega_{0}t}\right)\underset{\varphi=\arg\left(\tilde{H}\left(\omega_{0}\right)\right)}{\underbrace{=}}\frac{1}{2}\left(\left|\tilde{H}\left(\omega_{0}\right)\right|e^{i\varphi}e^{i\omega_{0}t}+\left|\tilde{H}\left(\omega_{0}\right)\right|e^{-i\varphi}e^{-i\omega_{0}t}\right)$$
+$$=\frac{\left|\tilde{H}\left(\omega_{0}\right)\right|}{2}\left(e^{i\left(\omega_{0}t+\varphi\right)}+e^{-i\left(\omega_{0}t+\varphi\right)}\right)=\left|\tilde{H}\left(\omega_{0}\right)\right|\cos\left(\omega_{0}t+\varphi\right)$$
 
 קיבלנו ש-$\cos\left(\omega_{0}t\right)$ צובר פאזה והאמפליטודה שלו משתנה
 נשים לב שהמערכת היא Time Invariant ולכן:
@@ -193,7 +192,7 @@ $$T:\left\{ \cos\left(\omega_{0}t+\phi_{0}\right)\right\} =T:\left\{ \cos\left(\
 |                וקטור                 |                                                                      $\vec{v}$                                                                      |                                                                                  $x$                                                                                  |
 |               אופרטור                |                                                                 $T:V\rightarrow V$                                                                  |                                                          $y\left(t\right)=T:\left\{ x\left(t\right)\right\}$                                                          |
 |               לינאריות               |                  $T\left(\alpha\vec{v_{1}}+\beta\vec{v_{2}}\right)=T\left(\alpha\vec{v_{1}}\right)+T\left(\beta\vec{v_{2}}\right)$                  |                              $T:\left\{ \alpha x_{1}+\beta x_{2}\right\} =\alpha T:\left\{ x_{1}\right\} +\beta T:\left\{ x_{2}\right\}$                              |
-|          קורדינטות של וקטור          |                                                                        $v_i$                                                                        |                                                                                $x(t)$                                                                                 |
+|          קואורדינטות של וקטור          |                                                                        $v_i$                                                                        |                                                                                $x(t)$                                                                                 |
 |            פריסה על דלתא             |                                       $\left[\vec{v}\right]_{j}=\sum_{i}\left[\vec{v}\right]_{i}\delta_{ij}$                                        |                                   $x\left(t\right)=\intop_{-\infty}^{\infty}x\left(\tau\right)\cdot\delta\left(t-\tau\right)d\tau$                                    |
 |              תגובה להלם              |                                   $\left[T\left(\vec{v}\right)\right]_{i}=\sum_{j}h_{ij}\left[\vec{v}\right]_{j}$                                   |                            $T:\left\{ x\left(t\right)\right\} =\intop_{-\infty}^{\infty}x\left(\tau\right)\cdot h\left(t,\tau\right)d\tau$                            |
 |             מכפלה פנימית             |                 $\left\langle \vec{v}\|\vec{u}\right\rangle =\sum_{i}\left[\vec{v}\right]_{i}\cdot\left[\vec{u}\right]_{i}^{\ast}$                  |                 $\left\langle x\left(t\right)\|g\left(t\right)\right\rangle =\intop_{-\infty}^{\infty}x\left(t\right)\cdot g^{\ast}\left(t\right)dt$                  |
@@ -202,7 +201,7 @@ $$T:\left\{ \cos\left(\omega_{0}t+\phi_{0}\right)\right\} =T:\left\{ \cos\left(\
 | חישוב מקדמי פריסה בבסיס אורתונורמאלי | $\left[\vec{v}\right]_{i}=\left\langle \vec{v}\|\vec{b_{i}}\right\rangle =\sum_{j}\left[\vec{v}\right]_{j}\cdot\left[\vec{b}_{i}\right]_{j}^{\ast}$ | $X\left(\alpha\right)=\left\langle x\left(t\right)\|g_{\alpha}\left(t\right)\right\rangle =\intop_{-\infty}^{\infty}x\left(t\right)g_{\alpha}^{\ast}\left(t\right)dt$ |
 |              וקטור עצמי              |                                                 $T\left(\vec{v}_{i}\right)=\lambda_{i}\vec{v}_{i}$                                                  |                                   $T:\left\{ x_{\alpha}\left(t\right)\right\} =\lambda\left(\alpha\right)x_{\alpha}\left(t\right)$                                    |
 |              בסיס התדר               |                                                                 ספויילר לסוף הקורס                                                                  |                                                     $g_{\omega}\left(t\right)=\frac{1}{\sqrt{2\pi}}e^{i\omega t}$                                                     |
-|      בסיס התדר הוא ארתונורמאלי       |                                                                 ספויילר לסוף הקורס                                                                  |                             $\intop_{-\infty}^{\infty}e^{i\omega_{i}t}\cdot e^{-i\omega_{j}t}dt=\delta\left(\omega_{i}-\omega_{j}\right)$                             |
+|      בסיס התדר הוא ארתונורמאלי       |                                                                 ספויילר לסוף הקורס                                                                  |                             $\frac{1}{2\pi}\intop_{-\infty}^{\infty}e^{i\omega_{i}t}\cdot e^{-i\omega_{j}t}dt=\delta\left(\omega_{i}-\omega_{j}\right)$                             |
 |     חישוב מקדמי פריסה בבסיס התדר     |                                                                 ספויילר לסוף הקורס                                                                  |                                 $F\left(\omega\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}f\left(t\right)e^{-i\omega t}dt$                                  |
 |      בסיס התדר מלכסן מערכות LTI      |                                                                 ספויילר לסוף הקורס                                                                  |                                        $T:\left\{ e^{i\omega_{0}t}\right\} =\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}$                                         |
 
@@ -222,7 +221,7 @@ $$\tilde{H}_{inv}\left(\omega\right)=\frac{1}{\tilde{H}\left(\omega\right)}$$
 
 אבל כאן נכנסת הבעיה: לא בהכרח קיים הופכי קוזאלי. לעיתים מזיזים את $h_{inv}(t)$ קדימה בזמן כדי להפוך את החלק השלילי לבלתי משמעותי (דיליי קטן):
 
-$$\tilde{H}_{inv}\left(\omega\right)=\frac{1}{\tilde{H}\left(\omega\right)}\underset{\text{הזזה}}{\underbrace{e^{i\omega\tau}}}$$
+$$\tilde{H}_{inv}\left(\omega\right)=\frac{1}{\tilde{H}\left(\omega\right)}\underset{\text{הזזה}}{\underbrace{e^{-i\omega\tau}}}$$
 
 עוד בעיה שלרוב קיימת היא רעש. אנחנו נגיע לזה בהמשך הקורס.
 
@@ -230,4 +229,3 @@ $$\tilde{H}_{inv}\left(\omega\right)=\frac{1}{\tilde{H}\left(\omega\right)}\unde
 :class: tip
 תגובת התדר אומרת איך המערכת מטפלת ב"גווני הצליל": היא לא יוצרת גוונים חדשים, רק משנה עוצמות ופאזות. זהו כלי תכנון מרכזי למסננים, מיקרופונים ומערכות תקשורת.
 ```
-
