@@ -24,9 +24,9 @@
     },
     stages:[
       {key:"mix-i",name:"מיקסר I",symbol:"mixer",input:"received",output:"mixI",equation:[[String.raw`u_I=I(t)[\cos\theta+\cos(2\omega_0t+\theta)]`],[String.raw`+Q(t)[\sin\theta-\sin(2\omega_0t+\theta)]`]],note:"רכיבי בסיס הסרט נשארים אחרי הסינון; הרכיבים סביב תדר כפול מסולקים."},
-      {key:"filter-i",name:"מסנן ערוץ I",symbol:"lpf",input:"mixI",output:"outI",equation:iFormula,note:s=>s.cutoff>=375?"המסנן מעביר את שני תדרי המידע. שגיאת הפאזה מסובבת את הזוג I/Q, גם כאשר הסינון מושלם.":"המסנן חותך חלק מתדרי המידע, ולכן אי אפשר להשמיט אותו מהנוסחה."},
+      {key:"filter-i",filter:s=>({bands:[[-s.cutoff/1000,s.cutoff/1000]],edges:[-s.cutoff/1000,s.cutoff/1000],note:"הצללה: תחום המעבר; קווים מקווקווים: תדרי החיתוך.",tex:String.raw`|\nu|\le ${s.cutoff/1000}\;\mathrm{kHz}`}),name:"מסנן ערוץ I",symbol:"lpf",input:"mixI",output:"outI",equation:iFormula,note:s=>s.cutoff>=375?"המסנן מעביר את שני תדרי המידע. שגיאת הפאזה מסובבת את הזוג I/Q, גם כאשר הסינון מושלם.":"המסנן חותך חלק מתדרי המידע, ולכן אי אפשר להשמיט אותו מהנוסחה."},
       {key:"mix-q",name:"מיקסר Q",symbol:"mixer",input:"received",output:"mixQ",equation:[[String.raw`u_Q=-I(t)[\sin\theta+\sin(2\omega_0t+\theta)]`],[String.raw`+Q(t)[\cos\theta-\cos(2\omega_0t+\theta)]`]],note:"הסימן של מתנד הסינוס נבחר כדי לשחזר את Q באותו סימן כמו בשידור."},
-      {key:"filter-q",name:"מסנן ערוץ Q",symbol:"lpf",input:"mixQ",output:"outQ",equation:qFormula,note:s=>s.cutoff>=375?"בסנכרון מתקבל Q בלבד. ברבע מחזור הערוצים מתחלפים ואחד מהם מתהפך בסימן.":"תדר חיתוך נמוך מדי מסלק מידע, גם כאשר הפאזה מסונכרנת."}
+      {key:"filter-q",filter:s=>({bands:[[-s.cutoff/1000,s.cutoff/1000]],edges:[-s.cutoff/1000,s.cutoff/1000],note:"הצללה: תחום המעבר; קווים מקווקווים: תדרי החיתוך.",tex:String.raw`|\nu|\le ${s.cutoff/1000}\;\mathrm{kHz}`}),name:"מסנן ערוץ Q",symbol:"lpf",input:"mixQ",output:"outQ",equation:qFormula,note:s=>s.cutoff>=375?"בסנכרון מתקבל Q בלבד. ברבע מחזור הערוצים מתחלפים ואחד מהם מתהפך בסימן.":"תדר חיתוך נמוך מדי מסלק מידע, גם כאשר הפאזה מסונכרנת."}
     ],
     diagram:{width:850,height:385,draw({line,part,probe,label}){
       line("M25 75 H315","received");line("M180 75 V215 H315","received");probe("received",65,75);

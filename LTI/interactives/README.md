@@ -16,6 +16,8 @@ Paths in this table are relative to the repository root except the three local L
 
 All plots use fixed viewing windows, transparent MathJax labels, Hebrew controls and LTR mathematical notation. Units are explicit: RC uses milliseconds and thousands of radians per second; RLC uses milliohms, nanohenries, nanofarads and hundreds of millions of radians per second. Room plots use the chapter's symmetric Fourier normalization. Impedance-matching power is scaled by the source-voltage amplitude squared, as in the original activity.
 
+Every local JSXGraph plot has four compact tools through `CourseInteractives.navigation`: magnifier (drag a rectangle to zoom), hand (left-drag to pan, right-drag to scale), home, and undo. Undo reverses one completed view gesture (including Home), independently for each graph, without changing signal parameters. In hand mode, rightward/upward right-button movement zooms in along x/y respectively; leftward/downward movement zooms out. Scaling is anchored at the pressed point and follows Matplotlib's exponential linear-axis rule (one plot width/height changes the span tenfold). Pointer capture lets a drag finish outside the plot. Rectangle selection, left-button pan and wheel/pinch zoom use JSXGraph's built-in interactions. Escape returns to pan mode. Shift + wheel zooms without taking over ordinary page scrolling. Touch uses two-finger panning/pinch zoom. Home restores the original limits; parameter changes preserve the user's current view. The microphone fragment includes the shared runtime for the same controls.
+
 The RC width marker retains the original half-amplitude definition; the RLC width uses half power. Convolution uses numerical quadrature on a fixed grid, with explicitly labelled finite Gaussian approximations for impulses and a finite seven-pulse train. Playback reuses the output curve until a signal parameter changes. Extreme parameter combinations can exceed the fixed viewing window.
 
 JSXGraph is pinned to version 1.14.0 on jsDelivr. MathJax is supplied by the course. If loading fails, the activity offers the original external activity as a fallback link.
@@ -24,6 +26,7 @@ Run the mathematical invariants and inline-script syntax checks from the reposit
 
 ```powershell
 node --test LTI/interactives/tests/models.test.cjs
+node --test LTI/interactives/tests/navigation.test.cjs
 ```
 
 For browser verification, build the affected chapters with notebook execution disabled in a separate preview configuration. Inspect dropdowns after opening, presets, slider extremes, playback, fixed scales and phone width. A fresh build or touching the containing Markdown ensures edited raw HTML includes are re-read by incremental page builds.
@@ -48,3 +51,11 @@ The RC detector uses a discrete peak/decay recurrence with periodic warm-up, not
 ```powershell
 node --test LTI/interactives/tests/processes.test.cjs analog_communication/interactives/tests/coherent-am.test.cjs
 ```
+
+Selected process filters use `CourseInteractives.filterOverlay`: translucent passbands with dashed edges (in kHz), or a dashed magnitude response at a fixed reference height. The caption distinguishes filter gain from the signal amplitude axis. Bounds follow filter parameters; selection and curve visibility do not change the physical signal scale. Ideal RF models explicitly show unity across the displayed range, without inventing a bandwidth. Nonlinear diode/RC envelope detection has no LTI response overlay.
+
+The two heterodyne stations carry five-digit DTMF-inspired sequences (12345 and 86420), using artificial low-frequency row/column pairs on the existing 6.25 Hz grid. Carrier frequencies, plot limits, and 4,096-sample buffers remain unchanged. Each digit is a stationary pair; Play assembles five short segments with fades and gaps, advances the selected digit and plots, and stops on manual selection/parameter changes. Only the five small models for the current LO/bandwidth are cached. These are illustrative pairs, not standard telephone DTMF frequencies.
+
+The heterodyne `frequencyReference` keeps the downstream IF passband visible in RF, mixer, VCO, and prefilter checkpoint views. The reference retains the IF output color and fixed ±1.2 kHz center; only bandwidth changes its edges. Its caption identifies it as a downstream reference rather than a filter already applied at the displayed point.
+
+The microphone fragment also contains an analytic single/three-tone probe. It shares the existing mass, damping and stiffness parameters. Exactly two plots are visible: magnitude, plus either steady-state input/output or phase. Tone frequencies, gain/phase markers, component inclusion, and component/sum views preserve physical amplitude and viewport limits. No FFT, numerical ODE, audio or long buffers are used. `tests/tone-probe.test.cjs` verifies the microphone equation and superposition at parameter extremes.

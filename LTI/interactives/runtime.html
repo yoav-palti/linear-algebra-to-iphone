@@ -21,6 +21,15 @@
   .course-interactive .ci-board { width:100%; height:265px; direction:ltr; overflow:hidden; position:relative; touch-action:pan-y; }
   .course-interactive .ci-board > svg { max-width:none; }
   .course-interactive .ci-caption { text-align:center; direction:ltr; font-size:12px; color:var(--ci-muted); }
+  .ci-graph-navigation { display:flex; justify-content:center; flex-wrap:wrap; gap:4px; direction:ltr; margin:4px 0; }
+  .course-interactive .ci-graph-navigation button, #microphone-response .ci-graph-navigation button { min-width:32px; min-height:32px; padding:3px 7px; font:16px/1.2 system-ui,sans-serif; }
+  .ci-graph-pannable { cursor:grab; }
+  .ci-graph-pannable:active { cursor:grabbing; }
+  .ci-graph-selecting, .ci-graph-selecting:active { cursor:crosshair; touch-action:none !important; }
+  .ci-graph-scaling, .ci-graph-scaling:active { cursor:crosshair; }
+  .course-interactive .ci-graph-navigation button[aria-pressed=true], #microphone-response .ci-graph-navigation button[aria-pressed=true] { background:#dceef1; border-color:#087e85; }
+  .ci-graph-navigation button svg { display:block; width:18px; height:18px; }
+  .ci-graph-navigation button:disabled { opacity:.35; cursor:default; }
   .course-interactive .ci-math-label { direction:ltr; background:transparent; white-space:nowrap; padding:0 2px; }
   .course-interactive .ci-metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:8px; margin:14px 0 0; }
   .course-interactive .ci-metric { background:#eaf1f5; border-radius:9px; padding:10px; font-size:12px; color:var(--ci-muted); min-width:0; }
@@ -129,6 +138,139 @@
     return element;
   }
   function math(parent,tex) { const span=node("span",parent,"\\(" + tex + "\\)","math notranslate"); span.dir="ltr"; return span; }
+  function navigation(board,container) {
+    const home=board.getBoundingBox().slice();
+    const toolbar=node("div",null,undefined,"ci-graph-navigation");
+    toolbar.setAttribute("role","group");toolbar.setAttribute("aria-label","ניווט בגרף");
+    const icon=path=>`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+    const makeButton=(title,path,action)=>{const button=node("button",toolbar);button.innerHTML=icon(path);button.type="button";button.title=title;button.setAttribute("aria-label",title);button.addEventListener("click",action);return button;};
+    let selecting=false,rightDrag=null,gesture=false,restoring=false,historyTimer,undo;
+    const history=[home.slice()];
+    const sameView=(a,b)=>a.every((v,i)=>Math.abs(v-b[i])<=1e-10*Math.max(1,Math.abs(v),Math.abs(b[i])));
+    const remember=()=>{
+      clearTimeout(historyTimer);
+      const view=board.getBoundingBox().slice();
+      if(!sameView(view,history.at(-1))){history.push(view);if(history.length>101)history.shift();}
+      if(undo)undo.disabled=history.length<2;
+    };
+    const finishScaling=()=>{
+      const pointer=rightDrag?.pointerId;rightDrag=null;
+      container.classList.remove("ci-graph-scaling");
+      if(pointer!==undefined&&container.hasPointerCapture(pointer))container.releasePointerCapture(pointer);
+      if(pointer!==undefined){gesture=false;remember();}
+    };
+    const mode=enabled=>{
+      finishScaling();
+      selecting=enabled;
+      if(enabled)board.startSelectionMode();else board.stopSelectionMode();
+      zoom.setAttribute("aria-pressed",String(enabled));pan.setAttribute("aria-pressed",String(!enabled));
+      container.classList.toggle("ci-graph-selecting",enabled);
+    };
+    const zoom=makeButton("בחירת אזור להגדלה",'<circle cx="10" cy="10" r="6.5"/><path d="M15 15 L21 21"/>',()=>mode(!selecting));
+    const pan=makeButton("הזזה בגרירה",'<path d="M8 12 V5 a1.5 1.5 0 0 1 3 0 V11 V3 a1.5 1.5 0 0 1 3 0 V11 V5 a1.5 1.5 0 0 1 3 0 V12 V8 a1.5 1.5 0 0 1 3 0 V16 Q20 22 14 22 H12 Q9 22 7 19 L3 13 Q2 11 4 11 L8 15"/>',()=>mode(false));
+    makeButton("תצוגת הבית",'<path d="M3 11 L12 3 L21 11 M5 10 V21 H19 V10 M10 21 V14 H14 V21"/>',()=>{mode(false);remember();board.setBoundingBox(home.slice(),false,"reset");remember();});
+    undo=makeButton("ביטול שינוי תצוגה",'<path d="M9 5 L4 10 L9 15 M4 10 H14 A6 6 0 0 1 14 22"/>',()=>{
+      finishScaling();remember();if(history.length<2)return;
+      history.pop();restoring=true;
+      try{board.setBoundingBox(history.at(-1).slice(),false,"update");}finally{restoring=false;}
+      undo.disabled=history.length<2;
+    });
+    undo.disabled=true;
+    zoom.setAttribute("aria-pressed","false");pan.setAttribute("aria-pressed","true");
+    // Save one view per drag; wheel/pinch bursts settle into a single history entry.
+    board.on("down",()=>{remember();gesture=true;});
+    board.on("up",()=>queueMicrotask(()=>{gesture=false;remember();}));
+    board.on("boundingbox",()=>{if(!restoring&&!gesture){clearTimeout(historyTimer);historyTimer=setTimeout(remember,180);}});
+    // JSXGraph draws and tracks the rectangle; only its resulting viewport is applied here.
+    board.on("stopselecting",()=>{
+      const corners=board.stopSelectionMode(),a=corners[0].usrCoords,b=corners[1].usrCoords;
+      remember();
+      if(Math.abs(a[1]-b[1])*board.unitX>=6&&Math.abs(a[2]-b[2])*board.unitY>=6)
+        board.setBoundingBox([Math.min(a[1],b[1]),Math.max(a[2],b[2]),Math.max(a[1],b[1]),Math.min(a[2],b[2])],false,"update");
+      remember();
+      // JSXGraph ends selection again after this callback returns. Re-arm afterwards.
+      if(selecting)queueMicrotask(()=>{if(selecting)board.startSelectionMode();});
+    });
+    const escape=event=>{if(event.key==="Escape")mode(false);};
+    container.addEventListener("keydown",escape);toolbar.addEventListener("keydown",escape);
+    const consume=event=>{event.preventDefault();event.stopImmediatePropagation();};
+    container.addEventListener("pointerdown",event=>{
+      if(selecting||event.button!==2||event.pointerType==="touch")return;
+      const rect=container.getBoundingClientRect(),bounds=board.getBoundingBox().slice();
+      if(!rect.width||!rect.height)return;
+      consume(event);
+      remember();gesture=true;
+      const u=(event.clientX-rect.left)/rect.width,v=(event.clientY-rect.top)/rect.height;
+      rightDrag={pointerId:event.pointerId,x:event.clientX,y:event.clientY,width:rect.width,height:rect.height,bounds,
+        anchorX:bounds[0]+u*(bounds[2]-bounds[0]),anchorY:bounds[1]-v*(bounds[1]-bounds[3])};
+      container.setPointerCapture(event.pointerId);container.classList.add("ci-graph-scaling");
+    },true);
+    container.addEventListener("pointermove",event=>{
+      if(!rightDrag||event.pointerId!==rightDrag.pointerId)return;
+      consume(event);
+      if(!(event.buttons&2)){finishScaling();return;}
+      const d=rightDrag;
+      // Matplotlib's linear-axis rule: a full plot-width/height drag changes scale tenfold.
+      const fx=10**Math.max(-6,Math.min(6,-(event.clientX-d.x)/d.width));
+      const fy=10**Math.max(-6,Math.min(6,(event.clientY-d.y)/d.height));
+      const b=d.bounds,next=[d.anchorX+(b[0]-d.anchorX)*fx,d.anchorY+(b[1]-d.anchorY)*fy,
+        d.anchorX+(b[2]-d.anchorX)*fx,d.anchorY+(b[3]-d.anchorY)*fy];
+      if(next.every(Number.isFinite)&&next[2]>next[0]&&next[1]>next[3])board.setBoundingBox(next,false,"update");
+    },true);
+    for(const type of ["pointerup","pointercancel"])container.addEventListener(type,event=>{
+      if(rightDrag&&event.pointerId===rightDrag.pointerId){consume(event);finishScaling();}
+    },true);
+    container.addEventListener("lostpointercapture",finishScaling);
+    container.addEventListener("contextmenu",event=>{if(!selecting||rightDrag)consume(event);},true);
+    container.after(toolbar);container.classList.add("ci-graph-pannable");
+    container.title="זכוכית מגדלת: בחירת אזור; יד: גרירה בשמאל להזזה ובימין לשינוי קנה המידה; בית: התצוגה המקורית";
+    return toolbar;
+  }
+  // Frequency coordinates are kHz. Shading denotes a region, never signal amplitude.
+  function filterOverlay(c,board,specification) {
+    const spec=()=>specification(),shown=()=>Boolean(spec());
+    const color=()=>spec()?.color||"#526779";
+    const bounds=()=>board.getBoundingBox();
+    for(let i=0;i<2;i++){
+      const band=()=>spec()?.allpass&&i===0?[bounds()[0],bounds()[2]]:spec()?.bands?.[i];
+      const x=side=>()=>band()?.[side]??0;
+      board.create("polygon",[[x(0),()=>bounds()[1]],[x(1),()=>bounds()[1]],[x(1),0],[x(0),0]],{
+        visible:()=>Boolean(band()),fillColor:color,fillOpacity:.09,highlight:false,fixed:true,layer:1,
+        vertices:{visible:false,fixed:true},borders:{visible:false}});
+    }
+    for(let i=0;i<4;i++){
+      const edge=()=>spec()?.edges?.[i];
+      c.segment(board,[()=>edge()??0,0],[()=>edge()??0,()=>bounds()[1]],{
+        visible:()=>edge()!==undefined,strokeColor:color,strokeOpacity:.65,strokeWidth:1.3,layer:2});
+    }
+    const height=board.getBoundingBox()[1]*.72;
+    c.curve(board,x=>(spec()?.response?.(x)||0)*height,()=>bounds()[0],()=>bounds()[2],"#526779",{
+      visible:()=>Boolean(spec()?.response),strokeColor:color,dash:2,strokeWidth:1.8,layer:3});
+    c.label(board,()=>bounds()[2]-.04*(bounds()[2]-bounds()[0]),height,String.raw`|H|=1`,{
+      visible:()=>Boolean(spec()?.response),strokeColor:color,anchorX:"right",anchorY:"bottom",fontSize:11});
+    // Response height is fixed at creation; navigating never rescales it.
+    const caption=c.node("div",null,undefined,"ci-note");
+    caption.style.margin="4px 0";caption.style.minHeight="1.5em";
+    const container=document.getElementById(board.container);
+    container.parentNode.append(caption);
+    let last="",revision=0;
+    return {update(){
+      const value=spec();caption.hidden=!value;
+      if(!value){last="";return;}
+      caption.style.color=value.color;
+      const key=value.note+value.tex;
+      if(key===last)return;last=key;
+      const version=++revision;
+      // Serialize with other MathJax work and discard stale slider updates.
+      Promise.resolve(window.MathJax.startup.promise).then(async()=>{
+        if(version!==revision||!shown())return;
+        window.MathJax.typesetClear([caption]);caption.replaceChildren();
+        caption.append(document.createTextNode(value.note+" "));
+        if(value.tex)c.math(c.node("span",caption),value.tex);
+        await window.MathJax.typesetPromise([caption]);
+      }).catch(error=>console.error("Filter annotation",error));
+    }};
+  }
   async function mount(id,options) {
     const root=document.getElementById(id);
     if (!root || root.dataset.initialized) return;
@@ -171,7 +313,8 @@
           if(settings.height) container.style.height=settings.height + "px";
           if(caption) math(node("div",card,undefined,"ci-caption"),caption);
           const board=window.JXG.JSXGraph.initBoard(container.id,{boundingbox:box,axis:false,grid:false,
-            showCopyright:false,showNavigation:false,keepaspectratio:false,pan:{enabled:false},zoom:{enabled:false,wheel:false},resize:{enabled:true}});
+            showCopyright:false,showNavigation:false,keepaspectratio:false,pan:{enabled:true,needShift:false,needTwoFingers:true},zoom:{enabled:true,wheel:true,needShift:true,pinch:true},selection:{enabled:true,needShift:false,needCtrl:true,fillColor:"#087e85",fillOpacity:.12,strokeColor:"#087e85",withLines:true,vertices:{visible:false}},resize:{enabled:true}});
+          navigation(board,container);
           const axis={strokeColor:"#9cabb6",strokeWidth:1,highlight:false,fixed:true,
             ticks:{minorTicks:0,drawLabels:true,strokeColor:"#bdcbd4",label:{fontSize:11,strokeColor:"#526779"}}};
           board.create("axis",[[0,0],[1,0]],{...axis,ticks:{...axis.ticks,drawNegative:settings.negativeX!==false}});
@@ -208,6 +351,6 @@
       if(options.original) { const link=node("a",status,"ההדגמה המקורית");link.href=options.original;link.target="_blank";link.rel="noopener"; }
     }
   }
-  window.CourseInteractives={mount,models,colors};
+  window.CourseInteractives={mount,models,colors,navigation,filterOverlay};
 })();
 </script>

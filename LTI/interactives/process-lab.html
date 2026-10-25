@@ -56,7 +56,7 @@ window.ProcessLab = (() => {
       root.classList.add("process-lab");
       const info={};Object.entries(config.signals).forEach(([key,v],i)=>{info[key]={color:palette[i%palette.length],...v};});
       const colorize=(el,key)=>{el.style.setProperty("--signal",info[key].color);el.style.setProperty("--tint",info[key].color+"15");};
-      let data=config.model(s),selected=config.initial.selection||config.stages[0].key,hidden=new Set(),cache={},audioContext,source,finishTimer,audioVersion=0;
+      let data=config.model(s),selected=config.initial.selection||config.stages[0].key,hidden=new Set(),cache={},audioContext,source,finishTimer,audioVersion=0,sequenceTimers=[];
       const controls=root.querySelector(".ci-controls"),presets=root.querySelector(".ci-buttons"),plots=root.querySelector(".ci-plots");
       config.controls(c);
       if(config.window!==160)c.control("position","תחילת חלון הזמן",String.raw`t_0\;[\mathrm{ms}]`,0,140,5,0);
@@ -74,6 +74,14 @@ window.ProcessLab = (() => {
       const time=c.board("time",String.raw`t`,config.window===160?String.raw`t\;[\mathrm{ms}]`:String.raw`t-t_0\;[\mathrm{ms}]`,[-duration*.09,2.2,duration*1.04,-2.2],{height:220});
       const frequency=c.board("frequency",String.raw`\nu`,String.raw`\nu\;[\mathrm{kHz}]`,[-limit*1.08,config.frequencyTop||1.8,limit*1.08,-(config.frequencyTop||1.8)*.12],{height:220});
       for(const [index,title] of ["בזמן","בתדר"].entries()){const h=plots.children[index].querySelector("h5");h.replaceChildren();c.node("span",h,title);}
+      const filter=CourseInteractives.filterOverlay(c,frequency,()=>{
+        const reference=config.frequencyReference?.(s,selected);
+        if(reference)return {color:info[reference.signal].color,...reference};
+        const current=stageByKey[selected];
+        if(!current)return null;
+        const definition=typeof current.filter==="function"?current.filter(s):current.filter || (current.symbol==="dc"?{edges:[0],note:"הקו המקווקו מסמן את רכיב האפס שמסולק.",tex:String.raw`H(0)=0`}:null);
+        return definition?{color:info[current.output].color,...definition}:null;
+      });
       const curves={};
       for(const side of ["input","output"]){
         const attributes={visible:()=>Boolean(visible(active()[side])),strokeWidth:side==="input"?2:2.5};
@@ -89,18 +97,27 @@ window.ProcessLab = (() => {
       }
       const legendButtons={};
       for(const side of ["input","output"]){const button=c.node("button",legend);button.type="button";button.addEventListener("click",()=>{const key=active()[side];hidden.has(key)?hidden.delete(key):hidden.add(key);c.update("visibility");});legendButtons[side]=button;}
-      const stop=()=>{audioVersion++;if(source){source.onended=null;source.stop();source.disconnect();source=null;}clearTimeout(finishTimer);audioStatus.textContent="";};
+      const stop=()=>{audioVersion++;sequenceTimers.forEach(clearTimeout);sequenceTimers=[];if(source){source.onended=null;source.stop();source.disconnect();source=null;}clearTimeout(finishTimer);audioStatus.textContent="";};
       async function play(side){
         stop();const key=side==="original"?config.original:active()[side];if(!key)return;
         const version=audioVersion;
         try{
           const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)throw new Error("Audio unavailable");
           audioContext=audioContext||new Audio();await audioContext.resume();if(version!==audioVersion)return;
-          const buffer=audioContext.createBuffer(1,Math.round(audioContext.sampleRate*2),audioContext.sampleRate),values=buffer.getChannelData(0),signal=data[key];
-          for(let i=0;i<values.length;i++){const t=i/audioContext.sampleRate+s.position/1000;values[i]=.12*m.valueAt(signal,Math.floor(t*signal.rate))*Math.min(1,i/400,(values.length-1-i)/400);}
+          const sequence=config.audioSequence;
+          const frames=sequence?Array.from({length:sequence.count},(_,digit)=>config.model({...s,[sequence.control]:digit})):[data];
+          const seconds=sequence?sequence.count*(sequence.tone+sequence.gap)-sequence.gap:2;
+          const buffer=audioContext.createBuffer(1,Math.round(audioContext.sampleRate*seconds),audioContext.sampleRate),values=buffer.getChannelData(0),signal=data[key];
+          if(sequence)values.set(m.sequenceAudio(frames,key,s.position,audioContext.sampleRate,sequence));
+          else for(let i=0;i<values.length;i++){const t=i/audioContext.sampleRate+s.position/1000;values[i]=.12*m.valueAt(signal,Math.floor(t*signal.rate))*Math.min(1,i/400,(values.length-1-i)/400);}
           source=audioContext.createBufferSource();source.buffer=buffer;source.connect(audioContext.destination);source.start();source.onended=()=>{source=null;audioStatus.textContent="";};
           audioStatus.textContent="מנגן: "+info[key].name+(signal.discrete?" (בהחזקה מסדר אפס)":"");
-          finishTimer=setTimeout(()=>{audioStatus.textContent="";},2200);
+          if(sequence){
+            const showDigit=digit=>{if(version!==audioVersion)return;s[sequence.control]=digit;c.update("sequence-step");};
+            showDigit(0);
+            for(let digit=1;digit<sequence.count;digit++)sequenceTimers.push(setTimeout(()=>showDigit(digit),digit*(sequence.tone+sequence.gap)*1000));
+          }
+          finishTimer=setTimeout(()=>{audioStatus.textContent="";},seconds*1000+200);
         }catch(error){audioStatus.textContent="לא ניתן להפעיל שמע בדפדפן זה.";}
       }
       const playInput=c.node("button",audio,"האזנה לכניסה"),playOutput=c.node("button",audio,"האזנה למוצא"),stopButton=c.node("button",audio,"עצירה");
@@ -153,11 +170,12 @@ window.ProcessLab = (() => {
       if(config.note)c.note(config.note);
       return {update(key){
         if(!["visibility","selection"].includes(key)){data=config.model(s);}
-        if(key!=="visibility")stop();
+        if(key!=="visibility"&&key!=="sequence-step")stop();
         if(key!=="visibility"){
           cache={};for(const side of ["input","output"]){const name=active()[side];if(name){cache[side]={time:m.timeData(data[name],s.position,duration),frequency:m.spectrum(data[name],s.position,duration,limit)};}}
           renderEquation();
         }
+        filter.update();
         const current=active();description.textContent=(stageByKey[selected]?stageByKey[selected].name+": ":"")+(typeof current.note==="function"?current.note(s):current.note||"");
         if(readout)readout.textContent=config.readout(data,s);
         diagram.querySelectorAll("[data-view]").forEach(el=>el.setAttribute("aria-pressed",String(el.dataset.view===selected)));

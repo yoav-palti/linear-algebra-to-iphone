@@ -50,11 +50,35 @@ window.ProcessModels = (() => {
     const rectified=map(received,v=>Math.max(0,v)),held=diode(received,tau/1000);
     return {original,received,rectified,held,recovered:dc(held)};
   }
-  function heterodyne({lo=1200,width=450}={}) {
-    const received=signal(t=>(1+.6*Math.cos(TAU*250*t))*Math.cos(TAU*2400*t)+.4*(1+.5*Math.cos(TAU*375*t))*Math.cos(TAU*3400*t));
+  const stationNumbers=["12345","86420"];
+  function dialPair(digit) {
+    const keypad=["123","456","789","*0#"],row=keypad.findIndex(keys=>keys.includes(String(digit)));
+    if(row<0)throw new Error("Unknown dial digit");
+    return [[175,193.75,212.5,237.5][row],[300,331.25,368.75][keypad[row].indexOf(String(digit))]];
+  }
+  let dialCacheKey="",dialCache=new Map();
+  function heterodyne({lo=1200,width=450,digit=0}={}) {
+    const key=lo+":"+width;
+    if(key!==dialCacheKey){dialCacheKey=key;dialCache.clear();}
+    digit=Math.max(0,Math.min(4,Math.round(digit)));
+    if(dialCache.has(digit))return dialCache.get(digit);
+    const pairs=stationNumbers.map(number=>dialPair(number[digit]));
+    const message=(j,t)=>(Math.cos(TAU*pairs[j][0]*t)+Math.cos(TAU*pairs[j][1]*t))/2;
+    const received=signal(t=>(1+.6*message(0,t))*Math.cos(TAU*2400*t)+.4*(1+.5*message(1,t))*Math.cos(TAU*3400*t));
     const oscillator=signal(t=>Math.cos(TAU*lo*t)),mixed=map(received,(v,t)=>v*Math.cos(TAU*lo*t));
     const intermediate=filter(mixed,f=>Math.abs(f-1200)<=width+1e-8),detected=envelope(intermediate);
-    return {received,rf:received,oscillator,mixed,intermediate,detected,recovered:dc(detected)};
+    const result={received,rf:received,oscillator,mixed,intermediate,detected,recovered:dc(detected)};
+    dialCache.set(digit,result);return result;
+  }
+  function sequenceAudio(frames,key,position,rate,{tone=.3,gap=.1,gain=.12}={}) {
+    const seconds=frames.length*(tone+gap)-gap,values=new Float32Array(Math.round(rate*seconds));
+    for(let i=0;i<values.length;i++){
+      const t=i/rate,slot=Math.floor((t+1e-10)/(tone+gap)),local=t-slot*(tone+gap);
+      if(local>=tone)continue;
+      const current=frames[Math.min(slot,frames.length-1)][key],fade=Math.max(0,Math.min(1,local/.005,(tone-local)/.005));
+      values[i]=gain*valueAt(current,Math.floor((local+position/1000)*current.rate+1e-8))*fade;
+    }
+    return values;
   }
   function fm({deviation=600,message:kind="tone"}={}) {
     const original=signal(t=>message(kind,t));
@@ -130,6 +154,6 @@ window.ProcessModels = (() => {
     fft(re,im);const max=Math.min(size/2,Math.floor(limit*1000*size/s.rate)),x=[],y=[];
     for(let k=-max;k<=max;k++){const j=(k+size)%size;x.push(k*s.rate/size/1000);y.push(Math.hypot(re[j],im[j])/area);}return {x,y};
   }
-  return {signal,map,fft,lowpass,dc,envelope,diode,amEnvelope,heterodyne,fm,iq,sampling,matched,alias,timeData,spectrum,valueAt};
+  return {signal,map,fft,lowpass,dc,envelope,diode,amEnvelope,heterodyne,dialPair,stationNumbers,sequenceAudio,fm,iq,sampling,matched,alias,timeData,spectrum,valueAt};
 })();
 </script>

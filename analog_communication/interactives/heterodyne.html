@@ -4,13 +4,20 @@
   <noscript>ההדגמה דורשת JavaScript.</noscript>
 </section>
 <script>
+(() => {
+  const ifFilter=s=>({bands:[[-1.2-s.width/1000,-1.2+s.width/1000],[1.2-s.width/1000,1.2+s.width/1000]],edges:[-1.2-s.width/1000,-1.2+s.width/1000,1.2-s.width/1000,1.2+s.width/1000],note:"הצללה: תחומי המעבר; קווים מקווקווים: גבולות המסנן.",tex:String.raw`|\nu|\in[${(1.2-s.width/1000).toFixed(3)},${(1.2+s.width/1000).toFixed(3)}]\;\mathrm{kHz}`});
 ProcessLab.mount("heterodyne-process",{
-  initial:{lo:1200,width:450,selection:"if"},model:ProcessModels.heterodyne,limit:6.5,
+  initial:{lo:1200,width:450,digit:0,selection:"if"},model:ProcessModels.heterodyne,limit:6.5,
   diagramLabel:"מקלט הטרודיין: RF, מיקסר עם VCO, מסנן תדר ביניים, גילוי מעטפת והסרת רכיב קבוע",
+  frequencyReference(s,selected){
+    if(!["received","rf","mixed","oscillator","rf-block","mix","intermediate"].includes(selected))return null;
+    return {...ifFilter(s),signal:"intermediate",note:selected==="intermediate"?"הצללה: תחומי המעבר של מסנן IF.":"הצללה: מסנן IF בהמשך השרשרת, כתצוגת ייחוס. כיוון המתנד מזיז את ספקטרום המיקסר ביחס לתחום המעבר הקבוע."};
+  },
+  audioSequence:{control:"digit",count:5,tone:.3,gap:.1},
   controls(c){c.control("lo","תדר המתנד המקומי",String.raw`f_{\mathrm{LO}}\;[\mathrm{Hz}]`,1000,2400,50,0);c.control("width","חצי רוחב מסנן הביניים",String.raw`B\;[\mathrm{Hz}]`,100,650,25,0);},
-  presets:[["התחנה הראשונה",{lo:1200,width:450}],["התחנה השנייה",{lo:2200,width:450}],["בין תחנות",{lo:1700,width:200}],["מסנן צר מדי",{lo:1200,width:100}]],
+  presets:[["התחנה הראשונה",{lo:1200,width:450}],["התחנה השנייה",{lo:2200,width:450}],["בין תחנות",{lo:1700,width:200}],["מסנן צר מדי",{lo:1200,width:250}]],
   signals:{
-    received:{name:"שתי תחנות בכניסה",symbol:String.raw`r(t)`,equation:String.raw`r(t)=A_1(t)\cos(\omega_1t)+A_2(t)\cos(\omega_2t)`,note:"שתי תחנות בתדרים 2.4 ו־3.4 kHz. בראשונה צליל 250 Hz, ובשנייה 375 Hz."},
+    received:{name:"שתי תחנות בכניסה",symbol:String.raw`r(t)`,equation:String.raw`r(t)=A_1(t)\cos(\omega_1t)+A_2(t)\cos(\omega_2t)`,note:"שתי תחנות בתדרים 2.4 ו־3.4 kHz. כל אחת משדרת חמישה זוגות צלילים, בהשראת חיוג טלפוני ובתדרים נמוכים המותאמים למסנן."},
     rf:{name:"מוצא חזית RF",symbol:String.raw`r_{\mathrm{RF}}(t)`,equation:String.raw`r_{\mathrm{RF}}(t)=r(t)`,note:"חזית RF אידאלית בהגבר יחידה מעבירה את שתי התחנות; הברירה הצרה תיעשה ב־IF."},
     mixed:{name:"מוצא המיקסר",symbol:String.raw`u(t)`,equation:[[String.raw`u(t)=\frac{1}{2}\sum_{j=1}^{2}A_j(t)\cos((\omega_j-\omega_{\mathrm{LO}})t)`],[String.raw`+\frac{1}{2}\sum_{j=1}^{2}A_j(t)\cos((\omega_j+\omega_{\mathrm{LO}})t)`]],note:"כל תחנה יוצרת עותק בתדר ההפרש ועותק בתדר הסכום. שני העותקים מופיעים גם בתדרים שליליים."},
     intermediate:{name:"מוצא מסנן IF",symbol:String.raw`v(t)`,equation:[[String.raw`v(t)=\operatorname{BPF}_{\omega_{\mathrm{IF}}}\{u(t)\}`],[String.raw`u(t)=\frac{1}{2}\sum_j A_j(t)\cos((\omega_j-\omega_{\mathrm{LO}})t)`],[String.raw`+\frac{1}{2}\sum_j A_j(t)\cos((\omega_j+\omega_{\mathrm{LO}})t)`]],note:"מרכז המסנן קבוע: 1.2 kHz. המתנד מזיז את התחנות ביחס למסנן; הוא אינו מזיז את המסנן."},
@@ -19,12 +26,17 @@ ProcessLab.mount("heterodyne-process",{
     oscillator:{name:"המתנד המקומי",symbol:String.raw`v_{\mathrm{LO}}(t)`,equation:String.raw`v_{\mathrm{LO}}(t)=\cos(2\pi f_{\mathrm{LO}}t)`,note:"כיוון תדר המתנד בוחר איזו תחנה תגיע לתדר הביניים הקבוע."}
   },
   stages:[
-    {key:"rf-block",name:"חזית RF רחבת סרט",symbol:"rf",input:"received",output:"rf",equation:String.raw`r_{\mathrm{RF}}(t)=r(t)=\sum_{j=1}^{2}A_j(t)\cos(\omega_jt)`,note:"מודל בהגבר יחידה שמעביר את שתי התחנות. כאן אין סינון של תחנת דמות או רעש נוסף."},
+    {key:"rf-block",filter:{allpass:true,note:"הצללה: מעבר בהגבר יחידה בכל התחום המוצג (מודל RF אידאלי).",tex:String.raw`H_{\mathrm{RF}}=1`},name:"חזית RF רחבת סרט",symbol:"rf",input:"received",output:"rf",equation:s=>{
+      const pairs=ProcessModels.stationNumbers.map(number=>ProcessModels.dialPair(number[Number(s.digit)]));
+      return [[String.raw`r(t)=\sum_{j=1}^{2}A_j(t)\cos(\omega_jt)`],[String.raw`A_1(t)=1+0.6m_1(t),\quad A_2(t)=0.4[1+0.5m_2(t)]`],...pairs.map((pair,j)=>[String.raw`m_${j+1}(t)=\frac{\cos(2\pi\cdot ${pair[0]}t)+\cos(2\pi\cdot ${pair[1]}t)}{2}`])];
+    },note:"מודל בהגבר יחידה שמעביר את שתי התחנות. כאן אין סינון של תחנת דמות או רעש נוסף."},
     {key:"mix",name:"הזזה בתדר",symbol:"mixer",input:"rf",output:"mixed",aux:"oscillator",equation:[[String.raw`u(t)=\frac{1}{2}\sum_{j=1}^{2}A_j(t)\cos((\omega_j-\omega_{\mathrm{LO}})t)`],[String.raw`+\frac{1}{2}\sum_{j=1}^{2}A_j(t)\cos((\omega_j+\omega_{\mathrm{LO}})t)`]],note:"כפל בקוסינוס יוצר את תדרי הסכום וההפרש. שימו לב להגבר חצי, שנשמר גם בגרפים."},
-    {key:"if",name:"מסנן IF קבוע",symbol:"bpf",input:"mixed",output:"intermediate",equation:[[String.raw`\tilde V(\omega)=H_{\mathrm{IF}}(\omega)\tilde U(\omega)`],[String.raw`H_{\mathrm{IF}}(\omega)=\mathbf 1_{\{||\omega|-\omega_{\mathrm{IF}}|\le2\pi B\}}`],[String.raw`v(t)=\frac{A_j(t)}{2}`,String.raw`\cos((\omega_j-\omega_{\mathrm{LO}})t)`]],note:"המסנן מעביר תחומים סימטריים סביב ±1.2 kHz. נוסחת המוצא המפושטת תקפה רק כאשר תחנה אחת עוברת במלואה. מסנן צר מדי חותך את פסי הצד; כיוון שגוי מחליש או מסלק את התחנה."},
+    {key:"if",filter:ifFilter,name:"מסנן IF קבוע",symbol:"bpf",input:"mixed",output:"intermediate",equation:[[String.raw`\tilde V(\omega)=H_{\mathrm{IF}}(\omega)\tilde U(\omega)`],[String.raw`H_{\mathrm{IF}}(\omega)=\mathbf 1_{\{||\omega|-\omega_{\mathrm{IF}}|\le2\pi B\}}`],[String.raw`v(t)=\frac{A_j(t)}{2}`,String.raw`\cos((\omega_j-\omega_{\mathrm{LO}})t)`]],note:"המסנן מעביר תחומים סימטריים סביב ±1.2 kHz. נוסחת המוצא המפושטת תקפה רק כאשר תחנה אחת עוברת במלואה. מסנן צר מדי חותך את פסי הצד; כיוון שגוי מחליש או מסלק את התחנה."},
     {key:"env",name:"גילוי מעטפת אידאלי",symbol:"envelope",input:"intermediate",output:"detected",equation:[[String.raw`e(t)=|v(t)+i\mathcal H\{v(t)\}|`],[String.raw`=\frac{A_j(t)}{2}\quad\text{for one fully passed station}`]],note:"כאשר רק תחנה שלמה אחת עוברת, המעטפת שווה לחצי מהמעטפת המקורית. אחרת הגלאי פועל על האות המסונן בפועל."},
     {key:"dc-block",name:"הסרת רכיב קבוע",symbol:"dc",input:"detected",output:"recovered",equation:[[String.raw`y(t)=e(t)-\langle e\rangle`],[String.raw`=\frac{A_j(t)-\langle A_j\rangle}{2}\quad\text{for one fully passed station}`]],note:"המוצא נשאר בהגבר הפיזיקלי של השרשרת. עברו בין שתי התחנות ושמעו את החלפת הצליל."}
   ],
-  note:"למעטפת התחנה הראשונה היסט 1 וצליל במשרעת 0.6; לשנייה היסט 0.4 וצליל במשרעת 0.2. כל המסננים אידאליים. תדרי ההדגמה הונמכו לתחום השמע."
+  readout(data,s){const i=Number(s.digit);return `תחנה ראשונה: 12345; תחנה שנייה: 86420. מוצג מקום ${i+1}: הספרות ${ProcessModels.stationNumbers[0][i]} ו־${ProcessModels.stationNumbers[1][i]}. בהאזנה הגרפים מתקדמים עם הרצף.`;},
+  note:"כל ספרה מיוצגת בזוג תדרים בהשראת DTMF, בטווח 175–368.75 Hz; אלה אינם תדרי הטלפון התקניים. כל זוג מנוגן במשך 0.3 שניות ובין הזוגות הפסקה קצרה. הגרפים מציגים את הקטע היציב של הזוג הנוכחי. האפנון והמסננים מחושבים באותם מערכים קטנים לכל ספרה; הגרפים וההאזנה שומרים על הגבר קבוע."
 });
+})();
 </script>

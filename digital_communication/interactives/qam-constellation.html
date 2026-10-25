@@ -1,0 +1,131 @@
+<style>
+  #qam-synchronization .ci-board { width:100%; max-width:350px; height:auto !important; aspect-ratio:1; margin-inline:auto; }
+  #qam-synchronization .qam-formula { display:flex; flex-wrap:wrap; justify-content:center; gap:4px 12px; direction:ltr; margin:8px 0; }
+  #qam-synchronization .qam-parameters { border:1px solid #dce5eb; border-radius:10px; padding:0 10px; margin:10px 0; }
+  #qam-synchronization .qam-legend,#qam-synchronization .qam-playback { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:8px 0; }
+  #qam-synchronization .qam-legend button { color:var(--signal); border-color:var(--signal); }
+  #qam-synchronization .qam-legend button[aria-pressed=false] { opacity:.5; text-decoration:line-through; }
+  #qam-synchronization .ci-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #qam-synchronization .qam-noise { direction:ltr; text-align:center; }
+</style>
+<section id="qam-synchronization" class="course-interactive" aria-labelledby="qam-synchronization-title">
+  <h4 id="qam-synchronization-title">מה קורה לקונסטלציה במקלט?</h4>
+  <p class="ci-status" role="status">פתחו את ההסבר כדי לטעון את הקונסטלציה.</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+window.QAMConstellation = (() => {
+  "use strict";
+  const levels=[-3,-1,1,3],count=256,symbolPeriod=.001;
+  const alphabet=levels.flatMap(i=>levels.map(q=>({i,q})));
+  const random=seed=>{let x=seed>>>0||1;return ()=>{x^=x<<13;x^=x>>>17;x^=x<<5;return ((x>>>0)+1)/4294967297;};};
+  // Each consecutive group contains every symbol once; source power is exactly 10.
+  const symbols=(()=>{
+    const next=random(731),result=[];
+    for(let block=0;block<count/16;block++){
+      const order=Array.from({length:16},(_,i)=>i);
+      for(let j=15;j>0;j--){const k=Math.floor(next()*(j+1));[order[j],order[k]]=[order[k],order[j]];}
+      for(const index of order)result.push(alphabet[index]);
+    }
+    return result;
+  })();
+  let noiseSeed,noise;
+  function samples({phase=25,frequency=0,snr=30,seed=17}={}) {
+    if(seed!==noiseSeed){
+      const next=random(seed);noiseSeed=seed;
+      noise=Array.from({length:count},()=>{
+        const radius=Math.sqrt(-2*Math.log(next())),angle=2*Math.PI*next();
+        return {i:radius*Math.cos(angle),q:radius*Math.sin(angle)};
+      });
+    }
+    const sigma=Math.sqrt(10/(2*10**(snr/10)));
+    const nearest=x=>levels.reduce((best,level)=>Math.abs(x-level)<Math.abs(x-best)?level:best,levels[0]);
+    const received=symbols.map((symbol,n)=>{
+      const angle=phase*Math.PI/180+2*Math.PI*frequency*n*symbolPeriod,c=Math.cos(angle),s=Math.sin(angle);
+      const i=symbol.i*c-symbol.q*s+sigma*noise[n].i,q=symbol.i*s+symbol.q*c+sigma*noise[n].q;
+      return {i,q,angle,error:nearest(i)!==symbol.i||nearest(q)!==symbol.q};
+    });
+    return {symbols,received,sigma,energy:10};
+  }
+  return {alphabet,symbols,count,symbolPeriod,samples};
+})();
+</script>
+<script>
+(() => {
+  const root=document.getElementById("qam-synchronization"),parent=root.closest("details");
+  let mounted=false;
+  function mount(){
+    if(mounted||(parent&&!parent.open))return;
+    mounted=true;
+    CourseInteractives.mount("qam-synchronization",{
+      initial:{phase:25,frequency:0,snr:30,index:255,seed:17},
+      setup(c){
+        const model=window.QAMConstellation,s=c.state,colors={ideal:"#697988",received:"#087e85"};
+        let data=model.samples(s),timer,showIdeal=true,showReceived=true;
+        const stop=()=>{clearInterval(timer);timer=null;};
+        c.control("phase","שגיאת פאזה קבועה",String.raw`\phi_0\;[{}^\circ]`,-180,180,1,0);
+        c.control("frequency","שגיאת תדר",String.raw`\Delta f\;[\mathrm{Hz}]`,-20,20,.5,1);
+        c.control("snr","יחס אות לרעש",String.raw`\mathrm{SNR}\;[\mathrm{dB}]`,0,40,1,0);
+        c.preset("כמעט אידאלי",{phase:0,frequency:0,snr:40,index:255});
+        c.preset("סיבוב קבוע",{phase:30,frequency:0,snr:40,index:255});
+        c.preset("סיבוב מצטבר",{phase:0,frequency:3,snr:40,index:255});
+        c.preset("פיזור מרעש",{phase:0,frequency:0,snr:12,index:255});
+        c.button("מימוש רעש נוסף",()=>{s.seed++;return "noise";});
+
+        const plots=root.querySelector(".ci-plots"),formula=c.node("div",null,undefined,"qam-formula");
+        for(const tex of [String.raw`r_n=s_n e^{i\theta_n}+w_n`,String.raw`\theta_n=\phi_0+2\pi\Delta f\,nT_s`,String.raw`T_s=1\,\mathrm{ms}`])c.math(c.node("span",formula),tex);
+        const controls=root.querySelector(".ci-controls"),presets=root.querySelector(".ci-buttons");
+        const parameters=c.node("div",null,undefined,"qam-parameters");
+        const noiseEquation=c.node("div",parameters,undefined,"qam-formula");
+        for(const tex of [String.raw`w_{I,n},w_{Q,n}\sim\mathcal N(0,\sigma^2)`,String.raw`\sigma^2=\frac{E_s}{2\cdot10^{\frac{\mathrm{SNR}}{10}}}`,String.raw`E_s=10`])c.math(c.node("span",noiseEquation),tex);
+        parameters.append(controls,presets);
+        const legend=c.node("div",null,undefined,"qam-legend");
+        for(const [key,label] of [["ideal","× סמלי השידור"],["received","● דגימות המקלט"]]){
+          const button=c.node("button",legend,label);button.type="button";button.style.setProperty("--signal",colors[key]);button.setAttribute("aria-pressed","true");
+          button.addEventListener("click",()=>{if(key==="ideal")showIdeal=!showIdeal;else showReceived=!showReceived;button.setAttribute("aria-pressed",String(key==="ideal"?showIdeal:showReceived));c.update("visibility");});
+        }
+        root.insertBefore(formula,plots);root.insertBefore(parameters,plots);root.insertBefore(legend,plots);
+        const board=c.board("constellation",String.raw`16\text{-QAM}`,String.raw`I=\operatorname{Re}\{r_n\},\qquad Q=\operatorname{Im}\{r_n\}`,[-5.5,5.5,5.5,-5.5],{height:350});
+        for(const symbol of model.alphabet)c.point(board,symbol.i,symbol.q,colors.ideal,{face:"x",size:4,strokeWidth:1.5,visible:()=>showIdeal});
+        for(let n=0;n<model.count;n++)c.point(board,()=>data.received[n].i,()=>data.received[n].q,colors.received,{size:1.4,strokeWidth:0,fillOpacity:.55,visible:()=>showReceived&&n<=s.index});
+        const selected=()=>data.received[s.index],sent=()=>data.symbols[s.index];
+        c.segment(board,[()=>sent().i,()=>sent().q],[()=>selected().i,()=>selected().q],{strokeColor:colors.ideal,visible:()=>showIdeal&&showReceived,strokeOpacity:.6});
+        c.point(board,()=>sent().i,()=>sent().q,colors.ideal,{face:"o",fillColor:"white",size:5,strokeWidth:2,visible:()=>showIdeal});
+        c.point(board,()=>selected().i,()=>selected().q,colors.received,{face:"o",fillColor:"white",size:4,strokeWidth:2.5,visible:()=>showReceived});
+
+        const playback=c.node("div",null,undefined,"qam-playback");
+        const play=c.node("button",playback,"הרצת סמלים"),pause=c.node("button",playback,"עצירה");play.type=pause.type="button";
+        play.addEventListener("click",()=>{
+          stop();if(s.index>=model.count-1)s.index=0;c.update("animation");
+          timer=setInterval(()=>{s.index=Math.min(model.count-1,s.index+1);c.update("animation");if(s.index===model.count-1)stop();},45);
+        });pause.addEventListener("click",stop);
+        root.insertBefore(playback,root.querySelector(".ci-metrics"));
+        c.metric("angle","סיבוב הסמל הנוכחי",String.raw`\theta_n\;[{}^\circ]`);
+        c.metric("errors","טעויות סמלים, ללא תיקון",String.raw`\widehat P_s`);
+        const clipping=c.note("");clipping.hidden=true;
+        function updateClipping(){
+          const bounds=board.getBoundingBox();let outside=0;
+          for(let n=0;n<=s.index;n++){const point=data.received[n];if(point.i<bounds[0]||point.i>bounds[2]||point.q>bounds[1]||point.q<bounds[3])outside++;}
+          clipping.hidden=outside===0;clipping.textContent=`${outside} מתוך ${s.index+1} הדגימות מחוץ לחלון התצוגה. הצירים אינם משתנים אוטומטית.`;
+        }
+        board.on("boundingbox",updateClipping);
+        c.note("הטבעות מסמנות את הסמל הנוכחי ואת הסמל שנשלח. בזמן ההרצה מצטברות הדגימות עד הסמל הנוכחי.");
+        c.note("שגיאת התדר היא תדר האות פחות תדר המתנד במקלט. ההחלטה נעשית לפי הנקודה הקרובה בקונסטלציה המקורית, ללא תיקון סנכרון. SNR מוגדר כאן כאנרגיית הסמל הממוצעת חלקי אנרגיית הרעש המרוכב, בדגימת המקלט. רכיבי הרעש בשני הצירים בלתי תלויים. שינוי SNR שומר על אותו מימוש רעש.");
+        if(parent)parent.addEventListener("toggle",()=>{if(!parent.open)stop();});
+        document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});
+        return {update(key){
+          if(!["animation","visibility"].includes(key))stop();
+          if(!["index","animation","visibility"].includes(key))data=model.samples(s);
+          let errors=0;
+          for(let n=0;n<=s.index;n++)if(data.received[n].error)errors++;
+          c.value("angle",(selected().angle*180/Math.PI).toFixed(1)+"°");
+          c.value("errors",(100*errors/(s.index+1)).toFixed(1)+"%");
+          updateClipping();
+        }};
+      }
+    });
+  }
+  if(parent)parent.addEventListener("toggle",mount);
+  mount();
+})();
+</script>

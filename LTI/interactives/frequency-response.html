@@ -1,8 +1,42 @@
 <!-- Included directly by frequency_response.md; no iframe or build configuration needed. -->
+<script>
+window.MicrophoneToneProbe = (() => {
+  "use strict";
+  function response(omega,{mass,damping,stiffness}) {
+    const real=stiffness-mass*omega*omega,imaginary=damping*omega;
+    return {gain:1/Math.hypot(real,imaginary),phase:-Math.atan2(imaginary,real)};
+  }
+  function components(system,source) {
+    return source.frequencies.map((omega,index)=>({omega,index,...response(omega,system),
+      amplitude:source.mode==="one"?(index===0?1:0):[.6,.35,.25][index],
+      enabled:(source.mode==="three"||index===0)&&source.enabled[index]}));
+  }
+  function sum(t,parts,output=false) {
+    return parts.reduce((total,part)=>total+(part.enabled?part.amplitude*(output?part.gain:1)*Math.cos(part.omega*t+(output?part.phase:0)):0),0);
+  }
+  return {response,components,sum};
+})();
+</script>
 <section id="microphone-response" dir="rtl" aria-labelledby="fr-title">
   <style>
     #microphone-response { --fr-ink:#172f43; --fr-muted:#526779; --fr-line:#dce5eb; --fr-orange:#c35c18; --fr-teal:#087e85; color:var(--fr-ink); background:#f6f9fb; border:1px solid var(--fr-line); border-radius:18px; margin:28px 0; padding:24px; font:16px/1.6 system-ui,sans-serif; color-scheme:light; }
     #microphone-response * { box-sizing:border-box; }
+    #microphone-response [hidden] { display:none !important; }
+    #microphone-response .fr-system { border:1px solid var(--fr-line); border-radius:10px; padding:0 10px; margin:10px 0; }
+    #microphone-response .fr-system summary { cursor:pointer; font-weight:650; padding:8px 0; }
+    #microphone-response .fr-probe-modes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:10px 0; }
+    #microphone-response .fr-probe-modes label { display:block; font-size:12px; }
+    #microphone-response select { font:inherit; width:100%; color:var(--fr-ink); border:1px solid #b7cbd6; border-radius:8px; background:white; padding:6px; }
+    #microphone-response .fr-tone-controls { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:10px 0; }
+    #microphone-response .fr-tone-controls[data-mode=one] { grid-template-columns:1fr; }
+    #microphone-response .fr-tone { border:1px solid var(--fr-line); border-radius:10px; padding:8px; background:white; min-width:0; }
+    #microphone-response .fr-tone label { color:var(--tone); font-size:12px; flex-wrap:wrap; }
+    #microphone-response .fr-tone-readout { display:flex; flex-wrap:wrap; justify-content:space-between; gap:3px 8px; direction:ltr; font-size:11px; margin-top:4px; }
+    #microphone-response .fr-tone-use { display:flex; align-items:center; gap:5px; }
+    #microphone-response .fr-probe-formula { display:flex; flex-wrap:wrap; justify-content:center; gap:3px 12px; direction:ltr; font-size:13px; margin:8px 0; }
+    #microphone-response .fr-legend { display:flex; flex-wrap:wrap; gap:7px; margin:8px 0; }
+    #microphone-response .fr-legend button:not([data-fr-toggle=components])[aria-pressed=false] { opacity:.5; text-decoration:line-through; }
+    #microphone-response .fr-legend button[data-fr-toggle=components][aria-pressed=true] { background:#dceef1; border-color:#087e85; }
     #microphone-response h4 { font-size:24px; color:var(--fr-ink); background:transparent; margin:0 0 6px; }
     #microphone-response p { margin:0 0 14px; }
     #microphone-response .fr-note { color:var(--fr-muted); font-size:12px; }
@@ -32,6 +66,7 @@
       #microphone-response { padding:16px; }
       #microphone-response .fr-plots { grid-template-columns:1fr; }
       #microphone-response .fr-controls { grid-template-columns:1fr; gap:6px; }
+      #microphone-response .fr-tone-controls,#microphone-response .fr-probe-modes { grid-template-columns:1fr; }
       #microphone-response .fr-control { padding:9px; }
       #microphone-response .fr-controls .fr-control { display:grid; grid-template-columns:135px minmax(0,1fr); align-items:center; gap:10px; }
       #microphone-response .fr-controls label { flex-wrap:nowrap; font-size:13px; margin:0; }
@@ -45,6 +80,7 @@
     }
   </style>
   <h4 id="fr-title">מה משתנה כשמשנים את המיקרופון?</h4>
+  <details class="fr-system"><summary>מסה, ריסון וקשיחות</summary>
   <div class="fr-controls">
     <div class="fr-control">
       <label for="fr-mass">מסה <bdi class="math notranslate">\(m\)</bdi><output id="fr-mass-value" for="fr-mass">1.65</output></label>
@@ -65,17 +101,38 @@
     <button type="button" data-fr-preset="stiff">קשיחות גבוהה</button>
     <button type="button" data-fr-preset="reset">איפוס</button>
   </div>
+  </details>
+  <div class="fr-probe-modes">
+    <label for="fr-input-mode">אות הבדיקה<select id="fr-input-mode" disabled><option value="one">קוסינוס יחיד</option><option value="three">סכום של שלושה קוסינוסים</option></select></label>
+    <label for="fr-response-view">הגרף לצד גודל התמסורת<select id="fr-response-view" disabled><option value="time">כניסה ומוצא בזמן</option><option value="phase">פאזת התמסורת</option></select></label>
+  </div>
+  <div class="fr-probe-formula math notranslate">
+    <span>\(p(t)=\sum_{j=1}^{N}a_j\cos(\omega_jt)\)</span>
+    <span>\(x(t)=\sum_{j=1}^{N}a_j|\tilde H(\omega_j)|\cos(\omega_jt+\varphi_j)\)</span>
+    <span>\(\varphi_j=\arg\tilde H(\omega_j)\)</span>
+  </div>
+  <div id="fr-tone-controls" class="fr-tone-controls" data-mode="one"></div>
+  <div class="fr-legend" role="group" aria-label="הצגה והסתרה של האותות בזמן">
+    <button type="button" data-fr-toggle="input" aria-pressed="true" style="color:var(--fr-orange)">לחץ הכניסה</button>
+    <button type="button" data-fr-toggle="output" aria-pressed="true" style="color:var(--fr-teal)">העתק הממברנה</button>
+    <button type="button" data-fr-toggle="components" aria-pressed="false" hidden>פירוק לרכיבים</button>
+  </div>
   <p id="fr-loading" class="fr-note" role="status">טוענים את הגרפים…</p>
   <div class="fr-plots">
     <div class="fr-plot">
       <h5 style="color:var(--fr-orange)">גודל התמסורת <bdi class="math notranslate">\(\left|\tilde{H}(\omega)\right|\)</bdi></h5>
       <div id="fr-magnitude" class="fr-board" role="img" aria-label="גודל התמסורת כפונקציה של התדר הזוויתי, עם תדר השיא ורוחב בחצי הספק"></div>
-      <div class="fr-axis-caption math notranslate">\(\omega\;[\mathrm{rad}\,\mathrm{time}^{-1}]\)</div>
+      <div class="fr-axis-caption math notranslate">\(\omega\;[\mathrm{rad/sec}]\)</div>
     </div>
-    <div class="fr-plot">
+    <div class="fr-plot" id="fr-phase-card">
       <h5 style="color:var(--fr-teal)">פאזה <bdi class="math notranslate">\(\arg\tilde{H}(\omega)\;[\mathrm{rad}]\)</bdi></h5>
       <div id="fr-phase" class="fr-board" role="img" aria-label="פאזת התמסורת ברדיאנים כפונקציה של התדר הזוויתי"></div>
-      <div class="fr-axis-caption math notranslate">\(\omega\;[\mathrm{rad}\,\mathrm{time}^{-1}]\)</div>
+      <div class="fr-axis-caption math notranslate">\(\omega\;[\mathrm{rad/sec}]\)</div>
+    </div>
+    <div class="fr-plot" id="fr-time-card">
+      <h5><span style="color:var(--fr-orange)">כניסה</span> ו<span style="color:var(--fr-teal)">מוצא</span> בזמן</h5>
+      <div id="fr-time" class="fr-board" role="img" aria-label="לחץ הכניסה והעתק הממברנה במצב מתמיד"></div>
+      <div class="fr-axis-caption math notranslate">\(t\;[\mathrm{sec}]\)</div>
     </div>
   </div>
   <div class="fr-metrics">
@@ -83,7 +140,8 @@
     <div class="fr-metric">תדר שיא התגובה <bdi class="math notranslate">\(\omega_D=\sqrt{\frac{k}{m}-\frac{\gamma^2}{2m^2}}\)</bdi><strong><bdi id="fr-peak">—</bdi></strong></div>
     <div class="fr-metric">רוחב בחצי הספק <bdi class="math notranslate">\(\Delta\omega\)</bdi><strong><bdi id="fr-width">—</bdi></strong></div>
   </div>
-  <p class="fr-note"><bdi class="math notranslate">\(A=1\)</bdi> · יחידות יחסיות · צירים קבועים · רוחב בחצי הספק</p>
+  <p class="fr-note"><bdi class="math notranslate">\(A=1\)</bdi> · יחידות מודל · צירים קבועים · רוחב בחצי הספק · מצב מתמיד, ללא מעבר התחלתי</p>
+  <p id="fr-probe-note" class="fr-note">בפירוק לרכיבים: קו מקווקו הוא רכיב כניסה וקו רציף הוא רכיב מוצא. הצבעים תואמים לסמנים על עקומת התמסורת. אין נרמול נפרד של האותות.</p>
   <noscript><p>כדי להפעיל את ההדגמה יש לאפשר JavaScript. <a href="https://www.geogebra.org/material/iframe/id/ydttts6y" target="_blank" rel="noopener">פתיחת ההדגמה המקורית ב־GeoGebra</a></p></noscript>
   <script>
   (() => {
@@ -106,6 +164,9 @@
       if (!window.MathJax?.typesetPromise) throw new Error("MathJax is unavailable");
       const JXG = window.JXG;
       const state = { mass:1.65, damping:0.82, stiffness:3.32 };
+      const source = {mode:"one",frequencies:[1,1.4,3],enabled:[true,true,true],input:true,output:true,components:false,view:"time"};
+      const probeModel=window.MicrophoneToneProbe,toneColors=["#2563a6","#8b4db7","#b73b63"];
+      let parts=probeModel.components(state,source);
       const presets = {
         reset: { mass:1.65, damping:0.82, stiffness:3.32 },
         resonant: { mass:1.65, damping:0.25, stiffness:3.32 },
@@ -128,13 +189,18 @@
       const boardOptions = {
         boundingbox:[-2,yMax,1.06 * xMax,-0.15 * yMax], axis:false, grid:false,
         showCopyright:false, showNavigation:false, keepaspectratio:false,
-        pan:{ enabled:false }, zoom:{ enabled:false, wheel:false },
+        pan:{ enabled:true, needShift:false, needTwoFingers:true }, zoom:{ enabled:true, wheel:true, needShift:true, pinch:true },
+        selection:{ enabled:true, needShift:false, needCtrl:true, fillColor:"#087e85", fillOpacity:.12, strokeColor:"#087e85", withLines:true, vertices:{visible:false} },
         resize:{ enabled:true }, renderer:"svg"
       };
       const magnitude = JXG.JSXGraph.initBoard("fr-magnitude", boardOptions);
       const phaseBoard = JXG.JSXGraph.initBoard("fr-phase", {
         ...boardOptions, boundingbox:[-2,0.5,1.06 * xMax,-3.65]
       });
+      const timeBoard=JXG.JSXGraph.initBoard("fr-time",{...boardOptions,boundingbox:[-.7,3.5,12.4,-3.5]});
+      CourseInteractives.navigation(timeBoard,document.getElementById("fr-time"));
+      CourseInteractives.navigation(magnitude,document.getElementById("fr-magnitude"));
+      CourseInteractives.navigation(phaseBoard,document.getElementById("fr-phase"));
       const axisStyle = { strokeColor:"#9cabb6", strokeWidth:1, highlight:false, fixed:true,
         ticks:{ strokeColor:"#bdcbd4", minorTicks:0, drawLabels:true,
           label:{ fontSize:11, strokeColor:"#526779" } } };
@@ -142,6 +208,8 @@
       magnitude.create("axis", [[0,0],[0,1]], axisStyle);
       phaseBoard.create("axis", [[0,0],[1,0]], axisStyle);
       phaseBoard.create("axis", [[0,0],[0,1]], axisStyle);
+      timeBoard.create("axis", [[0,0],[1,0]], axisStyle);
+      timeBoard.create("axis", [[0,0],[0,1]], axisStyle);
       magnitude.create("functiongraph", [gain,0,() => xMax], {
         strokeColor:"#c35c18", strokeWidth:3, highlight:false,
         numberPointsHigh:1200
@@ -173,8 +241,8 @@
       const labelStyle = { fixed:true, highlight:false, fontSize:14, display:"html", useMathJax:true, parse:false,
         cssClass:"fr-graph-label", anchorX:"middle", anchorY:"top", strokeColor:"#172f43" };
       [magnitude,phaseBoard].forEach((board) => {
-        board.create("text", [() => peakFrequency,0,String.raw`\(\omega_D\)`], {
-          ...labelStyle, offset:[0,-18], visible:() => hasPeak
+        board.create("text", [() => peakFrequency,() => -18/board.unitY,String.raw`\(\omega_D\)`], {
+          ...labelStyle, fontSize:12, visible:() => hasPeak
         });
       });
       magnitude.create("text", [0,() => halfGain,String.raw`\(\dfrac{\left|\tilde{H}(\omega_D)\right|}{\sqrt{2}}\)`], {
@@ -190,7 +258,41 @@
         });
       });
 
+      const showParts=()=>source.mode==="three"&&source.components;
+      for(const [output,color] of [[false,"#c35c18"],[true,"#087e85"]])timeBoard.create("functiongraph",[t=>probeModel.sum(t,parts,output),0,12],{
+        strokeColor:color,strokeWidth:2.4,highlight:false,numberPointsHigh:900,visible:()=>!showParts()&&(output?source.output:source.input)});
+      for(let i=0;i<3;i++){
+        for(const [output,dash] of [[false,2],[true,0]])timeBoard.create("functiongraph",[t=>parts[i].amplitude*(output?parts[i].gain:1)*Math.cos(parts[i].omega*t+(output?parts[i].phase:0)),0,12],{
+          strokeColor:toneColors[i],strokeWidth:2,dash,highlight:false,numberPointsHigh:900,
+          visible:()=>showParts()&&parts[i].enabled&&(output?source.output:source.input)});
+        for(const [board,ordinate] of [[magnitude,()=>parts[i].gain],[phaseBoard,()=>parts[i].phase]]){
+          board.create("segment",[[()=>parts[i].omega,0],[()=>parts[i].omega,ordinate]],{...segmentStyle,strokeColor:toneColors[i],visible:()=>parts[i].enabled});
+          board.create("point",[()=>parts[i].omega,ordinate],{...markerStyle,size:4,fillColor:"white",strokeColor:toneColors[i],visible:()=>parts[i].enabled});
+        }
+        const card=document.createElement("div");card.className="fr-tone";card.style.setProperty("--tone",toneColors[i]);
+        card.innerHTML=String.raw`<label for="fr-tone-${i}"><span>\(\omega_${i+1}\;[\mathrm{rad/sec}]\)</span><output id="fr-tone-${i}-value"></output></label><input id="fr-tone-${i}" type="range" min="0.2" max="6" step="0.05" value="${source.frequencies[i]}" aria-label="תדר רכיב ${i+1}"><label class="fr-tone-use"><span><input type="checkbox" id="fr-active-${i}" checked>כלול בסכום</span></label><div class="fr-tone-readout"><span>\(a_${i+1}=\)<bdi id="fr-amplitude-${i}"></bdi></span><span>\(|\tilde H(\omega_${i+1})|=\)<bdi id="fr-gain-${i}"></bdi></span><span>\(\varphi_${i+1}\;[\mathrm{rad}]=\)<bdi id="fr-angle-${i}"></bdi></span></div>`;
+        el("tone-controls").append(card);
+        el("tone-"+i).addEventListener("input",()=>{source.frequencies[i]=Number(el("tone-"+i).value);update();});
+        el("active-"+i).addEventListener("change",()=>{source.enabled[i]=el("active-"+i).checked;update();});
+      }
+      el("input-mode").addEventListener("change",()=>{source.mode=el("input-mode").value;if(source.mode==="one")source.enabled[0]=true;update();});
+      el("response-view").addEventListener("change",()=>{source.view=el("response-view").value;update();});
+      root.querySelectorAll("[data-fr-toggle]").forEach(button=>button.addEventListener("click",()=>{const key=button.dataset.frToggle;source[key]=!source[key];update();}));
+
       function update() {
+        parts=probeModel.components(state,source);
+        el("tone-controls").dataset.mode=source.mode;
+        for(let i=0;i<3;i++){
+          const card=el("tone-"+i).closest(".fr-tone");card.hidden=source.mode==="one"&&i>0;
+          card.querySelector(".fr-tone-use").hidden=source.mode==="one";
+          el("tone-"+i+"-value").value=source.frequencies[i].toFixed(2);el("active-"+i).checked=source.enabled[i];
+          el("amplitude-"+i).textContent=parts[i].enabled?String(parts[i].amplitude):"0";
+          el("gain-"+i).textContent=parts[i].gain.toFixed(2);el("angle-"+i).textContent=parts[i].phase.toFixed(2);
+        }
+        el("time-card").hidden=source.view!=="time";el("phase-card").hidden=source.view!=="phase";
+        root.querySelectorAll("[data-fr-toggle]").forEach(button=>{const key=button.dataset.frToggle;button.setAttribute("aria-pressed",String(source[key]));if(key==="components")button.hidden=source.mode!=="three";});
+        root.querySelector(".fr-legend").hidden=source.view!=="time";
+        el("probe-note").hidden=!showParts()||source.view!=="time";
         const {mass:m, damping:gamma, stiffness:k} = state;
         const natural = Math.sqrt(k / m);
         // The maximum of displacement magnitude is not the damped free-oscillation frequency.
@@ -210,7 +312,8 @@
           el(name + "-value").value = format(state[name]);
         });
         magnitude.update();
-        phaseBoard.update();
+        if(source.view==="phase")phaseBoard.update();
+        if(source.view==="time")timeBoard.update();
         el("natural").textContent = format(natural);
         el("peak").textContent = hasPeak ? format(peakFrequency) : "אין שיא בתדר חיובי";
         el("width").textContent = hasWidth ? format(rightHalf - leftHalf) : "אין שני חיתוכים";
@@ -229,7 +332,10 @@
           update();
         });
       });
+      el("input-mode").disabled=false;el("response-view").disabled=false;
+      root.querySelectorAll("[data-fr-toggle]").forEach(button=>{button.disabled=false;});
       update();
+      await window.MathJax.typesetPromise([root]);
       status.hidden = true;
     }
 

@@ -40,7 +40,7 @@ Most student-facing content lives in Markdown (`.md`) and notebooks (`.ipynb`). 
 
 ### Visual design and interaction
 
-- Use fixed axis limits with sensible, moderate ranges. Moving sliders or selecting presets must change the curves and measurements without changing the axis scales or normalizing away amplitude differences.
+- Use fixed default axis limits with sensible, moderate ranges. Provide zoom, home, and pan controls for explicit view changes. Moving sliders or selecting presets must preserve the current view and change only the curves and measurements, without normalizing away amplitude differences. Home restores the graph's original limits.
 - Choose ranges that make the default state and representative presets easy to compare. Do not expand the axes automatically to fit extreme parameter values.
 - Keep the interface compact and uncluttered. Prefer clear labels directly on the graph over paragraphs explaining which colored point or line represents each quantity.
 - Avoid redundant instructions, repeated explanations, and controls or readouts that do not serve the teaching purpose.

@@ -272,7 +272,7 @@ Q\left(t_{n}\right)
 מה לינארי בהם? מה קורה אם שני אנשים משדרים באותו תדר נושא?
 
 <details>
-  <summary>למתקדמים, טעויות פאזה</summary>
+  <summary>למתקדמים, שגיאות סנכרון ורעש</summary>
 בפועל האות שאנחנו הולכים לקלוט לא יהיה מסונכרן בפאזה עם המקלט הקוהרנטי ולכן
 אנחנו קולטים אות מהצורה:
 
@@ -284,9 +284,11 @@ $$r\left(t\right)=\begin{pmatrix}I\left(t\right)\cos\left(\phi_{0}\right)-Q\left
 I\left(t\right)\sin\left(\phi_{0}\right)+Q\left(t\right)\cos\left(\phi_{0}\right)
 \end{pmatrix}\Rightarrow r_{c}\left(t\right)=z\left(t\right)e^{i\phi_{0}}$$
 
-שזה בעצם אומר שכל הקונסטלציות מסתובבות!
+שגיאת פאזה קבועה מסובבת את הקונסטלציה בזווית קבועה. שגיאת תדר גורמת לזווית להצטבר מסמל לסמל, ורעש מפזר את הדגימות סביב מיקומן ללא רעש. באיור הבא אפשר להפריד בין שלוש ההשפעות.
 
-![QAM16_phase.png](images/QAM16_phase.png)
+```{raw} html
+:file: interactives/qam-constellation.html
+```
 
 איך נתקן את זה? מה אם פעם בכמה סימבולים נדע איזה סימבול אנחנו משדרים?
 </details>
