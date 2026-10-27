@@ -13,7 +13,7 @@
 
 נאמר שאות אקראי $x\left(t\right)$ הוא סטציונרי במובן הרחב אם:
 1. הממוצע שלו לאורך זמן קבוע - $\mu_{x}\left(t\right)=\mathbb{E}\left[x\left(t\right)\right]=\underset{\text{עובק}}{\underbrace{\mu_{x}}}$
-2. האוטוקורלציה שלו תלויה רק בהפרשי זמן - $R_{x}\left(t_{i},t_{j}\right)=R_{x}\left(t_{i}-t_{j}\right)$
+2. האוטוקורלציה שלו תלויה רק בהפרשי זמן - $R_{x}\left(t_{i},t_{j}\right)=R_{x}\left(t_{j}-t_{i}\right)$
 
 ### 2. ארגודיות
 
@@ -34,9 +34,9 @@ $$R_{x}\left(\tau\right)\equiv\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left
 $$R_{x}\left(\tau\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}x\left(t\right)x^{\ast}\left(t+\tau\right)dt$$
 
 ראינו שלוש תכונות חשובות של הקורלציה:
-1. **קישור להתפלגות בכל רגע** - R_{x}\left(0\right)=\sigma_{x}^{2}+\mu_{x}^{2} כלומר מתארת את הספק האות האקראי בתור חיבור של הממוצע בריבוע וסטיית התקן בריבוע
-2. **מקסימום מתקבל ב-0** -  \forall\tau>0:\left|R_{x}\left(\tau\right)\right|\le R_{x}\left(0\right)
-3. **סימטרית (יוניטרית)** - R_{x}\left(-\tau\right)=R_{x}^{\ast}\left(\tau\right) 
+1. **קישור להתפלגות בכל רגע** - $R_{x}\left(0\right)=\sigma_{x}^{2}+\left|\mu_{x}\right|^{2}$ כלומר מתארת את הספק האות האקראי בתור חיבור של הממוצע בריבוע וסטיית התקן בריבוע
+2. **מקסימום מתקבל ב-0** -  $\forall\tau>0:\left|R_{x}\left(\tau\right)\right|\le R_{x}\left(0\right)$
+3. **סימטרית (יוניטרית)** - $R_{x}\left(-\tau\right)=R_{x}^{\ast}\left(\tau\right)$
 ```
 
 
@@ -49,7 +49,7 @@ $$R_{x}\left(\tau\right)=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2
 
 ### משתנה אקראי
 
-אם היינו מבצעים הרבה מאוד ניסויין ומסתכלים רק על הtאות האקראי (הרעש) בזמן $t_{i}$ היינו מקבלים המון
+אם היינו מבצעים הרבה מאוד ניסויים ומסתכלים רק על האות האקראי (הרעש) בזמן $t_{i}$ היינו מקבלים המון
 ערכים שונים. נקרא להם $x\left(t_{i}\right)$. זה ממש כמו הטלות של קובייה רק שיש לנו טווח ערכים רציף.
 נוכל לאפיין את הסטטיסטיקה של הערכים על ידי **פונקציית צפיפות הסתברות**. 
 
@@ -71,7 +71,11 @@ $$\mathbb{P}\left(x_{1}<X<x_{2}\right)=\intop_{x_{1}}^{x_{2}}p_{X}\left(x\right)
 
 ```
 
-```{admonition} דוגמא - התפלגות נורמלית
+```{raw} html
+:file: ../LTI/interactives/runtime.html
+```
+
+````{admonition} דוגמא - התפלגות נורמלית
 :class: dropdown
 
 פונקציית צפיפות הסתברות שנעבוד איתה הרבה והיא מאוד מאוד מאוד נפוצה היא גאוסיין. (לפעמים נקראת נורמלית)
@@ -79,10 +83,11 @@ $$\mathbb{P}\left(x_{1}<X<x_{2}\right)=\intop_{x_{1}}^{x_{2}}p_{X}\left(x\right)
 $$p_{X}\left(x\right)=\sqrt{\frac{1}{2\pi\sigma^{2}}}e^{-\frac{\left(x-\mu\right)^{2}}{2\sigma^{2}}}$$
 
 כאשר $\mu$ היא הערך הממוצע ו$\sigma$ הסטיית תקן.
- מוזמנים לשחק עם הערכים כדי לראות אי ך הפונקצייה נראית. את ההתפלגות הנורמלית של ממוצע 0 וסטיית תקן 1 ציירתי בשחור
+ מוזמנים לשחק עם הערכים כדי לראות איך הפונקצייה נראית. את ההתפלגות הנורמלית של ממוצע 0 וסטיית תקן 1 ציירתי בשחור
  
- <iframe src="https://www.geogebra.org/material/iframe/id/mb5n2gph" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/mb5n2gph" target="_blank">לפתיחה בחלון נפרד</a>
+```{raw} html
+:file: interactives/gaussian-density.html
+```
 
 מה מתפלג ככה? האמת שכמעט הכל (יש לזה סיבות טובות). לדוגמה גובה של אנשים:
 ![height-distribution.png](images/height-distribution.png)
@@ -90,7 +95,7 @@ $$p_{X}\left(x\right)=\sqrt{\frac{1}{2\pi\sigma^{2}}}e^{-\frac{\left(x-\mu\right
 מתוך הגרף הזה אתם יכולים לחשב לדוגמה מה הסיכוי שהגובה של גבר או אישה רנדומלים בעולם הם בין 170-175 .
 זה פשוט לחשב אינטגרל (או לשאול מה השטח מתחת לגרף)
 
-```
+````
 
 נרצה עכשיו להרחיב את ההגדרה של משתנה אקראי לתהליך אקראי או אות אקראי.
 נצטרך עכשיו לתת הסתברות לכל אפשרות. כלומר תהיה לנו פונקצייה $\underset{\text{תפתושמ}-\text{תוגלפתה}}{\underbrace{p_{x\left(t\right)}\left(x_{1},x_{2},x_{3},...;t_{1},t_{2},t_{3},...\right)}}$
@@ -113,7 +118,7 @@ $$\forall\tau\in\mathbb{R},\forall n\in\mathbb{N}:p_{x\left(t\right)}\left(x_{1}
 $$\boxed{\forall\tau\in\mathbb{R}:p_{x\left(t\right)}\left(x_{1};t_{1}\right)=p_{x\left(t\right)}\left(x_{1};t_{1}+\tau\right)}$$
 
 מה זה אומר? במילים פשוטות זה אומר שאם תתחילו מדידה של האות בזמן כלשהו למשך זמן כלשהו הסטטיסטיקה
-לא תהיה תלוייה בזמן התחלת המדידה.  שימו לב שזה נכון גם למדידה של מספר אחד ולכן **בפרט** הממוצע וסטיית
+לא תהיה תלויה בזמן התחלת המדידה.  שימו לב שזה נכון גם למדידה של מספר אחד ולכן **בפרט** הממוצע וסטיית
 התקן לא משתנות בזמן. (זאת הולכת להיות ההגדרה שלנו בהמשך + פרט קטן).
 
 דוגמאות לאותות שהם לא סטציונרים:
@@ -175,7 +180,7 @@ $$\underset{\mu_{x}}{\underbrace{\intop_{-\infty}^{\infty}x\cdot\mathbb{P}\left(
 
 המסקנה היא:
 
-> אם אנחנו התהליך יכול להיות תהליך שונה בכל פעם וזה נקבע בהתחלה, אז כנראה שהוא לא ארגודי
+> אם התהליך יכול להיות תהליך שונה בכל פעם וזה נקבע בהתחלה, אז כנראה שהוא לא ארגודי
 
 יכולות להיות הרבה דוגמאות לזה. אבל תנסו לדמיין שאנחנו מודדים בעזרת מכשיר מדידה רעש
 אבל יכול להיות שיש פגם במכשיר. אז מה שבאמת צריך לעשות הוא לדגום בעזרת הרבה מכשירים.
@@ -186,7 +191,7 @@ $$\underset{\mu_{x}}{\underbrace{\intop_{-\infty}^{\infty}x\cdot\mathbb{P}\left(
 יש עוד דוגמאות מעניינות ממש בפיזיקה אבל לא ניכנס לזה כאן.
 
 למה ארגודיות חשובה לנו בכלל? היינו רוצים לומר שאם הממוצע של האות
-לא תלוי בזמן (סטציונריות) אז ה מספיק.
+לא תלוי בזמן (סטציונריות) אז זה מספיק.
 הבעיה היא שלרוב במדידה אמיתית תהיה לנו רק ריאליזציה אחת של הרעש.
 ולכן אם נחשוב שהממוצע של הרעש הוא הממוצע מהתכונה הסטציונרית
 נוכל לטעות ולחשוב שזה הממוצע בכל קטע מספיק ארוך של זמן.
@@ -210,13 +215,13 @@ $$=\mathbb{E}\left[x\left(t\right)^{2}\right]-2\mu_{x}^{2}+\mu_{x}^{2}=\mathbb{E
 ולכן אפשר לחשוב על $\left\langle x\left(t\right)^{2}\right\rangle $ בתור ההספק הממוצע
 נקבל מסקנה חמודה:
 
-> באות בעל ממוצע 0 ($\mu_{x}=0$) סטיית התקן פרופורציונלית להספק הממוצע $\sigma_{x}^{2}\propto\left\langle P_{x}\right\rangle $
+> באות בעל ממוצע 0 ($\mu_{x}=0$) השונות פרופורציונלית להספק הממוצע $\sigma_{x}^{2}\propto\left\langle P_{x}\right\rangle $
 
-כלומר שסטיית התקן של רעש (שלרוב ההמוצע שלו הוא באמת 0) היא סופר חשובה לחישובי SNR
+כלומר שסטיית התקן של רעש (שלרוב הממוצע שלו הוא באמת 0) היא סופר חשובה לחישובי SNR
 
 ### אוטוקורלציה
 
-יש לנו פיסה אחת שחסרה בפאזל. הבנו שאפשר לאפיין את האות האקראי בכל נקודת זמן עם פונקצייה $p_{x}$ אשר לא תלוייה בזמן
+יש לנו פיסה אחת שחסרה בפאזל. הבנו שאפשר לאפיין את האות האקראי בכל נקודת זמן עם פונקצייה $p_{x}$ אשר לא תלויה בזמן
 אבל מה הקשר בין הרעש בזמנים שונים? 
 לדוגמה מה אם הייתי אומר לכם שאני מטיל קובייה אבל כל פעם אני לא מאפשר 
 להטלה הקודמת לחזור על עצמה.
@@ -269,7 +274,7 @@ $$Cov\left(x_{i},x_{j}\right)=\mathbb{E}\left[\left(x_{i}-\mu_{x_{i}}\right)\lef
 > אני אגדיר את כל ההגדרות למשתנים אקראיים מרוכבים. אם עובדים
 > עם משתנים אקראיים ממשיים אפשר פשוט להתעלם מכל הפעולות של הצמדה 
 
-במילים: כמה בבמוצע סטייה של אחד מהמשתנים מהממוצע **מתואמת** עם סטייה של המשתנה השני
+במילים: כמה בממוצע סטייה של אחד מהמשתנים מהממוצע **מתואמת** עם סטייה של המשתנה השני
 
 נשים לב שאם אנחנו עובדים עם אות שהממוצע שלו הוא תמיד 0 $\mu_{x}=0$ אז נקבל:
 
@@ -295,8 +300,8 @@ $$R_{x}\left(\tau\right)\equiv\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left
 > מסקנה: האוטוקורלציה היא פונקציה של הפרשי זמנים $\tau=t_{j}-t_{i}$
 
 תכונות חשובות:
-* עבור אות ממשי - $R_{x}\left(0\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(0\right)\right]\underset{\text{ישממ}}{\underbrace{=}}\mathbb{E}\left[\left(x\left(0\right)\right)^{2}\right]=\sigma_{x}^{2}$
-* סימטריות -  $R_{x}\left(-\tau\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(-\tau\right)\right]=\mathbb{E}\left[x\left(\tau\right)\cdot x^{\ast}\left(0\right)\right]=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(\tau\right)^{\ast}\right]=R_{x}^{\ast}\left(\tau\right)$
+* עבור אות ממשי - $R_{x}\left(0\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(0\right)\right]\underset{\text{ישממ}}{\underbrace{=}}\mathbb{E}\left[\left(x\left(0\right)\right)^{2}\right]=\sigma_{x}^{2}+\mu_{x}^{2}$
+* סימטריות -  $R_{x}\left(-\tau\right)=\mathbb{E}\left[x\left(0\right)\cdot x^{\ast}\left(-\tau\right)\right]=\mathbb{E}\left[x\left(\tau\right)\cdot x^{\ast}\left(0\right)\right]=\mathbb{E}\left[\left(x\left(0\right)\cdot x^{\ast}\left(\tau\right)\right)^{\ast}\right]=R_{x}^{\ast}\left(\tau\right)$
 
 נשים לב שאם האות סטציונרי אז נוכל לרשום כי $\forall t:R_{x}\left(0\right)=\mathbb{E}\left[\left|x\left(t\right)\right|^{2}\right]\in\mathbb{R}$
 
@@ -308,7 +313,7 @@ $$\left|R_{x}\left(\tau>0\right)\right|=\left|\mathbb{E}\left[x\left(0\right)\cd
 > 
 > הרבה פעמים מה שנעשה הוא לצייר את הפונקצייה של האוטוקורלציה המנורמלת כלומר $\frac{R_{x}\left(\tau\right)}{R_{x}\left(0\right)}$
 
-```{admonition} דוגמא - רעש טלגרף (מערכת שני מצבים) 
+````{admonition} דוגמא - רעש טלגרף (מערכת שני מצבים)
 :class: dropdown
 
 ניקח את המערכת הכי פשוטה שאנחנו יכולים לחשוב עליה (כמעט). נניח שיש לנו שני מצבים. 0,1 
@@ -351,7 +356,7 @@ $$\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=\frac{\lambda_{0}+\
 
 $$\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}$$
 
-מסתבר שהמספר שאם מניחים שהתחלנו לצפות בתהליך בזמן אקראי כלשהו זה גם הסיבוי שהמצב שאנחנו צופים בו יהיה 1 משום שהסיכוי הזה לא תלוי במצב ההתחלתי.
+מסתבר שהמספר שאם מניחים שהתחלנו לצפות בתהליך בזמן אקראי כלשהו זה גם הסיכוי שהמצב שאנחנו צופים בו יהיה 1 משום שהסיכוי הזה לא תלוי במצב ההתחלתי.
 לא נחשב כאן אבל הטענה היא ש-
 
 $$\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=1\right)=\lim_{t\rightarrow\infty}\mathbb{P}\left(x\left(t\right)=1|x\left(0\right)=0\right)=\frac{\lambda_{0}}{\lambda_{0}+\lambda_{1}}$$
@@ -384,10 +389,11 @@ $$\lim_{\tau\rightarrow\infty}R_{x}\left(\tau\right)=\left(\frac{\lambda_{0}}{\l
 
 נסרטט:
 
- <iframe src="https://www.geogebra.org/material/iframe/id/entghwt6" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/entghwt6" target="_blank">לפתיחה בחלון נפרד</a>
+```{raw} html
+:file: interactives/telegraph-correlation.html
+```
 
-מה ההתפלגות של התהליך שלנו בכל זמן נתון? נשים לב שכאן אנחנו יכולים להיות רק בשני מצבין ולא באינסוף ולכן לא נצטרך PDF אלא פשוט
+מה ההתפלגות של התהליך שלנו בכל זמן נתון? נשים לב שכאן אנחנו יכולים להיות רק בשני מצבים ולא באינסוף ולכן לא נצטרך PDF אלא פשוט
 וקטור שאומר מה הסיכוי להיות בכל מצב. במקרה שלנו:
 
 $$\vec{p}=\begin{pmatrix}\mathbb{P}\left(x\left(t\right)=0\right)\\
@@ -398,7 +404,7 @@ $$\vec{p}=\begin{pmatrix}\mathbb{P}\left(x\left(t\right)=0\right)\\
 
 יש לנו את כל מה שאנחנו צריכים :)
 
-```
+````
 
 #### אוטוקורלציה עבור אותות לא אקראיים
 
@@ -438,7 +444,7 @@ $$=\frac{A^{2}\cos\left(\omega\tau\right)}{2}$$
 הרבה פעמים אנחנו מקבלים דגימות מאות מסויים (לפעמים אפילו דגימה אחת ארוכה) ואין לנו דרך לדעת
 אם באמת ה-PDF של האות בכל זמן הוא זהה. מה שאנחנו כן יכולים לחשב
 בקלות הוא ממוצע רץ ואוטוקורלצייה עם זמני התחלה שונים כלומר את $R_{x}\left(t,t+\tau\right)\approx\frac{1}{T}\intop_{t}^{t+T}x\left(t^{\prime}\right)x\left(t^{\prime}+\tau\right)dt^{\prime}$
-ולראות אם התוצאה תלוייה רק  ב$\tau$
+ולראות אם התוצאה תלויה רק  ב$\tau$
 
 עבור תהליך ארגודי נוכל לומר כי:
 1. $\left\langle x\left(t_{i}\right)\right\rangle =\underset{\text{עובק}}{\underbrace{\mu_{x}}}\Rightarrow\boxed{\mathbb{E}\left[x\left(t_{i}\right)\right]=\underset{\text{עובק}}{\underbrace{\mu_{x}}}}$
@@ -450,15 +456,15 @@ $$=\frac{A^{2}\cos\left(\omega\tau\right)}{2}$$
 
 נאמר שאות אקראי $x\left(t\right)$ הוא סטציונרי במובן הרחב אם:
 1. הממוצע שלו לאורך זמן קבוע - $\mu_{x}\left(t\right)=\mathbb{E}\left[x\left(t\right)\right]=\underset{\text{עובק}}{\underbrace{\mu_{x}}}$
-2. האוטוקורלציה שלו תלויה רק בהפרשי זמן - $R_{x}\left(t_{i},t_{j}\right)=R_{x}\left(t_{i}-t_{j}\right)$
+2. האוטוקורלציה שלו תלויה רק בהפרשי זמן - $R_{x}\left(t_{i},t_{j}\right)=R_{x}\left(t_{j}-t_{i}\right)$
 
 זה אומר שגם $Cov\left(x\left(t_{i}\right),x\left(t_{j}\right)\right)$ הוא פונקציה רק של הפרשי זמנים:
 
-$$Cov\left(x\left(t_{i}\right),x\left(t_{j}\right)\right)=\mathbb{E}\left[\left(x\left(t_{i}\right)-\mu_{x}\right)\left(x\left(t_{j}\right)-\mu_{x}\right)^{\ast}\right]=\mathbb{E}\left[x\left(t_{i}\right),x^{\ast}\left(t_{j}\right)\right]-\mu_{x}^{2}=R_{x}\left(t_{i}-t_{j}\right)-\mu_{x}^{2}$$
+$$Cov\left(x\left(t_{i}\right),x\left(t_{j}\right)\right)=\mathbb{E}\left[\left(x\left(t_{i}\right)-\mu_{x}\right)\left(x\left(t_{j}\right)-\mu_{x}\right)^{\ast}\right]=\mathbb{E}\left[x\left(t_{i}\right)\cdot x^{\ast}\left(t_{j}\right)\right]-\left|\mu_{x}\right|^{2}=R_{x}\left(t_{j}-t_{i}\right)-\left|\mu_{x}\right|^{2}$$
 
 ובפרט סטיית התקן קבועה בזמן:
 
-$$\sigma_{x}\left(t\right)=\sqrt{Cov\left(x\left(t\right),x\left(t\right)\right)}=R_{x}\left(0\right)-\mu_{x}^{2}=\underset{\text{עובק}}{\underbrace{\sigma_{x}}}$$
+$$\sigma_{x}\left(t\right)=\sqrt{Cov\left(x\left(t\right),x\left(t\right)\right)}=\sqrt{R_{x}\left(0\right)-\left|\mu_{x}\right|^{2}}=\underset{\text{עובק}}{\underbrace{\sigma_{x}}}$$
 
 ```
 

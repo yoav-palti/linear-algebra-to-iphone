@@ -1,11 +1,19 @@
 # אורתוגונליות של אותות
 
+<details>
+<summary>אמ;לק</summary>
+
+אורתוגונליות מאפשרת ריבוב משתמשים / ערוצים בלי הפרעות: $\int g_m g_n = 0$ או ב-baseband $\Re\int z_m z_n^*$. אפשר להשיג אורתוגונליות ע"י: הפרדת פאזה (I/Q), חלוקה בזמן (סימבולים לא חופפים), חלוקה בתדר (FSK עם מרווח מתאים), או קודי בסיס (Walsh / CDMA). התנאי קובע מרווחי תדר ותבניות קוד; קליטה: הקרנה (קורלציה) על הבסיס הרלוונטי מנתקת את יתר הערוצים.
+
+</details>
+
+
 ### מספר משתמשים (ואורתוגונליות באופן כללי)
 מערכות תקשורת מנקודה לנקודה הן חשובות אבל הן מתגמדות בחשיבותן
 למערכות תקשורת רב משתמשים. נניח שהוקצתה לכם פרוסת תדר למערכת שלכם ואתם מתלבטים
-איך לגרום לכל אחד מהמשתמשים לשכם להיות מסוגל לקלוט ולשדר במקביל.
+איך לגרום לכל אחד מהמשתמשים שלכם להיות מסוגל לקלוט ולשדר במקביל.
 
-העקרון הבסיסי הוא אורתוגונליות. נדאג שהמשתמשים שלהו הם אורתוגונלים
+העקרון הבסיסי הוא אורתוגונליות. נדאג שהמשתמשים שלנו הם אורתוגונלים
 אחד לשני.
 
 כבר ראינו דוגמה יפה לזה. הערוצים $I\left(t\right)$ ו-$Q\left(t\right)$ ניתנים
@@ -24,19 +32,19 @@ $$=\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt+\intop_{-\i
 בנוסף:
 
 $$\intop_{-\infty}^{\infty}\hat{g}_{m}\left(t\right)\hat{g}_{n}\left(t\right)dt=\intop_{-\infty}^{\infty}\mathcal{H}\left[g_{m}\left(t\right)\right]\mathcal{H}\left[g_{n}\left(t\right)\right]dt\underset{parseval}{\underbrace{=}}$$
-$$=\intop_{-\infty}^{\infty}\underset{1}{\underbrace{\left|isgn\left(\omega\right)\right|^{2}}}G_{m}\left(\omega\right)G_{n}^{\ast}\left(\omega\right)d\omega=\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt$$
+$$=\intop_{-\infty}^{\infty}\underset{1}{\underbrace{\left|-isgn\left(\omega\right)\right|^{2}}}G_{m}\left(\omega\right)G_{n}^{\ast}\left(\omega\right)d\omega=\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt$$
 
-כאשר השתמשנו בזה שהחלק המדומה הוא הילברט טרנספורם של החלק הממשי ושפונקציית התמסורת של הילברט היא פשוט $isgn\left(\omega\right)$
+כאשר השתמשנו בזה שהחלק המדומה הוא הילברט טרנספורם של החלק הממשי ושפונקציית התמסורת של הילברט היא פשוט $-isgn\left(\omega\right)$
 
 נזכיר איך זה נראה:
 ![baseband-passband-anlytic.png](images/baseband-passband-anlytic.png)
 בסך הכל קיבלנו כי:
 
-$$\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt=\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)\right]$$
+$$\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt=\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)dt\right]$$
 
 ולכן נוכל לדרוש שהאותות שלנו יהיו אורתוגונליים ב-baseband ולא רק ב-passband כאשר ההגדרה לאורתוגונליות היא:
 
-$$\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)\right]=E_{n}\delta_{mn}$$
+$$\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)dt\right]=E_{n}\delta_{mn}$$
 
 הדוגמה הפשוטה ביותר שלקחנו הם שני אותות:
 
@@ -44,7 +52,7 @@ $$z_{1}\left(t\right)=I\left(t\right),z_{2}\left(t\right)=iQ\left(t\right)$$
 
 בבירור:
 
-$$\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}I\left(t\right)\cdot\left[-iQ\left(t\right)\right]\right]=0$$
+$$\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}I\left(t\right)\cdot\left[-iQ\left(t\right)\right]dt\right]=0$$
 
 אפשר לשים לב שאפילו בחלוקה הראשונית שלנו לסימבולים בזמן כלומר שאנחנו משדרים סימבול
 ואת הסימבול הבא משדרים אחריו אנחנו יכולים לבדוק ולראות שהם אורתוגונלים:
@@ -64,7 +72,7 @@ $$=\Re\left[\left[\frac{1}{i\left(\omega_{k}-\omega_{l}\right)}e^{i\left(\omega_
 
 $$\omega_{k}-\omega_{l}=n\frac{\pi}{T_{s}},n\in\mathbb{N}$$
 
-כלומר אנחנו צריכים קפיצות תדר מסויימות אחרת נאבד את האורתוגונליות!
+כלומר אנחנו צריכים קפיצות תדר מסוימות אחרת נאבד את האורתוגונליות!
 
 נשים לב שאם אנחנו לא יודעים את הפאזה של כל ערוץ כלומר הסימבולים הם:
 
@@ -80,11 +88,11 @@ $$\omega_{k}-\omega_{l}=n\frac{2\pi}{T_{s}},n\in\mathbb{N}$$
 
 ### CDMA
 
-שיטה אחרת היא שפותרת לנו את בעיית המשתמשים היא ליצור קוד עבור כל משתמש כך שהאותות
+שיטה אחרת שפותרת לנו את בעיית המשתמשים היא ליצור קוד עבור כל משתמש כך שהאותות
 הם אורתוגונלים. כלומר נרצה ליצור רצף פונקציות $z_{n}\left(t\right)Rect\left(\frac{t-mT_{s}}{T_{s}}\right)$ שהן אורתוגונליות האחת לשנייה
 כלומר נדרוש כי:
 
-$$\frac{1}{2}\Re\left[\intop_{0}^{T_{s}}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)\right]=E_{n}\delta_{mn}$$
+$$\frac{1}{2}\Re\left[\intop_{0}^{T_{s}}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)dt\right]=E_{n}\delta_{mn}$$
 
 אחת הדרכים לעשות את זה היא פונקציות שמורכבות ממלבנים. ניקח לדוגמה את 4 הפונקציות הבאות
 
@@ -103,5 +111,5 @@ $$\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}z\left(t\right)\cdot z_{n}^{\ast}
 אשר שומר את הקוד שלנו $z_{n}\left(t\right)$ בזיכרון ומשתמש בו כדי לפענח את
 הסימבולים שקשורים לנו.
 
-לאומת האפנונים שלמדנו עליהם עד עכשיו זה כבר משהו שהשתמשו בו
+לעומת האפנונים שלמדנו עליהם עד עכשיו זה כבר משהו שהשתמשו בו
 באופן רחב לתקשורת 3G ל-GPS ואפילו ל-WIFI (באופן קצת שונה)

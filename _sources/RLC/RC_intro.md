@@ -1,5 +1,43 @@
 # מעגלי RC
 
+<details>
+  <summary>אמ;לק</summary>
+
+במעגל RC מתקיים כי המתח הכולל הוא סכום המתחים על הנגד והקבל:
+
+$$V_{in}(t)=V_{R}(t)+V_{C}(t)$$
+
+במרחב התדר נקבל את פונקציית התמסורת:
+
+$$\tilde{H}(\omega)=\frac{1}{1+i\omega RC}$$
+
+אם נסמן $\tau=RC$ נקבל:
+
+$$\tilde{H}(\omega)=\frac{1}{1+i\omega\tau}$$
+
+* זהו **מסנן מעביר נמוכים (LPF)** — תדרים נמוכים עוברים, תדרים גבוהים נחלשים.
+* פונקציית התגובה להלם היא:
+
+$$h(t)=\frac{1}{RC}\,e^{-\frac{t}{RC}}\theta(t)$$
+
+* עבור תדרים גבוהים $\tilde{H}(\omega)\approx\frac{1}{i\omega RC}$ → המעגל מתנהג כאינטגרטור.  
+* אם מחליפים את סדר הרכיבים נקבל **מסנן מעביר גבוהים (HPF)** עם:
+
+$$\tilde{H}_{HPF}(\omega)=\frac{i\omega RC}{1+i\omega RC}$$
+
+והתגובה להלם:
+
+$$h_{HPF}(t)=\delta(t)-\frac{1}{RC}e^{-\frac{t}{RC}}\theta(t)$$
+
+---
+
+**בשורה התחתונה:**  
+מעגל RC הוא מערכת LTI פשוטה שמתפקדת כפילטר אנלוגי:  
+LPF – מעביר תדרים נמוכים (אינטגרטור),  
+HPF – מעביר תדרים גבוהים (גוזר).
+
+</details>
+
 כדוגמה מובילה נתחיל לחקור מעגלי RLC ונבין איך אנחנו יכולים לאפיין אותם עם החוקים שפיתחנו עד עכשיו
 ניקח את החוקים שאנחנו מכירים מחשמל. אם מודדים מתח במקביל לרכיבים מקבלים:
 
@@ -7,12 +45,12 @@
 * קבל - $V_{C}\left(t\right)=\frac{1}{C}\cdot Q\left(t\right)=\frac{1}{C}\cdot\intop_{-\infty}^{t}I\left(\tau\right)d\tau$
 * חוק לנץ - $V_{L}\left(t\right)=L\frac{d}{dt}I\left(t\right)$
 
-אפשר להסתכל על הנוסחאות הללו במחרב התדר:
+אפשר להסתכל על הנוסחאות הללו במרחב התדר:
 * $\tilde{V_{R}}\left(\omega\right)=R\cdot\tilde{I}\left(\omega\right)\Rightarrow Z_{R}=R$
 * $\tilde{V_{C}}\left(\omega\right)=\frac{1}{i\omega C}\tilde{I}\left(\omega\right)\Rightarrow Z_{C}=\frac{1}{i\omega C}$
 * $\tilde{V_{L}}\left(\omega\right)=i\omega L\tilde{I}\left(\omega\right)\Rightarrow Z_{L}=i\omega L$
 
-קיבלנו שכל אחר מהרכיבים האלו הוא מערכת LTI שממירה זרם למתח
+קיבלנו שכל אחד מהרכיבים האלו הוא מערכת LTI שממירה זרם למתח
 ![RLC_system.png](images/RC_system.png)
 
 קיבלנו שהעכבה (אימפדנס) $Z\left(\omega\right)$ היא מקרה פרטי של פונקציית תמסורת ושרכיבי RLC הם מערכות LTI
@@ -28,7 +66,7 @@
 * חוק המתחים - סכום המתחים על פני לולאה הוא 0
 
 כדי להשתמש בחוקים האלו אנו מניחים כי:
-* המויכים אידיאליים (חסרי התנגדות)
+* המוליכים אידיאליים (חסרי התנגדות)
 * אורך הרכיבים קצר ביחס לאורך הגל של המתח - בקורס הבא לומדים על קוי תמסורת
 * השדה שלנו משמר $\nabla\times\vec{E}=0$ -כלומר אין שינוי זמני בשדה המגנטי
 * אין אגירת מטען באף צומת במעגל
@@ -53,13 +91,18 @@ $$\tilde{H}\left(\omega\right)=\frac{1}{i\omega C}\cdot\frac{1}{R+\frac{1}{i\ome
 
 $$\tilde{H}\left(\omega\right)=\frac{1}{1+i\omega\tau}$$
 
-<iframe src="https://www.geogebra.org/material/iframe/id/ta47hhwh" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/ta47hhwh" target="_blank">לפתיחה בחלון נפרד</a>
+```{raw} html
+:file: ../LTI/interactives/runtime.html
+```
+
+```{raw} html
+:file: interactives/rc-filter.html
+```
 
 נשים לב שקיבלנו מערכת שמעבירה תדרים נמוכים אבל לא תדרים גבוהים למערכת לינארית כזאת נקרא "מסנן מעביר נמוכים" או בשם המוכר יותר Low Pass Filter (LPF)
 
 ### הצגה ב-dB
-מעבר למתמטיקה, נוסחאות ואינטואיציה לפעמים צריך למצוא דרך נוחה להציג ולכתוב נתונים. מהנדסים (ואני ממליץ גם לכם) משתמשים ב-dB או בשם היות מוכר שלו דציבל.
+מעבר למתמטיקה, נוסחאות ואינטואיציה לפעמים צריך למצוא דרך נוחה להציג ולכתוב נתונים. מהנדסים (ואני ממליץ גם לכם) משתמשים ב-dB או בשם היותר מוכר שלו דציבל.
 זאת דרך למדוד גדלים בסקאלה לוגריתמית בעלת בסיס 10. באופן כללי כאשר אנו רושמים dB זה לעשות $10\log_{10}\left(\frac{size}{ref}\right)$ כלומר אנחנו מציגים בסקאלה לוגריתמית את הגודל חסר היחידות שלנו. חשוב תמיד לציין מה הרפרנס שביחס אליו אנחנו מודדים. ולכן הרבה פעמים מציינים את זה מיד אחרי הסימן dB. דוגמאות יעזרו להבין:
 
 | $dB=dB_{Watt}$ | $dBm=dB_{mWatt}$ | $\frac{P}{1[Watt]}$ |  $\frac{V}{1[Volt]}$ |
@@ -90,17 +133,17 @@ $$10\log_{10}\left(\left|\tilde{H}\left(\omega\right)\right|^{2}\right)\underset
 אנחנו רוצים פילטר אופטימלי. כלומר אחד שהוא 0dB בתחום מסויים ואז צונח ל-$-\infty$ בבת אחת. איך נקבל פילטר חד יותר?
 
 * נשרשר כמה פילטרים אחד אחרי השני
-* נבנה פילטר מורכב יותר מלחתחילה
+* נבנה פילטר מורכב יותר מלכתחילה
 
 ### תכנון מסנן שמע
-נרצה לתכנן מעגל RC שמסנן את כל התדרים שאנחנו לא שומעים. כלומר על תדר מעל 20kHz.
+נרצה לתכנן מעגל RC שמסנן את כל התדרים שאנחנו לא שומעים. כלומר כל תדר מעל 20kHz.
 נסו להשתמש ב-applet למעלה כדי לתכנן פילטר כזה.
 ![sound_RC_LPF.png](images/sound_RC_LPF.png)
 כמו שרואים בתמונה זה לא מאוד מוצלח. או שאתה מסנן תדרים שאתה רוצה או שאתה נותן לעוד תדרים לעבור
 
 באופן כללי שמתכננים מסנן (filter) חשוב לשים לב לתכונות הבאות:
 * חדות - כמה חד המעבר מ"העברה" ל"ניחות"
-* תדר קטעון $\omega_{c}$
+* תדר קיטעון $\omega_{c}$
 * כמה הוא באמת מעביר בחלק שהוא מעביר $\left|\tilde{H}\left(\omega\right)\right|\approx1$
 * כמה הוא מנחית בתחום תדרי הניחות
 
@@ -160,7 +203,7 @@ $$\tilde{V}_{out}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}\cdot\tilde{
 $$\tilde{H}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}$$
 
 באופן לא מפתיע קיבלנו 1 מינוס מה שקיבלנו קודם. "המתח מתחלק על הרכיבים"
-גם כאן נין לעשות קירוב לתדרים גבוהים ולקבל:
+גם כאן ניתן לעשות קירוב לתדרים נמוכים ולקבל:
 
 $$\tilde{H}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}=\frac{1}{1+\frac{1}{i\omega RC}}\underset{\omega\ll\frac{1}{RC}}{\underbrace{\approx}}RC\cdot i\omega$$
 
@@ -171,4 +214,4 @@ $$\tilde{H}\left(\omega\right)=\frac{i\omega RC}{1+i\omega RC}=\frac{1}{1+\frac{
 $$\tilde{H}_{HPF}\left(\omega\right)=1-\tilde{H}_{LPF}\left(\omega\right)$$
 $$h_{HPF}\left(t\right)=\delta\left(t\right)-h_{LPF}\left(t\right)=\delta\left(t\right)-\frac{1}{RC}\theta\left(t\right)e^{-\frac{t}{RC}}$$
 
-האינטואיציה של זה היא שאנחנו בהתחלה מודדים את ההלם ואז אחרכך יש זרם שלילי בנגד בגלל הפריקה של הקבל
+האינטואיציה של זה היא שאנחנו בהתחלה מודדים את ההלם ואז אחר כך יש זרם שלילי בנגד בגלל הפריקה של הקבל

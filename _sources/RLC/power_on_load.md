@@ -1,6 +1,63 @@
 # הספק על רכיב מרוכב
 
-### עומס מרוכב 
+<details>
+  <summary>אמ;לק</summary>
+
+בעומס כללי עם עכבה מרוכבת  
+
+$$Z(\omega)=R(\omega)+i\chi(\omega)=|Z|e^{i\phi(\omega)}$$  
+
+ההספק הרגעי הוא  
+
+$$P(t)=V(t)\cdot I(t)=\frac{V_{0}^{2}}{2|Z|}\left[\cos(2\omega t-\phi)+\cos(\phi)\right]$$  
+
+וההספק הממוצע:
+
+$$\boxed{\left\langle P\right\rangle =\frac{V_{0}^{2}}{2|Z|}\cos(\phi)}$$
+
+---
+
+### מסקנות עיקריות:
+* רק **החלק הממשי** של העכבה צורך הספק.
+    * צריכת הספק - $\Re[Z]>0$
+    * החזר הספק - $\Re[Z]<0 \Rightarrow \text{הספק מוחזר (Negative Impedance)}$
+* רכיבים טהורים ($L$ או $C$ בלבד) אינם צורכים הספק ממוצע.
+  $$\cos(\phi)=0$$
+* בתדר הרזוננס במעגל $LC$ מתקיים $\cos(\phi)=1$ → האימפדנס ממשי.
+
+---
+
+### תיאום עכבות
+נניח מקור ועומס:
+
+$$Z_{S}, Z_{L}$$  
+
+הזרם:  
+
+$$I=\frac{V_{0}}{Z_{S}+Z_{L}}$$  
+
+ההספק על העומס:  
+
+$$\left\langle P_{L}\right\rangle =\frac{|V_{0}|^{2}}{2}\frac{\Re[Z_{L}]}{|Z_{S}+Z_{L}|^{2}}$$  
+
+כדי למקסם את ההספק:
+
+$$\boxed{Z_{L}=Z_{S}^{\ast}}$$  
+
+במקרה של מקור ממשי:
+
+$$R_{L}=R_{S} \Rightarrow P_{max}=\frac{|V_{0}|^{2}}{8R_{S}}$$  
+
+---
+
+**בשורה התחתונה:**  
+* רק החלק הממשי של העכבה מבזבז הספק.  
+* תיאום עכבות ($Z_{L}=Z_{S}^{\ast}$) מבטיח העברת הספק ממוצע מקסימלי.  
+* במעגלים בתדר קבוע – ניתן לבטל את החלק המדומה (לדוגמה ע"י הוספת קבל/סליל).
+
+</details>
+
+### עומס מרוכב
 ![complex_impedance.png](images/complex_impedance.png)
 
 נרצה לדעת בהינתן רכיב כללי עם עכבה כלשהי $Z\left(\omega\right)=R\left(\omega\right)+i\chi\left(\omega\right)=\left|Z\left(\omega\right)\right|e^{i\phi\left(\omega\right)}$
@@ -11,8 +68,8 @@ $$P\left(t\right)=I\left(t\right)\cdot V\left(t\right)$$
 נשים לב שאנחנו צריכים להיזהר כאן. יש לנו משוואה עם כפל ולכן לא נוכל באמת להחליף את הכל להיות במרחב התדר. אנחנו נקבל בצד שמאל קונבולוציה בין הזרם למתח.
 על מנת להיות מסוגלים לומר משהו חכם נתחיל ממקרה פשוט:
 
-$$V\left(t\right)=V_{0}\cos\left(\omega_{0}t+\phi\right)$$
-$$\frac{1}{Z\left(\omega\right)}=\frac{1}{\left|Z\left(\omega\right)\right|}e^{-\phi\left(\omega\right)}$$
+$$V\left(t\right)=V_{0}\cos\left(\omega_{0}t\right)$$
+$$\frac{1}{Z\left(\omega\right)}=\frac{1}{\left|Z\left(\omega\right)\right|}e^{-i\phi\left(\omega\right)}$$
 $$\Downarrow$$
 $$I\left(t\right)=\frac{1}{\left|Z\left(\omega_{0}\right)\right|}V_{0}\cos\left(\omega_{0}t-\phi\left(\omega_{0}\right)\right)$$
 
@@ -27,7 +84,7 @@ $$\boxed{P\left(t\right)=\frac{V_{0}^{2}}{2\left|Z\left(\omega_{0}\right)\right|
 נשים לב ששום דבר לא מונע מההספק להיות שלילי! מתי זה קורה? האם יכול להיות רכיב שבזמן מסויים "מחזיר" אנרגיה למעגל במקום לעלות אנרגיה?
 כמובן שכן, אנחנו מכירים פריקה וטעינה גם של קבל וגם של סליל
 
-נשאל שאלה יותר קשה. האם ההספק יכול להיות שלילי בבמוצע? נחשב
+נשאל שאלה יותר קשה. האם ההספק יכול להיות שלילי בממוצע? נחשב
 
 $$P_{avg}\equiv\left\langle P\left(t\right)\right\rangle \equiv\overline{P\left(t\right)}=\lim_{T\rightarrow\infty}\frac{1}{T}\intop_{-\frac{T}{2}}^{\frac{T}{2}}P\left(t\right)dt$$
 
@@ -70,7 +127,7 @@ $$\cos\left(\phi\left(\omega_{0}\right)\right)<0\Rightarrow\Re\left[Z\left(\omeg
 נניח שיש לנו עומס עם חלק השראתי מאוד גדול:
 
 $$Z\left(\omega\right)=i\omega L+R$$
-$$L\gg R\Rightarrow\left|\cos\left(\phi\right)\right|\ll1$$
+$$\omega L\gg R\Rightarrow\left|\cos\left(\phi\right)\right|\ll1$$
 
 (נשים לב שזה תלוי תדר אבל נניח שאנחנו עובדים בתדר שבו זה באמת נכון)
 
@@ -107,13 +164,13 @@ $$Z\left(\omega\right)=i\left(\omega L-\frac{1}{\omega C}\right)+R$$
 
 ראינו כבר שאם המתח על עומס מסויים $Z$ הוא $V\left(t\right)=V_{0}\cos\left(\omega_{0}t\right)$ נקבל כי 
 
-$$I\left(t\right)=\frac{V_{0}}{\left|Z\right|}\cos\left(\omega_{0}t+\phi_{Z}\right)$$
+$$I\left(t\right)=\frac{V_{0}}{\left|Z\right|}\cos\left(\omega_{0}t-\phi_{Z}\right)$$
 $$\left\langle P\right\rangle =\frac{V_{0}^{2}}{2\left|Z\right|}\cos\left(\phi_{Z}\right)$$
 
 במקום לעבוד קשה ולעשות את האינטגרלים של הממוצע כל הזמן נגדיר:
 
 $$V\left(t\right)=V_{0}e^{i\omega_{0}t}$$
-$$I\left(t\right)=\frac{V_{0}}{\left|Z\right|}e^{i\left(\omega_{0}t+\phi_{Z}\right)}$$
+$$I\left(t\right)=\frac{V_{0}}{\left|Z\right|}e^{i\left(\omega_{0}t-\phi_{Z}\right)}$$
 
 ולכן כדי לחשב את ההספק הממוצע כל מה שנצטרך לחשב הוא:
 
@@ -161,7 +218,12 @@ $$P_{L}\left(Z_{L}=Z_{S}^{\ast}\right)=\frac{\left|V_{0}\right|^{2}}{2}\frac{R_{
 
 חשוב לציין שלמערכת יש אפשרות לתאם "בכל תדר" אבל רק בנפרד אלא אם העכבה שווה בכמה תדרים שונים.
 
-מומזנים לנסות לתאם עכבות ולראות מה ההספק שנופל על העומס L
+מוזמנים לנסות לתאם עכבות ולראות מה ההספק שנופל על העומס L
 
-<iframe src="https://www.geogebra.org/material/iframe/id/qpb4yvjq" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/qpb4yvjq" target="_blank">לפתיחה בחלון נפרד</a>
+```{raw} html
+:file: ../LTI/interactives/runtime.html
+```
+
+```{raw} html
+:file: interactives/impedance-matching.html
+```

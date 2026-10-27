@@ -2,48 +2,45 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="../" data-theme="auto">
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>תגובת בתדר &#8212; Linear Algebra to iPhone 1</title>
+    <title>תגובה בתדר &#8212; Linear Algebra to iPhone 1</title>
   
   
   
   <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=28a1b870" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -54,27 +51,25 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"menuOptions": {"settings": {"renderer": "SVG"}}, "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'LTI/frequency_response';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="תמסורת גלים בחדר" href="wave_in_a_room.html" />
-    <link rel="prev" title="תגובת להלם" href="impulse_response.html" />
+    <link rel="prev" title="תגובה להלם" href="impulse_response.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
 
   
   
@@ -86,8 +81,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -95,6 +101,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -102,8 +109,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -119,8 +126,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -150,17 +156,21 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="Linear Algebra to iPhone 1 - Home"/>
-    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Linear Algebra to iPhone 1 - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Linear Algebra to iPhone 1 - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -174,8 +184,8 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
-<li class="toctree-l1"><a class="reference internal" href="impulse_response.html">תגובת להלם</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">תגובת בתדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="impulse_response.html">תגובה להלם</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">תגובה בתדר</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wave_in_a_room.html">החזרות בחדר</a></li>
 <li class="toctree-l1"><a class="reference internal" href="noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
 </ul>
@@ -201,7 +211,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">דיגיטציה</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/digitation_intro.html">מה זה לדיגיטציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/digitation_intro.html">מה זה דיגיטציה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/sampling.html">דגימה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/interpolation.html">שחזור באינטרפולציה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/quantization.html">קוונטיזציה</a></li>
@@ -220,6 +230,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">תורת האינפורמציה</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../information/entropy.html">למה אנטרופיה?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../temp.html">דמו: דגימה ו-Aliasing</a></li>
 </ul>
 
     </div>
@@ -342,16 +353,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -365,7 +384,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>תגובת בתדר</h1>
+    <h1>תגובה בתדר</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -394,7 +413,18 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>תגובת בתדר<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<h1>תגובה בתדר<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<details>
+<summary>אמ;לק</summary>
+<p>מערכת LTI מקיימת:</p>
+<p><span class="math notranslate nohighlight">\(y=x*h\)</span> ↔ <span class="math notranslate nohighlight">\(\tilde{Y}(\omega)=\tilde{H}(\omega)\tilde{X}(\omega)\sqrt{2\pi}\)</span></p>
+<p>. אקספוננטים מרוכבים הם פונקציות עצמיות → פירוק פורייה מפשט ניתוח.</p>
+<p>מערכת LTI לא מייצרת תדרים חדשים אלא רק מגבירה או מנחיתה תדרים קיימים.
+דרושה גם אי־תלות בזמן; לינאריות לבדה אינה מספיקה למסקנה הזו.
+המערכת משנה רק אמפליטודה ופאזה, ופונקציית התמסורת</p>
+<p><span class="math notranslate nohighlight">\(\tilde{H}(\omega)=\mathcal{F}[h(t)]\)</span></p>
+<p>היא האנלוג של מטריצה בבסיס עצמי. כלומר מלוכסנת.</p>
+</details>
 <section id="id2">
 <h2>פירוק לתדרים<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>עם האינטואיציה שמערכות לינאריות מאפשרות לנו לפרק אות מורכב לסכום (או אינטגרל) של אותות פשוטים פירקנו את האות לפונקציות
@@ -416,23 +446,24 @@
 <p>איזה פירוק כדאי לשקול? נתחיל מפשוט לגלות את התשובה ולאט לאט נבין למה בחרנו דווקא את הפירוק הזה.
 התשובה תהיה טרנספורם פורייה:</p>
 <div class="math notranslate nohighlight">
-\[x\left(t\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\underset{\text{םימדקמ}}{\underbrace{\tilde{X}\left(\omega\right)}}e^{i\omega t}dt\]</div>
+\[x\left(t\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\underset{\text{םימדקמ}}{\underbrace{\tilde{X}\left(\omega\right)}}e^{i\omega t}d\omega\]</div>
 <p>למי שכבר יצא לראות את הנוסחה הזו הוא יזהה את זה דווקא בתור טרנספורם פורייה ההפוך אבל שימו לב שכל מה שכתבנו כאן הוא שהאות
 שלנו ניתן לכתיבה כסכום של הפונקציות <span class="math notranslate nohighlight">\(e^{i\omega t}\)</span> ולכל פונקצייה יש מקדם <span class="math notranslate nohighlight">\(X\left(\omega\right)\)</span> אשר מכפיל אותה. איך
 נמצא את המקדמים? נתן כאן את הנוסחה בלי להסביר ובהמשך זה יתבהר:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{F}\left[x\left(t\right)\right]\equiv\tilde{X}\left(\omega\right)=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}x\left(t\right)e^{-i\omega t}dt\]</div>
 <p>זה טרנספורם פורייה (לא ההפוך) כמו שלרוב מכירים. כלומר טרנספורם פורייה הוא דרך לחשב את מקדמי הפריסה של האות.</p>
+<p>הערת מוטיבציה: למה דווקא אקספוננטים מרוכבים <span class="math notranslate nohighlight">\(e^{i\omega t}\)</span>? כי עבור מערכות LTI הם פונקציות עצמיות (eigenfunctions): נכנסים ויוצאים באותו תדר, רק עם שינוי אמפליטודה ופאזה. זה עושה את האנליזה פשוטה מאוד ונראה זאת בהמשך.</p>
 <p>נבדוק שהנוסחא באמת נכונה:</p>
 <div class="math notranslate nohighlight">
-\[\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\underset{\text{םימדקמ}}{\underbrace{\tilde{X}\left(\omega\right)}}e^{i\omega t}dt=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\left(\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}d\tau\right)e^{i\omega t}dt=\]</div>
+\[\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\underset{\text{םימדקמ}}{\underbrace{\tilde{X}\left(\omega\right)}}e^{i\omega t}d\omega=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\left(\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}d\tau\right)e^{i\omega t}d\omega=\]</div>
 <div class="math notranslate nohighlight">
-\[\underset{\text{היצרגטניא}-\text{רדס}-\text{ףילחנ}}{\underbrace{=}}\frac{1}{2\pi}\intop_{-\infty}^{\infty}x\left(\tau\right)\left(\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}dt\right)d\tau=\frac{1}{2\pi}\intop_{-\infty}^{\infty}x\left(\tau\right)\left(2\pi\delta\left(t-\tau\right)\right)d\tau=x\left(t\right)\]</div>
+\[\underset{\text{היצרגטניא}-\text{רדס}-\text{ףילחנ}}{\underbrace{=}}\frac{1}{2\pi}\intop_{-\infty}^{\infty}x\left(\tau\right)\left(\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}d\omega\right)d\tau=\frac{1}{2\pi}\intop_{-\infty}^{\infty}x\left(\tau\right)\left(2\pi\delta\left(t-\tau\right)\right)d\tau=x\left(t\right)\]</div>
 <div class="tip admonition">
 <p class="admonition-title">נשים לב</p>
-<p>האינטגרל <span class="math notranslate nohighlight">\(\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}dt\)</span> שווה 0 כאשר <span class="math notranslate nohighlight">\(t\ne\tau\)</span> ואינסוף אחרת. כלומר:</p>
+<p>האינטגרל <span class="math notranslate nohighlight">\(\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}d\omega\)</span> שווה 0 כאשר <span class="math notranslate nohighlight">\(t\ne\tau\)</span> ואינסוף אחרת. כלומר:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}dt=\begin{cases}
+\[\begin{split}\intop_{-\infty}^{\infty}e^{i\omega\left(t-\tau\right)}d\omega=\begin{cases}
 0 &amp; t\ne\tau\\
 \infty &amp; t=\tau
 \end{cases}\propto\delta\left(t-\tau\right)\end{split}\]</div>
@@ -449,10 +480,10 @@
 <div class="math notranslate nohighlight">
 \[=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau e^{-i\omega t}dt=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)e^{-i\omega t}dtd\tau\]</div>
 <div class="math notranslate nohighlight">
-\[\underset{u=t-\tau}{\underbrace{=}}\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(u\right)e^{-i\omega\left(u+\tau\right)}dud\tau=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}h\left(u\right)e^{-i\omega u}dtd\tau\]</div>
+\[\underset{u=t-\tau}{\underbrace{=}}\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(u\right)e^{-i\omega\left(u+\tau\right)}dud\tau=\frac{1}{\sqrt{2\pi}}\intop_{-\infty}^{\infty}\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}h\left(u\right)e^{-i\omega u}dud\tau\]</div>
 <div class="math notranslate nohighlight">
-\[=\frac{1}{\sqrt{2\pi}}\left(\intop_{-\infty}^{\infty}h\left(u\right)e^{-i\omega u}dt\right)\left(\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}d\tau\right)=\sqrt{2\pi}\tilde{H}\left(\omega\right)\tilde{X}\left(\omega\right)\]</div>
-<p>בקצרה קיבלנו כי:</p>
+\[=\frac{1}{\sqrt{2\pi}}\left(\intop_{-\infty}^{\infty}h\left(u\right)e^{-i\omega u}du\right)\left(\intop_{-\infty}^{\infty}x\left(\tau\right)e^{-i\omega\tau}d\tau\right)=\sqrt{2\pi}\tilde{H}\left(\omega\right)\tilde{X}\left(\omega\right)\]</div>
+<p>בקצרה קיבלנו כי (הטריק המרכזי: מחליפים סדר אינטגרציה ומגדירים <span class="math notranslate nohighlight">\(u=t-\tau\)</span> כדי לחשוף את המכפלה בתדר):</p>
 <div class="math notranslate nohighlight">
 \[\boxed{y\left(t\right)=x\left(t\right)\ast h\left(t\right)\Longleftrightarrow\tilde{Y}\left(\omega\right)=\sqrt{2\pi}\tilde{X}\left(\omega\right)\tilde{H}\left(\omega\right)}\]</div>
 <p>(את הכיוון ההפוך אתם מוזמנים לעשות וזה חישוב מאוד דומה)</p>
@@ -463,13 +494,17 @@
 ישנה.
 נרשום את זה בדיאגרמה כמו מקודם
 <img alt="lti_freq_diagram.png" src="../_images/lti_freq_diagram.png" /></p>
-<p>קיבלנו שמערכת LTI היא equalizer. היא מגבירה או מנמיכה תדרים מסויימים.</p>
+<p>קיבלנו שמערכת LTI היא equalizer: היא מגבירה או מנמיכה תדרים מסוימים, ומסיטה פאזה – בלי ליצור תדרים חדשים.</p>
 <p>כמה מסקנות חשובות נובעות מזה:</p>
 <ul class="simple">
 <li><p>אין יצירת תדרים חדשים: <span class="math notranslate nohighlight">\(\tilde{X}\left(\omega_{0}\right)=0\Rightarrow\tilde{Y}\left(\omega_{0}\right)=0\)</span></p></li>
 <li><p>משפט הקונבולוציה: קונבולוציה בזמן היא מכפלה בתדר והפוך</p></li>
 <li><p>ניתן לעבוד לגמרי במרחב התדר. כל מערכת LTI ניתן לאפיין לחלוטין במרחב התדר</p></li>
 </ul>
+<div class="tip admonition">
+<p class="admonition-title">סיכום קצר – אנלוגיה לאלגברה לינארית</p>
+<p>אותות ↔ וקטורים; מערכות ↔ אופרטורים; תגובה להלם h(t) ↔ מטריצה; בסיס התדר <span class="math notranslate nohighlight">\(e^{i\omega t}\)</span> ↔ בסיס עצמי; קונבולוציה ↔ מכפלה בתדר.</p>
+</div>
 </section>
 <section id="id3">
 <h2>תכונות של פונקציית התמסורת<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
@@ -499,10 +534,730 @@
 <p>כלומר:</p>
 <div class="math notranslate nohighlight">
 \[\tilde{H}\left(\omega\right)=\frac{\tilde{X}\left(\omega\right)}{\tilde{P}\left(\omega\right)}=\frac{A}{-m\omega^{2}+i\gamma\omega+k}\]</div>
-<iframe src="https://www.geogebra.org/material/iframe/id/ydttts6y" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/ydttts6y" target="_blank">לפתיחה בחלון נפרד</a>
-<p>נסו לשחק קצת עם האילוסטרציה. מה ה-ם הפרמטרים הכי טובים אם אנחנו רוצים לתכנן מיקרופון?
-נסו לגרום לרוחב של התמסורת להיות כמה שיותר רחבה</p>
+<!-- Shared by chapter-local raw includes. No configuration or build step is required. -->
+<style>
+  .course-interactive { --ci-ink:#172f43; --ci-muted:#526779; --ci-line:#dce5eb; color:var(--ci-ink); background:#f6f9fb; border:1px solid var(--ci-line); border-radius:18px; margin:26px 0; padding:22px; font:15px/1.6 system-ui,sans-serif; direction:rtl; color-scheme:light; }
+  .course-interactive * { box-sizing:border-box; }
+  .course-interactive h4 { margin:0 0 14px; font-size:23px; color:var(--ci-ink); background:transparent; }
+  .course-interactive .ci-equation { text-align:center; overflow-x:auto; direction:ltr; margin:8px 0 16px; padding:6px; }
+  .course-interactive .ci-controls { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin:12px 0; }
+  .course-interactive .ci-control { background:white; border:1px solid var(--ci-line); border-radius:10px; padding:10px; min-width:0; }
+  .course-interactive label { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:4px 8px; margin:0 0 6px; font-size:13px; font-weight:650; }
+  .course-interactive output { direction:ltr; unicode-bidi:isolate; font-variant-numeric:tabular-nums; }
+  .course-interactive input[type=range] { display:block; direction:ltr; width:100%; accent-color:#087e85; cursor:pointer; min-height:28px; margin:0; }
+  .course-interactive button, .course-interactive select { font:inherit; color:var(--ci-ink); background:white; border:1px solid #b7cbd6; border-radius:8px; padding:7px 11px; cursor:pointer; }
+  .course-interactive select { width:100%; max-width:100%; }
+  .course-interactive button:hover { background:#e7f1f5; }
+  .course-interactive :is(button,input,select):focus-visible { outline:3px solid #168c9a; outline-offset:3px; }
+  .course-interactive .ci-buttons { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 18px; }
+  .course-interactive .ci-plots { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .course-interactive .ci-plot { background:white; border:1px solid var(--ci-line); border-radius:12px; padding:10px 7px 7px; min-width:0; }
+  .course-interactive .ci-plot:only-child { grid-column:1 / -1; }
+  .course-interactive h5 { margin:0 8px 4px; color:var(--ci-ink); font-size:14px; }
+  .course-interactive .ci-board { width:100%; height:265px; direction:ltr; overflow:hidden; position:relative; touch-action:pan-y; }
+  .course-interactive .ci-board > svg { max-width:none; }
+  .course-interactive .ci-caption { text-align:center; direction:ltr; font-size:12px; color:var(--ci-muted); }
+  .ci-graph-navigation { display:flex; justify-content:center; flex-wrap:wrap; gap:4px; direction:ltr; margin:4px 0; }
+  .course-interactive .ci-graph-navigation button, #microphone-response .ci-graph-navigation button { min-width:32px; min-height:32px; padding:3px 7px; font:16px/1.2 system-ui,sans-serif; }
+  .ci-graph-pannable { cursor:grab; }
+  .ci-graph-pannable:active { cursor:grabbing; }
+  .ci-graph-selecting, .ci-graph-selecting:active { cursor:crosshair; touch-action:none !important; }
+  .ci-graph-scaling, .ci-graph-scaling:active { cursor:crosshair; }
+  .course-interactive .ci-graph-navigation button[aria-pressed=true], #microphone-response .ci-graph-navigation button[aria-pressed=true] { background:#dceef1; border-color:#087e85; }
+  .ci-graph-navigation button svg { display:block; width:18px; height:18px; }
+  .ci-graph-navigation button:disabled { opacity:.35; cursor:default; }
+  .course-interactive .ci-math-label { direction:ltr; background:transparent; white-space:nowrap; padding:0 2px; }
+  .course-interactive .ci-metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:8px; margin:14px 0 0; }
+  .course-interactive .ci-metric { background:#eaf1f5; border-radius:9px; padding:10px; font-size:12px; color:var(--ci-muted); min-width:0; }
+  .course-interactive .ci-metric strong { display:block; font-size:18px; font-weight:650; color:var(--ci-ink); direction:ltr; unicode-bidi:isolate; margin-top:3px; }
+  .course-interactive .ci-note, .course-interactive .ci-status { color:var(--ci-muted); font-size:12px; margin:10px 0 0; }
+  .course-interactive .ci-error { color:#9b351b; }
+  .course-interactive a { color:#086b78; }
+  @media(max-width:700px) {
+    .course-interactive { padding:15px; }
+    .course-interactive .ci-plots, .course-interactive .ci-metrics { grid-template-columns:1fr; }
+    .course-interactive .ci-controls { grid-template-columns:1fr; gap:6px; }
+    .course-interactive .ci-control { display:grid; grid-template-columns:minmax(110px,145px) minmax(0,1fr); align-items:center; gap:10px; padding:8px; }
+    .course-interactive label { margin:0; }
+    .course-interactive .ci-metric strong { display:inline-block; margin-inline-start:10px; }
+  }
+  @media print { .course-interactive .ci-controls,.course-interactive .ci-buttons { display:none; } }
+</style>
+<script>
+(() => {
+  "use strict";
+  if (window.CourseInteractives) return;
+  const colors = { orange:"#c35c18", teal:"#087e85", blue:"#2463a7", purple:"#8756b7", ink:"#172f43", gray:"#758a99" };
+  const TAU = 2 * Math.PI;
+  const models = {
+    rc(w, tau) { return { magnitude:1 / Math.hypot(1,w * tau), phase:-Math.atan(w * tau) }; },
+    rlc(w, r, l, c) {
+      if (w === 0) return { magnitude:0, phase:Math.PI / 2 };
+      const x = w * l - 1 / (w * c);
+      return { magnitude:r / Math.hypot(r,x), phase:-Math.atan2(x,r) };
+    },
+    rlcParameters(r,l,c) {
+      const discriminant = Math.hypot(r,2 * Math.sqrt(l / c));
+      return { resonance:1 / Math.sqrt(l * c), lower:2 / (c * (discriminant + r)),
+        upper:(discriminant + r) / (2 * l), bandwidth:r / l, q:Math.sqrt(l / c) / r };
+    },
+    room(w, delta, sum, a2) {
+      const t1 = (sum - delta) / 2, t2 = (sum + delta) / 2;
+      const re = (0.5 * Math.cos(w * t1) + a2 * Math.cos(w * t2)) / Math.sqrt(TAU);
+      const im = (-0.5 * Math.sin(w * t1) - a2 * Math.sin(w * t2)) / Math.sqrt(TAU);
+      const magnitude = Math.hypot(re,im);
+      return { magnitude, phase:magnitude < 1e-10 ? NaN : Math.atan2(im,re), re, im };
+    },
+    gaussian(x,mean,sigma) { return Math.exp(-0.5 * ((x - mean) / sigma) ** 2) / (Math.sqrt(TAU) * sigma); },
+    telegraph(l0,l1) {
+      const mean = l0 / (l0 + l1), variance = mean * (1 - mean);
+      return { mean, variance, correlationTime:1 / (l0 + l1),
+        correlation:t => mean * mean + variance * Math.exp(-(l0 + l1) * Math.abs(t)),
+        conditional:t => mean + (1 - mean) * Math.exp(-(l0 + l1) * t) };
+    },
+    loadPower(rl,rs,xs,xl) { return rl / ((rs + rl) ** 2 + (xs + xl) ** 2); },
+    optimalResistance(rs,xs,xl) { return Math.hypot(rs,xs + xl); },
+    // Delta and impulse-train choices use explicitly labelled finite Gaussian approximations.
+    signal(kind,width,amplitude,t) {
+      switch (kind) {
+        case "triangle": return amplitude * Math.max(0,1 - Math.abs(t) / width);
+        case "rectangle": return amplitude * (Math.abs(Math.abs(t)-width)<1e-10 ? 0.5 : Math.abs(t)<width ? 1 : 0);
+        case "gaussian":
+        case "impulse": return amplitude * Math.exp(-((t / width) ** 2)) / (width * Math.sqrt(Math.PI));
+        case "train": {
+          let result = 0;
+          for (let n=-3;n<=3;n++) result += Math.exp(-(((t - 2.5 * n) / width) ** 2));
+          return amplitude * result / (width * Math.sqrt(Math.PI));
+        }
+        case "ramp": return Math.abs(t) < width ? amplitude * (t + width) / (2 * width) : 0;
+        default: throw new Error("Unknown signal: " + kind);
+      }
+    },
+    convolution(f,g,{bound=20,step=0.02,min=-6,max=6}={}) {
+      const count = Math.round(2 * bound / step), firstShift = Math.round(min / step), lastShift = Math.round(max / step);
+      const a = new Float64Array(count + 1), b = new Float64Array(count + 1);
+      for (let i=0;i<=count;i++) { const x = -bound + i * step; a[i]=f(x); b[i]=g(x); }
+      const times=[], values=[];
+      for (let shift=firstShift;shift<=lastShift;shift++) {
+        let value=0;
+        for (let i=Math.max(0,shift);i<=Math.min(count,count + shift);i++) {
+          const j=count + shift - i;
+          value += a[i] * b[j] * ((i===0 || i===count) ? 0.5 : 1);
+        }
+        times.push(shift * step); values.push(value * step);
+      }
+      return { times, values, at(t) {
+        const position=(t - min) / step, i=Math.floor(position), fraction=position-i;
+        if (i < 0 || i >= values.length - 1) return values[Math.max(0,Math.min(values.length-1,i))];
+        return values[i] * (1 - fraction) + values[i + 1] * fraction;
+      } };
+    }
+  };
+  let library;
+  async function ready() {
+    if (document.readyState === "loading") await new Promise(resolve => document.addEventListener("DOMContentLoaded",resolve,{once:true}));
+    await window.MathJax?.startup?.promise;
+    if (!window.MathJax?.typesetPromise) throw new Error("MathJax unavailable");
+    if (window.JXG) return;
+    if (!library) library=new Promise((resolve,reject) => {
+      const script=document.createElement("script");
+      script.src="https://cdn.jsdelivr.net/npm/jsxgraph@1.14.0/distrib/jsxgraphcore.js";
+      script.onload=resolve; script.onerror=reject; document.head.appendChild(script);
+    });
+    await library;
+  }
+  function node(tag,parent,text,className) {
+    const element=document.createElement(tag);
+    if (className) element.className=className;
+    if (text !== undefined) element.textContent=text;
+    if (parent) parent.appendChild(element);
+    return element;
+  }
+  function math(parent,tex) { const span=node("span",parent,"\\(" + tex + "\\)","math notranslate"); span.dir="ltr"; return span; }
+  function navigation(board,container) {
+    const home=board.getBoundingBox().slice();
+    const toolbar=node("div",null,undefined,"ci-graph-navigation");
+    toolbar.setAttribute("role","group");toolbar.setAttribute("aria-label","ניווט בגרף");
+    const icon=path=>`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+    const makeButton=(title,path,action)=>{const button=node("button",toolbar);button.innerHTML=icon(path);button.type="button";button.title=title;button.setAttribute("aria-label",title);button.addEventListener("click",action);return button;};
+    let selecting=false,rightDrag=null,gesture=false,restoring=false,historyTimer,undo;
+    const history=[home.slice()];
+    const sameView=(a,b)=>a.every((v,i)=>Math.abs(v-b[i])<=1e-10*Math.max(1,Math.abs(v),Math.abs(b[i])));
+    const remember=()=>{
+      clearTimeout(historyTimer);
+      const view=board.getBoundingBox().slice();
+      if(!sameView(view,history.at(-1))){history.push(view);if(history.length>101)history.shift();}
+      if(undo)undo.disabled=history.length<2;
+    };
+    const finishScaling=()=>{
+      const pointer=rightDrag?.pointerId;rightDrag=null;
+      container.classList.remove("ci-graph-scaling");
+      if(pointer!==undefined&&container.hasPointerCapture(pointer))container.releasePointerCapture(pointer);
+      if(pointer!==undefined){gesture=false;remember();}
+    };
+    const mode=enabled=>{
+      finishScaling();
+      selecting=enabled;
+      if(enabled)board.startSelectionMode();else board.stopSelectionMode();
+      zoom.setAttribute("aria-pressed",String(enabled));pan.setAttribute("aria-pressed",String(!enabled));
+      container.classList.toggle("ci-graph-selecting",enabled);
+    };
+    const zoom=makeButton("בחירת אזור להגדלה",'<circle cx="10" cy="10" r="6.5"/><path d="M15 15 L21 21"/>',()=>mode(!selecting));
+    const pan=makeButton("הזזה בגרירה",'<path d="M8 12 V5 a1.5 1.5 0 0 1 3 0 V11 V3 a1.5 1.5 0 0 1 3 0 V11 V5 a1.5 1.5 0 0 1 3 0 V12 V8 a1.5 1.5 0 0 1 3 0 V16 Q20 22 14 22 H12 Q9 22 7 19 L3 13 Q2 11 4 11 L8 15"/>',()=>mode(false));
+    makeButton("תצוגת הבית",'<path d="M3 11 L12 3 L21 11 M5 10 V21 H19 V10 M10 21 V14 H14 V21"/>',()=>{mode(false);remember();board.setBoundingBox(home.slice(),false,"reset");remember();});
+    undo=makeButton("ביטול שינוי תצוגה",'<path d="M9 5 L4 10 L9 15 M4 10 H14 A6 6 0 0 1 14 22"/>',()=>{
+      finishScaling();remember();if(history.length<2)return;
+      history.pop();restoring=true;
+      try{board.setBoundingBox(history.at(-1).slice(),false,"update");}finally{restoring=false;}
+      undo.disabled=history.length<2;
+    });
+    undo.disabled=true;
+    zoom.setAttribute("aria-pressed","false");pan.setAttribute("aria-pressed","true");
+    // Save one view per drag; wheel/pinch bursts settle into a single history entry.
+    board.on("down",()=>{remember();gesture=true;});
+    board.on("up",()=>queueMicrotask(()=>{gesture=false;remember();}));
+    board.on("boundingbox",()=>{if(!restoring&&!gesture){clearTimeout(historyTimer);historyTimer=setTimeout(remember,180);}});
+    // JSXGraph draws and tracks the rectangle; only its resulting viewport is applied here.
+    board.on("stopselecting",()=>{
+      const corners=board.stopSelectionMode(),a=corners[0].usrCoords,b=corners[1].usrCoords;
+      remember();
+      if(Math.abs(a[1]-b[1])*board.unitX>=6&&Math.abs(a[2]-b[2])*board.unitY>=6)
+        board.setBoundingBox([Math.min(a[1],b[1]),Math.max(a[2],b[2]),Math.max(a[1],b[1]),Math.min(a[2],b[2])],false,"update");
+      remember();
+      // JSXGraph ends selection again after this callback returns. Re-arm afterwards.
+      if(selecting)queueMicrotask(()=>{if(selecting)board.startSelectionMode();});
+    });
+    const escape=event=>{if(event.key==="Escape")mode(false);};
+    container.addEventListener("keydown",escape);toolbar.addEventListener("keydown",escape);
+    const consume=event=>{event.preventDefault();event.stopImmediatePropagation();};
+    container.addEventListener("pointerdown",event=>{
+      if(selecting||event.button!==2||event.pointerType==="touch")return;
+      const rect=container.getBoundingClientRect(),bounds=board.getBoundingBox().slice();
+      if(!rect.width||!rect.height)return;
+      consume(event);
+      remember();gesture=true;
+      const u=(event.clientX-rect.left)/rect.width,v=(event.clientY-rect.top)/rect.height;
+      rightDrag={pointerId:event.pointerId,x:event.clientX,y:event.clientY,width:rect.width,height:rect.height,bounds,
+        anchorX:bounds[0]+u*(bounds[2]-bounds[0]),anchorY:bounds[1]-v*(bounds[1]-bounds[3])};
+      container.setPointerCapture(event.pointerId);container.classList.add("ci-graph-scaling");
+    },true);
+    container.addEventListener("pointermove",event=>{
+      if(!rightDrag||event.pointerId!==rightDrag.pointerId)return;
+      consume(event);
+      if(!(event.buttons&2)){finishScaling();return;}
+      const d=rightDrag;
+      // Matplotlib's linear-axis rule: a full plot-width/height drag changes scale tenfold.
+      const fx=10**Math.max(-6,Math.min(6,-(event.clientX-d.x)/d.width));
+      const fy=10**Math.max(-6,Math.min(6,(event.clientY-d.y)/d.height));
+      const b=d.bounds,next=[d.anchorX+(b[0]-d.anchorX)*fx,d.anchorY+(b[1]-d.anchorY)*fy,
+        d.anchorX+(b[2]-d.anchorX)*fx,d.anchorY+(b[3]-d.anchorY)*fy];
+      if(next.every(Number.isFinite)&&next[2]>next[0]&&next[1]>next[3])board.setBoundingBox(next,false,"update");
+    },true);
+    for(const type of ["pointerup","pointercancel"])container.addEventListener(type,event=>{
+      if(rightDrag&&event.pointerId===rightDrag.pointerId){consume(event);finishScaling();}
+    },true);
+    container.addEventListener("lostpointercapture",finishScaling);
+    container.addEventListener("contextmenu",event=>{if(!selecting||rightDrag)consume(event);},true);
+    container.after(toolbar);container.classList.add("ci-graph-pannable");
+    container.title="זכוכית מגדלת: בחירת אזור; יד: גרירה בשמאל להזזה ובימין לשינוי קנה המידה; בית: התצוגה המקורית";
+    return toolbar;
+  }
+  // Frequency coordinates are kHz. Shading denotes a region, never signal amplitude.
+  function filterOverlay(c,board,specification) {
+    const spec=()=>specification(),shown=()=>Boolean(spec());
+    const color=()=>spec()?.color||"#526779";
+    const bounds=()=>board.getBoundingBox();
+    for(let i=0;i<2;i++){
+      const band=()=>spec()?.allpass&&i===0?[bounds()[0],bounds()[2]]:spec()?.bands?.[i];
+      const x=side=>()=>band()?.[side]??0;
+      board.create("polygon",[[x(0),()=>bounds()[1]],[x(1),()=>bounds()[1]],[x(1),0],[x(0),0]],{
+        visible:()=>Boolean(band()),fillColor:color,fillOpacity:.09,highlight:false,fixed:true,layer:1,
+        vertices:{visible:false,fixed:true},borders:{visible:false}});
+    }
+    for(let i=0;i<4;i++){
+      const edge=()=>spec()?.edges?.[i];
+      c.segment(board,[()=>edge()??0,0],[()=>edge()??0,()=>bounds()[1]],{
+        visible:()=>edge()!==undefined,strokeColor:color,strokeOpacity:.65,strokeWidth:1.3,layer:2});
+    }
+    const height=board.getBoundingBox()[1]*.72;
+    c.curve(board,x=>(spec()?.response?.(x)||0)*height,()=>bounds()[0],()=>bounds()[2],"#526779",{
+      visible:()=>Boolean(spec()?.response),strokeColor:color,dash:2,strokeWidth:1.8,layer:3});
+    c.label(board,()=>bounds()[2]-.04*(bounds()[2]-bounds()[0]),height,String.raw`|H|=1`,{
+      visible:()=>Boolean(spec()?.response),strokeColor:color,anchorX:"right",anchorY:"bottom",fontSize:11});
+    // Response height is fixed at creation; navigating never rescales it.
+    const caption=c.node("div",null,undefined,"ci-note");
+    caption.style.margin="4px 0";caption.style.minHeight="1.5em";
+    const container=document.getElementById(board.container);
+    container.parentNode.append(caption);
+    let last="",revision=0;
+    return {update(){
+      const value=spec();caption.hidden=!value;
+      if(!value){last="";return;}
+      caption.style.color=value.color;
+      const key=value.note+value.tex;
+      if(key===last)return;last=key;
+      const version=++revision;
+      // Serialize with other MathJax work and discard stale slider updates.
+      Promise.resolve(window.MathJax.startup.promise).then(async()=>{
+        if(version!==revision||!shown())return;
+        window.MathJax.typesetClear([caption]);caption.replaceChildren();
+        caption.append(document.createTextNode(value.note+" "));
+        if(value.tex)c.math(c.node("span",caption),value.tex);
+        await window.MathJax.typesetPromise([caption]);
+      }).catch(error=>console.error("Filter annotation",error));
+    }};
+  }
+  async function mount(id,options) {
+    const root=document.getElementById(id);
+    if (!root || root.dataset.initialized) return;
+    root.dataset.initialized="true";
+    const status=root.querySelector(".ci-status");
+    try {
+      await ready();
+      const state={...options.initial}, boards=[], controls=new Map(), metrics=new Map();
+      if (options.equation) math(node("div",root,undefined,"ci-equation"),options.equation);
+      const controlBox=node("div",root,undefined,"ci-controls"), buttons=node("div",root,undefined,"ci-buttons");
+      const plots=node("div",root,undefined,"ci-plots"), metricBox=node("div",root,undefined,"ci-metrics");
+      let update=()=>{};
+      const context={ root,state,colors,models,boards,math,node,
+        format:(value,digits=2)=>Number(value).toFixed(digits),
+        control(key,text,tex,min,max,step,digits=2) {
+          const card=node("div",controlBox,undefined,"ci-control"), label=node("label",card,text);
+          const input=node("input",card); input.type="range"; input.min=min; input.max=max; input.step=step;
+          input.id=id + "-" + key; input.setAttribute("aria-label",text); label.htmlFor=input.id;
+          if (tex) math(label,tex);
+          const output=node("output",label); output.setAttribute("for",input.id);
+          input.addEventListener("input",()=>{state[key]=Number(input.value); update(key);});
+          controls.set(key,{input,output,digits}); return input;
+        },
+        select(key,text,choices) {
+          const card=node("div",controlBox,undefined,"ci-control"), label=node("label",card,text), select=node("select",card);
+          select.id=id + "-" + key; label.htmlFor=select.id;
+          choices.forEach(([value,title])=>{const option=node("option",select,title); option.value=value;});
+          select.value=state[key]; select.addEventListener("change",()=>{state[key]=select.value;update(key);});
+          controls.set(key,{input:select}); return select;
+        },
+        button(text,callback) { const button=node("button",buttons,text); button.type="button"; button.addEventListener("click",()=>{const key=callback();update(typeof key==="string"?key:"preset");}); return button; },
+        preset(text,values) { return this.button(text,()=>Object.assign(state,values)); },
+        metric(key,text,tex) { const card=node("div",metricBox,text,"ci-metric"); if(tex) math(card,tex); const value=node("strong",card,"—"); metrics.set(key,value); return value; },
+        value(key,value) { metrics.get(key).textContent=value; },
+        note(text,tex) { const paragraph=node("p",root,text,"ci-note"); if(tex) math(paragraph,tex); return paragraph; },
+        board(key,title,caption,box,settings={}) {
+          const card=node("div",plots,undefined,"ci-plot"); math(node("h5",card),title);
+          const container=node("div",card,undefined,"ci-board"); container.id=id + "-" + key;
+          container.setAttribute("aria-label",settings.description || root.querySelector("h4").textContent);
+          if(settings.height) container.style.height=settings.height + "px";
+          if(caption) math(node("div",card,undefined,"ci-caption"),caption);
+          const board=window.JXG.JSXGraph.initBoard(container.id,{boundingbox:box,axis:false,grid:false,
+            showCopyright:false,showNavigation:false,keepaspectratio:false,pan:{enabled:true,needShift:false,needTwoFingers:true},zoom:{enabled:true,wheel:true,needShift:true,pinch:true},selection:{enabled:true,needShift:false,needCtrl:true,fillColor:"#087e85",fillOpacity:.12,strokeColor:"#087e85",withLines:true,vertices:{visible:false}},resize:{enabled:true}});
+          navigation(board,container);
+          const axis={strokeColor:"#9cabb6",strokeWidth:1,highlight:false,fixed:true,
+            ticks:{minorTicks:0,drawLabels:true,strokeColor:"#bdcbd4",label:{fontSize:11,strokeColor:"#526779"}}};
+          board.create("axis",[[0,0],[1,0]],{...axis,ticks:{...axis.ticks,drawNegative:settings.negativeX!==false}});
+          board.create("axis",[[0,0],[0,1]],{...axis,ticks:{...axis.ticks,drawNegative:settings.negativeY!==false}});
+          boards.push(board); return board;
+        },
+        curve(board,fn,min,max,color=colors.orange,attributes={}) { return board.create("functiongraph",[fn,min,max],{strokeColor:color,strokeWidth:2.7,highlight:false,numberPointsHigh:1600,...attributes}); },
+        sampled(board,data,color=colors.orange,attributes={}) {
+          const curve=board.create("curve",[[],[]],{strokeColor:color,strokeWidth:2.7,highlight:false,...attributes});
+          curve.updateDataArray=()=>{const points=data();curve.dataX=points.x;curve.dataY=points.y;}; return curve;
+        },
+        segment(board,a,b,attributes={}) { return board.create("segment",[a,b],{strokeColor:colors.gray,strokeWidth:1.3,dash:2,fixed:true,highlight:false,
+          point1:{visible:false},point2:{visible:false},...attributes}); },
+        point(board,x,y,color=colors.orange,attributes={}) { return board.create("point",[x,y],{size:3,name:"",fixed:true,highlight:false,showInfobox:false,strokeColor:color,fillColor:color,...attributes}); },
+        label(board,x,y,tex,attributes={}) {
+          // Standalone JSXGraph text does not apply point-label offsets. Convert pixels explicitly.
+          const {offset=[0,0],...style}=attributes;
+          const value=coordinate=>typeof coordinate==="function"?coordinate():coordinate;
+          return board.create("text",[()=>value(x)+offset[0]/board.unitX,()=>value(y)+offset[1]/board.unitY,"\\(" + tex + "\\)"],{
+            fixed:true,highlight:false,fontSize:13,display:"html",useMathJax:true,parse:false,
+            cssClass:"ci-math-label",anchorX:"middle",anchorY:"top",strokeColor:colors.ink,...style});
+        },
+        update:(key="external")=>update(key),
+        sync() { controls.forEach(({input,output,digits},key)=>{ input.value=state[key]; if(output) output.value=Number(state[key]).toFixed(digits); }); }
+      };
+      const implementation=options.setup(context);
+      update=(key)=>{implementation.update(key);context.sync();boards.forEach(board=>board.update());};
+      update("initial");
+      await window.MathJax.typesetPromise([root]);
+      status.hidden=true;
+    } catch(error) {
+      console.error("Interactive " + id,error); status.hidden=false; status.classList.add("ci-error");
+      status.textContent="לא ניתן לטעון את ההדגמה. בדקו את החיבור לרשת. ";
+      if(options.original) { const link=node("a",status,"ההדגמה המקורית");link.href=options.original;link.target="_blank";link.rel="noopener"; }
+    }
+  }
+  window.CourseInteractives={mount,models,colors,navigation,filterOverlay};
+})();
+</script>
+<!-- Included directly by frequency_response.md; no iframe or build configuration needed. -->
+<script>
+window.MicrophoneToneProbe = (() => {
+  "use strict";
+  function response(omega,{mass,damping,stiffness}) {
+    const real=stiffness-mass*omega*omega,imaginary=damping*omega;
+    return {gain:1/Math.hypot(real,imaginary),phase:-Math.atan2(imaginary,real)};
+  }
+  function components(system,source) {
+    return source.frequencies.map((omega,index)=>({omega,index,...response(omega,system),
+      amplitude:source.mode==="one"?(index===0?1:0):[.6,.35,.25][index],
+      enabled:(source.mode==="three"||index===0)&&source.enabled[index]}));
+  }
+  function sum(t,parts,output=false) {
+    return parts.reduce((total,part)=>total+(part.enabled?part.amplitude*(output?part.gain:1)*Math.cos(part.omega*t+(output?part.phase:0)):0),0);
+  }
+  return {response,components,sum};
+})();
+</script>
+<section id="microphone-response" dir="rtl" aria-labelledby="fr-title">
+  <style>
+    #microphone-response { --fr-ink:#172f43; --fr-muted:#526779; --fr-line:#dce5eb; --fr-orange:#c35c18; --fr-teal:#087e85; color:var(--fr-ink); background:#f6f9fb; border:1px solid var(--fr-line); border-radius:18px; margin:28px 0; padding:24px; font:16px/1.6 system-ui,sans-serif; color-scheme:light; }
+    #microphone-response * { box-sizing:border-box; }
+    #microphone-response [hidden] { display:none !important; }
+    #microphone-response .fr-system { border:1px solid var(--fr-line); border-radius:10px; padding:0 10px; margin:10px 0; }
+    #microphone-response .fr-system summary { cursor:pointer; font-weight:650; padding:8px 0; }
+    #microphone-response .fr-probe-modes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:10px 0; }
+    #microphone-response .fr-probe-modes label { display:block; font-size:12px; }
+    #microphone-response select { font:inherit; width:100%; color:var(--fr-ink); border:1px solid #b7cbd6; border-radius:8px; background:white; padding:6px; }
+    #microphone-response .fr-tone-controls { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:10px 0; }
+    #microphone-response .fr-tone-controls[data-mode=one] { grid-template-columns:1fr; }
+    #microphone-response .fr-tone { border:1px solid var(--fr-line); border-radius:10px; padding:8px; background:white; min-width:0; }
+    #microphone-response .fr-tone label { color:var(--tone); font-size:12px; flex-wrap:wrap; }
+    #microphone-response .fr-tone-readout { display:flex; flex-wrap:wrap; justify-content:space-between; gap:3px 8px; direction:ltr; font-size:11px; margin-top:4px; }
+    #microphone-response .fr-tone-use { display:flex; align-items:center; gap:5px; }
+    #microphone-response .fr-probe-formula { display:flex; flex-wrap:wrap; justify-content:center; gap:3px 12px; direction:ltr; font-size:13px; margin:8px 0; }
+    #microphone-response .fr-legend { display:flex; flex-wrap:wrap; gap:7px; margin:8px 0; }
+    #microphone-response .fr-legend button:not([data-fr-toggle=components])[aria-pressed=false] { opacity:.5; text-decoration:line-through; }
+    #microphone-response .fr-legend button[data-fr-toggle=components][aria-pressed=true] { background:#dceef1; border-color:#087e85; }
+    #microphone-response h4 { font-size:24px; color:var(--fr-ink); background:transparent; margin:0 0 6px; }
+    #microphone-response p { margin:0 0 14px; }
+    #microphone-response .fr-note { color:var(--fr-muted); font-size:12px; }
+    #microphone-response .fr-controls { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:18px 0 12px; }
+    #microphone-response .fr-control { background:white; border:1px solid var(--fr-line); border-radius:12px; padding:12px; min-width:0; }
+    #microphone-response label { display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:14px; font-weight:650; margin:0 0 8px; }
+    #microphone-response output, #microphone-response bdi { direction:ltr; unicode-bidi:isolate; font-variant-numeric:tabular-nums; }
+    #microphone-response input[type=range] { display:block; width:100%; margin:0; direction:ltr; accent-color:var(--fr-teal); cursor:pointer; min-height:28px; }
+    #microphone-response .fr-presets { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; }
+    #microphone-response button { background:white; color:var(--fr-ink); border:1px solid #b7cbd6; padding:7px 12px; border-radius:8px; cursor:pointer; font-size:13px; line-height:1.5; }
+    #microphone-response button:hover { background:#e7f1f5; }
+    #microphone-response button:focus-visible, #microphone-response input:focus-visible { outline:3px solid #168c9a; outline-offset:3px; }
+    #microphone-response .fr-plots { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    #microphone-response .fr-plot { border:1px solid var(--fr-line); background:white; border-radius:12px; padding:12px 8px 8px; min-width:0; }
+    #microphone-response .fr-plot h5 { font-size:15px; margin:0 8px 0; color:var(--fr-ink); }
+    #microphone-response .fr-board { height:255px; width:100%; direction:ltr; overflow:hidden; position:relative; touch-action:pan-y; }
+    #microphone-response .fr-board svg { max-width:none; }
+    #microphone-response .fr-axis-caption { text-align:center; color:var(--fr-muted); font-size:12px; direction:ltr; }
+    #microphone-response .fr-metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:14px 0; }
+    #microphone-response .fr-metric { background:#eaf1f5; border-radius:9px; padding:10px; font-size:12px; color:var(--fr-muted); }
+    #microphone-response .fr-metric strong { display:block; color:var(--fr-ink); font-size:18px; font-weight:650; margin-top:3px; }
+    #microphone-response .fr-graph-label { direction:ltr; background:transparent; padding:0 3px; white-space:nowrap; }
+    #microphone-response .fr-note { font-size:12px; margin:10px 0 0; }
+    #microphone-response .fr-error { color:#9b351b; }
+    #microphone-response a { color:#086b78; }
+    @media (max-width:700px) {
+      #microphone-response { padding:16px; }
+      #microphone-response .fr-plots { grid-template-columns:1fr; }
+      #microphone-response .fr-controls { grid-template-columns:1fr; gap:6px; }
+      #microphone-response .fr-tone-controls,#microphone-response .fr-probe-modes { grid-template-columns:1fr; }
+      #microphone-response .fr-control { padding:9px; }
+      #microphone-response .fr-controls .fr-control { display:grid; grid-template-columns:135px minmax(0,1fr); align-items:center; gap:10px; }
+      #microphone-response .fr-controls label { flex-wrap:nowrap; font-size:13px; margin:0; }
+      #microphone-response label { flex-wrap:wrap; gap:2px; }
+      #microphone-response .fr-metrics { grid-template-columns:1fr; }
+      #microphone-response .fr-metric strong { display:inline; margin-inline-start:8px; font-size:16px; }
+    }
+    @media print {
+      #microphone-response .fr-controls, #microphone-response .fr-presets { display:none; }
+      #microphone-response { break-inside:avoid; }
+    }
+  </style>
+  <h4 id="fr-title">מה משתנה כשמשנים את המיקרופון?</h4>
+  <details class="fr-system"><summary>מסה, ריסון וקשיחות</summary>
+  <div class="fr-controls">
+    <div class="fr-control">
+      <label for="fr-mass">מסה <bdi class="math notranslate">\(m\)</bdi><output id="fr-mass-value" for="fr-mass">1.65</output></label>
+      <input id="fr-mass" type="range" min="0.2" max="4" step="0.01" value="1.65" aria-label="מסה m">
+    </div>
+    <div class="fr-control">
+      <label for="fr-damping">ריסון <bdi class="math notranslate">\(\gamma\)</bdi><output id="fr-damping-value" for="fr-damping">0.82</output></label>
+      <input id="fr-damping" type="range" min="0.1" max="8" step="0.01" value="0.82" aria-label="ריסון גמא">
+    </div>
+    <div class="fr-control">
+      <label for="fr-stiffness">קשיחות <bdi class="math notranslate">\(k\)</bdi><output id="fr-stiffness-value" for="fr-stiffness">3.32</output></label>
+      <input id="fr-stiffness" type="range" min="0.2" max="8" step="0.01" value="3.32" aria-label="קשיחות k">
+    </div>
+  </div>
+  <div class="fr-presets" role="group" aria-label="מצבים לדוגמה">
+    <button type="button" data-fr-preset="resonant">תהודה חדה</button>
+    <button type="button" data-fr-preset="damped">ריסון חזק</button>
+    <button type="button" data-fr-preset="stiff">קשיחות גבוהה</button>
+    <button type="button" data-fr-preset="reset">איפוס</button>
+  </div>
+  </details>
+  <div class="fr-probe-modes">
+    <label for="fr-input-mode">אות הבדיקה<select id="fr-input-mode" disabled><option value="one">קוסינוס יחיד</option><option value="three">סכום של שלושה קוסינוסים</option></select></label>
+    <label for="fr-response-view">הגרף לצד גודל התמסורת<select id="fr-response-view" disabled><option value="time">כניסה ומוצא בזמן</option><option value="phase">פאזת התמסורת</option></select></label>
+  </div>
+  <div class="fr-probe-formula math notranslate">
+    <span>\(p(t)=\sum_{j=1}^{N}a_j\cos(\omega_jt)\)</span>
+    <span>\(x(t)=\sum_{j=1}^{N}a_j|\tilde H(\omega_j)|\cos(\omega_jt+\varphi_j)\)</span>
+    <span>\(\varphi_j=\arg\tilde H(\omega_j)\)</span>
+  </div>
+  <div id="fr-tone-controls" class="fr-tone-controls" data-mode="one"></div>
+  <div class="fr-legend" role="group" aria-label="הצגה והסתרה של האותות בזמן">
+    <button type="button" data-fr-toggle="input" aria-pressed="true" style="color:var(--fr-orange)">לחץ הכניסה</button>
+    <button type="button" data-fr-toggle="output" aria-pressed="true" style="color:var(--fr-teal)">העתק הממברנה</button>
+    <button type="button" data-fr-toggle="components" aria-pressed="false" hidden>פירוק לרכיבים</button>
+  </div>
+  <p id="fr-loading" class="fr-note" role="status">טוענים את הגרפים…</p>
+  <div class="fr-plots">
+    <div class="fr-plot">
+      <h5 style="color:var(--fr-orange)">גודל התמסורת <bdi class="math notranslate">\(\left|\tilde{H}(\omega)\right|\)</bdi></h5>
+      <div id="fr-magnitude" class="fr-board" role="img" aria-label="גודל התמסורת כפונקציה של התדר הזוויתי, עם תדר השיא ורוחב בחצי הספק"></div>
+      <div class="fr-axis-caption math notranslate">\(\omega\;[\mathrm{rad/sec}]\)</div>
+    </div>
+    <div class="fr-plot" id="fr-phase-card">
+      <h5 style="color:var(--fr-teal)">פאזה <bdi class="math notranslate">\(\arg\tilde{H}(\omega)\;[\mathrm{rad}]\)</bdi></h5>
+      <div id="fr-phase" class="fr-board" role="img" aria-label="פאזת התמסורת ברדיאנים כפונקציה של התדר הזוויתי"></div>
+      <div class="fr-axis-caption math notranslate">\(\omega\;[\mathrm{rad/sec}]\)</div>
+    </div>
+    <div class="fr-plot" id="fr-time-card">
+      <h5><span style="color:var(--fr-orange)">כניסה</span> ו<span style="color:var(--fr-teal)">מוצא</span> בזמן</h5>
+      <div id="fr-time" class="fr-board" role="img" aria-label="לחץ הכניסה והעתק הממברנה במצב מתמיד"></div>
+      <div class="fr-axis-caption math notranslate">\(t\;[\mathrm{sec}]\)</div>
+    </div>
+  </div>
+  <div class="fr-metrics">
+    <div class="fr-metric">תדר טבעי <bdi class="math notranslate">\(\omega_0=\sqrt{\frac{k}{m}}\)</bdi><strong><bdi id="fr-natural">—</bdi></strong></div>
+    <div class="fr-metric">תדר שיא התגובה <bdi class="math notranslate">\(\omega_D=\sqrt{\frac{k}{m}-\frac{\gamma^2}{2m^2}}\)</bdi><strong><bdi id="fr-peak">—</bdi></strong></div>
+    <div class="fr-metric">רוחב בחצי הספק <bdi class="math notranslate">\(\Delta\omega\)</bdi><strong><bdi id="fr-width">—</bdi></strong></div>
+  </div>
+  <p class="fr-note"><bdi class="math notranslate">\(A=1\)</bdi> · יחידות מודל · צירים קבועים · רוחב בחצי הספק · מצב מתמיד, ללא מעבר התחלתי</p>
+  <p id="fr-probe-note" class="fr-note">בפירוק לרכיבים: קו מקווקו הוא רכיב כניסה וקו רציף הוא רכיב מוצא. הצבעים תואמים לסמנים על עקומת התמסורת. אין נרמול נפרד של האותות.</p>
+  <noscript><p>כדי להפעיל את ההדגמה יש לאפשר JavaScript. <a href="https://www.geogebra.org/material/iframe/id/ydttts6y" target="_blank" rel="noopener">פתיחת ההדגמה המקורית ב־GeoGebra</a></p></noscript>
+  <script>
+  (() => {
+    "use strict";
+    const root = document.getElementById("microphone-response");
+    if (!root || root.dataset.initialized) return;
+    root.dataset.initialized = "true";
+    const el = (name) => root.querySelector("#fr-" + name);
+    const status = el("loading");
+    const controls = ["mass", "damping", "stiffness"];
+    controls.forEach((name) => { el(name).disabled = true; });
+    root.querySelectorAll("button").forEach((button) => { button.disabled = true; });
+
+    async function initialize() {
+      // Jupyter Book loads MathJax with defer; wait before creating typeset graph labels.
+      if (document.readyState === "loading") {
+        await new Promise((resolve) => document.addEventListener("DOMContentLoaded",resolve,{once:true}));
+      }
+      await window.MathJax?.startup?.promise;
+      if (!window.MathJax?.typesetPromise) throw new Error("MathJax is unavailable");
+      const JXG = window.JXG;
+      const state = { mass:1.65, damping:0.82, stiffness:3.32 };
+      const source = {mode:"one",frequencies:[1,1.4,3],enabled:[true,true,true],input:true,output:true,components:false,view:"time"};
+      const probeModel=window.MicrophoneToneProbe,toneColors=["#2563a6","#8b4db7","#b73b63"];
+      let parts=probeModel.components(state,source);
+      const presets = {
+        reset: { mass:1.65, damping:0.82, stiffness:3.32 },
+        resonant: { mass:1.65, damping:0.25, stiffness:3.32 },
+        damped: { mass:1.65, damping:5, stiffness:3.32 },
+        stiff: { mass:1.65, damping:0.82, stiffness:7 }
+      };
+      // Fixed viewing window: slider changes must remain visually comparable.
+      const xMax = 7;
+      const yMax = 3.5;
+      let peakFrequency = 0;
+      let halfGain = 0;
+      let leftHalf = 0;
+      let rightHalf = 0;
+      let hasPeak = false;
+      let hasWidth = false;
+      const gain = (omega) => 1 / Math.hypot(state.stiffness - state.mass * omega * omega, state.damping * omega);
+      const phase = (omega) => -Math.atan2(state.damping * omega, state.stiffness - state.mass * omega * omega);
+      const format = (value) => value.toFixed(2);
+
+      const boardOptions = {
+        boundingbox:[-2,yMax,1.06 * xMax,-0.15 * yMax], axis:false, grid:false,
+        showCopyright:false, showNavigation:false, keepaspectratio:false,
+        pan:{ enabled:true, needShift:false, needTwoFingers:true }, zoom:{ enabled:true, wheel:true, needShift:true, pinch:true },
+        selection:{ enabled:true, needShift:false, needCtrl:true, fillColor:"#087e85", fillOpacity:.12, strokeColor:"#087e85", withLines:true, vertices:{visible:false} },
+        resize:{ enabled:true }, renderer:"svg"
+      };
+      const magnitude = JXG.JSXGraph.initBoard("fr-magnitude", boardOptions);
+      const phaseBoard = JXG.JSXGraph.initBoard("fr-phase", {
+        ...boardOptions, boundingbox:[-2,0.5,1.06 * xMax,-3.65]
+      });
+      const timeBoard=JXG.JSXGraph.initBoard("fr-time",{...boardOptions,boundingbox:[-.7,3.5,12.4,-3.5]});
+      CourseInteractives.navigation(timeBoard,document.getElementById("fr-time"));
+      CourseInteractives.navigation(magnitude,document.getElementById("fr-magnitude"));
+      CourseInteractives.navigation(phaseBoard,document.getElementById("fr-phase"));
+      const axisStyle = { strokeColor:"#9cabb6", strokeWidth:1, highlight:false, fixed:true,
+        ticks:{ strokeColor:"#bdcbd4", minorTicks:0, drawLabels:true,
+          label:{ fontSize:11, strokeColor:"#526779" } } };
+      magnitude.create("axis", [[0,0],[1,0]], axisStyle);
+      magnitude.create("axis", [[0,0],[0,1]], axisStyle);
+      phaseBoard.create("axis", [[0,0],[1,0]], axisStyle);
+      phaseBoard.create("axis", [[0,0],[0,1]], axisStyle);
+      timeBoard.create("axis", [[0,0],[1,0]], axisStyle);
+      timeBoard.create("axis", [[0,0],[0,1]], axisStyle);
+      magnitude.create("functiongraph", [gain,0,() => xMax], {
+        strokeColor:"#c35c18", strokeWidth:3, highlight:false,
+        numberPointsHigh:1200
+      });
+      phaseBoard.create("functiongraph", [phase,0,() => xMax], {
+        strokeColor:"#087e85", strokeWidth:3, highlight:false,
+        numberPointsHigh:1200
+      });
+      const quietPoint = { visible:false, fixed:true, name:"" };
+      const segmentStyle = { strokeColor:"#94a7b5", strokeWidth:1.4, dash:2,
+        highlight:false, fixed:true, point1:quietPoint, point2:quietPoint };
+      magnitude.create("segment", [[() => peakFrequency,0], [() => peakFrequency,() => gain(peakFrequency)]], {
+        ...segmentStyle, visible:() => hasPeak
+      });
+      phaseBoard.create("segment", [[() => peakFrequency,0], [() => peakFrequency,-Math.PI]], {
+        ...segmentStyle, visible:() => hasPeak
+      });
+      const markerStyle = { size:3, strokeColor:"#c35c18", fillColor:"#c35c18", name:"", fixed:true, highlight:false };
+      magnitude.create("point", [() => peakFrequency,() => gain(peakFrequency)], {
+        ...markerStyle, visible:() => hasPeak, size:3, fillColor:"#c35c18", strokeColor:"#c35c18"
+      });
+      magnitude.create("segment", [[() => leftHalf,() => halfGain], [() => rightHalf,() => halfGain]], {
+        ...segmentStyle, visible:() => hasWidth, strokeColor:"#c35c18", strokeWidth:2,
+        firstArrow:{ type:1, size:4 }, lastArrow:{ type:1, size:4 }
+      });
+      magnitude.create("segment", [[0,() => halfGain], [() => leftHalf,() => halfGain]], {
+        ...segmentStyle, visible:() => hasWidth, strokeColor:"#c35c18"
+      });
+      const labelStyle = { fixed:true, highlight:false, fontSize:14, display:"html", useMathJax:true, parse:false,
+        cssClass:"fr-graph-label", anchorX:"middle", anchorY:"top", strokeColor:"#172f43" };
+      [magnitude,phaseBoard].forEach((board) => {
+        board.create("text", [() => peakFrequency,() => -18/board.unitY,String.raw`\(\omega_D\)`], {
+          ...labelStyle, fontSize:12, visible:() => hasPeak
+        });
+      });
+      magnitude.create("text", [0,() => halfGain,String.raw`\(\dfrac{\left|\tilde{H}(\omega_D)\right|}{\sqrt{2}}\)`], {
+        ...labelStyle, fontSize:12, anchorX:"right", anchorY:"bottom", offset:[-6,4],
+        strokeColor:"#c35c18", visible:() => hasWidth
+      });
+      magnitude.create("text", [() => rightHalf,() => halfGain,String.raw`\(\Delta\omega\)`], {
+        ...labelStyle, anchorX:"left", anchorY:"bottom", offset:[9,5], strokeColor:"#c35c18", visible:() => hasWidth
+      });
+      [() => leftHalf, () => rightHalf].forEach((coordinate) => {
+        magnitude.create("point", [coordinate,() => halfGain], {
+          ...markerStyle, visible:() => hasWidth, size:2, fillColor:"white", strokeColor:"#c35c18"
+        });
+      });
+
+      const showParts=()=>source.mode==="three"&&source.components;
+      for(const [output,color] of [[false,"#c35c18"],[true,"#087e85"]])timeBoard.create("functiongraph",[t=>probeModel.sum(t,parts,output),0,12],{
+        strokeColor:color,strokeWidth:2.4,highlight:false,numberPointsHigh:900,visible:()=>!showParts()&&(output?source.output:source.input)});
+      for(let i=0;i<3;i++){
+        for(const [output,dash] of [[false,2],[true,0]])timeBoard.create("functiongraph",[t=>parts[i].amplitude*(output?parts[i].gain:1)*Math.cos(parts[i].omega*t+(output?parts[i].phase:0)),0,12],{
+          strokeColor:toneColors[i],strokeWidth:2,dash,highlight:false,numberPointsHigh:900,
+          visible:()=>showParts()&&parts[i].enabled&&(output?source.output:source.input)});
+        for(const [board,ordinate] of [[magnitude,()=>parts[i].gain],[phaseBoard,()=>parts[i].phase]]){
+          board.create("segment",[[()=>parts[i].omega,0],[()=>parts[i].omega,ordinate]],{...segmentStyle,strokeColor:toneColors[i],visible:()=>parts[i].enabled});
+          board.create("point",[()=>parts[i].omega,ordinate],{...markerStyle,size:4,fillColor:"white",strokeColor:toneColors[i],visible:()=>parts[i].enabled});
+        }
+        const card=document.createElement("div");card.className="fr-tone";card.style.setProperty("--tone",toneColors[i]);
+        card.innerHTML=String.raw`<label for="fr-tone-${i}"><span>\(\omega_${i+1}\;[\mathrm{rad/sec}]\)</span><output id="fr-tone-${i}-value"></output></label><input id="fr-tone-${i}" type="range" min="0.2" max="6" step="0.05" value="${source.frequencies[i]}" aria-label="תדר רכיב ${i+1}"><label class="fr-tone-use"><span><input type="checkbox" id="fr-active-${i}" checked>כלול בסכום</span></label><div class="fr-tone-readout"><span>\(a_${i+1}=\)<bdi id="fr-amplitude-${i}"></bdi></span><span>\(|\tilde H(\omega_${i+1})|=\)<bdi id="fr-gain-${i}"></bdi></span><span>\(\varphi_${i+1}\;[\mathrm{rad}]=\)<bdi id="fr-angle-${i}"></bdi></span></div>`;
+        el("tone-controls").append(card);
+        el("tone-"+i).addEventListener("input",()=>{source.frequencies[i]=Number(el("tone-"+i).value);update();});
+        el("active-"+i).addEventListener("change",()=>{source.enabled[i]=el("active-"+i).checked;update();});
+      }
+      el("input-mode").addEventListener("change",()=>{source.mode=el("input-mode").value;if(source.mode==="one")source.enabled[0]=true;update();});
+      el("response-view").addEventListener("change",()=>{source.view=el("response-view").value;update();});
+      root.querySelectorAll("[data-fr-toggle]").forEach(button=>button.addEventListener("click",()=>{const key=button.dataset.frToggle;source[key]=!source[key];update();}));
+
+      function update() {
+        parts=probeModel.components(state,source);
+        el("tone-controls").dataset.mode=source.mode;
+        for(let i=0;i<3;i++){
+          const card=el("tone-"+i).closest(".fr-tone");card.hidden=source.mode==="one"&&i>0;
+          card.querySelector(".fr-tone-use").hidden=source.mode==="one";
+          el("tone-"+i+"-value").value=source.frequencies[i].toFixed(2);el("active-"+i).checked=source.enabled[i];
+          el("amplitude-"+i).textContent=parts[i].enabled?String(parts[i].amplitude):"0";
+          el("gain-"+i).textContent=parts[i].gain.toFixed(2);el("angle-"+i).textContent=parts[i].phase.toFixed(2);
+        }
+        el("time-card").hidden=source.view!=="time";el("phase-card").hidden=source.view!=="phase";
+        root.querySelectorAll("[data-fr-toggle]").forEach(button=>{const key=button.dataset.frToggle;button.setAttribute("aria-pressed",String(source[key]));if(key==="components")button.hidden=source.mode!=="three";});
+        root.querySelector(".fr-legend").hidden=source.view!=="time";
+        el("probe-note").hidden=!showParts()||source.view!=="time";
+        const {mass:m, damping:gamma, stiffness:k} = state;
+        const natural = Math.sqrt(k / m);
+        // The maximum of displacement magnitude is not the damped free-oscillation frequency.
+        const peakSquared = k / m - gamma * gamma / (2 * m * m);
+        hasPeak = peakSquared > 0;
+        peakFrequency = hasPeak ? Math.sqrt(peakSquared) : 0;
+        const peakGain = gain(peakFrequency);
+        halfGain = peakGain / Math.sqrt(2);
+        // Solve (k-m*omega^2)^2 + gamma^2*omega^2 = 2 / peakGain^2.
+        const minimumDenominator = 1 / (peakGain * peakGain);
+        const spread = Math.sqrt(minimumDenominator) / m;
+        hasWidth = hasPeak && peakSquared - spread > 0;
+        leftHalf = hasWidth ? Math.sqrt(peakSquared - spread) : 0;
+        rightHalf = hasWidth ? Math.sqrt(peakSquared + spread) : 0;
+        controls.forEach((name) => {
+          el(name).value = state[name];
+          el(name + "-value").value = format(state[name]);
+        });
+        magnitude.update();
+        if(source.view==="phase")phaseBoard.update();
+        if(source.view==="time")timeBoard.update();
+        el("natural").textContent = format(natural);
+        el("peak").textContent = hasPeak ? format(peakFrequency) : "אין שיא בתדר חיובי";
+        el("width").textContent = hasWidth ? format(rightHalf - leftHalf) : "אין שני חיתוכים";
+      }
+      controls.forEach((name) => {
+        el(name).disabled = false;
+        el(name).addEventListener("input", () => {
+          state[name] = Number(el(name).value);
+          update();
+        });
+      });
+      root.querySelectorAll("[data-fr-preset]").forEach((button) => {
+        button.disabled = false;
+        button.addEventListener("click", () => {
+          Object.assign(state,presets[button.dataset.frPreset]);
+          update();
+        });
+      });
+      el("input-mode").disabled=false;el("response-view").disabled=false;
+      root.querySelectorAll("[data-fr-toggle]").forEach(button=>{button.disabled=false;});
+      update();
+      await window.MathJax.typesetPromise([root]);
+      status.hidden = true;
+    }
+
+    function failed() {
+      status.classList.add("fr-error");
+      status.textContent = "לא ניתן לטעון את הגרפים. בדקו את החיבור לרשת או פתחו את ההדגמה המקורית: ";
+      const link = document.createElement("a");
+      link.href = "https://www.geogebra.org/material/iframe/id/ydttts6y";
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "GeoGebra";
+      status.appendChild(link);
+    }
+    const launch = () => initialize().catch((error) => { console.error(error); failed(); });
+    if (window.JXG) {
+      launch();
+    } else {
+      const script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/npm/jsxgraph@1.14.0/distrib/jsxgraphcore.js";
+      script.onload = launch;
+      script.onerror = failed;
+      document.head.appendChild(script);
+    }
+  })();
+  </script>
+</section>
+<p>בחרו תחילה קוסינוס יחיד ושנו את תדרו: התדר במוצא נשאר זהה, אך המשרעת והפאזה משתנות לפי הנקודה המסומנת על עקומת התמסורת. אחר כך בחרו סכום של שלושה קוסינוסים והשוו בין הסכום לפירוק לרכיבים. אפשר לשנות כל תדר ולהוציא רכיב מהסכום, בלי לשנות את קני המידה.</p>
+<p>בהדגמת המיקרופון התמסורת היא ההגבר הפיזיקלי <span class="math notranslate nohighlight">\(\tilde X(\omega)/\tilde P(\omega)\)</span>, כפי שנגזר ממשוואת התנועה. בנרמול פורייה הסימטרי שבו פתחנו, הגבר זה שווה ל־<span class="math notranslate nohighlight">\(\sqrt{2\pi}\mathcal F[h](\omega)\)</span>.</p>
+<p>נסו לשחק קצת עם האילוסטרציה. מהם הפרמטרים הכי טובים אם אנחנו רוצים לתכנן מיקרופון?
+נסו לגרום לרוחב של התמסורת להיות כמה שיותר רחב.</p>
 <ul class="simple">
 <li><p>אם רוצים למקסם את התגובה בתדרים נמוכים נרצה <span class="math notranslate nohighlight">\(A\)</span> גדול ו<span class="math notranslate nohighlight">\(k\)</span> קטן</p></li>
 <li><p>אם רוצים למקסם את התגובה בתדרים גבוהים נרצה <span class="math notranslate nohighlight">\(\sqrt{\frac{k}{m}}\)</span> גדול</p></li>
@@ -513,7 +1268,7 @@
 <section id="id5">
 <h2>לכסון מערכות<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>נחזור עכשיו לשאלה למה הפריסה על <span class="math notranslate nohighlight">\(e^{i\omega t}\)</span> כל כך מוצלחת
-מה יקרה אם נכניס למערכת לינארית <span class="math notranslate nohighlight">\(x\left(t\right)=e^{i\omega_{0}t}\)</span>?
+מה יקרה אם נכניס למערכת LTI <span class="math notranslate nohighlight">\(x\left(t\right)=e^{i\omega_{0}t}\)</span>?
 אנחנו יודעים שכל תדר מוכפל במספר אבל יש לנו רק תדר אחד. כלומר התוצאה
 תהיה: <span class="math notranslate nohighlight">\(y\left(t\right)=\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}\)</span></p>
 <p>או בדיאגרמה:
@@ -521,17 +1276,17 @@
 <p>כלומר שיש לנו שתי דרכים למדוד את <span class="math notranslate nohighlight">\(\tilde{H}\left(\omega_{0}\right)\)</span></p>
 <ul class="simple">
 <li><p>להכניס <span class="math notranslate nohighlight">\(\delta\left(t\right)\)</span> למערכת ולעשות פורייה טרנספורם</p></li>
-<li><p>להכניס למערכת  <span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t\right)\)</span> ולאות את שינוי האמפליטודה והפאזה</p></li>
+<li><p>להכניס למערכת  <span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t\right)\)</span> ולראות את שינוי האמפליטודה והפאזה</p></li>
 </ul>
 <p>איך נראית המערכת כשאנחנו מכניסים אליה קוסינוס?</p>
 <div class="math notranslate nohighlight">
-\[y\left(t\right)=T:\left\{ x\left(t\right)\right\} =T:\left\{ \cos\left(\omega_{0}t\right)\right\} =T:\left\{ \frac{e^{i\omega_{0}t}-e^{-i\omega_{0}t}}{2}\right\} =\]</div>
+\[y\left(t\right)=T:\left\{ x\left(t\right)\right\} =T:\left\{ \cos\left(\omega_{0}t\right)\right\} =T:\left\{ \frac{e^{i\omega_{0}t}+e^{-i\omega_{0}t}}{2}\right\} =\]</div>
 <div class="math notranslate nohighlight">
-\[=\frac{1}{2}\left(T:\left\{ e^{i\omega_{0}t}\right\} -T:\left\{ e^{-i\omega_{0}t}\right\} \right)=\frac{1}{2}\left(\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}-\tilde{H}\left(-\omega_{0}\right)e^{-i\omega_{0}t}\right)\]</div>
+\[=\frac{1}{2}\left(T:\left\{ e^{i\omega_{0}t}\right\} +T:\left\{ e^{-i\omega_{0}t}\right\} \right)=\frac{1}{2}\left(\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}+\tilde{H}\left(-\omega_{0}\right)e^{-i\omega_{0}t}\right)\]</div>
 <div class="math notranslate nohighlight">
-\[=\frac{1}{2}\left(\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}-\tilde{H}^{\ast}\left(\omega_{0}\right)e^{-i\omega_{0}t}\right)\underset{\varphi=\arg\left(\tilde{H}\left(\omega_{0}\right)\right)}{\underbrace{=}}\frac{1}{2}\left(\left|\tilde{H}\left(\omega_{0}\right)\right|e^{i\varphi}e^{i\omega_{0}t}-\left|\tilde{H}\left(\omega_{0}\right)\right|e^{-i\varphi}e^{-i\omega_{0}t}\right)\]</div>
+\[=\frac{1}{2}\left(\tilde{H}\left(\omega_{0}\right)e^{i\omega_{0}t}+\tilde{H}^{\ast}\left(\omega_{0}\right)e^{-i\omega_{0}t}\right)\underset{\varphi=\arg\left(\tilde{H}\left(\omega_{0}\right)\right)}{\underbrace{=}}\frac{1}{2}\left(\left|\tilde{H}\left(\omega_{0}\right)\right|e^{i\varphi}e^{i\omega_{0}t}+\left|\tilde{H}\left(\omega_{0}\right)\right|e^{-i\varphi}e^{-i\omega_{0}t}\right)\]</div>
 <div class="math notranslate nohighlight">
-\[=\frac{\left|\tilde{H}\left(\omega_{0}\right)\right|}{2}\left(e^{i\left(\omega_{0}t+\varphi\right)}-e^{-i\left(\omega_{0}t+\varphi\right)}\right)=\left|\tilde{H}\left(\omega_{0}\right)\right|\cos\left(\omega_{0}t+\varphi\right)\]</div>
+\[=\frac{\left|\tilde{H}\left(\omega_{0}\right)\right|}{2}\left(e^{i\left(\omega_{0}t+\varphi\right)}+e^{-i\left(\omega_{0}t+\varphi\right)}\right)=\left|\tilde{H}\left(\omega_{0}\right)\right|\cos\left(\omega_{0}t+\varphi\right)\]</div>
 <p>קיבלנו ש-<span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t\right)\)</span> צובר פאזה והאמפליטודה שלו משתנה
 נשים לב שהמערכת היא Time Invariant ולכן:</p>
 <div class="math notranslate nohighlight">
@@ -567,7 +1322,7 @@
 <td class="text-center"><p><span class="math notranslate nohighlight">\(T\left(\alpha\vec{v_{1}}+\beta\vec{v_{2}}\right)=T\left(\alpha\vec{v_{1}}\right)+T\left(\beta\vec{v_{2}}\right)\)</span></p></td>
 <td class="text-center"><p><span class="math notranslate nohighlight">\(T:\left\{ \alpha x_{1}+\beta x_{2}\right\} =\alpha T:\left\{ x_{1}\right\} +\beta T:\left\{ x_{2}\right\}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td class="text-center"><p>קורדינטות של וקטור</p></td>
+<tr class="row-odd"><td class="text-center"><p>קואורדינטות של וקטור</p></td>
 <td class="text-center"><p><span class="math notranslate nohighlight">\(v_i\)</span></p></td>
 <td class="text-center"><p><span class="math notranslate nohighlight">\(x(t)\)</span></p></td>
 </tr>
@@ -605,7 +1360,7 @@
 </tr>
 <tr class="row-even"><td class="text-center"><p>בסיס התדר הוא ארתונורמאלי</p></td>
 <td class="text-center"><p>ספויילר לסוף הקורס</p></td>
-<td class="text-center"><p><span class="math notranslate nohighlight">\(\intop_{-\infty}^{\infty}e^{i\omega_{i}t}\cdot e^{-i\omega_{j}t}dt=\delta\left(\omega_{i}-\omega_{j}\right)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{1}{2\pi}\intop_{-\infty}^{\infty}e^{i\omega_{i}t}\cdot e^{-i\omega_{j}t}dt=\delta\left(\omega_{i}-\omega_{j}\right)\)</span></p></td>
 </tr>
 <tr class="row-odd"><td class="text-center"><p>חישוב מקדמי פריסה בבסיס התדר</p></td>
 <td class="text-center"><p>ספויילר לסוף הקורס</p></td>
@@ -631,10 +1386,14 @@
 <p>ואז נוכל לעצב מערכת נוספת שהתגובה שלה לתדר היא :</p>
 <div class="math notranslate nohighlight">
 \[\tilde{H}_{inv}\left(\omega\right)=\frac{1}{\tilde{H}\left(\omega\right)}\]</div>
-<p>אבל כאן נכנסת הבעיה. מי אמר שההופכי הוא קוזאלי? מה שאפשר לעשות הוא “להקל על עצמנו” ולהזיז את <span class="math notranslate nohighlight">\(h_{inv}\left(t\right)\)</span> קדימה בזמן ככה שמה שיהיה בזמן שלילי זניח. נקבל כי:</p>
+<p>אבל כאן נכנסת הבעיה: לא בהכרח קיים הופכי קוזאלי. לעיתים מזיזים את <span class="math notranslate nohighlight">\(h_{inv}(t)\)</span> קדימה בזמן כדי להפוך את החלק השלילי לבלתי משמעותי (דיליי קטן):</p>
 <div class="math notranslate nohighlight">
-\[\tilde{H}_{inv}\left(\omega\right)=\frac{1}{\tilde{H}\left(\omega\right)}\underset{\text{הזזה}}{\underbrace{e^{i\omega\tau}}}\]</div>
+\[\tilde{H}_{inv}\left(\omega\right)=\frac{1}{\tilde{H}\left(\omega\right)}\underset{\text{הזזה}}{\underbrace{e^{-i\omega\tau}}}\]</div>
 <p>עוד בעיה שלרוב קיימת היא רעש. אנחנו נגיע לזה בהמשך הקורס.</p>
+<div class="tip admonition">
+<p class="admonition-title">סיכום מושגי</p>
+<p>תגובת התדר אומרת איך המערכת מטפלת ב”גווני הצליל”: היא לא יוצרת גוונים חדשים, רק משנה עוצמות ופאזות. זהו כלי תכנון מרכזי למסננים, מיקרופונים ומערכות תקשורת.</p>
+</div>
 </section>
 </section>
 
@@ -674,7 +1433,7 @@
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">תגובת להלם</p>
+        <p class="prev-next-title">תגובה להלם</p>
       </div>
     </a>
     <a class="right-next"
@@ -693,8 +1452,7 @@
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -758,8 +1516,8 @@ By Yoav Palti
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="../" data-theme="auto">
 
   <head>
     <meta charset="utf-8" />
@@ -13,37 +13,34 @@
   
   
   <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=28a1b870" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -54,27 +51,25 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"menuOptions": {"settings": {"renderer": "SVG"}}, "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'LTI/intro_to_LTI';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="תגובת להלם" href="impulse_response.html" />
+    <link rel="next" title="תגובה להלם" href="impulse_response.html" />
     <link rel="prev" title="מאלגברה לינארית לאייפון" href="../intro/intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
 
   
   
@@ -86,8 +81,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -95,6 +101,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -102,8 +109,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -119,8 +126,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -150,17 +156,21 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="Linear Algebra to iPhone 1 - Home"/>
-    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Linear Algebra to iPhone 1 - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Linear Algebra to iPhone 1 - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -174,8 +184,8 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">מבוא למערכות לינאריות</a></li>
-<li class="toctree-l1"><a class="reference internal" href="impulse_response.html">תגובת להלם</a></li>
-<li class="toctree-l1"><a class="reference internal" href="frequency_response.html">תגובת בתדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="impulse_response.html">תגובה להלם</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frequency_response.html">תגובה בתדר</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wave_in_a_room.html">החזרות בחדר</a></li>
 <li class="toctree-l1"><a class="reference internal" href="noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
 </ul>
@@ -201,7 +211,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">דיגיטציה</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/digitation_intro.html">מה זה לדיגיטציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/digitation_intro.html">מה זה דיגיטציה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/sampling.html">דגימה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/interpolation.html">שחזור באינטרפולציה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/quantization.html">קוונטיזציה</a></li>
@@ -220,6 +230,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">תורת האינפורמציה</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../information/entropy.html">למה אנטרופיה?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../temp.html">דמו: דגימה ו-Aliasing</a></li>
 </ul>
 
     </div>
@@ -342,16 +353,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -381,8 +400,8 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">מערכת</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">מערכת לינארית</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">דוגמא למערכת לא לינארית</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">שרשור מערכות לינאריות <em>(היא מערכת לינארית)</em></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">דוגגמא: ממברנה של מיקרופון</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">שרשור מערכות לינאריות <em>(הוא מערכת לינארית)</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">דוגמה: ממברנה של מיקרופון</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">דוגמאות נוספות</a></li>
 </ul>
 </li>
@@ -399,13 +418,26 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>מערכות לינאריות<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<details>
+<summary>אמ;לק</summary>
+<p>מערכת תהיה מוגדרת כמשהו שמקבל אות <span class="math notranslate nohighlight">\(x(t)\)</span> ומחזיר אות <span class="math notranslate nohighlight">\(y(t)\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+T:\underset{input}{\left\{ \underbrace{x\left(t\right)}\right\} }=\underset{output}{\underbrace{y\left(t\right)}}
+\]</div>
+<p>מערכות לינאריות הן לינאריות (מי היה מאמין) ומקיימות:</p>
+<div class="math notranslate nohighlight">
+\[T\{\alpha x_1 + \beta x_2\} = \alpha T\{x_1\} + \beta T\{x_2\}\]</div>
+<p>שרשור של מערכות לינאריות הוא גם מערכת לינארית מה שעוזר מאוד בניתוח של מערכות</p>
+<p>הרבה מהמערכות שאתם מכירים הן לינאריות בקירוב ולכן ניתוח של מערכות לינאריות הוא שימושי</p>
+</details>
 <section id="id2">
 <h2>מוטיבציה<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>הרבה מערכות פיזיקליות הן לינאריות (לפחות בקירוב טוב)</p></li>
 <li><p>התגובה לאות מורכב ע”י סכום תגובות לאותות פשוטים</p></li>
 <li><p>מתמטיקה אלגנטית (אלגברה לינארית)</p></li>
-<li><p>שרשור מערכות לינאריות היא מערכת לינארית</p></li>
+<li><p>שרשור מערכות לינאריות הוא מערכת לינארית</p></li>
 </ol>
 </section>
 <section id="id3">
@@ -413,7 +445,7 @@
 <section id="id4">
 <h3>אות (סיגנל)<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <ul>
-<li><p>פונקציה מתמטית המעבירה אינפורמציה אודות התנהגות של תופעה מסויימת</p>
+<li><p>פונקציה מתמטית המעבירה אינפורמציה אודות התנהגות של תופעה מסוימת</p>
 <p>דוגמאות:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(p(t)\)</span> לחץ כפונקציה של זמן - כלומר אות אקוסטי
@@ -424,11 +456,12 @@
 </ul>
 </li>
 </ul>
+<p>הערת מסגרת קצרה: אות יכול להיות רציף או בדיד בזמן, סקלרי או וקטורי, דטרמיניסטי או אקראי, ולעיתים גם מרוכב (לא רק אמיתי). נשתמש בגרסאות השונות לפי ההקשר.</p>
 </section>
 <section id="id5">
 <h3>מערכת<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>תהליך <span class="math notranslate nohighlight">\(T\)</span> שיוצר טרנפורמציה מאות נתון לאות אחר</p></li>
+<li><p>תהליך <span class="math notranslate nohighlight">\(T\)</span> שיוצר טרנספורמציה מאות נתון לאות אחר</p></li>
 </ul>
 <p>נסמן:</p>
 <div class="math notranslate nohighlight">
@@ -436,7 +469,7 @@
 T:\underset{input}{\left\{ \underbrace{x\left(t\right)}\right\} }=\underset{output}{\underbrace{y\left(t\right)}}
 \]</div>
 <p><img alt="LTI_diagram.png" src="../_images/LTI_diagram.png" />
-למשל: מיקרופון היא מערכת שמירה לחץ למתח/זרם חשמלי</p>
+למשל: מיקרופון הוא מערכת שממירה לחץ למתח/זרם חשמלי</p>
 <div class="math notranslate nohighlight">
 \[
 \underset{\text{ןופורקימה אצומב חתמ}}{\underbrace{V\left(t\right)}}=T:\left\{ p\left(t\right)\right\}
@@ -446,7 +479,7 @@ T:\underset{input}{\left\{ \underbrace{x\left(t\right)}\right\} }=\underset{outp
 <h3>מערכת לינארית<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>מערכת לינארית <span class="math notranslate nohighlight">\(T\)</span> במרחב האותות היא מערכת המקבלת אות <span class="math notranslate nohighlight">\(x\left(t\right)\)</span>
 בכניסה ומחזירה אות ביציאה <span class="math notranslate nohighlight">\(y\left(t\right)=T:\left\{ x\left(t\right)\right\} \)</span>
-כאשר הטרנספורמציה <span class="math notranslate nohighlight">\(T\)</span> מקיינת את עקרון הלינאריות (או סופור פוזיציה)
+כאשר הטרנספורמציה <span class="math notranslate nohighlight">\(T\)</span> מקיימת את עקרון הלינאריות (או סופרפוזיציה)
 כלומר בהינתן אות מהצורה <span class="math notranslate nohighlight">\(x\left(t\right)=\alpha x_{1}\left(t\right)+\beta x_{2}\left(t\right)\)</span>
 האות במוצא המערכת הלינארית יהיה הצירוף הלינארי של מוצא המערכת עבור כל
 אחד מהאותות בנפרד כלומר:</p>
@@ -456,13 +489,18 @@ T:\underset{x\left(t\right)}{\underbrace{\left\{ \alpha x_{1}\left(t\right)+\bet
 \]</div>
 <p>חשוב לציין שהתכונה הזו מאוד עוזרת לנו משום שאנחנו יכולים בתקווה לקחת אות
 מורכב <span class="math notranslate nohighlight">\(x\left(t\right)\)</span> ולכתוב אותו כחיבור של אותות פשוטים</p>
+<p>במילים פשוטות: אם מכפילים ומחברים בכניסה — נקבל בדיוק את אותה הכפלה והחיבור ביציאה.</p>
+<div class="tip admonition">
+<p class="admonition-title">תכל׳ס – מה לקחת מפה?</p>
+<p>מערכת לינארית מגיבה באופן פרופורציונלי ומצטבר. זה מאפשר לנו לבנות תגובות מורכבות מסכום תגובות פשוטות.</p>
+</div>
 </section>
 <section id="id7">
 <h3>דוגמא למערכת לא לינארית<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
-<p>ניקח את המערכת הכי פשוטה שאנחנו יכולים לחשוב עליה. מדידת מטח על נגד שזורם בו זרם
-כמו שנלמד בקורס בחשמל, ניתן לתאר את הנגד באמצעות מספר אחר <span class="math notranslate nohighlight">\(R\)</span>
+<p>ניקח את המערכת הכי פשוטה שאנחנו יכולים לחשוב עליה. מדידת מתח על נגד שזורם בו זרם
+כמו שנלמד בקורס בחשמל, ניתן לתאר את הנגד באמצעות מספר אחד <span class="math notranslate nohighlight">\(R\)</span>
 שמסמן את ההתנגדות שלו. תחת המודל המקורב הזה ניתן לרשום את חוק
-אוהם:</p>
+אום:</p>
 <div class="math notranslate nohighlight">
 \[
 V=IR
@@ -472,27 +510,28 @@ V=IR
 \[
 V\left(t\right)=R:\left\{ I\left(t\right)\right\} =R\cdot I\left(t\right)
 \]</div>
-<p>כלומר הנגד הוא מערכת לינארית לממירה זרם למתח.</p>
+<p>כלומר הנגד הוא מערכת לינארית הממירה זרם למתח.</p>
 <p>אבל כמו כל מודל גם חוק אום נכון רק בקירוב. אם לוקחים נגד אמיתי ומודדים
 אותו מגלים שבזרמים גדולים “ההתנגדות” משתנה.
 אנחנו כל כך רגילים לחשוב על נגד בתור רכיב עם התנגדות שאנחנו מוכנים
 לחשוב על מודל בו “ההתנגדות משתנה”. כלומר השיפוע של הגרף <span class="math notranslate nohighlight">\(V\left(I\right)\)</span> משתנה
-הקשר בין הזרם למטח יכול להראות לדוגמא ככה
+הקשר בין הזרם למתח יכול להיראות לדוגמה ככה
 <img alt="non_linear_resistor.png" src="../_images/non_linear_resistor.png" />
 מכאן ניתן לראות שאם לדוגמא אנחנו מזרימים זרם <span class="math notranslate nohighlight">\(I_{1}\left(t\right)=1\)</span> וזרם <span class="math notranslate nohighlight">\(I_{2}\left(t\right)=2\)</span> המערכת כבר לא לינארית
 כלומר שאם ניקח לדוגמה את הקומבינציה <span class="math notranslate nohighlight">\(I\left(t\right)=2I_{1}\left(t\right)+I_{2}\left(t\right)=4\)</span> היינו מצפים
-לקבל מטח:</p>
+לקבל מתח:</p>
 <div class="math notranslate nohighlight">
 \[
 V\left(t\right)=R:\left\{ I\left(t\right)\right\} =R:\left\{ 2I_{1}\left(t\right)+I_{2}\left(t\right)\right\} =2R:\left\{ I_{1}\left(t\right)\right\} +R:\left\{ I_{2}\left(t\right)\right\} 
 \]</div>
 <p>אך אנחנו רואים מהגרף שהתגובה היא חזקה בהרבה יותר
-למה זה בכל זאת שימושי לנו לדבר על מערכות לינאריות? כי הרבה מערכות הן בקירוב טוב לינאריות
-וגם כאן במערכת של הגנד אם היינו מגבילים את עצמנו לזרמים נמוכים היינו יכולים להתייחס למערכת כלינארית</p>
+למה זה בכל זאת שימושי לנו לדבר על מערכות לינאריות? כי הרבה מערכות הן בקירוב טוב לינאריות.
+גם כאן, אם נפעל בטווחי זרם קטנים (אזור עבודה), אפשר לקרב את העקומה בקו ישר ולקבל התנהגות כמעט לינארית.</p>
 </section>
 <section id="id8">
-<h3>שרשור מערכות לינאריות <em>(היא מערכת לינארית)</em><a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<h3>שרשור מערכות לינאריות <em>(הוא מערכת לינארית)</em><a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p><img alt="LTI_stack.png" src="../_images/LTI_stack.png" />
+לפני ההוכחה, למה זה חשוב? כי לעיתים מחברים רכיבים זה לזה, ורוצים לדעת אם נשארים “בעולם הלינארי”.
 נניח שיש לנו שתי מערכות <span class="math notranslate nohighlight">\(T\)</span> ו<span class="math notranslate nohighlight">\(S\)</span>. האם גם המערכת הכוללת היא לינארית?
 קל לחשב:</p>
 <div class="math notranslate nohighlight">
@@ -506,14 +545,15 @@ ST:\left\{ x\left(t\right)\right\} =S:\left\{ T:\left\{ \alpha x_{1}\left(t\righ
 <p><span class="math notranslate nohighlight">\( \blacksquare\)</span></p>
 </section>
 <section id="id9">
-<h3>דוגגמא: ממברנה של מיקרופון<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<h3>דוגמה: ממברנה של מיקרופון<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <p>בפועל כדי באמת להבין מה קורה צריך לפתור את משוואת הגלים על הממברנה
 ביחד עם תנאי שפה ואילוץ של האוויר. אבל אנחנו ניקח מודל פשטני
 <img alt="membrane.png" src="../_images/membrane.png" />
 כלומר יש גל לחץ שפוגע בממברנה והיא מתחילה להתנדנד
 לממברנה יש “קשיחות” או “מתיחות” שאותה נסמן ב<span class="math notranslate nohighlight">\(k\)</span>
-את שטח הממברנה נסמן ב<span class="math notranslate nohighlight">\(A\)</span> ואת קבוע הדאיכה של התנודות ב<span class="math notranslate nohighlight">\(\gamma\)</span>
-נוכל לרשום את החוק השני של ניוטון:</p>
+את שטח הממברנה נסמן ב<span class="math notranslate nohighlight">\(A\)</span> ואת קבוע הדעיכה של התנודות ב<span class="math notranslate nohighlight">\(\gamma\)</span>
+נוסיף פירוש פיזיקלי קצר: <span class="math notranslate nohighlight">\(m\)</span> היא המסה (אינרציה), <span class="math notranslate nohighlight">\(\gamma\)</span> מייצג ריסון/חיכוך (דאיכה), ו-<span class="math notranslate nohighlight">\(k\)</span> מייצג קשיחות/קפיץ (החזרה למצב שיווי-משקל).
+כעת נוכל לרשום את החוק השני של ניוטון:</p>
 <div class="math notranslate nohighlight">
 \[
 F\left(t\right)=ma=m\ddot{x}
@@ -572,12 +612,16 @@ Ap\left(t\right)=A\left[\alpha p_{1}\left(t\right)+\beta p_{2}\left(t\right)\rig
 T:\underset{p\left(t\right)}{\underbrace{\left\{ \alpha p_{1}\left(t\right)+\beta p_{2}\left(t\right)\right\} }}=\alpha x_{1}+\beta x_{2}=\alpha\underset{x_{1}\left(t\right)}{\underbrace{T:\left\{ p_{1}\left(t\right)\right\} }}+\beta\underset{x_{2}\left(t\right)}{\underbrace{T:\left\{ p_{2}\left(t\right)\right\} }}
 \]</div>
 <p>כלומר המערכת לינארית!</p>
+<div class="tip admonition">
+<p class="admonition-title">תמצית</p>
+<p>חיבור של מערכות לינאריות נשאר לינארי, והמיקרופון בדגם זה מתואר ע”י משוואה לינארית – לכן ניתן לפרק קלטים מורכבים לסכום רכיבים פשוטים להפעיל את המערכת על כל אחד בנפרד ולהרכיב את הפלט.</p>
+</div>
 </section>
 <section id="id10">
 <h3>דוגמאות נוספות<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>מעגלי RLC (נלמד בהמשך הקורס)</p></li>
-<li><p>התפשטות גלים (גם אקוסטים וגם אלקטרומגנטים). טוב לפחות נכון בקירוב</p></li>
+<li><p>התפשטות גלים (גם אקוסטיים וגם אלקטרומגנטיים) — לפחות נכון בקירוב</p></li>
 <li><p>אנטנות</p></li>
 <li><p>פילטרים, מגברים</p></li>
 <li><p>בולמי זעזועים</p></li>
@@ -630,7 +674,7 @@ T:\underset{p\left(t\right)}{\underbrace{\left\{ \alpha p_{1}\left(t\right)+\bet
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">תגובת להלם</p>
+        <p class="prev-next-title">תגובה להלם</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -641,8 +685,7 @@ T:\underset{p\left(t\right)}{\underbrace{\left\{ \alpha p_{1}\left(t\right)+\bet
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -657,8 +700,8 @@ T:\underset{p\left(t\right)}{\underbrace{\left\{ \alpha p_{1}\left(t\right)+\bet
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">מערכת</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">מערכת לינארית</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">דוגמא למערכת לא לינארית</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">שרשור מערכות לינאריות <em>(היא מערכת לינארית)</em></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">דוגגמא: ממברנה של מיקרופון</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">שרשור מערכות לינאריות <em>(הוא מערכת לינארית)</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">דוגמה: ממברנה של מיקרופון</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">דוגמאות נוספות</a></li>
 </ul>
 </li>
@@ -710,8 +753,8 @@ By Yoav Palti
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

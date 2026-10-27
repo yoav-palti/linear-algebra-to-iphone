@@ -1,17 +1,20 @@
-# תגובת להלם
+# תגובה להלם
+
+<details>
+<summary>אמ;לק</summary>
+
+כל אות ניתן לפירוק כצירוף לינארי של פונקציות דלתא: $x(t)=\int x(\tau)\delta(t-\tau)d\tau$. מערכת לינארית מגיבה לדלתא בזמן $\tau$ עם תגובת הלם $h(t,\tau)$. עבור מערכות LTI: $h(t,\tau)=h(t-\tau)$ → קונבולוציה $y(t)=x(t)*h(t)$. תגובת הלם מאפיינת לחלוטין את המערכת: ברגע שיודעים $h(t)$, אפשר לחשב פלט לכל קלט. דוגמאות: הד בחדר (סכום דלתות מעוכבות), אוסילטור הרמוני (דעיכה מתנדנדת). המושג מקביל למטריצה באלגברה לינארית.
+
+</details>
 
 ### פונקציית דלתא
-בוא נתחיל להשתמש בלינאריות של המערכת!
-אמרנו לשאפשר לפרק את המערכת לאותות פשוטים. מה האות הכי פשוט
-שאפשר לחשוב עליו? כנראה שאות קבוע. אבל קצ תקשה להרכיב אותות 
-מחיבור של אותות קבועים. ננסה משהוא אחר. אות שהוא אפס בכל מקום חוץ מבנקודה אחת.
-כן כן, פונקציית דלתא.
+בואו נתחיל להשתמש בלינאריות של המערכת!
+אמרנו שאפשר לפרק אותות מורכבים לסכום של אותות פשוטים. מה האות הכי פשוט?
+קבוע בזמן זה נחמד, אבל קשה להרכיב ממנו כל אות. ננסה משהו אחר: אות שהוא אפס בכל מקום חוץ מבנקודה אחת – פונקציית הדלתא.
 ![delta_function.png](images/delta_function.png)
 חשוב לחזור קצת על תכונות של פונקציית דלתא.
-נתחיל מזה שלקרוא לה פונקציה זה קצת עקום. פונקציה אמורה להחזיר ערך $x$ על כל
-ערך $t$ שהיא מקבלת. מה $\delta\left(t-\tau\right)$ מחזירה  בנקודה $\tau$?
-לא ניכנס לסיבוך המתמטי של "אפיון מרחב האותות" בקורס הזה.
-פונקציית דלתא אצלנו תיקרא גם "הלם" או באנגלית "impulse"
+נזכיר בפשטות: הדלתא אינה "פונקציה רגילה" אלא אידאליזציה שימושית – היא אפס בכל מקום, והשטח שלה שווה 1. לא ניכנס כאן לעומק המתמטי (התמרות, מרחבי פונקציות וכו').
+פונקציית דלתא אצלנו תיקרא גם "הלם" (impulse).
 תכונות פונקציית הדלתא הן:
 
 $$
@@ -41,7 +44,7 @@ $$
 \boxed{\underset{\text{תוא}}{\underbrace{x\left(t\right)}}=\intop_{-\infty}^{\infty}\underset{\text{רפסמ}}{\underbrace{x\left(\tau\right)}}\cdot\delta\left(t-\tau\right)d\tau}
 $$
 
-כלומא כל אות ניתן לכתוב כצירוף לינארי של פונקציות דלתא מושהות
+כלומר כל אות ניתן לכתוב כצירוף לינארי (אינטגרל) של פונקציות דלתא מושהות בזמן.
 ![function_delta_decomposition.png](images/function_delta_decomposition.png)
 
 ```{admonition} חשיבה כמו באלגברה לינארית
@@ -82,18 +85,18 @@ $$ h\left(\underset{\text{הבוגתה}-\text{תדידמ}-\text{ןמז}}{\underb
 
 $$\overrightarrow{y}_{t}=\left[T:\left\{ \overrightarrow{x}\right\} \right]_{t}=\sum_{\tau}\overrightarrow{x}_{\tau}\cdot h_{t,\tau}$$
 
-כלומר שניתן לחשוב על זה "כאילו" כל מערכת לינארית מיוצגת על ידיד מטריצה $h$ ועכשיו למדנו גם איך לחשב אותה
+כלומר שניתן לחשוב על זה "כאילו" כל מערכת לינארית מיוצגת על ידי מטריצה $h$ ועכשיו למדנו גם איך לחשב אותה.
 ```
 
 ### תכונות של פונקציית התגובה להלם
-1. ממשית (האותות פיזיקלים)
+1. ממשית (האותות פיזיקליים)
 2. סיבתית - $\forall t<\tau:h\left(t,\tau\right)=0$
 3. יחידות
 
 ### דוגמאות
 
 #### התקדמות גלים בחלל חופשי עם החזרות
-נניח שיש לנו רמקול בנקודה מסויימת בחדר ובמקום אחר בחדר יש מיקרופון.
+נניח שיש לנו רמקול בנקודה מסוימת בחדר ובמקום אחר בחדר יש מיקרופון.
 אם הרמקול ישמיע צליל קצר וחזק (דלתא) המיקרופון ישמע את הצליל בדיליי אבל הוא גם ישמע את כל ההחזרות מהקירות של אותו צליל
 כלומר שפונקציית התמסורת תהיה מהצורה הבאה:
 
@@ -101,7 +104,7 @@ $$
 h\left(t,\tau\right)=\sum_{i}\alpha_{i}\delta\left(t-\left(\tau+\frac{d_{i}}{c}\right)\right)
 $$
 
-כלומר יגיעו למירופון גם דלתאות אבל בזמנים שונים לפי המרחקים השונים $d_i$ והניחותים השונים $\alpha_i$ כמו בתמונה הבאה:
+כלומר יגיעו למיקרופון "הדים" בזמנים שונים לפי המרחקים $d_i$ ומקדמי ההנחתה השונים $\alpha_i$ כמו בתמונה:
 ![sound_reflections.png](images/sound_reflections.png)
 
 פונקציית התגובה להלם תיראה ככה:
@@ -118,7 +121,7 @@ $$=\sum_{i}\alpha_{i}\intop_{-\infty}^{\infty}x\left(\tau\right)\delta\left(t-\t
 
 $$F\left(t\right)=m\ddot{x}+\gamma\dot{x}+kx$$
 
-כלומר שכדי לחשב את התדובה להלם כל מה שאנחנו צריכים לעשות היא "להכניס דלתא למערכת" כלומר לםתור את המשוואה:
+כלומר שכדי לחשב את התגובה להלם כל מה שאנחנו צריכים לעשות הוא "להכניס דלתא למערכת" – דהיינו לפתור את המשוואה:
 
 $$\delta\left(t-\tau\right)=m\ddot{h}+\gamma\dot{h}+kh$$
 
@@ -128,7 +131,7 @@ $$\delta\left(t-\tau\right)=m\ddot{h}+\gamma\dot{h}+kh$$
 $$h\left(t,\tau\right)=\theta\left(t-\tau\right)\frac{1}{m\omega_{D}}e^{-\frac{\gamma}{2m}\left(t-\tau\right)}\sin\left(\omega_{D}\left(t-\tau\right)\right)$$
 $$\omega_{D}=\sqrt{\frac{k}{m}-\left(\frac{\gamma}{2m}\right)^{2}}$$
 
-שזה מה שאנחנו מצפים. נותנים מכה לאוסילטור בזמן $\tau$ והוא מתחיל להתנדנד ולדאוך. לפני זמן המכה הוא כמובן לא זז ולכן פונקציית המדרגה. את תכונה זו של פונקציית התגובה להלם אנחנו פשוט מניחים פיזיקאלית וקוראים לה קוזאליות. כלומר:
+שזה מה שאנחנו מצפים: נותנים "מכה" לאוסילטור בזמן $\tau$ והוא מתחיל להתנדנד ולדעוך. לפני זמן המכה הוא כמובן לא זז ולכן מופיעה פונקציית המדרגה. את התכונה הזו אנו מניחים פיזיקלית וקוראים לה סיבתיות (קוזאליות). כלומר:
 לפני ההלם בזמן $t-\tau$ פונקציית התגובה להלם צריכה להיות $0$. אין תגובה "אחורה בזמן"
 מתמטית נכתוב: 
 
@@ -139,12 +142,12 @@ $$\forall t<\tau:h\left(t,\tau\right)=0$$
 $$ h\left(t,\tau\right)=h\left(t-\tau\right)$$
 ישנן כל כך הרבה מערכות שהדבר הזה נכון להן שיש להן שם מיוחד. LTI!!!
 
-במערכות אלו פונקציית התגובה להלם תלוייה רק בכמות הזמן שחלף מאז שהיה ההלם ולא בזמן של ההלם עצמו.
+במערכות אלו פונקציית התגובה להלם תלויה רק בכמות הזמן שחלף מאז שהיה ההלם ולא בזמן של ההלם עצמו.
 
 ### מערכות LTI
 עבור מערכות אלו נרשום:
 
-$$T:\left\{ x\left(t\right)\right\} \underset{Linear}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t,\tau\right)d\tau\underset{Time-Intariant}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau\equiv x\left(t\right)\ast h\left(t\right)$$
+$$T:\left\{ x\left(t\right)\right\} \underset{Linear}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t,\tau\right)d\tau\underset{Time-Invariant}{\underbrace{=}}\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau\equiv x\left(t\right)\ast h\left(t\right)$$
 
 המעבר האחרון הוא סימון. לאינטגרל $\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)d\tau$ יש שם מיוחד. הוא נקרא קונבולוציה ונסמן אותו ב-$x\left(t\right)\ast h\left(t\right)$
 נסכם את התוצאה שלנו
@@ -153,8 +156,16 @@ $$T:\left\{ x\left(t\right)\right\} \underset{Linear}{\underbrace{=}}\intop_{-\i
 :class: tip
 
 $$T:\left\{ x\left(t\right)\right\} =x\left(t\right)\ast h\left(t\right)$$
-$$x\left(t\right)\ast h\left(t\right)\equiv\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)\tau$$
+$$x\left(t\right)\ast h\left(t\right)\equiv\intop_{-\infty}^{\infty}x\left(\tau\right)h\left(t-\tau\right)\,d\tau$$
+```
 
+```{admonition} מה המשמעות של h(t)?
+:class: tip
+פונקציית התגובה להלם $h(t)$ מתארת לגמרי את המערכת: ברגע שיודעים אותה – אפשר לחשב את הפלט לכל קלט בעזרת קונבולוציה.
+```
+
+```{admonition} דוגמה חישובית קצרה
+בחרו $h(t)=e^{-t}\theta(t)$ וכניסה $x(t)$ כמלבן קצר. נסו להעריך מה יהיה $y(t)=x*h$ – תקבלו "החלקה" (smoothing) ואיחור בזמן.
 ```
 
 ### הדגמה של קונבולוציה 
@@ -163,5 +174,10 @@ $$x\left(t\right)\ast h\left(t\right)\equiv\intop_{-\infty}^{\infty}x\left(\tau\
 - מה קורה כאשר פונקציית תגובה להלם היא מלבן מאוד רחב
 - מה אם גם התגובה להלם וגם הקלט הם גאוסיינים?
 
-<iframe src="https://phiresky.github.io/convolution-demo/" width="100%" height="1000px" style="border: 1px solid #ccc" frameborder=0></iframe>
-<a href="https://phiresky.github.io/convolution-demo/" target="_blank">לפתיחה בחלון נפרד</a>
+```{raw} html
+:file: interactives/runtime.html
+```
+
+```{raw} html
+:file: interactives/convolution.html
+```

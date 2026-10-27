@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="../" data-theme="auto">
 
   <head>
     <meta charset="utf-8" />
@@ -13,37 +13,34 @@
   
   
   <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=28a1b870" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -54,15 +51,14 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"menuOptions": {"settings": {"renderer": "SVG"}}, "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'analog_communication/AM';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -70,11 +66,10 @@
     <link rel="prev" title="תקשורת אנלוגית" href="analog_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
 
   
   
@@ -86,8 +81,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -95,6 +101,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -102,8 +109,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -119,8 +126,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -150,17 +156,21 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="Linear Algebra to iPhone 1 - Home"/>
-    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Linear Algebra to iPhone 1 - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Linear Algebra to iPhone 1 - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -174,8 +184,8 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../LTI/intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../LTI/impulse_response.html">תגובת להלם</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../LTI/frequency_response.html">תגובת בתדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/impulse_response.html">תגובה להלם</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/frequency_response.html">תגובה בתדר</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../LTI/wave_in_a_room.html">החזרות בחדר</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../LTI/noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
 </ul>
@@ -201,7 +211,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">דיגיטציה</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/digitation_intro.html">מה זה לדיגיטציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/digitation_intro.html">מה זה דיגיטציה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/sampling.html">דגימה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/interpolation.html">שחזור באינטרפולציה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/quantization.html">קוונטיזציה</a></li>
@@ -220,6 +230,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">תורת האינפורמציה</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../information/entropy.html">למה אנטרופיה?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../temp.html">דמו: דגימה ו-Aliasing</a></li>
 </ul>
 
     </div>
@@ -342,16 +353,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -401,12 +420,16 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="am">
 <h1>אפנון AM<a class="headerlink" href="#am" title="Link to this heading">#</a></h1>
+<details>
+<summary>אמ;לק</summary>
+<p>AM: מעטפת איטית <span class="math notranslate nohighlight">\(f(t)\)</span> מכפילה גל נושא: <span class="math notranslate nohighlight">\((1+m f(t))\cos(\omega_0 t)\)</span>. עומק מודולציה חייב לשמור <span class="math notranslate nohighlight">\(1+m f(t)&gt;0\)</span> למניעת היפוכי מעטפת. בספקטרום: שני צדדים סימטריים + רכיב נושא (נצילות נמוכה). שיפורים: דיכוי הנושא ו/או צד אחד (SSB) לחיסכון ברוחב סרט והספק. קליטה: גילוי מעטפת (פשוט, לא קוהרנטי) או קליטה קוהרנטית (משחזרת סימן מעטפת ומאפשרת עומק גדול). מיקסר פיזי נבנה מאי־לינאריות + סינון לקבלת המכפלה הרצויה.</p>
+</details>
 <section id="id1">
 <h2>יצוג בזמן<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>אנחנו צריכים שיטה לקחת אות <span class="math notranslate nohighlight">\(f\left(t\right)\)</span> ולאפנן אותו. הנוסחה תהיה:</p>
 <div class="math notranslate nohighlight">
 \[g_{AM}\left(t\right)=\underset{A\left(t\right)}{\underbrace{\left[1+mf\left(t\right)\right]}}\cos\left(\omega{}_{0}t\right)\]</div>
-<p>למספר <span class="math notranslate nohighlight">\(m\)</span> נקרע עומק המודולציה או באנגלית modulation index</p>
+<p>למספר <span class="math notranslate nohighlight">\(m\)</span> נקרא עומק המודולציה או באנגלית modulation index</p>
 <p>להמחשה:
 <img alt="AM_fig.png" src="../_images/AM_fig.png" /></p>
 <p>ההנחות שלנו הן:</p>
@@ -444,7 +467,7 @@
 <p>מסקנות:</p>
 <ul class="simple">
 <li><p>רוחב הסרט (רוחב הפס) של שידור AM הוא <span class="math notranslate nohighlight">\(\Delta\omega=2\omega_{max}\)</span></p></li>
-<li><p>עומק המודולציה משפיע על <strong>יעילות השידור</strong> כלומר כמה מהסספק הוא המידע ואיזה הוא רק הגל הנושא</p></li>
+<li><p>עומק המודולציה משפיע על <strong>יעילות השידור</strong> כלומר כמה מההספק הוא המידע ואיזה הוא רק הגל הנושא</p></li>
 <li><p>נשים לב שאידאלית אנחנו רוצים לשדר “בלי הגל הנושא” כלומר בלי ה-<span class="math notranslate nohighlight">\(+1\)</span> ובנוסף רק אונה אחת מתוך השתיים</p></li>
 </ul>
 </section>
@@ -485,7 +508,7 @@
 <ul class="simple">
 <li><p>אם יש לנו רכיב לא לינארי ריבועי <span class="math notranslate nohighlight">\(V_{out}\propto V_{in}^{2}\)</span> נוכל להשתמש ברכיב הזה על מנת לממש מכפלה</p></li>
 <li><p>אנחנו יכולים לבחור את הרכיב הלא לינארי</p></li>
-<li><p>אנחנו יכלים לבחור את נקודת העבודה <span class="math notranslate nohighlight">\(V_{0}\)</span> על מנת להשפיע על הקבועים <span class="math notranslate nohighlight">\(I_{0},\alpha,\beta\)</span></p></li>
+<li><p>אנחנו יכולים לבחור את נקודת העבודה <span class="math notranslate nohighlight">\(V_{0}\)</span> על מנת להשפיע על הקבועים <span class="math notranslate nohighlight">\(I_{0},\alpha,\beta\)</span></p></li>
 </ul>
 <p>בפועל המעגל נראה בערך ככה:
 <img alt="mixer_digram.png" src="../_images/mixer_digram.png" /></p>
@@ -508,7 +531,7 @@
 <li><p>שיטות לא קוהרנטיות</p>
 <ul>
 <li><p>לא רגישות לפאזה של הגל הנושא וכל מה שאנחנו נדרשים לדעת הוא התדר של הגל הנושא</p></li>
-<li><p>שיטות לא קוהרנטיות לא יכולות להבדיל בין <span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t\right),\cos\left(\omega_{0}t+\frac{\pi}{2}\right)=\sin\left(\omega_{0}t\right),\cos\left(\omega_{0}t+\pi\right)=-\cos\left(\omega_{0}t\right)\)</span> ולכן לא יכולות להתמודד עם עומק מודולציה גדול מידי</p></li>
+<li><p>שיטות לא קוהרנטיות לא יכולות להבדיל בין <span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t\right),\cos\left(\omega_{0}t+\frac{\pi}{2}\right)=-\sin\left(\omega_{0}t\right),\cos\left(\omega_{0}t+\pi\right)=-\cos\left(\omega_{0}t\right)\)</span> ולכן לא יכולות להתמודד עם עומק מודולציה גדול מידי</p></li>
 </ul>
 </li>
 </ul>
@@ -540,7 +563,741 @@
 <p>לסיכום נבחר:</p>
 <div class="math notranslate nohighlight">
 \[\boxed{\frac{2\pi}{\omega_{0}}\ll RC\ll\frac{2\pi}{\omega_{max}}}\]</div>
-<p>אנחנו רואים שחבוייה כאן גם ההנחה שלנו כי <span class="math notranslate nohighlight">\(\omega_{max}\ll\omega_{0}\)</span> הנחה זו נכונה ברוחב מערכות התקשורת (כאשר משתמשים בגלים אלקטרומגנטים)</p>
+<p>אנחנו רואים שחבויה כאן גם ההנחה שלנו כי <span class="math notranslate nohighlight">\(\omega_{max}\ll\omega_{0}\)</span> הנחה זו נכונה ברוב מערכות התקשורת (כאשר משתמשים בגלים אלקטרומגנטים)</p>
+<p>נבדוק את הפשרה בין אדווה למעקב מעטפת באותו מעגל. לחיצה על כל רכיב מציגה את האות לפניו ואחריו; במצבי הקיצון אפשר גם לשמוע את העיוות.</p>
+<!-- Shared by chapter-local raw includes. No configuration or build step is required. -->
+<style>
+  .course-interactive { --ci-ink:#172f43; --ci-muted:#526779; --ci-line:#dce5eb; color:var(--ci-ink); background:#f6f9fb; border:1px solid var(--ci-line); border-radius:18px; margin:26px 0; padding:22px; font:15px/1.6 system-ui,sans-serif; direction:rtl; color-scheme:light; }
+  .course-interactive * { box-sizing:border-box; }
+  .course-interactive h4 { margin:0 0 14px; font-size:23px; color:var(--ci-ink); background:transparent; }
+  .course-interactive .ci-equation { text-align:center; overflow-x:auto; direction:ltr; margin:8px 0 16px; padding:6px; }
+  .course-interactive .ci-controls { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin:12px 0; }
+  .course-interactive .ci-control { background:white; border:1px solid var(--ci-line); border-radius:10px; padding:10px; min-width:0; }
+  .course-interactive label { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:4px 8px; margin:0 0 6px; font-size:13px; font-weight:650; }
+  .course-interactive output { direction:ltr; unicode-bidi:isolate; font-variant-numeric:tabular-nums; }
+  .course-interactive input[type=range] { display:block; direction:ltr; width:100%; accent-color:#087e85; cursor:pointer; min-height:28px; margin:0; }
+  .course-interactive button, .course-interactive select { font:inherit; color:var(--ci-ink); background:white; border:1px solid #b7cbd6; border-radius:8px; padding:7px 11px; cursor:pointer; }
+  .course-interactive select { width:100%; max-width:100%; }
+  .course-interactive button:hover { background:#e7f1f5; }
+  .course-interactive :is(button,input,select):focus-visible { outline:3px solid #168c9a; outline-offset:3px; }
+  .course-interactive .ci-buttons { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 18px; }
+  .course-interactive .ci-plots { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .course-interactive .ci-plot { background:white; border:1px solid var(--ci-line); border-radius:12px; padding:10px 7px 7px; min-width:0; }
+  .course-interactive .ci-plot:only-child { grid-column:1 / -1; }
+  .course-interactive h5 { margin:0 8px 4px; color:var(--ci-ink); font-size:14px; }
+  .course-interactive .ci-board { width:100%; height:265px; direction:ltr; overflow:hidden; position:relative; touch-action:pan-y; }
+  .course-interactive .ci-board > svg { max-width:none; }
+  .course-interactive .ci-caption { text-align:center; direction:ltr; font-size:12px; color:var(--ci-muted); }
+  .ci-graph-navigation { display:flex; justify-content:center; flex-wrap:wrap; gap:4px; direction:ltr; margin:4px 0; }
+  .course-interactive .ci-graph-navigation button, #microphone-response .ci-graph-navigation button { min-width:32px; min-height:32px; padding:3px 7px; font:16px/1.2 system-ui,sans-serif; }
+  .ci-graph-pannable { cursor:grab; }
+  .ci-graph-pannable:active { cursor:grabbing; }
+  .ci-graph-selecting, .ci-graph-selecting:active { cursor:crosshair; touch-action:none !important; }
+  .ci-graph-scaling, .ci-graph-scaling:active { cursor:crosshair; }
+  .course-interactive .ci-graph-navigation button[aria-pressed=true], #microphone-response .ci-graph-navigation button[aria-pressed=true] { background:#dceef1; border-color:#087e85; }
+  .ci-graph-navigation button svg { display:block; width:18px; height:18px; }
+  .ci-graph-navigation button:disabled { opacity:.35; cursor:default; }
+  .course-interactive .ci-math-label { direction:ltr; background:transparent; white-space:nowrap; padding:0 2px; }
+  .course-interactive .ci-metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:8px; margin:14px 0 0; }
+  .course-interactive .ci-metric { background:#eaf1f5; border-radius:9px; padding:10px; font-size:12px; color:var(--ci-muted); min-width:0; }
+  .course-interactive .ci-metric strong { display:block; font-size:18px; font-weight:650; color:var(--ci-ink); direction:ltr; unicode-bidi:isolate; margin-top:3px; }
+  .course-interactive .ci-note, .course-interactive .ci-status { color:var(--ci-muted); font-size:12px; margin:10px 0 0; }
+  .course-interactive .ci-error { color:#9b351b; }
+  .course-interactive a { color:#086b78; }
+  @media(max-width:700px) {
+    .course-interactive { padding:15px; }
+    .course-interactive .ci-plots, .course-interactive .ci-metrics { grid-template-columns:1fr; }
+    .course-interactive .ci-controls { grid-template-columns:1fr; gap:6px; }
+    .course-interactive .ci-control { display:grid; grid-template-columns:minmax(110px,145px) minmax(0,1fr); align-items:center; gap:10px; padding:8px; }
+    .course-interactive label { margin:0; }
+    .course-interactive .ci-metric strong { display:inline-block; margin-inline-start:10px; }
+  }
+  @media print { .course-interactive .ci-controls,.course-interactive .ci-buttons { display:none; } }
+</style>
+<script>
+(() => {
+  "use strict";
+  if (window.CourseInteractives) return;
+  const colors = { orange:"#c35c18", teal:"#087e85", blue:"#2463a7", purple:"#8756b7", ink:"#172f43", gray:"#758a99" };
+  const TAU = 2 * Math.PI;
+  const models = {
+    rc(w, tau) { return { magnitude:1 / Math.hypot(1,w * tau), phase:-Math.atan(w * tau) }; },
+    rlc(w, r, l, c) {
+      if (w === 0) return { magnitude:0, phase:Math.PI / 2 };
+      const x = w * l - 1 / (w * c);
+      return { magnitude:r / Math.hypot(r,x), phase:-Math.atan2(x,r) };
+    },
+    rlcParameters(r,l,c) {
+      const discriminant = Math.hypot(r,2 * Math.sqrt(l / c));
+      return { resonance:1 / Math.sqrt(l * c), lower:2 / (c * (discriminant + r)),
+        upper:(discriminant + r) / (2 * l), bandwidth:r / l, q:Math.sqrt(l / c) / r };
+    },
+    room(w, delta, sum, a2) {
+      const t1 = (sum - delta) / 2, t2 = (sum + delta) / 2;
+      const re = (0.5 * Math.cos(w * t1) + a2 * Math.cos(w * t2)) / Math.sqrt(TAU);
+      const im = (-0.5 * Math.sin(w * t1) - a2 * Math.sin(w * t2)) / Math.sqrt(TAU);
+      const magnitude = Math.hypot(re,im);
+      return { magnitude, phase:magnitude < 1e-10 ? NaN : Math.atan2(im,re), re, im };
+    },
+    gaussian(x,mean,sigma) { return Math.exp(-0.5 * ((x - mean) / sigma) ** 2) / (Math.sqrt(TAU) * sigma); },
+    telegraph(l0,l1) {
+      const mean = l0 / (l0 + l1), variance = mean * (1 - mean);
+      return { mean, variance, correlationTime:1 / (l0 + l1),
+        correlation:t => mean * mean + variance * Math.exp(-(l0 + l1) * Math.abs(t)),
+        conditional:t => mean + (1 - mean) * Math.exp(-(l0 + l1) * t) };
+    },
+    loadPower(rl,rs,xs,xl) { return rl / ((rs + rl) ** 2 + (xs + xl) ** 2); },
+    optimalResistance(rs,xs,xl) { return Math.hypot(rs,xs + xl); },
+    // Delta and impulse-train choices use explicitly labelled finite Gaussian approximations.
+    signal(kind,width,amplitude,t) {
+      switch (kind) {
+        case "triangle": return amplitude * Math.max(0,1 - Math.abs(t) / width);
+        case "rectangle": return amplitude * (Math.abs(Math.abs(t)-width)<1e-10 ? 0.5 : Math.abs(t)<width ? 1 : 0);
+        case "gaussian":
+        case "impulse": return amplitude * Math.exp(-((t / width) ** 2)) / (width * Math.sqrt(Math.PI));
+        case "train": {
+          let result = 0;
+          for (let n=-3;n<=3;n++) result += Math.exp(-(((t - 2.5 * n) / width) ** 2));
+          return amplitude * result / (width * Math.sqrt(Math.PI));
+        }
+        case "ramp": return Math.abs(t) < width ? amplitude * (t + width) / (2 * width) : 0;
+        default: throw new Error("Unknown signal: " + kind);
+      }
+    },
+    convolution(f,g,{bound=20,step=0.02,min=-6,max=6}={}) {
+      const count = Math.round(2 * bound / step), firstShift = Math.round(min / step), lastShift = Math.round(max / step);
+      const a = new Float64Array(count + 1), b = new Float64Array(count + 1);
+      for (let i=0;i<=count;i++) { const x = -bound + i * step; a[i]=f(x); b[i]=g(x); }
+      const times=[], values=[];
+      for (let shift=firstShift;shift<=lastShift;shift++) {
+        let value=0;
+        for (let i=Math.max(0,shift);i<=Math.min(count,count + shift);i++) {
+          const j=count + shift - i;
+          value += a[i] * b[j] * ((i===0 || i===count) ? 0.5 : 1);
+        }
+        times.push(shift * step); values.push(value * step);
+      }
+      return { times, values, at(t) {
+        const position=(t - min) / step, i=Math.floor(position), fraction=position-i;
+        if (i < 0 || i >= values.length - 1) return values[Math.max(0,Math.min(values.length-1,i))];
+        return values[i] * (1 - fraction) + values[i + 1] * fraction;
+      } };
+    }
+  };
+  let library;
+  async function ready() {
+    if (document.readyState === "loading") await new Promise(resolve => document.addEventListener("DOMContentLoaded",resolve,{once:true}));
+    await window.MathJax?.startup?.promise;
+    if (!window.MathJax?.typesetPromise) throw new Error("MathJax unavailable");
+    if (window.JXG) return;
+    if (!library) library=new Promise((resolve,reject) => {
+      const script=document.createElement("script");
+      script.src="https://cdn.jsdelivr.net/npm/jsxgraph@1.14.0/distrib/jsxgraphcore.js";
+      script.onload=resolve; script.onerror=reject; document.head.appendChild(script);
+    });
+    await library;
+  }
+  function node(tag,parent,text,className) {
+    const element=document.createElement(tag);
+    if (className) element.className=className;
+    if (text !== undefined) element.textContent=text;
+    if (parent) parent.appendChild(element);
+    return element;
+  }
+  function math(parent,tex) { const span=node("span",parent,"\\(" + tex + "\\)","math notranslate"); span.dir="ltr"; return span; }
+  function navigation(board,container) {
+    const home=board.getBoundingBox().slice();
+    const toolbar=node("div",null,undefined,"ci-graph-navigation");
+    toolbar.setAttribute("role","group");toolbar.setAttribute("aria-label","ניווט בגרף");
+    const icon=path=>`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+    const makeButton=(title,path,action)=>{const button=node("button",toolbar);button.innerHTML=icon(path);button.type="button";button.title=title;button.setAttribute("aria-label",title);button.addEventListener("click",action);return button;};
+    let selecting=false,rightDrag=null,gesture=false,restoring=false,historyTimer,undo;
+    const history=[home.slice()];
+    const sameView=(a,b)=>a.every((v,i)=>Math.abs(v-b[i])<=1e-10*Math.max(1,Math.abs(v),Math.abs(b[i])));
+    const remember=()=>{
+      clearTimeout(historyTimer);
+      const view=board.getBoundingBox().slice();
+      if(!sameView(view,history.at(-1))){history.push(view);if(history.length>101)history.shift();}
+      if(undo)undo.disabled=history.length<2;
+    };
+    const finishScaling=()=>{
+      const pointer=rightDrag?.pointerId;rightDrag=null;
+      container.classList.remove("ci-graph-scaling");
+      if(pointer!==undefined&&container.hasPointerCapture(pointer))container.releasePointerCapture(pointer);
+      if(pointer!==undefined){gesture=false;remember();}
+    };
+    const mode=enabled=>{
+      finishScaling();
+      selecting=enabled;
+      if(enabled)board.startSelectionMode();else board.stopSelectionMode();
+      zoom.setAttribute("aria-pressed",String(enabled));pan.setAttribute("aria-pressed",String(!enabled));
+      container.classList.toggle("ci-graph-selecting",enabled);
+    };
+    const zoom=makeButton("בחירת אזור להגדלה",'<circle cx="10" cy="10" r="6.5"/><path d="M15 15 L21 21"/>',()=>mode(!selecting));
+    const pan=makeButton("הזזה בגרירה",'<path d="M8 12 V5 a1.5 1.5 0 0 1 3 0 V11 V3 a1.5 1.5 0 0 1 3 0 V11 V5 a1.5 1.5 0 0 1 3 0 V12 V8 a1.5 1.5 0 0 1 3 0 V16 Q20 22 14 22 H12 Q9 22 7 19 L3 13 Q2 11 4 11 L8 15"/>',()=>mode(false));
+    makeButton("תצוגת הבית",'<path d="M3 11 L12 3 L21 11 M5 10 V21 H19 V10 M10 21 V14 H14 V21"/>',()=>{mode(false);remember();board.setBoundingBox(home.slice(),false,"reset");remember();});
+    undo=makeButton("ביטול שינוי תצוגה",'<path d="M9 5 L4 10 L9 15 M4 10 H14 A6 6 0 0 1 14 22"/>',()=>{
+      finishScaling();remember();if(history.length<2)return;
+      history.pop();restoring=true;
+      try{board.setBoundingBox(history.at(-1).slice(),false,"update");}finally{restoring=false;}
+      undo.disabled=history.length<2;
+    });
+    undo.disabled=true;
+    zoom.setAttribute("aria-pressed","false");pan.setAttribute("aria-pressed","true");
+    // Save one view per drag; wheel/pinch bursts settle into a single history entry.
+    board.on("down",()=>{remember();gesture=true;});
+    board.on("up",()=>queueMicrotask(()=>{gesture=false;remember();}));
+    board.on("boundingbox",()=>{if(!restoring&&!gesture){clearTimeout(historyTimer);historyTimer=setTimeout(remember,180);}});
+    // JSXGraph draws and tracks the rectangle; only its resulting viewport is applied here.
+    board.on("stopselecting",()=>{
+      const corners=board.stopSelectionMode(),a=corners[0].usrCoords,b=corners[1].usrCoords;
+      remember();
+      if(Math.abs(a[1]-b[1])*board.unitX>=6&&Math.abs(a[2]-b[2])*board.unitY>=6)
+        board.setBoundingBox([Math.min(a[1],b[1]),Math.max(a[2],b[2]),Math.max(a[1],b[1]),Math.min(a[2],b[2])],false,"update");
+      remember();
+      // JSXGraph ends selection again after this callback returns. Re-arm afterwards.
+      if(selecting)queueMicrotask(()=>{if(selecting)board.startSelectionMode();});
+    });
+    const escape=event=>{if(event.key==="Escape")mode(false);};
+    container.addEventListener("keydown",escape);toolbar.addEventListener("keydown",escape);
+    const consume=event=>{event.preventDefault();event.stopImmediatePropagation();};
+    container.addEventListener("pointerdown",event=>{
+      if(selecting||event.button!==2||event.pointerType==="touch")return;
+      const rect=container.getBoundingClientRect(),bounds=board.getBoundingBox().slice();
+      if(!rect.width||!rect.height)return;
+      consume(event);
+      remember();gesture=true;
+      const u=(event.clientX-rect.left)/rect.width,v=(event.clientY-rect.top)/rect.height;
+      rightDrag={pointerId:event.pointerId,x:event.clientX,y:event.clientY,width:rect.width,height:rect.height,bounds,
+        anchorX:bounds[0]+u*(bounds[2]-bounds[0]),anchorY:bounds[1]-v*(bounds[1]-bounds[3])};
+      container.setPointerCapture(event.pointerId);container.classList.add("ci-graph-scaling");
+    },true);
+    container.addEventListener("pointermove",event=>{
+      if(!rightDrag||event.pointerId!==rightDrag.pointerId)return;
+      consume(event);
+      if(!(event.buttons&2)){finishScaling();return;}
+      const d=rightDrag;
+      // Matplotlib's linear-axis rule: a full plot-width/height drag changes scale tenfold.
+      const fx=10**Math.max(-6,Math.min(6,-(event.clientX-d.x)/d.width));
+      const fy=10**Math.max(-6,Math.min(6,(event.clientY-d.y)/d.height));
+      const b=d.bounds,next=[d.anchorX+(b[0]-d.anchorX)*fx,d.anchorY+(b[1]-d.anchorY)*fy,
+        d.anchorX+(b[2]-d.anchorX)*fx,d.anchorY+(b[3]-d.anchorY)*fy];
+      if(next.every(Number.isFinite)&&next[2]>next[0]&&next[1]>next[3])board.setBoundingBox(next,false,"update");
+    },true);
+    for(const type of ["pointerup","pointercancel"])container.addEventListener(type,event=>{
+      if(rightDrag&&event.pointerId===rightDrag.pointerId){consume(event);finishScaling();}
+    },true);
+    container.addEventListener("lostpointercapture",finishScaling);
+    container.addEventListener("contextmenu",event=>{if(!selecting||rightDrag)consume(event);},true);
+    container.after(toolbar);container.classList.add("ci-graph-pannable");
+    container.title="זכוכית מגדלת: בחירת אזור; יד: גרירה בשמאל להזזה ובימין לשינוי קנה המידה; בית: התצוגה המקורית";
+    return toolbar;
+  }
+  // Frequency coordinates are kHz. Shading denotes a region, never signal amplitude.
+  function filterOverlay(c,board,specification) {
+    const spec=()=>specification(),shown=()=>Boolean(spec());
+    const color=()=>spec()?.color||"#526779";
+    const bounds=()=>board.getBoundingBox();
+    for(let i=0;i<2;i++){
+      const band=()=>spec()?.allpass&&i===0?[bounds()[0],bounds()[2]]:spec()?.bands?.[i];
+      const x=side=>()=>band()?.[side]??0;
+      board.create("polygon",[[x(0),()=>bounds()[1]],[x(1),()=>bounds()[1]],[x(1),0],[x(0),0]],{
+        visible:()=>Boolean(band()),fillColor:color,fillOpacity:.09,highlight:false,fixed:true,layer:1,
+        vertices:{visible:false,fixed:true},borders:{visible:false}});
+    }
+    for(let i=0;i<4;i++){
+      const edge=()=>spec()?.edges?.[i];
+      c.segment(board,[()=>edge()??0,0],[()=>edge()??0,()=>bounds()[1]],{
+        visible:()=>edge()!==undefined,strokeColor:color,strokeOpacity:.65,strokeWidth:1.3,layer:2});
+    }
+    const height=board.getBoundingBox()[1]*.72;
+    c.curve(board,x=>(spec()?.response?.(x)||0)*height,()=>bounds()[0],()=>bounds()[2],"#526779",{
+      visible:()=>Boolean(spec()?.response),strokeColor:color,dash:2,strokeWidth:1.8,layer:3});
+    c.label(board,()=>bounds()[2]-.04*(bounds()[2]-bounds()[0]),height,String.raw`|H|=1`,{
+      visible:()=>Boolean(spec()?.response),strokeColor:color,anchorX:"right",anchorY:"bottom",fontSize:11});
+    // Response height is fixed at creation; navigating never rescales it.
+    const caption=c.node("div",null,undefined,"ci-note");
+    caption.style.margin="4px 0";caption.style.minHeight="1.5em";
+    const container=document.getElementById(board.container);
+    container.parentNode.append(caption);
+    let last="",revision=0;
+    return {update(){
+      const value=spec();caption.hidden=!value;
+      if(!value){last="";return;}
+      caption.style.color=value.color;
+      const key=value.note+value.tex;
+      if(key===last)return;last=key;
+      const version=++revision;
+      // Serialize with other MathJax work and discard stale slider updates.
+      Promise.resolve(window.MathJax.startup.promise).then(async()=>{
+        if(version!==revision||!shown())return;
+        window.MathJax.typesetClear([caption]);caption.replaceChildren();
+        caption.append(document.createTextNode(value.note+" "));
+        if(value.tex)c.math(c.node("span",caption),value.tex);
+        await window.MathJax.typesetPromise([caption]);
+      }).catch(error=>console.error("Filter annotation",error));
+    }};
+  }
+  async function mount(id,options) {
+    const root=document.getElementById(id);
+    if (!root || root.dataset.initialized) return;
+    root.dataset.initialized="true";
+    const status=root.querySelector(".ci-status");
+    try {
+      await ready();
+      const state={...options.initial}, boards=[], controls=new Map(), metrics=new Map();
+      if (options.equation) math(node("div",root,undefined,"ci-equation"),options.equation);
+      const controlBox=node("div",root,undefined,"ci-controls"), buttons=node("div",root,undefined,"ci-buttons");
+      const plots=node("div",root,undefined,"ci-plots"), metricBox=node("div",root,undefined,"ci-metrics");
+      let update=()=>{};
+      const context={ root,state,colors,models,boards,math,node,
+        format:(value,digits=2)=>Number(value).toFixed(digits),
+        control(key,text,tex,min,max,step,digits=2) {
+          const card=node("div",controlBox,undefined,"ci-control"), label=node("label",card,text);
+          const input=node("input",card); input.type="range"; input.min=min; input.max=max; input.step=step;
+          input.id=id + "-" + key; input.setAttribute("aria-label",text); label.htmlFor=input.id;
+          if (tex) math(label,tex);
+          const output=node("output",label); output.setAttribute("for",input.id);
+          input.addEventListener("input",()=>{state[key]=Number(input.value); update(key);});
+          controls.set(key,{input,output,digits}); return input;
+        },
+        select(key,text,choices) {
+          const card=node("div",controlBox,undefined,"ci-control"), label=node("label",card,text), select=node("select",card);
+          select.id=id + "-" + key; label.htmlFor=select.id;
+          choices.forEach(([value,title])=>{const option=node("option",select,title); option.value=value;});
+          select.value=state[key]; select.addEventListener("change",()=>{state[key]=select.value;update(key);});
+          controls.set(key,{input:select}); return select;
+        },
+        button(text,callback) { const button=node("button",buttons,text); button.type="button"; button.addEventListener("click",()=>{const key=callback();update(typeof key==="string"?key:"preset");}); return button; },
+        preset(text,values) { return this.button(text,()=>Object.assign(state,values)); },
+        metric(key,text,tex) { const card=node("div",metricBox,text,"ci-metric"); if(tex) math(card,tex); const value=node("strong",card,"—"); metrics.set(key,value); return value; },
+        value(key,value) { metrics.get(key).textContent=value; },
+        note(text,tex) { const paragraph=node("p",root,text,"ci-note"); if(tex) math(paragraph,tex); return paragraph; },
+        board(key,title,caption,box,settings={}) {
+          const card=node("div",plots,undefined,"ci-plot"); math(node("h5",card),title);
+          const container=node("div",card,undefined,"ci-board"); container.id=id + "-" + key;
+          container.setAttribute("aria-label",settings.description || root.querySelector("h4").textContent);
+          if(settings.height) container.style.height=settings.height + "px";
+          if(caption) math(node("div",card,undefined,"ci-caption"),caption);
+          const board=window.JXG.JSXGraph.initBoard(container.id,{boundingbox:box,axis:false,grid:false,
+            showCopyright:false,showNavigation:false,keepaspectratio:false,pan:{enabled:true,needShift:false,needTwoFingers:true},zoom:{enabled:true,wheel:true,needShift:true,pinch:true},selection:{enabled:true,needShift:false,needCtrl:true,fillColor:"#087e85",fillOpacity:.12,strokeColor:"#087e85",withLines:true,vertices:{visible:false}},resize:{enabled:true}});
+          navigation(board,container);
+          const axis={strokeColor:"#9cabb6",strokeWidth:1,highlight:false,fixed:true,
+            ticks:{minorTicks:0,drawLabels:true,strokeColor:"#bdcbd4",label:{fontSize:11,strokeColor:"#526779"}}};
+          board.create("axis",[[0,0],[1,0]],{...axis,ticks:{...axis.ticks,drawNegative:settings.negativeX!==false}});
+          board.create("axis",[[0,0],[0,1]],{...axis,ticks:{...axis.ticks,drawNegative:settings.negativeY!==false}});
+          boards.push(board); return board;
+        },
+        curve(board,fn,min,max,color=colors.orange,attributes={}) { return board.create("functiongraph",[fn,min,max],{strokeColor:color,strokeWidth:2.7,highlight:false,numberPointsHigh:1600,...attributes}); },
+        sampled(board,data,color=colors.orange,attributes={}) {
+          const curve=board.create("curve",[[],[]],{strokeColor:color,strokeWidth:2.7,highlight:false,...attributes});
+          curve.updateDataArray=()=>{const points=data();curve.dataX=points.x;curve.dataY=points.y;}; return curve;
+        },
+        segment(board,a,b,attributes={}) { return board.create("segment",[a,b],{strokeColor:colors.gray,strokeWidth:1.3,dash:2,fixed:true,highlight:false,
+          point1:{visible:false},point2:{visible:false},...attributes}); },
+        point(board,x,y,color=colors.orange,attributes={}) { return board.create("point",[x,y],{size:3,name:"",fixed:true,highlight:false,showInfobox:false,strokeColor:color,fillColor:color,...attributes}); },
+        label(board,x,y,tex,attributes={}) {
+          // Standalone JSXGraph text does not apply point-label offsets. Convert pixels explicitly.
+          const {offset=[0,0],...style}=attributes;
+          const value=coordinate=>typeof coordinate==="function"?coordinate():coordinate;
+          return board.create("text",[()=>value(x)+offset[0]/board.unitX,()=>value(y)+offset[1]/board.unitY,"\\(" + tex + "\\)"],{
+            fixed:true,highlight:false,fontSize:13,display:"html",useMathJax:true,parse:false,
+            cssClass:"ci-math-label",anchorX:"middle",anchorY:"top",strokeColor:colors.ink,...style});
+        },
+        update:(key="external")=>update(key),
+        sync() { controls.forEach(({input,output,digits},key)=>{ input.value=state[key]; if(output) output.value=Number(state[key]).toFixed(digits); }); }
+      };
+      const implementation=options.setup(context);
+      update=(key)=>{implementation.update(key);context.sync();boards.forEach(board=>board.update());};
+      update("initial");
+      await window.MathJax.typesetPromise([root]);
+      status.hidden=true;
+    } catch(error) {
+      console.error("Interactive " + id,error); status.hidden=false; status.classList.add("ci-error");
+      status.textContent="לא ניתן לטעון את ההדגמה. בדקו את החיבור לרשת. ";
+      if(options.original) { const link=node("a",status,"ההדגמה המקורית");link.href=options.original;link.target="_blank";link.rel="noopener"; }
+    }
+  }
+  window.CourseInteractives={mount,models,colors,navigation,filterOverlay};
+})();
+</script>
+<script>
+/* Shared numerical models. Signal amplitudes are never rescaled to fit a plot. */
+window.ProcessModels = (() => {
+  "use strict";
+  const TAU=2*Math.PI, RATE=25600, COUNT=4096;
+  const signal=(fn,rate=RATE,count=COUNT)=>({values:Float64Array.from({length:count},(_,i)=>fn(i/rate)),rate,periodic:true});
+  const like=(s,values,extra={})=>({...s,values:Float64Array.from(values),...extra});
+  const map=(s,fn)=>like(s,s.values.map((v,i)=>fn(v,i/s.rate,i)));
+  function fft(re,im,inverse=false) {
+    const n=re.length;
+    if(n<2 || (n&(n-1)))throw new Error("FFT requires a power of two");
+    for(let i=1,j=0;i<n;i++){
+      let bit=n>>1;for(;j&bit;bit>>=1)j^=bit;j^=bit;
+      if(i<j){[re[i],re[j]]=[re[j],re[i]];[im[i],im[j]]=[im[j],im[i]];}
+    }
+    for(let size=2;size<=n;size*=2){
+      const angle=(inverse?1:-1)*TAU/size,cr=Math.cos(angle),ci=Math.sin(angle);
+      for(let start=0;start<n;start+=size){
+        let wr=1,wi=0;
+        for(let j=0;j<size/2;j++){
+          const a=start+j,b=a+size/2,tr=wr*re[b]-wi*im[b],ti=wr*im[b]+wi*re[b];
+          re[b]=re[a]-tr;im[b]=im[a]-ti;re[a]+=tr;im[a]+=ti;
+          const next=wr*cr-wi*ci;wi=wr*ci+wi*cr;wr=next;
+        }
+      }
+    }
+    if(inverse)for(let i=0;i<n;i++){re[i]/=n;im[i]/=n;}
+  }
+  function filter(s,pass) {
+    const re=s.values.slice(),im=new Float64Array(re.length);fft(re,im);
+    for(let i=0;i<re.length;i++)if(!pass(Math.abs((i<=re.length/2?i:i-re.length)*s.rate/re.length))){re[i]=0;im[i]=0;}
+    fft(re,im,true);return like(s,re);
+  }
+  const lowpass=(s,cutoff)=>filter(s,f=>f<=cutoff+1e-8);
+  const dc=s=>{const mean=s.values.reduce((a,b)=>a+b,0)/s.values.length;return map(s,v=>v-mean);};
+  function envelope(s) {
+    const re=s.values.slice(),im=new Float64Array(re.length);fft(re,im);
+    for(let i=1;i<re.length;i++){const gain=i<re.length/2?2:i===re.length/2?1:0;re[i]*=gain;im[i]*=gain;}
+    fft(re,im,true);return like(s,re.map((v,i)=>Math.hypot(v,im[i])));
+  }
+  const message=(kind,t)=>kind==="two"?.6*Math.cos(TAU*250*t)+.4*Math.cos(TAU*375*t):Math.cos(TAU*250*t);
+  function diode(s,tau) {
+    const decay=Math.exp(-1/(s.rate*tau));let held=0;const out=new Float64Array(s.values.length);
+    // Warm up the periodic RC circuit; do not display a fictitious startup transient.
+    for(let cycle=0;cycle<3;cycle++)for(let i=0;i<out.length;i++){held=Math.max(0,s.values[i],held*decay);out[i]=held;}
+    return like(s,out);
+  }
+  function amEnvelope({message:kind="two",depth=.6,tau=.45}={}) {
+    const original=signal(t=>message(kind,t)),received=map(original,(v,t)=>(1+depth*v)*Math.cos(TAU*4000*t));
+    const rectified=map(received,v=>Math.max(0,v)),held=diode(received,tau/1000);
+    return {original,received,rectified,held,recovered:dc(held)};
+  }
+  const stationNumbers=["12345","86420"];
+  function dialPair(digit) {
+    const keypad=["123","456","789","*0#"],row=keypad.findIndex(keys=>keys.includes(String(digit)));
+    if(row<0)throw new Error("Unknown dial digit");
+    return [[175,193.75,212.5,237.5][row],[300,331.25,368.75][keypad[row].indexOf(String(digit))]];
+  }
+  let dialCacheKey="",dialCache=new Map();
+  function heterodyne({lo=1200,width=450,digit=0}={}) {
+    const key=lo+":"+width;
+    if(key!==dialCacheKey){dialCacheKey=key;dialCache.clear();}
+    digit=Math.max(0,Math.min(4,Math.round(digit)));
+    if(dialCache.has(digit))return dialCache.get(digit);
+    const pairs=stationNumbers.map(number=>dialPair(number[digit]));
+    const message=(j,t)=>(Math.cos(TAU*pairs[j][0]*t)+Math.cos(TAU*pairs[j][1]*t))/2;
+    const received=signal(t=>(1+.6*message(0,t))*Math.cos(TAU*2400*t)+.4*(1+.5*message(1,t))*Math.cos(TAU*3400*t));
+    const oscillator=signal(t=>Math.cos(TAU*lo*t)),mixed=map(received,(v,t)=>v*Math.cos(TAU*lo*t));
+    const intermediate=filter(mixed,f=>Math.abs(f-1200)<=width+1e-8),detected=envelope(intermediate);
+    const result={received,rf:received,oscillator,mixed,intermediate,detected,recovered:dc(detected)};
+    dialCache.set(digit,result);return result;
+  }
+  function sequenceAudio(frames,key,position,rate,{tone=.3,gap=.1,gain=.12}={}) {
+    const seconds=frames.length*(tone+gap)-gap,values=new Float32Array(Math.round(rate*seconds));
+    for(let i=0;i<values.length;i++){
+      const t=i/rate,slot=Math.floor((t+1e-10)/(tone+gap)),local=t-slot*(tone+gap);
+      if(local>=tone)continue;
+      const current=frames[Math.min(slot,frames.length-1)][key],fade=Math.max(0,Math.min(1,local/.005,(tone-local)/.005));
+      values[i]=gain*valueAt(current,Math.floor((local+position/1000)*current.rate+1e-8))*fade;
+    }
+    return values;
+  }
+  function fm({deviation=600,message:kind="tone"}={}) {
+    const original=signal(t=>message(kind,t));
+    const integral=t=>kind==="two"?.6*Math.sin(TAU*250*t)/(TAU*250)+.4*Math.sin(TAU*375*t)/(TAU*375):Math.sin(TAU*250*t)/(TAU*250);
+    const phase=t=>TAU*3000*t+TAU*deviation*integral(t);
+    const received=signal(t=>Math.cos(phase(t)));
+    // Differentiator gain 1/omega_0 is explicit in the illustration.
+    const differentiated=signal(t=>-(1+deviation/3000*message(kind,t))*Math.sin(phase(t)));
+    const detected=signal(t=>1+deviation/3000*message(kind,t));
+    return {original,received,differentiated,detected,recovered:map(detected,v=>(v-1)*3000/deviation)};
+  }
+  function iq({phase=0,cutoff=650,input="both"}={}) {
+    const theta=phase*Math.PI/180;
+    const i=signal(t=>input==="q"?0:.75*Math.cos(TAU*250*t)),q=signal(t=>input==="i"?0:.55*Math.sin(TAU*375*t));
+    const received=map(i,(v,t,n)=>v*Math.cos(TAU*2400*t)-q.values[n]*Math.sin(TAU*2400*t));
+    const oscillator=signal(t=>2*Math.cos(TAU*2400*t+theta)),quadrature=signal(t=>-2*Math.sin(TAU*2400*t+theta));
+    const mixI=map(received,(v,t,n)=>v*oscillator.values[n]),mixQ=map(received,(v,t,n)=>v*quadrature.values[n]);
+    return {i,q,received,oscillator,quadrature,mixI,mixQ,outI:lowpass(mixI,cutoff),outQ:lowpass(mixQ,cutoff)};
+  }
+  const alias=(frequency,rate)=>((frequency+rate/2)%rate+rate)%rate-rate/2;
+  function sampling({frequency=900,rate=2400,cutoff=1200,method="sinc",message:kind="two"}={}) {
+    rate=Number(rate);
+    const terms=kind==="tone"?[[frequency,.8]]:[[250,.5],[frequency,.4]];
+    const passed=terms.filter(([f])=>f<=cutoff);
+    const evaluate=(components,t)=>components.reduce((v,[f,a])=>v+a*Math.cos(TAU*f*t),0);
+    const original=signal(t=>evaluate(terms,t)),filtered=signal(t=>evaluate(passed,t));
+    const samples=signal(t=>evaluate(passed,t),rate,Math.ceil(.16*rate));samples.discrete=true;
+    const recovered=signal(t=>{
+      if(method==="sinc")return evaluate(passed.map(([f,a])=>[alias(f,rate),a]),t);
+      const n=Math.floor(t*rate+1e-9),left=evaluate(passed,n/rate);
+      return method==="hold"?left:left+(t*rate-n)*(evaluate(passed,(n+1)/rate)-left);
+    });
+    return {original,filtered,samples,recovered};
+  }
+  function gaussian(seed,count) {
+    let x=(seed>>>0)||1;
+    const uniform=()=>{x^=x<<13;x^=x>>>17;x^=x<<5;return ((x>>>0)+1)/4294967297;};
+    return Float64Array.from({length:count},()=>Math.sqrt(-2*Math.log(uniform()))*Math.cos(TAU*uniform()));
+  }
+  function matched({noise=.3,arrival=60,threshold=.5,present="yes",shape="biphasic",seed=17}={}) {
+    const rate=8000,n=2048,length=160,start=Math.round(arrival*rate/1000);
+    const template=Float64Array.from({length},(_,i)=>shape==="rect"||i<length/2?1:-1);
+    const clean=signal((t)=>{const i=Math.round(t*rate)-start;return present==="yes"&&i>=0&&i<length?template[i]:0;},rate,n);clean.periodic=false;
+    const realization=gaussian(seed,n),received=map(clean,(v,t,i)=>v+noise*realization[i]);
+    const values=new Float64Array(n);
+    for(let i=0;i<n;i++)for(let j=0;j<length&&j<=i;j++)values[i]+=received.values[i-j]*template[length-1-j]/length;
+    const correlated=like(received,values),decision=map(correlated,v=>v>threshold?1:0);
+    return {clean,received,correlated,decision};
+  }
+  function valueAt(s,index) {
+    return s.periodic?s.values[((index%s.values.length)+s.values.length)%s.values.length]:(s.values[index]||0);
+  }
+  function timeData(s,startMs=0,durationMs=20) {
+    const first=Math.ceil(startMs*s.rate/1000-1e-8),last=Math.floor((startMs+durationMs)*s.rate/1000+1e-8),x=[],y=[];
+    for(let i=first;i<=last;i++){x.push(i/s.rate*1000-startMs);y.push(valueAt(s,i));}return {x,y};
+  }
+  function spectrum(s,startMs=0,durationMs=20,limit=5.5) {
+    const start=startMs/1000,duration=durationMs/1000;
+    if(s.discrete){
+      const samples=timeData(s,startMs,durationMs),x=[],y=[];
+      const weights=samples.x.map(t=>.5-.5*Math.cos(TAU*t/durationMs)),sum=weights.reduce((a,b)=>a+b,0)||1;
+      // Evaluate the continuous DTFT, including replicas outside the Nyquist interval.
+      const re=new Float64Array(2049),im=new Float64Array(2049),step=2*limit*1000/2048;
+      for(let j=0;j<samples.x.length;j++){
+        const t=samples.x[j]/1000,a=samples.y[j]*weights[j]/sum,angle=TAU*limit*1000*t,d=TAU*step*t,cr=Math.cos(d),ci=-Math.sin(d);
+        let wr=Math.cos(angle),wi=Math.sin(angle);
+        for(let k=0;k<re.length;k++){re[k]+=a*wr;im[k]+=a*wi;const next=wr*cr-wi*ci;wi=wr*ci+wi*cr;wr=next;}
+      }
+      for(let k=0;k<re.length;k++){x.push(-limit+2*limit*k/2048);y.push(Math.hypot(re[k],im[k]));}return {x,y};
+    }
+    const size=8192,re=new Float64Array(size),im=new Float64Array(size),count=Math.round(duration*s.rate);let area=0;
+    for(let i=0;i<count;i++){const w=.5-.5*Math.cos(TAU*i/count);re[i]=valueAt(s,Math.round(start*s.rate)+i)*w;area+=w;}
+    fft(re,im);const max=Math.min(size/2,Math.floor(limit*1000*size/s.rate)),x=[],y=[];
+    for(let k=-max;k<=max;k++){const j=(k+size)%size;x.push(k*s.rate/size/1000);y.push(Math.hypot(re[j],im[j])/area);}return {x,y};
+  }
+  return {signal,map,fft,lowpass,dc,envelope,diode,amEnvelope,heterodyne,dialPair,stationNumbers,sequenceAudio,fm,iq,sampling,matched,alias,timeData,spectrum,valueAt};
+})();
+</script>
+<style>
+  .process-lab [hidden] { display:none !important; }
+  .process-lab .pl-diagram { direction:ltr; overflow-x:auto; background:white; border:1px solid #dce5eb; border-radius:12px; margin:12px 0; }
+  .process-lab .pl-canvas { position:relative; min-width:620px; }
+  .process-lab .pl-canvas > svg { display:block; width:100%; height:auto; }
+  .process-lab .pl-label { position:absolute; transform:translate(-50%,-50%); background:transparent; font-size:13px; white-space:nowrap; pointer-events:none; }
+  .process-lab .pl-part { cursor:pointer; outline:none; }
+  .process-lab .pl-body { stroke:var(--signal); fill:white; stroke-width:2; }
+  .process-lab .pl-part:hover .pl-body,.process-lab .pl-part[aria-pressed=true] .pl-body { fill:var(--tint); stroke-width:3; }
+  .process-lab .pl-part:focus-visible .pl-body { stroke-width:4; stroke-dasharray:4 2; }
+  .process-lab .pl-probe[aria-pressed=true] .pl-body { fill:var(--signal); }
+  .process-lab .pl-symbol { stroke:var(--signal); stroke-width:2; fill:none; pointer-events:none; }
+  .process-lab .pl-part text { fill:var(--signal); font:15px system-ui,sans-serif; text-anchor:middle; pointer-events:none; }
+  .process-lab .pl-wire { fill:none; stroke-width:2; }
+  .process-lab .pl-equation { direction:ltr; display:flex; flex-wrap:wrap; justify-content:center; gap:6px 12px; margin:10px 0; overflow:visible; }
+  .process-lab .pl-equation > span { max-width:100%; }
+  .process-lab .pl-equation .pl-row { width:100%; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px 10px; }
+  .process-lab .pl-description { margin:8px 0; min-height:2em; }
+  .process-lab .pl-legend,.process-lab .pl-audio { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:10px 0; }
+  .process-lab .pl-legend button { display:flex; align-items:center; gap:8px; color:var(--signal); border-color:var(--signal); background:var(--tint); }
+  .process-lab .pl-legend button::before { content:""; width:20px; height:3px; background:var(--signal); }
+  .process-lab .pl-legend button[aria-pressed=false] { text-decoration:line-through; background:white; opacity:.65; }
+  .process-lab .pl-parameters { border:1px solid #dce5eb; border-radius:10px; padding:0 10px; margin:10px 0 12px; }
+  .process-lab .pl-parameters > summary { cursor:pointer; padding:8px 2px; font-weight:650; }
+  .process-lab .pl-parameters > summary:focus-visible { outline:3px solid #168c9a; }
+  .process-lab .ci-controls { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .process-lab .pl-listening { font-size:12px; color:#526779; }
+  .process-lab .pl-readout { padding:8px 10px; background:#eaf1f5; border-radius:8px; margin:10px 0; }
+  @media(max-width:700px) { .process-lab .ci-controls { grid-template-columns:1fr; } .process-lab .ci-control { display:block; } }
+</style>
+<script>
+window.ProcessLab = (() => {
+  "use strict";
+  const palette=["#b45f06","#2563a6","#8b4db7","#087e85","#b73b63","#697723","#526779","#9c4e88"];
+  const symbols={
+    mixer:'<circle class="pl-body" r="28"/><path class="pl-symbol" d="M-12 -12 L12 12 M-12 12 L12 -12"/>',
+    oscillator:'<circle class="pl-body" r="28"/><path class="pl-symbol" d="M-20 0 Q-10 -22 0 0 T20 0"/>',
+    diode:'<path class="pl-symbol" d="M-32 0 H-13 M-13 -17 L14 0 L-13 17 Z M14 -18 V18 M14 0 H32"/>',
+    rc:'<path class="pl-symbol" d="M-35 0 H-19 L-15 -8 L-7 8 L1 -8 L9 8 L13 0 H35 M24 0 V13 M14 13 H34 M14 19 H34 M24 19 V27 M15 27 H33"/>',
+    lpf:'<path class="pl-symbol" d="M-29 9 H-3 Q8 9 14 21 H28"/><text y="-9">LPF</text>',
+    bpf:'<path class="pl-symbol" d="M-29 20 H-18 L-10 8 H10 L18 20 H29"/><text y="-9">BPF</text>',
+    rf:'<path class="pl-symbol" d="M-27 22 L-7 10 L-27 -2 Z"/><text x="17" y="21">BPF</text><text y="-13">RF</text>',
+    dc:'<path class="pl-symbol" d="M-25 15 H25 M-25 23 L25 2"/><text y="-8">DC</text>',
+    derivative:'<path class="pl-symbol" d="M-26 20 H-18 L18 4 H27"/>',
+    envelope:'<path class="pl-symbol" d="M-30 19 Q0 -28 30 19 M-30 19 L-24 13 L-18 19 L-12 -1 L-6 19 L0 -6 L6 19 L12 -1 L18 19 L24 13 L30 19"/>',
+    sampler:'<path class="pl-symbol" d="M-30 8 H-12 L12 -9 M12 8 H30 M-15 -20 H-6 V-29 H6 V-20 H15"/>',
+    reconstruct:'<path class="pl-symbol" d="M-29 11 H-17 V-1 H-4 V-11 H9 V1 H22 V11 H29 M-29 17 Q0 -35 29 17"/>',
+    matched:'<path class="pl-symbol" d="M-28 20 H-17 V-3 H-2 V20 H28"/><text y="-13">MF</text>',
+    threshold:'<path class="pl-symbol" d="M-29 17 H-3 V-5 H29 M-26 5 H27"/>',
+    noise:'<path class="pl-symbol" d="M-27 15 L-18 4 L-9 21 L0 -3 L9 12 L18 -1 L27 15"/><text y="-13">+ n</text>',
+    phase:''
+  };
+  function mount(id,config) {
+    CourseInteractives.mount(id,{initial:{position:0,...config.initial},setup(c){
+      const m=window.ProcessModels,s=c.state,root=c.root;
+      root.classList.add("process-lab");
+      const info={};Object.entries(config.signals).forEach(([key,v],i)=>{info[key]={color:palette[i%palette.length],...v};});
+      const colorize=(el,key)=>{el.style.setProperty("--signal",info[key].color);el.style.setProperty("--tint",info[key].color+"15");};
+      let data=config.model(s),selected=config.initial.selection||config.stages[0].key,hidden=new Set(),cache={},audioContext,source,finishTimer,audioVersion=0,sequenceTimers=[];
+      const controls=root.querySelector(".ci-controls"),presets=root.querySelector(".ci-buttons"),plots=root.querySelector(".ci-plots");
+      config.controls(c);
+      if(config.window!==160)c.control("position","תחילת חלון הזמן",String.raw`t_0\;[\mathrm{ms}]`,0,140,5,0);
+      for(const [name,values] of config.presets||[])c.preset(name,values);
+      const parameters=c.node("details",null,undefined,"pl-parameters");c.node("summary",parameters,"בחירת אות ופרמטרים");parameters.append(controls,presets);
+      const instruction=c.node("p",null,"לחצו על רכיב להשוואת הכניסה והמוצא, או על נקודה לבדיקת האות במקום זה.","ci-note");
+      const diagram=c.node("div",null,undefined,"pl-diagram"),canvas=c.node("div",diagram,undefined,"pl-canvas");
+      const description=c.node("p",null,undefined,"pl-description"),equation=c.node("div",null,undefined,"pl-equation"),legend=c.node("div",null,undefined,"pl-legend");
+      const audio=c.node("div",null,undefined,"pl-audio"),audioStatus=c.node("span",audio,"","pl-listening");
+      const readout=config.readout?c.node("p",null,undefined,"pl-readout"):null;
+      const stageByKey=Object.fromEntries(config.stages.map(v=>[v.key,v]));
+      const active=()=>stageByKey[selected]||{input:null,output:selected,note:info[selected].note,equation:info[selected].equation};
+      const visible=key=>key&&!hidden.has(key);
+      const duration=config.window||20,limit=config.limit||5.5;
+      const time=c.board("time",String.raw`t`,config.window===160?String.raw`t\;[\mathrm{ms}]`:String.raw`t-t_0\;[\mathrm{ms}]`,[-duration*.09,2.2,duration*1.04,-2.2],{height:220});
+      const frequency=c.board("frequency",String.raw`\nu`,String.raw`\nu\;[\mathrm{kHz}]`,[-limit*1.08,config.frequencyTop||1.8,limit*1.08,-(config.frequencyTop||1.8)*.12],{height:220});
+      for(const [index,title] of ["בזמן","בתדר"].entries()){const h=plots.children[index].querySelector("h5");h.replaceChildren();c.node("span",h,title);}
+      const filter=CourseInteractives.filterOverlay(c,frequency,()=>{
+        const reference=config.frequencyReference?.(s,selected);
+        if(reference)return {color:info[reference.signal].color,...reference};
+        const current=stageByKey[selected];
+        if(!current)return null;
+        const definition=typeof current.filter==="function"?current.filter(s):current.filter || (current.symbol==="dc"?{edges:[0],note:"הקו המקווקו מסמן את רכיב האפס שמסולק.",tex:String.raw`H(0)=0`}:null);
+        return definition?{color:info[current.output].color,...definition}:null;
+      });
+      const curves={};
+      for(const side of ["input","output"]){
+        const attributes={visible:()=>Boolean(visible(active()[side])),strokeWidth:side==="input"?2:2.5};
+        const t=c.sampled(time,()=>cache[side]?.time||{x:[],y:[]},palette[0],{...attributes,visible:()=>Boolean(visible(active()[side]))&&!data[active()[side]]?.discrete});
+        const f=c.sampled(frequency,()=>cache[side]?.frequency||{x:[],y:[]},palette[0],attributes);
+        const points=Array.from({length:82},(_,i)=>c.point(time,()=>cache[side]?.time.x[i]??0,()=>cache[side]?.time.y[i]??0,palette[0],{size:2,visible:()=>Boolean(visible(active()[side]))&&Boolean(data[active()[side]]?.discrete)&&i<(cache[side]?.time.x.length||0)}));
+        curves[side]={t,f,points};
+      }
+      if(config.thresholdSignal){
+        const showThreshold=()=>Object.values(active()).includes(config.thresholdSignal)&&visible(config.thresholdSignal);
+        c.segment(time,[0,()=>s.threshold],[duration,()=>s.threshold],{strokeColor:"#526779",visible:showThreshold});
+        c.label(time,duration*.12,()=>s.threshold+.18,String.raw`\gamma`,{strokeColor:"#526779",visible:showThreshold});
+      }
+      const legendButtons={};
+      for(const side of ["input","output"]){const button=c.node("button",legend);button.type="button";button.addEventListener("click",()=>{const key=active()[side];hidden.has(key)?hidden.delete(key):hidden.add(key);c.update("visibility");});legendButtons[side]=button;}
+      const stop=()=>{audioVersion++;sequenceTimers.forEach(clearTimeout);sequenceTimers=[];if(source){source.onended=null;source.stop();source.disconnect();source=null;}clearTimeout(finishTimer);audioStatus.textContent="";};
+      async function play(side){
+        stop();const key=side==="original"?config.original:active()[side];if(!key)return;
+        const version=audioVersion;
+        try{
+          const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)throw new Error("Audio unavailable");
+          audioContext=audioContext||new Audio();await audioContext.resume();if(version!==audioVersion)return;
+          const sequence=config.audioSequence;
+          const frames=sequence?Array.from({length:sequence.count},(_,digit)=>config.model({...s,[sequence.control]:digit})):[data];
+          const seconds=sequence?sequence.count*(sequence.tone+sequence.gap)-sequence.gap:2;
+          const buffer=audioContext.createBuffer(1,Math.round(audioContext.sampleRate*seconds),audioContext.sampleRate),values=buffer.getChannelData(0),signal=data[key];
+          if(sequence)values.set(m.sequenceAudio(frames,key,s.position,audioContext.sampleRate,sequence));
+          else for(let i=0;i<values.length;i++){const t=i/audioContext.sampleRate+s.position/1000;values[i]=.12*m.valueAt(signal,Math.floor(t*signal.rate))*Math.min(1,i/400,(values.length-1-i)/400);}
+          source=audioContext.createBufferSource();source.buffer=buffer;source.connect(audioContext.destination);source.start();source.onended=()=>{source=null;audioStatus.textContent="";};
+          audioStatus.textContent="מנגן: "+info[key].name+(signal.discrete?" (בהחזקה מסדר אפס)":"");
+          if(sequence){
+            const showDigit=digit=>{if(version!==audioVersion)return;s[sequence.control]=digit;c.update("sequence-step");};
+            showDigit(0);
+            for(let digit=1;digit<sequence.count;digit++)sequenceTimers.push(setTimeout(()=>showDigit(digit),digit*(sequence.tone+sequence.gap)*1000));
+          }
+          finishTimer=setTimeout(()=>{audioStatus.textContent="";},seconds*1000+200);
+        }catch(error){audioStatus.textContent="לא ניתן להפעיל שמע בדפדפן זה.";}
+      }
+      const playInput=c.node("button",audio,"האזנה לכניסה"),playOutput=c.node("button",audio,"האזנה למוצא"),stopButton=c.node("button",audio,"עצירה");
+      playInput.type=playOutput.type=stopButton.type="button";
+      playInput.addEventListener("click",()=>play("input"));playOutput.addEventListener("click",()=>play("output"));stopButton.addEventListener("click",stop);
+      if(config.original){const original=c.node("button",audio,"האזנה למידע המקורי");original.type="button";original.addEventListener("click",()=>play("original"));}
+      audio.append(audioStatus);audio.hidden=config.audio===false;
+      document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});
+      const width=config.diagram?.width||1040,height=config.diagram?.height||270;
+      let markup="",labels=[];
+      const line=(path,key)=>{markup+=`<path class="pl-wire" d="${path}" stroke="${info[key].color}" marker-end="url(#${id}-arrow)"/>`;};
+      const label=(x,y,key,tex)=>labels.push({x,y,key,tex:tex||info[key].symbol});
+      function part(key,x,y,symbol,signalKey,title){
+        const mathSymbol={derivative:String.raw`\frac{1}{\omega_0}\frac{d}{dt}`,threshold:String.raw`>\gamma`,phase:String.raw`+\frac{\pi}{2}`}[symbol];
+        if(mathSymbol)label(x,y+(symbol==="threshold"?-17:symbol==="phase"?0:-9),signalKey,mathSymbol);
+        const circle=["mixer","oscillator"].includes(symbol);
+        markup+=`<g class="pl-part" data-view="${key}" role="button" tabindex="0" aria-label="${title}" transform="translate(${x} ${y})" style="--signal:${info[signalKey].color};--tint:${info[signalKey].color}15"><rect width="108" height="82" x="-54" y="-41" fill="transparent"/>${circle?"":'<rect class="pl-body" x="-47" y="-32" width="94" height="64" rx="4"/>'}${symbols[symbol]||""}</g>`;
+      }
+      function probe(key,x,y){markup+=`<g class="pl-part pl-probe" data-view="${key}" role="button" tabindex="0" aria-label="${info[key].name}" style="--signal:${info[key].color};--tint:${info[key].color}15"><circle cx="${x}" cy="${y}" r="17" fill="transparent"/><circle class="pl-body" cx="${x}" cy="${y}" r="6"/></g>`;label(x,y+40,key);}
+      if(config.diagram?.draw){config.diagram.draw({line,label,part,probe});}
+      else{
+        const count=config.stages.length,gap=(width-200)/(count-1||1),xs=config.stages.map((_,i)=>count===1?width/2:100+i*gap),y=80;
+        config.stages.forEach((stage,i)=>{
+          const x=xs[i],previous=i?xs[i-1]+48:15;
+          line(`M${previous} ${y} H${x-48}`,stage.input);probe(stage.input,i?(previous+x-48)/2:30,y);
+          part(stage.key,x,y,stage.symbol,stage.output,stage.name);
+          if(stage.aux){const ay=210;line(`M${x} ${ay-28} V${y+29}`,stage.aux);part(stage.aux,x,ay,"oscillator",stage.aux,info[stage.aux].name);label(x+65,160,stage.aux);label(x,252,stage.aux,String.raw`\mathrm{VCO/LO}`);}
+        });
+        const last=config.stages.at(-1);line(`M${xs.at(-1)+48} ${y} H${width-15}`,last.output);probe(last.output,width-35,y);
+      }
+      canvas.innerHTML=`<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="${config.diagramLabel}"><defs><marker id="${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#526779"/></marker></defs>${markup}</svg>`;
+      for(const {x,y,key,tex} of labels){const node=c.node("span",canvas,undefined,"pl-label");node.style.left=x/width*100+"%";node.style.top=y/height*100+"%";node.style.color=info[key].color;c.math(node,tex);}
+      for(const element of diagram.querySelectorAll("[data-view]")){
+        const select=()=>{selected=element.dataset.view;c.update("selection");};
+        element.addEventListener("click",select);element.addEventListener("keydown",event=>{if(["Enter"," "].includes(event.key)){event.preventDefault();select();}});
+      }
+      let equationRevision=0,typesetting=Promise.resolve();
+      const renderEquation=()=>{
+        const version=++equationRevision;
+        typesetting=typesetting.then(async()=>{
+          if(version!==equationRevision)return;
+          window.MathJax.typesetClear([equation]);equation.replaceChildren();
+          const formula=active().equation,rows=typeof formula==="function"?formula(s):formula;
+          for(const row of (Array.isArray(rows)?rows:[[rows]])){const line=c.node("div",equation,undefined,"pl-row");for(const tex of Array.isArray(row)?row:[row])if(tex)c.math(c.node("span",line),tex);}
+          await window.MathJax.typesetPromise([equation]);
+        }).catch(error=>console.error("Process equation",error));
+      };
+      for(const element of [instruction,diagram,description,equation,readout,legend,audio,parameters])if(element)root.insertBefore(element,plots);
+      c.note("הספקטרום מציג חלון Hann של אותו קטע זמן, מחולק בשטח החלון ובסקלה קבועה. הרחבת הקווים נובעת מהחלון; גובה האותות אינו מנורמל בנפרד.");
+      if(config.note)c.note(config.note);
+      return {update(key){
+        if(!["visibility","selection"].includes(key)){data=config.model(s);}
+        if(key!=="visibility"&&key!=="sequence-step")stop();
+        if(key!=="visibility"){
+          cache={};for(const side of ["input","output"]){const name=active()[side];if(name){cache[side]={time:m.timeData(data[name],s.position,duration),frequency:m.spectrum(data[name],s.position,duration,limit)};}}
+          renderEquation();
+        }
+        filter.update();
+        const current=active();description.textContent=(stageByKey[selected]?stageByKey[selected].name+": ":"")+(typeof current.note==="function"?current.note(s):current.note||"");
+        if(readout)readout.textContent=config.readout(data,s);
+        diagram.querySelectorAll("[data-view]").forEach(el=>el.setAttribute("aria-pressed",String(el.dataset.view===selected)));
+        for(const side of ["input","output"]){const name=current[side],button=legendButtons[side];button.hidden=!name;if(!name)continue;
+          colorize(button,name);button.textContent=(current.input?(side==="input"?"כניסה: ":"מוצא: "):"אות: ")+info[name].name;button.setAttribute("aria-pressed",String(visible(name)));
+          curves[side].t.setAttribute({strokeColor:info[name].color});curves[side].f.setAttribute({strokeColor:info[name].color});curves[side].points.forEach(p=>p.setAttribute({strokeColor:info[name].color,fillColor:info[name].color}));
+        }
+        playInput.hidden=!current.input;playOutput.textContent=current.input?"האזנה למוצא":"האזנה לאות";
+      }};
+    }});
+  }
+  return {mount};
+})();
+</script>
+<section id="envelope-process" class="course-interactive" aria-labelledby="envelope-process-title">
+  <h4 id="envelope-process-title">בתוך גלאי מעטפת: דיודה ו־RC</h4>
+  <p class="ci-status" role="status">טוענים את הגלאי…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+ProcessLab.mount("envelope-process",{
+  initial:{message:"two",depth:.6,tau:.45,selection:"hold"},model:ProcessModels.amEnvelope,original:"original",
+  diagramLabel:"גלאי מעטפת: יישור בדיודה, טעינה ופריקה במעגל RC והסרת רכיב קבוע",diagram:{height:150},
+  controls(c){c.select("message","אות המידע",[["tone","צליל יחיד"],["two","שני צלילים"]]);c.control("depth","עומק האפנון",String.raw`m`,.2,1.2,.1,1);c.control("tau","קבוע הזמן",String.raw`\tau=RC\;[\mathrm{ms}]`,.05,3,.05,2);},
+  presets:[["מעקב מעטפת",{tau:.45,depth:.6}],["אדווה חזקה",{tau:.05,depth:.6}],["פריקה אטית מדי",{tau:3,depth:.6}],["אפנון יתר",{tau:.45,depth:1.2}]],
+  signals:{
+    received:{name:"האות הנקלט",symbol:String.raw`r(t)`,equation:String.raw`r(t)=A(t)\cos(\omega_0t),\quad A(t)=1+mf(t)`,note:"המעטפת כוללת את המידע ואת ההיסט הקבוע. הגל הנושא קבוע בכל המצבים."},
+    rectified:{name:"אחרי הדיודה",symbol:String.raw`d(t)`,equation:String.raw`d(t)=\max\{0,[1+mf(t)]\cos(\omega_0t)\}`,note:"דיודה אידאלית מעבירה רק את החלק החיובי. זו נקודת ביניים מושגית לפני מנגנון אגירת המטען."},
+    held:{name:"מתח הקבל",symbol:String.raw`v_C(t)`,equation:[[String.raw`v_C[k]=\max\{d[k],e^{-\frac{\Delta t}{RC}}v_C[k-1]\}`],[String.raw`\approx |1+mf(t)|\quad\text{(ideal envelope)}`]],note:"בכל שיא הקבל נטען; בין השיאים הוא נפרק. קבוע זמן קצר משאיר אדווה, וקבוע זמן ארוך מדי מתקשה לעקוב אחרי הירידה במעטפת."},
+    recovered:{name:"המוצא ללא DC",symbol:String.raw`y(t)`,equation:[[String.raw`y(t)=v_C(t)-\langle v_C\rangle`],[String.raw`\approx mf(t)\quad\text{if }1+mf(t)>0`]],note:"הסרת הממוצע מסלקת את ההיסט, אך אינה מתקנת אדווה, פריקה אטית או אפנון יתר."},
+    original:{name:"אות המידע",symbol:String.raw`f(t)`}
+  },
+  stages:[
+    {key:"diode",name:"יישור בדיודה",symbol:"diode",input:"received",output:"rectified",equation:String.raw`d(t)=\max\{0,A(t)\cos(\omega_0t)\}`,note:"החלק השלילי נחסם. עדיין רואים תנודות מהירות, ולכן צריך גם אגירת מטען."},
+    {key:"hold",name:"טעינה ופריקה — RC",symbol:"rc",input:"rectified",output:"held",equation:[[String.raw`v_C[k]=\max\{d[k],e^{-\frac{\Delta t}{RC}}v_C[k-1]\}`],[String.raw`d[k]=\max\{0,[1+mf(k\Delta t)]\cos(\omega_0k\Delta t)\}`]],note:"זהו קירוב בזמן בדיד לדיודה אידאלית עם טעינה מיידית ופריקה מעריכית. משנים את RC כדי לראות את הפשרה בין אדווה למעקב מעטפת."},
+    {key:"remove",name:"הסרת רכיב קבוע",symbol:"dc",input:"held",output:"recovered",equation:[[String.raw`y(t)=v_C(t)-\langle v_C\rangle`],[String.raw`\approx [1+mf(t)]-1=mf(t)`]],note:"רק בגילוי מעטפת טוב וללא אפנון יתר המוצא בקירוב פרופורציוני למידע."}
+  ],
+  note:"תדר הנושא 4 kHz. באפנון יתר הגלאי עוקב אחרי הערך המוחלט של המעטפת, ולכן הסימן המקורי אובד."
+});
+</script>
 </section>
 <section id="id7">
 <h3>מקלט הטרודיין<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
@@ -556,12 +1313,53 @@
 <img alt="superheterodyne_receiver.png" src="../_images/superheterodyne_receiver.png" /></p></li>
 </ul>
 <p>איך נזיז בתדר? נרצה להכפיל ב-<span class="math notranslate nohighlight">\(e^{i\omega_{LO}t}\)</span> אבל אנחנו יכולים להכפיל רק במשהו ממשי ולכן נכפיל ב-<span class="math notranslate nohighlight">\(\cos\left(\omega_{LO}t\right)\)</span></p>
-<p>הסרטוט של המקלט בשלבים הראה ככה:
-<img alt="superheterodyne_receiver_diagram.png" src="../_images/superheterodyne_receiver_diagram.png" /></p>
+<p>נעקוב אחרי שתי תחנות באותו מקלט. כיוון המתנד משנה את התחנה שמגיעה למסנן הביניים הקבוע; לחיצה על המיקסר או על המסנן מאפשרת לראות את ההזזה והברירה.</p>
+<section id="heterodyne-process" class="course-interactive" aria-labelledby="heterodyne-process-title">
+  <h4 id="heterodyne-process-title">מכוונים תחנה: מקלט הטרודיין</h4>
+  <p class="ci-status" role="status">טוענים את המקלט…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<script>
+(() => {
+  const ifFilter=s=>({bands:[[-1.2-s.width/1000,-1.2+s.width/1000],[1.2-s.width/1000,1.2+s.width/1000]],edges:[-1.2-s.width/1000,-1.2+s.width/1000,1.2-s.width/1000,1.2+s.width/1000],note:"הצללה: תחומי המעבר; קווים מקווקווים: גבולות המסנן.",tex:String.raw`|\nu|\in[${(1.2-s.width/1000).toFixed(3)},${(1.2+s.width/1000).toFixed(3)}]\;\mathrm{kHz}`});
+ProcessLab.mount("heterodyne-process",{
+  initial:{lo:1200,width:450,digit:0,selection:"if"},model:ProcessModels.heterodyne,limit:6.5,
+  diagramLabel:"מקלט הטרודיין: RF, מיקסר עם VCO, מסנן תדר ביניים, גילוי מעטפת והסרת רכיב קבוע",
+  frequencyReference(s,selected){
+    if(!["received","rf","mixed","oscillator","rf-block","mix","intermediate"].includes(selected))return null;
+    return {...ifFilter(s),signal:"intermediate",note:selected==="intermediate"?"הצללה: תחומי המעבר של מסנן IF.":"הצללה: מסנן IF בהמשך השרשרת, כתצוגת ייחוס. כיוון המתנד מזיז את ספקטרום המיקסר ביחס לתחום המעבר הקבוע."};
+  },
+  audioSequence:{control:"digit",count:5,tone:.3,gap:.1},
+  controls(c){c.control("lo","תדר המתנד המקומי",String.raw`f_{\mathrm{LO}}\;[\mathrm{Hz}]`,1000,2400,50,0);c.control("width","חצי רוחב מסנן הביניים",String.raw`B\;[\mathrm{Hz}]`,100,650,25,0);},
+  presets:[["התחנה הראשונה",{lo:1200,width:450}],["התחנה השנייה",{lo:2200,width:450}],["בין תחנות",{lo:1700,width:200}],["מסנן צר מדי",{lo:1200,width:250}]],
+  signals:{
+    received:{name:"שתי תחנות בכניסה",symbol:String.raw`r(t)`,equation:String.raw`r(t)=A_1(t)\cos(\omega_1t)+A_2(t)\cos(\omega_2t)`,note:"שתי תחנות בתדרים 2.4 ו־3.4 kHz. כל אחת משדרת חמישה זוגות צלילים, בהשראת חיוג טלפוני ובתדרים נמוכים המותאמים למסנן."},
+    rf:{name:"מוצא חזית RF",symbol:String.raw`r_{\mathrm{RF}}(t)`,equation:String.raw`r_{\mathrm{RF}}(t)=r(t)`,note:"חזית RF אידאלית בהגבר יחידה מעבירה את שתי התחנות; הברירה הצרה תיעשה ב־IF."},
+    mixed:{name:"מוצא המיקסר",symbol:String.raw`u(t)`,equation:[[String.raw`u(t)=\frac{1}{2}\sum_{j=1}^{2}A_j(t)\cos((\omega_j-\omega_{\mathrm{LO}})t)`],[String.raw`+\frac{1}{2}\sum_{j=1}^{2}A_j(t)\cos((\omega_j+\omega_{\mathrm{LO}})t)`]],note:"כל תחנה יוצרת עותק בתדר ההפרש ועותק בתדר הסכום. שני העותקים מופיעים גם בתדרים שליליים."},
+    intermediate:{name:"מוצא מסנן IF",symbol:String.raw`v(t)`,equation:[[String.raw`v(t)=\operatorname{BPF}_{\omega_{\mathrm{IF}}}\{u(t)\}`],[String.raw`u(t)=\frac{1}{2}\sum_j A_j(t)\cos((\omega_j-\omega_{\mathrm{LO}})t)`],[String.raw`+\frac{1}{2}\sum_j A_j(t)\cos((\omega_j+\omega_{\mathrm{LO}})t)`]],note:"מרכז המסנן קבוע: 1.2 kHz. המתנד מזיז את התחנות ביחס למסנן; הוא אינו מזיז את המסנן."},
+    detected:{name:"המעטפת ב־IF",symbol:String.raw`e(t)`,equation:[[String.raw`e(t)=|v(t)+i\mathcal H\{v(t)\}|`],[String.raw`=\frac{A_j(t)}{2}\quad\text{for one fully passed station}`]],note:"גלאי מעטפת אידאלי באמצעות האות האנליטי. זו אינה סימולציה של מעגל דיודה ו־RC."},
+    recovered:{name:"המידע לאחר הסרת DC",symbol:String.raw`y(t)`,equation:[[String.raw`y(t)=e(t)-\langle e\rangle`],[String.raw`=\frac{A_j(t)-\langle A_j\rangle}{2}\quad\text{for one fully passed station}`]],note:"ניתן לשמוע איזה צליל שרד. חיתוך פסי הצד או העברת שתי תחנות יחד משנים את צורת המידע."},
+    oscillator:{name:"המתנד המקומי",symbol:String.raw`v_{\mathrm{LO}}(t)`,equation:String.raw`v_{\mathrm{LO}}(t)=\cos(2\pi f_{\mathrm{LO}}t)`,note:"כיוון תדר המתנד בוחר איזו תחנה תגיע לתדר הביניים הקבוע."}
+  },
+  stages:[
+    {key:"rf-block",filter:{allpass:true,note:"הצללה: מעבר בהגבר יחידה בכל התחום המוצג (מודל RF אידאלי).",tex:String.raw`H_{\mathrm{RF}}=1`},name:"חזית RF רחבת סרט",symbol:"rf",input:"received",output:"rf",equation:s=>{
+      const pairs=ProcessModels.stationNumbers.map(number=>ProcessModels.dialPair(number[Number(s.digit)]));
+      return [[String.raw`r(t)=\sum_{j=1}^{2}A_j(t)\cos(\omega_jt)`],[String.raw`A_1(t)=1+0.6m_1(t),\quad A_2(t)=0.4[1+0.5m_2(t)]`],...pairs.map((pair,j)=>[String.raw`m_${j+1}(t)=\frac{\cos(2\pi\cdot ${pair[0]}t)+\cos(2\pi\cdot ${pair[1]}t)}{2}`])];
+    },note:"מודל בהגבר יחידה שמעביר את שתי התחנות. כאן אין סינון של תחנת דמות או רעש נוסף."},
+    {key:"mix",name:"הזזה בתדר",symbol:"mixer",input:"rf",output:"mixed",aux:"oscillator",equation:[[String.raw`u(t)=\frac{1}{2}\sum_{j=1}^{2}A_j(t)\cos((\omega_j-\omega_{\mathrm{LO}})t)`],[String.raw`+\frac{1}{2}\sum_{j=1}^{2}A_j(t)\cos((\omega_j+\omega_{\mathrm{LO}})t)`]],note:"כפל בקוסינוס יוצר את תדרי הסכום וההפרש. שימו לב להגבר חצי, שנשמר גם בגרפים."},
+    {key:"if",filter:ifFilter,name:"מסנן IF קבוע",symbol:"bpf",input:"mixed",output:"intermediate",equation:[[String.raw`\tilde V(\omega)=H_{\mathrm{IF}}(\omega)\tilde U(\omega)`],[String.raw`H_{\mathrm{IF}}(\omega)=\mathbf 1_{\{||\omega|-\omega_{\mathrm{IF}}|\le2\pi B\}}`],[String.raw`v(t)=\frac{A_j(t)}{2}`,String.raw`\cos((\omega_j-\omega_{\mathrm{LO}})t)`]],note:"המסנן מעביר תחומים סימטריים סביב ±1.2 kHz. נוסחת המוצא המפושטת תקפה רק כאשר תחנה אחת עוברת במלואה. מסנן צר מדי חותך את פסי הצד; כיוון שגוי מחליש או מסלק את התחנה."},
+    {key:"env",name:"גילוי מעטפת אידאלי",symbol:"envelope",input:"intermediate",output:"detected",equation:[[String.raw`e(t)=|v(t)+i\mathcal H\{v(t)\}|`],[String.raw`=\frac{A_j(t)}{2}\quad\text{for one fully passed station}`]],note:"כאשר רק תחנה שלמה אחת עוברת, המעטפת שווה לחצי מהמעטפת המקורית. אחרת הגלאי פועל על האות המסונן בפועל."},
+    {key:"dc-block",name:"הסרת רכיב קבוע",symbol:"dc",input:"detected",output:"recovered",equation:[[String.raw`y(t)=e(t)-\langle e\rangle`],[String.raw`=\frac{A_j(t)-\langle A_j\rangle}{2}\quad\text{for one fully passed station}`]],note:"המוצא נשאר בהגבר הפיזיקלי של השרשרת. עברו בין שתי התחנות ושמעו את החלפת הצליל."}
+  ],
+  readout(data,s){const i=Number(s.digit);return `תחנה ראשונה: 12345; תחנה שנייה: 86420. מוצג מקום ${i+1}: הספרות ${ProcessModels.stationNumbers[0][i]} ו־${ProcessModels.stationNumbers[1][i]}. בהאזנה הגרפים מתקדמים עם הרצף.`;},
+  note:"כל ספרה מיוצגת בזוג תדרים בהשראת DTMF, בטווח 175–368.75 Hz; אלה אינם תדרי הטלפון התקניים. כל זוג מנוגן במשך 0.3 שניות ובין הזוגות הפסקה קצרה. הגרפים מציגים את הקטע היציב של הזוג הנוכחי. האפנון והמסננים מחושבים באותם מערכים קטנים לכל ספרה; הגרפים וההאזנה שומרים על הגבר קבוע."
+});
+})();
+</script>
 <p>מה נקבל אחרי המיקסר?</p>
 <div class="math notranslate nohighlight">
 \[A\left(t\right)\cos\left(\omega_{0}t\right)\cos\left(\omega_{LO}t\right)=\frac{A\left(t\right)}{2}\left[\underset{Low-frequency}{\underbrace{\cos\left(\left(\omega_{0}-\omega_{LO}\right)t\right)}}+\underset{high-frequency}{\underbrace{\cos\left(\left(\omega_{0}+\omega_{LO}\right)t\right)}}\right]\]</div>
-<p>את זה כמובן נוכל לסנון עם ה-BPF שלנו ולקבל אות שאנחנו יכולים להכניס לגילוי מעטפת</p>
+<p>את זה כמובן נוכל לסנן עם ה-BPF שלנו ולקבל אות שאנחנו יכולים להכניס לגילוי מעטפת</p>
 <p>יש לנו המון תדרים שמשתתפים בקליטה. נעשה סדר:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\omega_{0}\)</span> תדר הגל הנושא</p></li>
@@ -582,14 +1380,365 @@
 <div class="math notranslate nohighlight">
 \[r\left(t\right)\approx A\left(t\right)\cos\left(\left(\omega_{0}+\omega_{d}\right)t+\phi_{0}\right)=A\left(t\right)\cos\left(\omega_{0}t+\underset{\omega_{d}t+\phi_{0}}{\underbrace{\phi\left(t\right)}}\right)\]</div>
 <p>כלומר השינוי אולי זניח ביחס לתדר המרכזי ולא מזיז אותו הרבה אבל אנחנו מתחילים לקבל צבירה של פאזה “במהירות” קבועה. אם נהיה רגישים לפאזה זה יכולה להיות בעיה.</p>
-<p>אבל כבר הזכרנו יתרון קטן של מקלט קוהרנטי. אם אנחנו “ריגישים” לפאזה אנחנו יכולים להבין מתי המעטפת שלנו הופכת לשלילית.</p>
-<p>ניקח השראה ממקלט הטרודיין אבל הפעם נוריד נבחר תדר ביניים שהוא תדר ה-0</p>
-<p>נסיון ראשון לבנות סכמה יראה ככה:
-<img alt="coherent_receiver_diagram.png" src="../_images/coherent_receiver_diagram.png" /></p>
+<p>אבל כבר הזכרנו יתרון קטן של מקלט קוהרנטי. אם אנחנו “רגישים” לפאזה אנחנו יכולים להבין מתי המעטפת שלנו הופכת לשלילית.</p>
+<p>ניקח השראה ממקלט הטרודיין אבל הפעם נבחר תדר ביניים שהוא תדר ה-0</p>
+<p>בתרשים הבא אפשר ללחוץ על רכיבי המקלט או על הנקודות שביניהם, ולבדוק איך האות משתנה בזמן ובתדר. חזית ה־RF מוצגת כאן כמעבר אידאלי בהגבר יחידה.</p>
+<section id="coherent-am" class="course-interactive" aria-labelledby="coherent-am-title">
+  <h4 id="coherent-am-title">בתוך מקלט AM קוהרנטי</h4>
+  <p class="ci-status" role="status">טוענים את המקלט…</p>
+  <noscript>ההדגמה דורשת JavaScript.</noscript>
+</section>
+<style>
+  #coherent-am .ci-controls { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #coherent-am .am-parameters { border:1px solid #dce5eb; border-radius:10px; margin:0 0 12px; padding:0 10px; }
+  #coherent-am .am-parameters > summary { cursor:pointer; padding:9px 2px; font-weight:600; }
+  #coherent-am .am-parameters > summary:focus-visible { outline:3px solid #168c9a; outline-offset:2px; }
+  #coherent-am .am-parameters .ci-buttons { margin-bottom:10px; }
+  #coherent-am .am-schematic { overflow-x:auto; margin:12px 0; direction:ltr; background:white; border:1px solid #dce5eb; border-radius:12px; }
+  #coherent-am .am-schematic-canvas > svg { display:block; width:100%; min-width:540px; height:auto; }
+  #coherent-am .am-schematic-canvas { position:relative; min-width:540px; }
+  #coherent-am .am-wire-label { position:absolute; transform:translate(-50%,-50%); background:transparent; font-size:13px; pointer-events:none; white-space:nowrap; }
+  #coherent-am .am-wire { fill:none; stroke:#526779; stroke-width:2; }
+  #coherent-am .am-component { cursor:pointer; outline:none; }
+  #coherent-am .am-body { fill:#fff; stroke:#526779; stroke-width:2; }
+  #coherent-am .am-component .am-body { stroke:var(--signal-color,#526779); }
+  #coherent-am .am-component:hover .am-body { fill:var(--signal-tint,#edf7f7); }
+  #coherent-am .am-component[aria-pressed=true] .am-body { fill:var(--signal-tint,#e0f1f1); stroke-width:3; }
+  #coherent-am .am-component:focus-visible .am-body { stroke-width:4; }
+  #coherent-am .am-component text { font:16px system-ui,sans-serif; fill:var(--signal-color,#172f43); text-anchor:middle; pointer-events:none; }
+  #coherent-am .am-probe .am-body { fill:#fff; }
+  #coherent-am .am-probe[aria-pressed=true] .am-body { fill:var(--signal-color,#087e85); }
+  #coherent-am .am-hit { fill:transparent; stroke:none; }
+  #coherent-am .am-symbol { fill:none; stroke:var(--signal-color,#172f43); stroke-width:2; pointer-events:none; }
+  #coherent-am .am-legend { display:flex; flex-wrap:wrap; gap:16px; margin:8px 0; font-weight:600; }
+  #coherent-am .am-legend [hidden] { display:none; }
+  #coherent-am .am-legend button { display:inline-flex; gap:8px; align-items:center; color:var(--signal-color); border-color:var(--signal-color); background:var(--signal-tint); }
+  #coherent-am .am-legend button::before { content:""; display:block; width:20px; height:3px; background:var(--signal-color); }
+  #coherent-am .am-legend button[aria-pressed=false] { opacity:0.65; text-decoration:line-through; background:white; }
+  #coherent-am .am-explanation { min-height:3.2em; margin:8px 0; }
+  #coherent-am .am-audio { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:14px; }
+  #coherent-am .am-audio-status { font-size:12px; color:#526779; }
+  #coherent-am .am-stage-equation { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px 14px; overflow:visible; min-height:48px; margin:4px 0 10px; }
+  #coherent-am .am-formula-part { display:block; max-width:100%; }
+  #coherent-am .am-formula-row { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px 8px; width:100%; }
+  #coherent-am .ci-plot h5 { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+  #coherent-am .am-spectrum-note { margin:6px 0; }
+  @media(max-width:700px) {
+    #coherent-am .ci-controls { grid-template-columns:1fr; }
+    #coherent-am .ci-control { display:block; }
+    #coherent-am .ci-control label { margin-bottom:5px; }
+  }
+</style>
+<script>
+// Exact line spectra of real, periodic signals. Coefficients use exp(i*2*pi*f*t).
+// The ideal low-pass filter acts on these same coefficients for plots and sound.
+window.CoherentAM = (() => {
+  const carrier=2400, depth=0.7;
+  const messages={melody:[],tone:[[220,1]],two:[[220,0.6],[330,0.4]],chord:[[220,0.4],[275,0.3],[330,0.3]]};
+  // Fourier transform of a centered Hann window, normalized by its area.
+  function hannResponse(x) {
+    if(Math.abs(x)<1e-8)return 1;
+    if(Math.abs(Math.abs(x)-1)<1e-8)return 0.5;
+    return Math.sin(Math.PI*x)/(Math.PI*x*(1-x*x));
+  }
+  function combine(terms) {
+    const bins=new Map();
+    for(const {f,re,im} of terms){const c=bins.get(f)||{f,re:0,im:0};c.re+=re;c.im+=im;bins.set(f,c);}
+    return [...bins.values()].filter(c=>Math.hypot(c.re,c.im)>1e-12).sort((a,b)=>a.f-b.f);
+  }
+  function multiplyCos(terms,frequency,phase=0) {
+    const result=[];
+    for(const c of terms)for(const sign of [-1,1]) {
+      const re=Math.cos(phase)/2,im=sign*Math.sin(phase)/2;
+      result.push({f:c.f+sign*frequency,re:c.re*re-c.im*im,im:c.re*im+c.im*re});
+    }
+    return combine(result);
+  }
+  function chain({message="tone",phase=0,offset=0,cutoff=600}={}) {
+    const original=message==="melody"?melody:messages[message].flatMap(([f,a])=>[{f,re:a/2,im:0},{f:-f,re:a/2,im:0}]);
+    const envelope=[{f:0,re:1,im:0},...original.map(c=>({...c,re:c.re*depth,im:c.im*depth}))];
+    const received=multiplyCos(envelope,carrier);
+    const mixed=multiplyCos(received,carrier+offset,phase*Math.PI/180);
+    const filtered=mixed.filter(c=>Math.abs(c.f)<=cutoff);
+    const recovered=filtered.filter(c=>c.f!==0);
+    const oscillator=multiplyCos([{f:0,re:1,im:0}],carrier+offset,phase*Math.PI/180);
+    return {original,received,rfout:received,mixed,filtered,recovered,oscillator};
+  }
+  const at=(terms,t)=>terms.reduce((sum,c)=>sum+c.re*Math.cos(2*Math.PI*c.f*t)-c.im*Math.sin(2*Math.PI*c.f*t),0);
+  const spectrum=terms=>terms.filter(c=>c.f>=0).map(c=>({f:c.f,amplitude:Math.hypot(c.re,c.im)*(c.f===0?1:2)}));
+  // Four softly gated notes, periodically repeated every two seconds.
+  // Truncating the gate at 16 harmonics keeps plots, filtering and audio identical.
+  const melody=combine([220,275,330,275].flatMap((pitch,index)=>{
+    const result=[],center=index*0.5+0.25;
+    for(let n=-16;n<=16;n++){
+      const amplitude=0.125*hannResponse(n*0.25),angle=-2*Math.PI*n*center/2;
+      for(const sign of [-1,1])result.push({f:n/2+sign*pitch,re:amplitude*Math.cos(angle)/2,im:amplitude*Math.sin(angle)/2});
+    }
+    return result;
+  }));
+  function series(terms,start,step,count) {
+    const y=new Float32Array(count);
+    for(const c of terms){
+      const angle=2*Math.PI*c.f*start,delta=2*Math.PI*c.f*step,cd=Math.cos(delta),sd=Math.sin(delta);
+      let re=c.re*Math.cos(angle)-c.im*Math.sin(angle),im=c.re*Math.sin(angle)+c.im*Math.cos(angle);
+      for(let i=0;i<count;i++){y[i]+=re;const next=re*cd-im*sd;im=re*sd+im*cd;re=next;}
+    }
+    return y;
+  }
+  function windowedSpectrum(terms,start,duration=0.02) {
+    const center=start+duration/2;
+    const phased=terms.map(c=>{const a=2*Math.PI*c.f*center;return {f:c.f,re:c.re*Math.cos(a)-c.im*Math.sin(a),im:c.re*Math.sin(a)+c.im*Math.cos(a)};});
+    const positive=Array.from({length:2201},(_,i)=>i*2.5),positiveY=positive.map(f=>{
+      let re=0,im=0;
+      for(const c of phased){const w=hannResponse((f-c.f)*duration);re+=c.re*w;im+=c.im*w;}
+      return Math.hypot(re,im);
+    });
+    // All pipeline signals are real: the negative-frequency magnitude is its mirror.
+    const x=[...positive.slice(1).reverse().map(f=>-f),...positive];
+    const y=[...positiveY.slice(1).reverse(),...positiveY];
+    return {x:x.map(f=>f/1000),y};
+  }
+  return {carrier,depth,messages,chain,at,spectrum,series,windowedSpectrum,hannResponse};
+})();
+</script>
+<script>
+CourseInteractives.mount("coherent-am",{
+  initial:{message:"melody",phase:0,offset:0,cutoff:600,position:250,selection:"dc"},
+  setup(c) {
+    const {state:s,colors:k}=c, model=window.CoherentAM;
+    const signalInfo={
+      original:{name:"אות המידע",color:"#526779"},
+      received:{name:"האות הנקלט",color:"#b45f06"},
+      rfout:{name:"מוצא RF",color:"#2563a6"},
+      mixed:{name:"מוצא המיקסר",color:"#8b4db7"},
+      filtered:{name:"מוצא המסנן",color:"#087e85"},
+      recovered:{name:"האות המשוחזר",color:"#b73b63"},
+      oscillator:{name:"המתנד המקומי",color:"#697723"}
+    };
+    const hiddenSignals=new Set();
+    const shown=side=>Boolean(active()[side])&&!hiddenSignals.has(active()[side]);
+    function colorSignal(element,key){const color=signalInfo[key].color;element.style.setProperty("--signal-color",color);element.style.setProperty("--signal-tint",color+"15");}
+    let signals=model.chain(s),revision=0;
+    c.select("message","אות המידע",[["melody","מנגינה קצרה — לה, דו דיאז, מי"],["tone","צליל יחיד — לה"],["two","שני צלילים — לה ומי"],["chord","אקורד לה מז׳ור"]]);
+    c.control("phase","שגיאת פאזה במתנד",String.raw`\hat\phi_0-\phi_0\;[{}^\circ]`,0,180,15,0);
+    c.control("offset","שגיאת תדר במתנד",String.raw`\Delta f\;[\mathrm{Hz}]`,-40,40,5,0);
+    c.control("cutoff","תדר החיתוך",String.raw`f_{\mathrm{cut}}\;[\mathrm{Hz}]`,100,800,10,0);
+    c.control("position","תחילת חלון הזמן",String.raw`t_0\;[\mathrm{ms}]`,0,1980,10,0);
+    c.preset("סנכרון מלא",{phase:0,offset:0,cutoff:600});
+    c.preset("שגיאת פאזה של רבע מחזור",{phase:90,offset:0,cutoff:600});
+    c.preset("שגיאת תדר",{phase:0,offset:20,cutoff:600});
+    const controlBox=c.root.querySelector(".ci-controls"),presetBox=c.root.querySelector(".ci-buttons");
+    const parameters=c.node("details",null,undefined,"am-parameters");
+    c.node("summary",parameters,"בחירת אות ופרמטרים");
+    c.root.insertBefore(parameters,controlBox);
+    parameters.append(controlBox,presetBox);
+    const diagram=c.node("div",null,undefined,"am-schematic");
+    diagram.innerHTML=`<svg viewBox="0 0 850 275" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="תרשים מקלט קוהרנטי: מסנן RF, מיקסר, מסנן נמוכים והסרת רכיב קבוע; מתנד מקומי מזין את המיקסר">
+      <defs><marker id="am-arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#526779"/></marker></defs>
+      <g marker-end="url(#am-arrowhead)">
+        <path class="am-wire" data-signal="received" d="M30 90 H100"/>
+        <path class="am-wire" data-signal="rfout" d="M200 90 H280"/>
+        <path class="am-wire" data-signal="mixed" d="M340 90 H450"/>
+        <path class="am-wire" data-signal="filtered" d="M540 90 H635"/>
+        <path class="am-wire" data-signal="recovered" d="M725 90 H820"/>
+        <path class="am-wire" data-signal="oscillator" d="M310 190 V120"/>
+      </g>
+      <g class="am-component" data-view="rf" role="button" tabindex="0" aria-label="מסנן ומגבר RF אידאלי">
+        <rect class="am-body" x="100" y="55" width="100" height="70" rx="4"/>
+        <text x="150" y="83">RF</text><path class="am-symbol" d="M130 108 L153 96 L130 84 Z"/><text x="176" y="108">BPF</text>
+      </g>
+      <g class="am-component" data-view="mixer" role="button" tabindex="0" aria-label="מיקסר">
+        <circle class="am-hit" cx="310" cy="90" r="38"/><circle class="am-body" cx="310" cy="90" r="30"/>
+        <path class="am-symbol" d="M297 77 L323 103 M297 103 L323 77"/><text x="310" y="39">Mixer</text>
+      </g>
+      <g class="am-component" data-view="lpf" role="button" tabindex="0" aria-label="מסנן מעביר נמוכים">
+        <rect class="am-body" x="450" y="55" width="90" height="70" rx="4"/><text x="495" y="79">LPF</text>
+        <path class="am-symbol" d="M469 103 H494 Q503 103 509 114 H523"/>
+      </g>
+      <g class="am-component" data-view="dc" role="button" tabindex="0" aria-label="הסרת רכיב קבוע">
+        <rect class="am-body" x="635" y="55" width="90" height="70" rx="4"/><text x="680" y="84">DC</text>
+        <path class="am-symbol" d="M657 109 H703 M657 117 L703 99"/>
+      </g>
+      <g class="am-component" data-view="oscillator" role="button" tabindex="0" aria-label="מתנד מקומי VCO">
+        <circle class="am-hit" cx="310" cy="220" r="38"/><circle class="am-body" cx="310" cy="220" r="30"/>
+        <path class="am-symbol" d="M289 220 Q299 199 310 220 T331 220"/><text x="310" y="267">VCO / LO</text>
+      </g>
+      <g class="am-component am-probe" data-view="received" role="button" tabindex="0" aria-label="האות הנקלט לפני RF"><circle class="am-hit" cx="60" cy="90" r="22"/><circle class="am-body" cx="60" cy="90" r="7"/></g>
+      <g class="am-component am-probe" data-view="rfout" role="button" tabindex="0" aria-label="האות לפני המיקסר"><circle class="am-hit" cx="238" cy="90" r="22"/><circle class="am-body" cx="238" cy="90" r="7"/></g>
+      <g class="am-component am-probe" data-view="mixed" role="button" tabindex="0" aria-label="האות אחרי המיקסר"><circle class="am-hit" cx="390" cy="90" r="22"/><circle class="am-body" cx="390" cy="90" r="7"/></g>
+      <g class="am-component am-probe" data-view="filtered" role="button" tabindex="0" aria-label="האות אחרי המסנן"><circle class="am-hit" cx="585" cy="90" r="22"/><circle class="am-body" cx="585" cy="90" r="7"/></g>
+      <g class="am-component am-probe" data-view="recovered" role="button" tabindex="0" aria-label="אות המוצא"><circle class="am-hit" cx="775" cy="90" r="22"/><circle class="am-body" cx="775" cy="90" r="7"/></g>
+    </svg>`;
+    const canvas=c.node("div",null,undefined,"am-schematic-canvas");
+    canvas.appendChild(diagram.firstElementChild);diagram.appendChild(canvas);
+    [[60,133,String.raw`r(t)`,"received"],[238,133,String.raw`r(t)`,"rfout"],[390,133,String.raw`u(t)`,"mixed"],[585,133,String.raw`v(t)`,"filtered"],[775,133,String.raw`y(t)`,"recovered"],[360,167,String.raw`v_{\mathrm{LO}}(t)`,"oscillator"]].forEach(([x,y,tex,key])=>{
+      const label=c.math(canvas,tex);label.classList.add("am-wire-label");label.style.left=100*x/850+"%";label.style.top=100*y/275+"%";
+      label.style.color=signalInfo[key].color;
+    });
+    const receivedEquation=[
+      [String.raw`r(t)=A(t)\cos(\omega_0t+\phi_0)`],
+      [String.raw`A(t)=1+0.7f(t)`]
+    ];
+    const mixerEquation=[
+      [String.raw`u(t)=A(t)`,String.raw`\cos(\omega_0t+\phi_0)`,String.raw`\cos(\omega_{\mathrm{LO}}t+\hat\phi_0)`],
+      [String.raw`=\frac{A(t)}{2}\Bigl[`,
+        String.raw`\underbrace{\cos\!\left((\omega_0-\omega_{\mathrm{LO}})t+\phi_0-\hat\phi_0\right)}_{\text{Low frequency}}`,
+        String.raw`+\underbrace{\cos\!\left((\omega_0+\omega_{\mathrm{LO}})t+\phi_0+\hat\phi_0\right)}_{\text{High frequency}}`,String.raw`\Bigr]`]
+    ];
+    const passesDifference=()=>s.cutoff>=Math.max(...signals.original.map(term=>Math.abs(term.f)))+Math.abs(s.offset);
+    function filteredEquation(){
+      const difference=String.raw`\cos\!\left((\omega_0-\omega_{\mathrm{LO}})t+\phi_0-\hat\phi_0\right)`;
+      const rows=[[String.raw`v(t)=\mathrm{LPF}\{u(t)\}`]];
+      if(passesDifference()){
+        rows.push([String.raw`=\frac{A(t)}{2}`,difference]);
+        if(s.offset===0)rows.push([String.raw`\omega_{\mathrm{LO}}=\omega_0\;\Longrightarrow`,String.raw`v(t)=\frac{A(t)}{2}\cos(\phi_0-\hat\phi_0)`]);
+      }else{
+        rows.push([String.raw`=\frac12\,\mathrm{LPF}\Bigl\{`,String.raw`A(t)`,difference,String.raw`\Bigr\}`]);
+      }
+      return rows;
+    }
+    const stages=[
+      {name:"כפל במתנד מקומי",input:"rfout",output:"mixed",before:"r(t)",after:"u(t)",
+        equation:mixerEquation,
+        note:"המכפלה מזיזה עותק של האות לסביבת האפס ועותק נוסף לסביבת פעמיים תדר הנושא."},
+      {name:"מסנן מעביר נמוכים",input:"mixed",output:"filtered",before:"u(t)",after:"v(t)",
+        equation:filteredEquation,
+        note:"מסנן אידאלי משאיר רק רכיבי תדר שמתחת לתדר החיתוך. חיתוך נמוך מדי מוחק גם חלק מצלילי המידע."},
+      {name:"הסרת רכיב קבוע",input:"filtered",output:"recovered",before:"v(t)",after:"y(t)",
+        equation:String.raw`y(t)=v(t)-\langle v\rangle,\qquad\substack{\omega_{\mathrm{LO}}=\omega_0\\ f_{\mathrm{cut}}\geq f_{\max}}\;\Longrightarrow\;y(t)=\frac{0.7}{2}f(t)\cos(\phi_0-\hat\phi_0)`,
+        note:"מסירים רק את רכיב האפס. בסנכרון תדר, וכאשר המסנן מעביר את כל המידע, מתקבל האות המקורי כפול הגבר קבוע. שגיאת תדר משאירה פעימות איטיות."}
+    ];
+    const views={mixer:{...stages[0],stage:0},lpf:{...stages[1],stage:1},dc:{...stages[2],stage:2},
+      rf:{name:"מסנן ומגבר RF",input:"received",output:"rfout",equation:[...receivedEquation,[String.raw`H_{\mathrm{RF}}=1`]],note:"במודל הזה חזית ה־RF אידאלית: היא מעבירה את השידור בהגבר יחידה. לחצו על המיקסר כדי לראות את שינוי התדר."},
+      oscillator:{name:"המתנד המקומי",output:"oscillator",equation:[[String.raw`v_{\mathrm{LO}}(t)=\cos(\omega_{\mathrm{LO}}t+\hat\phi_0)`],[String.raw`\omega_{\mathrm{LO}}=\omega_0+2\pi\Delta f`]],note:"המתנד המקומי מוזן לכניסה השנייה של המיקסר. הפאזה והתדר שלו קובעים אם המידע ישוחזר."}
+    };
+    const probes={received:["received","האות הנקלט",receivedEquation],rfout:["rfout","לפני המיקסר",receivedEquation],mixed:["mixed","אחרי המיקסר",mixerEquation],filtered:["filtered","אחרי המסנן",filteredEquation],recovered:["recovered","אות המוצא",String.raw`y(t)=v(t)-\langle v\rangle`]};
+    for(const [key,[output,name,equation]] of Object.entries(probes))views[key]={output,name,equation,note:"האות בנקודה שנבחרה מוצג בזמן ובתדר. אפשר להאזין לו או לבחור רכיב להשוואת כניסה ומוצא."};
+    views.filtered.note=()=>passesDifference()
+      ? "המסנן דוחה את רכיב תדר הסכום ומעביר את כל רכיב תדר ההפרש. כאשר גם התדרים תואמים, נשארת המעטפת כפול מקדם שתלוי בהפרש הפאזות."
+      : "המסנן דוחה את תדר הסכום, אך תדר החיתוך הנוכחי חותך גם חלק מרכיב תדר ההפרש. לכן פעולת הסינון נשארת בביטוי המפורש.";
+    const active=()=>views[s.selection];
+    const components=[...diagram.querySelectorAll("[data-view]")];
+    components.forEach(component=>{
+      colorSignal(component,views[component.dataset.view].output);
+      const select=()=>{s.selection=component.dataset.view;c.update("selection");};
+      component.addEventListener("click",select);
+      component.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();select();}});
+    });
+    diagram.querySelectorAll(".am-wire[data-signal]").forEach(wire=>wire.style.stroke=signalInfo[wire.dataset.signal].color);
+    const instruction=c.node("p",null,"לחצו על רכיב להשוואת כניסה ומוצא, או על נקודה כדי לבדוק את האות במקום זה.","ci-note");
+    const explanation=c.node("p",null,undefined,"am-explanation");explanation.setAttribute("aria-live","polite");
+    const equation=c.node("div",null,undefined,"ci-equation am-stage-equation");equation.dir="ltr";
+    const legend=c.node("div",null,undefined,"am-legend");
+    legend.setAttribute("role","group");legend.setAttribute("aria-label","הצגה והסתרה של אותות בשני הגרפים");
+    const beforeLegend=c.node("button",legend),afterLegend=c.node("button",legend);
+    [[beforeLegend,"input"],[afterLegend,"output"]].forEach(([button,side])=>{
+      button.type="button";button.title="לחצו כדי להציג או להסתיר בשני הגרפים";
+      button.addEventListener("click",()=>{const key=active()[side];if(hiddenSignals.has(key))hiddenSignals.delete(key);else hiddenSignals.add(key);c.update("visibility");});
+    });
+    const plots=c.root.querySelector(".ci-plots");
+    for(const element of [instruction,diagram,explanation,equation,legend])c.root.insertBefore(element,plots);
+    c.root.insertBefore(parameters,plots);
+    const settings={height:190,negativeX:false};
+    const time=c.board("time",String.raw`t`,String.raw`\Delta t\;[\mathrm{ms}]`,[-1.7,2,21,-2],settings);
+    const frequency=c.board("frequency",String.raw`\nu`,String.raw`\nu\;[\mathrm{kHz}]`,[-5.6,0.7,5.6,-0.1],{...settings,negativeX:true,negativeY:false});
+    [...c.root.querySelectorAll(".ci-plot h5")].forEach((title,index)=>{title.textContent=index?"בתדר":"בזמן";});
+    const current=side=>signals[active()[side]||active().output];
+    let plotCache=new WeakMap();
+    function samples(terms){
+      const cached=plotCache.get(terms)||{};
+      if(!cached.time){const x=Array.from({length:2401},(_,i)=>20*i/2400);cached.time={x,y:Array.from(model.series(terms,s.position/1000,0.02/2400,2401))};plotCache.set(terms,cached);}
+      return cached.time;
+    }
+    function frequencyCurve(terms){
+      const cached=plotCache.get(terms)||{};
+      if(!cached.frequency){cached.frequency=model.windowedSpectrum(terms,s.position/1000);plotCache.set(terms,cached);}
+      return cached.frequency;
+    }
+    const empty={x:[],y:[]};
+    const traces=[];
+    for(const side of ["input","output"]){
+      traces.push({side,curve:c.sampled(time,()=>shown(side)?samples(current(side)):empty,k.ink,{strokeWidth:side==="input"?1.3:1.6,strokeOpacity:0.85})});
+      traces.push({side,curve:c.sampled(frequency,()=>shown(side)?frequencyCurve(current(side)):empty,k.ink,{strokeWidth:side==="input"?2.2:1.4,strokeOpacity:0.85})});
+    }
+    const filter=CourseInteractives.filterOverlay(c,frequency,()=>{
+      const color=signalInfo[active().output].color;
+      if(s.selection==="lpf")return {color,bands:[[-s.cutoff/1000,s.cutoff/1000]],edges:[-s.cutoff/1000,s.cutoff/1000],note:"הצללה: תחום המעבר; קווים מקווקווים: תדרי החיתוך.",tex:String.raw`|\nu|\le ${s.cutoff/1000}\;\mathrm{kHz}`};
+      if(s.selection==="rf")return {color,allpass:true,note:"הצללה: מעבר בהגבר יחידה בכל התחום המוצג (מודל RF אידאלי).",tex:String.raw`H_{\mathrm{RF}}=1`};
+      if(s.selection==="dc")return {color,edges:[0],note:"הקו המקווקו מסמן את הרכיב שמסולק; יתר התדרים עוברים.",tex:String.raw`H(0)=0`};
+      return null;
+    });
+    c.note("בתדר מוצגת משרעת התמרת פורייה בחלון Hann קצר, ולכן מתקבלות פסגות רציפות. אין נרמול נפרד לאותות; הצירים קבועים.");
+    c.note("שני הגרפים מחושבים מאותו חלון בתחילת הקטע: ",String.raw`T=20\,\mathrm{ms},\qquad t=t_0+\Delta t`);
+    const audioRow=c.node("div",c.root,undefined,"am-audio");audioRow.setAttribute("role","group");audioRow.setAttribute("aria-label","האזנה לאותות");
+    let audioContext,source,gainNode,audioRevision=0;
+    const audioStatus=c.node("span",null,"","am-audio-status");audioStatus.setAttribute("role","status");
+    function stop(){audioRevision++;if(source){source.onended=null;source.stop();source.disconnect();source=null;}if(gainNode){gainNode.disconnect();gainNode=null;}audioStatus.textContent="";}
+    async function listen(side,name){
+      stop();
+      const request=audioRevision;
+      try {
+        const Audio=window.AudioContext||window.webkitAudioContext;
+        if(!Audio)throw new Error("Web Audio unavailable");
+        audioContext=audioContext||new Audio();await audioContext.resume();
+        if(request!==audioRevision)return;
+        const terms=side==="original"?signals.original:current(side),rate=audioContext.sampleRate;
+        const buffer=audioContext.createBuffer(1,rate*2,rate);
+        buffer.copyToChannel(model.series(terms,s.position/1000,1/rate,rate*2),0);
+        source=audioContext.createBufferSource();source.buffer=buffer;gainNode=audioContext.createGain();
+        const now=audioContext.currentTime;
+        gainNode.gain.setValueAtTime(0,now);gainNode.gain.linearRampToValueAtTime(0.12,now+0.015);
+        gainNode.gain.setValueAtTime(0.12,now+1.975);gainNode.gain.linearRampToValueAtTime(0,now+2);
+        source.connect(gainNode);gainNode.connect(audioContext.destination);
+        source.onended=()=>{source?.disconnect();gainNode?.disconnect();source=null;gainNode=null;audioStatus.textContent="ההאזנה הסתיימה";};
+        source.start();audioStatus.textContent="מנגנים: "+name;
+      }catch(error){stop();audioStatus.textContent="ההאזנה אינה זמינה בדפדפן זה";console.error(error);}
+    }
+    const audioButtons={};
+    [["האזנה לפני","input"],["האזנה אחרי","output"],["צליל המקור","original"]].forEach(([name,side])=>{const button=c.node("button",audioRow,name);button.type="button";audioButtons[side]=button;button.addEventListener("click",()=>listen(side,side==="original"?name:active().name));});
+    const stopButton=c.node("button",audioRow,"עצירה");stopButton.type="button";stopButton.addEventListener("click",stop);audioRow.appendChild(audioStatus);
+    c.note("לצורך האזנה נבחר נושא בתחום השמע: ",String.raw`\omega_0=2\pi\cdot2400\;\frac{\mathrm{rad}}{\mathrm{sec}}`);
+    c.note("בדוגמה הנקלטת הפאזה ההתחלתית היא אפס; הבקרה משנה את פאזת המתנד: ",String.raw`\phi_0=0,\qquad\hat\phi_0-\phi_0`);
+    c.note("נשמעים אותם אותות שמוצגים בגרפים, בהנחתה קבועה; רכיב קבוע אינו נשמע. כל קטע נמשך שתי שניות.");
+    document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});window.addEventListener("pagehide",()=>{stop();audioContext?.close();},{once:true});
+    function typesetEquation(){
+      const version=++revision;
+      Promise.resolve(window.MathJax.startup.promise).then(()=>{
+        if(version!==revision)return;
+        window.MathJax.typesetClear([equation]);equation.replaceChildren();
+        const value=typeof active().equation==="function"?active().equation():active().equation;
+        const rows=Array.isArray(value)?value:[value.split(/\\qquad|\\quad/g)];
+        rows.forEach(parts=>{
+          const row=c.node("div",equation,undefined,"am-formula-row");
+          parts.forEach(part=>c.math(row,part).classList.add("am-formula-part"));
+        });
+        return window.MathJax.typesetPromise([equation]);
+      }).catch(console.error);
+    }
+    return {update(key){
+      if(key!=="visibility"){stop();if(key!=="selection")signals=model.chain(s);plotCache=new WeakMap();}
+      filter.update();
+      components.forEach(component=>component.setAttribute("aria-pressed",String(component.dataset.view===s.selection)));
+      explanation.textContent=active().name+": "+(typeof active().note==="function"?active().note():active().note);
+      beforeLegend.hidden=!active().input;
+      [[beforeLegend,"input"],[afterLegend,"output"]].forEach(([button,side])=>{
+        const signal=active()[side];if(!signal)return;
+        colorSignal(button,signal);
+        button.textContent=(active().input?(side==="input"?"כניסה: ":"מוצא: "):"אות: ")+signalInfo[signal].name;
+        button.setAttribute("aria-pressed",String(shown(side)));
+      });
+      traces.forEach(({curve,side})=>{const signal=active()[side];if(signal)curve.setAttribute({strokeColor:signalInfo[signal].color});});
+      audioButtons.input.hidden=!active().input;
+      audioButtons.output.textContent=active().input?"האזנה אחרי":"האזנה לאות";
+      if(key==="initial"||key==="selection"||(typeof active().equation==="function"&&["cutoff","offset","message","preset"].includes(key)))typesetEquation();
+    }};
+  }
+});
+</script>
 <p>מה נקבל לפני ה-LPF?</p>
 <div class="math notranslate nohighlight">
 \[A\left(t\right)\cos\left(\omega_{0}t+\phi_{0}\right)\cos\left(\omega_{0}t\right)=\frac{A\left(t\right)}{2}\left[\cos\left(\phi_{0}\right)+\cos\left(2\omega_{0}t+\phi_{0}\right)\right]\]</div>
-<p>איך נתכנן את ה-LPF. כביכול הוא צריך להיות ברוחב של <span class="math notranslate nohighlight">\(2\omega_{max}\)</span> אבל אז שמים לב שאנחנו כבר סביב תדר 0 כלמור שהרוחב “לצד” שמאל היא פשוט התמונה של התדרים השליליים ונרצה כי:</p>
+<p>איך נתכנן את ה-LPF. כביכול הוא צריך להיות ברוחב של <span class="math notranslate nohighlight">\(2\omega_{max}\)</span> אבל אז שמים לב שאנחנו כבר סביב תדר 0 כלומר שהרוחב “לצד” שמאל היא פשוט התמונה של התדרים השליליים ונרצה כי:</p>
 <div class="math notranslate nohighlight">
 \[\omega_{cutoff}=\omega_{max}\]</div>
 <p>אחרי LPF (אידאלי) נקבל:</p>
@@ -605,7 +1754,7 @@
 \[\boxed{r\left(t\right)=\frac{A\left(t\right)}{2}\cos\left(\phi_{0}-\hat{\phi}_{0}\right)}\]</div>
 <div class="admonition- admonition">
 <p class="admonition-title">שתי תחנות במקביל?</p>
-<p>אנחנו לא מאוד מרוצים אם זה שאנחנו צריכים לקלוע לפאזה הנכונה אבל אולי זה לא באג אלא פיצ’ר.
+<p>אנחנו לא מאוד מרוצים עם זה שאנחנו צריכים לקלוע לפאזה הנכונה אבל אולי זה לא באג אלא פיצ’ר.
 מה אם היה לנו שני מקלטים ולכל אחד מהם VLO אבל הפאזה בינהם היא <span class="math notranslate nohighlight">\(\frac{\pi}{2}\)</span>
 כלומר אחד <span class="math notranslate nohighlight">\(\cos\left(\omega_{0}t\right)\)</span> ואחד <span class="math notranslate nohighlight">\(\sin\left(\omega_{0}t\right)\)</span></p>
 <p>נחזור לזה בתקשורת דיגיטלית</p>
@@ -676,8 +1825,7 @@
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -747,8 +1895,8 @@ By Yoav Palti
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

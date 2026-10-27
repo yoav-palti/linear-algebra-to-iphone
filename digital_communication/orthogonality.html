@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="../" data-theme="auto">
 
   <head>
     <meta charset="utf-8" />
@@ -13,37 +13,34 @@
   
   
   <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=28a1b870" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -54,15 +51,14 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"menuOptions": {"settings": {"renderer": "SVG"}}, "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'digital_communication/orthogonality';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -70,11 +66,10 @@
     <link rel="prev" title="FSK - Frequency Shift Keying" href="FSK.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
 
   
   
@@ -86,8 +81,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -95,6 +101,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -102,8 +109,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -119,8 +126,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -150,17 +156,21 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="Linear Algebra to iPhone 1 - Home"/>
-    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Linear Algebra to iPhone 1 - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Linear Algebra to iPhone 1 - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -174,8 +184,8 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../LTI/intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../LTI/impulse_response.html">תגובת להלם</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../LTI/frequency_response.html">תגובת בתדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/impulse_response.html">תגובה להלם</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/frequency_response.html">תגובה בתדר</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../LTI/wave_in_a_room.html">החזרות בחדר</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../LTI/noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
 </ul>
@@ -201,7 +211,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">דיגיטציה</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/digitation_intro.html">מה זה לדיגיטציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/digitation_intro.html">מה זה דיגיטציה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/sampling.html">דגימה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/interpolation.html">שחזור באינטרפולציה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/quantization.html">קוונטיזציה</a></li>
@@ -220,6 +230,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">תורת האינפורמציה</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../information/entropy.html">למה אנטרופיה?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../temp.html">דמו: דגימה ו-Aliasing</a></li>
 </ul>
 
     </div>
@@ -342,16 +353,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -390,12 +409,16 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>אורתוגונליות של אותות<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<details>
+<summary>אמ;לק</summary>
+<p>אורתוגונליות מאפשרת ריבוב משתמשים / ערוצים בלי הפרעות: <span class="math notranslate nohighlight">\(\int g_m g_n = 0\)</span> או ב-baseband <span class="math notranslate nohighlight">\(\Re\int z_m z_n^*\)</span>. אפשר להשיג אורתוגונליות ע”י: הפרדת פאזה (I/Q), חלוקה בזמן (סימבולים לא חופפים), חלוקה בתדר (FSK עם מרווח מתאים), או קודי בסיס (Walsh / CDMA). התנאי קובע מרווחי תדר ותבניות קוד; קליטה: הקרנה (קורלציה) על הבסיס הרלוונטי מנתקת את יתר הערוצים.</p>
+</details>
 <section id="id2">
 <h2>מספר משתמשים (ואורתוגונליות באופן כללי)<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>מערכות תקשורת מנקודה לנקודה הן חשובות אבל הן מתגמדות בחשיבותן
 למערכות תקשורת רב משתמשים. נניח שהוקצתה לכם פרוסת תדר למערכת שלכם ואתם מתלבטים
-איך לגרום לכל אחד מהמשתמשים לשכם להיות מסוגל לקלוט ולשדר במקביל.</p>
-<p>העקרון הבסיסי הוא אורתוגונליות. נדאג שהמשתמשים שלהו הם אורתוגונלים
+איך לגרום לכל אחד מהמשתמשים שלכם להיות מסוגל לקלוט ולשדר במקביל.</p>
+<p>העקרון הבסיסי הוא אורתוגונליות. נדאג שהמשתמשים שלנו הם אורתוגונלים
 אחד לשני.</p>
 <p>כבר ראינו דוגמה יפה לזה. הערוצים <span class="math notranslate nohighlight">\(I\left(t\right)\)</span> ו-<span class="math notranslate nohighlight">\(Q\left(t\right)\)</span> ניתנים
 לקליטה בנפרד.</p>
@@ -412,22 +435,22 @@
 <div class="math notranslate nohighlight">
 \[\intop_{-\infty}^{\infty}\hat{g}_{m}\left(t\right)\hat{g}_{n}\left(t\right)dt=\intop_{-\infty}^{\infty}\mathcal{H}\left[g_{m}\left(t\right)\right]\mathcal{H}\left[g_{n}\left(t\right)\right]dt\underset{parseval}{\underbrace{=}}\]</div>
 <div class="math notranslate nohighlight">
-\[=\intop_{-\infty}^{\infty}\underset{1}{\underbrace{\left|isgn\left(\omega\right)\right|^{2}}}G_{m}\left(\omega\right)G_{n}^{\ast}\left(\omega\right)d\omega=\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt\]</div>
-<p>כאשר השתמשנו בזה שהחלק המדומה הוא הילברט טרנספורם של החלק הממשי ושפונקציית התמסורת של הילברט היא פשוט <span class="math notranslate nohighlight">\(isgn\left(\omega\right)\)</span></p>
+\[=\intop_{-\infty}^{\infty}\underset{1}{\underbrace{\left|-isgn\left(\omega\right)\right|^{2}}}G_{m}\left(\omega\right)G_{n}^{\ast}\left(\omega\right)d\omega=\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt\]</div>
+<p>כאשר השתמשנו בזה שהחלק המדומה הוא הילברט טרנספורם של החלק הממשי ושפונקציית התמסורת של הילברט היא פשוט <span class="math notranslate nohighlight">\(-isgn\left(\omega\right)\)</span></p>
 <p>נזכיר איך זה נראה:
 <img alt="baseband-passband-anlytic.png" src="../_images/baseband-passband-anlytic.png" />
 בסך הכל קיבלנו כי:</p>
 <div class="math notranslate nohighlight">
-\[\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt=\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)\right]\]</div>
+\[\intop_{-\infty}^{\infty}g_{m}\left(t\right)g_{n}\left(t\right)dt=\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)dt\right]\]</div>
 <p>ולכן נוכל לדרוש שהאותות שלנו יהיו אורתוגונליים ב-baseband ולא רק ב-passband כאשר ההגדרה לאורתוגונליות היא:</p>
 <div class="math notranslate nohighlight">
-\[\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)\right]=E_{n}\delta_{mn}\]</div>
+\[\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)dt\right]=E_{n}\delta_{mn}\]</div>
 <p>הדוגמה הפשוטה ביותר שלקחנו הם שני אותות:</p>
 <div class="math notranslate nohighlight">
 \[z_{1}\left(t\right)=I\left(t\right),z_{2}\left(t\right)=iQ\left(t\right)\]</div>
 <p>בבירור:</p>
 <div class="math notranslate nohighlight">
-\[\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}I\left(t\right)\cdot\left[-iQ\left(t\right)\right]\right]=0\]</div>
+\[\frac{1}{2}\Re\left[\intop_{-\infty}^{\infty}I\left(t\right)\cdot\left[-iQ\left(t\right)\right]dt\right]=0\]</div>
 <p>אפשר לשים לב שאפילו בחלוקה הראשונית שלנו לסימבולים בזמן כלומר שאנחנו משדרים סימבול
 ואת הסימבול הבא משדרים אחריו אנחנו יכולים לבדוק ולראות שהם אורתוגונלים:</p>
 <div class="math notranslate nohighlight">
@@ -443,7 +466,7 @@
 <p>וקיבלנו תנאי:</p>
 <div class="math notranslate nohighlight">
 \[\omega_{k}-\omega_{l}=n\frac{\pi}{T_{s}},n\in\mathbb{N}\]</div>
-<p>כלומר אנחנו צריכים קפיצות תדר מסויימות אחרת נאבד את האורתוגונליות!</p>
+<p>כלומר אנחנו צריכים קפיצות תדר מסוימות אחרת נאבד את האורתוגונליות!</p>
 <p>נשים לב שאם אנחנו לא יודעים את הפאזה של כל ערוץ כלומר הסימבולים הם:</p>
 <div class="math notranslate nohighlight">
 \[z_{km}\left(t\right)\in\left\{ e^{i\left(\omega_{k}t+\phi_{k}\right)}Rect\left(\frac{t-mT_{s}}{T_{s}}\right)\right\} _{m=-\infty}^{\infty}\]</div>
@@ -456,11 +479,11 @@
 </section>
 <section id="cdma">
 <h2>CDMA<a class="headerlink" href="#cdma" title="Link to this heading">#</a></h2>
-<p>שיטה אחרת היא שפותרת לנו את בעיית המשתמשים היא ליצור קוד עבור כל משתמש כך שהאותות
+<p>שיטה אחרת שפותרת לנו את בעיית המשתמשים היא ליצור קוד עבור כל משתמש כך שהאותות
 הם אורתוגונלים. כלומר נרצה ליצור רצף פונקציות <span class="math notranslate nohighlight">\(z_{n}\left(t\right)Rect\left(\frac{t-mT_{s}}{T_{s}}\right)\)</span> שהן אורתוגונליות האחת לשנייה
 כלומר נדרוש כי:</p>
 <div class="math notranslate nohighlight">
-\[\frac{1}{2}\Re\left[\intop_{0}^{T_{s}}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)\right]=E_{n}\delta_{mn}\]</div>
+\[\frac{1}{2}\Re\left[\intop_{0}^{T_{s}}z_{m}\left(t\right)\cdot z_{n}^{\ast}\left(t\right)dt\right]=E_{n}\delta_{mn}\]</div>
 <p>אחת הדרכים לעשות את זה היא פונקציות שמורכבות ממלבנים. ניקח לדוגמה את 4 הפונקציות הבאות</p>
 <p><img alt="Walsh_codes_4.png" src="../_images/Walsh_codes_4.png" /></p>
 <p>הן בבירור אורתוגונליות האחת לשנייה. בכל זמן נשדר את האות:</p>
@@ -473,7 +496,7 @@
 (כמובן ניתן לבנות מקלט יעודי) אבל בצורה הזו אנחנו אפילו יכולים לבנות מקלט דיגיטלי
 אשר שומר את הקוד שלנו <span class="math notranslate nohighlight">\(z_{n}\left(t\right)\)</span> בזיכרון ומשתמש בו כדי לפענח את
 הסימבולים שקשורים לנו.</p>
-<p>לאומת האפנונים שלמדנו עליהם עד עכשיו זה כבר משהו שהשתמשו בו
+<p>לעומת האפנונים שלמדנו עליהם עד עכשיו זה כבר משהו שהשתמשו בו
 באופן רחב לתקשורת 3G ל-GPS ואפילו ל-WIFI (באופן קצת שונה)</p>
 </section>
 </section>
@@ -533,8 +556,7 @@
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -593,8 +615,8 @@ By Yoav Palti
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

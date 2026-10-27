@@ -13,6 +13,24 @@ $$V_{1}\left(\omega\right)=\Delta t\left[sinc\left(\frac{\omega}{2\pi}\Delta t\r
 אחרי שראינו שחזור אידאלי בעזרת קונבולוציה עם $sinc\left(f_{s}t\right)$ נחזור לשתי שיטות פשוטות יותר וננסה
 לכמת כמה הן טובות
 
+נעקוב תחילה אחרי כל השרשרת: סינון לפני הדגימה, הדגימה עצמה והאינטרפולציה. השוו בין שחזור תקין, קיפול תדרים והגנה בעזרת מסנן; אחר כך החליפו את שיטת האינטרפולציה.
+
+```{raw} html
+:file: ../LTI/interactives/runtime.html
+```
+
+```{raw} html
+:file: ../LTI/interactives/process-models.html
+```
+
+```{raw} html
+:file: ../LTI/interactives/process-lab.html
+```
+
+```{raw} html
+:file: interactives/sampling-process.html
+```
+
 ### שחזור מסדר 0
 הרעיון הבסיסי הוא פשוט להגדיר את הפונקציה בתור מדרגות
 כלומר ערך הפונקציה הוא הערך של הדגימה האחרונה שנתקלנו בה. ברגע שמגיעה הדגימה הבאה משנים את הערך
@@ -49,7 +67,7 @@ $$V_{1}\left(t\right)=V_{0}\left(t\right)\ast\frac{1}{\Delta t}Rect\left(\frac{t
 
 או במרחב התדר:
 
-$$V_{1}\left(\omega\right)=V_{0}\left(\omega\right)e^{-i\omega\frac{\Delta t}{2}}sinc\left(\frac{\omega}{2\pi}\Delta t\right)$$
+$$V_{1}\left(\omega\right)=V_{0}\left(\omega\right)e^{i\omega\frac{\Delta t}{2}}sinc\left(\frac{\omega}{2\pi}\Delta t\right)$$
 $$V_{1}\left(\omega\right)=\Delta t\left[sinc\left(\frac{\omega}{2\pi}\Delta t\right)\right]^{2}\cdot V_{s}\left(\omega\right)$$
 
 נסכם בתמונה של איך הכל נראה בתדר

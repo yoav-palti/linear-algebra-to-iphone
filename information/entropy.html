@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="../" data-theme="auto">
 
   <head>
     <meta charset="utf-8" />
@@ -13,37 +13,34 @@
   
   
   <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/main_style.css?v=28a1b870" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -54,26 +51,25 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"menuOptions": {"settings": {"renderer": "SVG"}}, "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'information/entropy';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="דמו: דגימה ו-Aliasing" href="../temp.html" />
     <link rel="prev" title="מבוא ל-DFT" href="../DSP/DFT_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
 
   
   
@@ -85,8 +81,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -94,6 +101,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -101,8 +109,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -118,8 +126,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -149,17 +156,21 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="Linear Algebra to iPhone 1 - Home"/>
-    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Linear Algebra to iPhone 1 - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Linear Algebra to iPhone 1 - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -173,8 +184,8 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">מערכות לינאריות</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../LTI/intro_to_LTI.html">מבוא למערכות לינאריות</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../LTI/impulse_response.html">תגובת להלם</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../LTI/frequency_response.html">תגובת בתדר</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/impulse_response.html">תגובה להלם</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LTI/frequency_response.html">תגובה בתדר</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../LTI/wave_in_a_room.html">החזרות בחדר</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../LTI/noise_removal_examples.html">דוגמה לתגובה בתדר בתור מסנן רעשים</a></li>
 </ul>
@@ -200,7 +211,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">דיגיטציה</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/digitation_intro.html">מה זה לדיגיטציה</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/digitation_intro.html">מה זה דיגיטציה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/sampling.html">דגימה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/interpolation.html">שחזור באינטרפולציה</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digitation_and_reconstruction/quantization.html">קוונטיזציה</a></li>
@@ -219,6 +230,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">תורת האינפורמציה</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">למה אנטרופיה?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../temp.html">דמו: דגימה ו-Aliasing</a></li>
 </ul>
 
     </div>
@@ -341,16 +353,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -398,10 +418,14 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>אנטרופיה<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<details>
+<summary>אמ;לק</summary>
+<p>אנטרופיה <span class="math notranslate nohighlight">\(H=-\sum p_i\log_2 p_i\)</span> היא מספר הביטים הממוצע הדרוש לסימבול ממקור חסר זיכרון. קיבול ערוץ: קצב מקסימלי בו ניתן להעביר מידע אמין (ללא שגיאה אסימפטוטית). אינפורמציה נמדדת כלוג כמות האפשרויות. תנאי יסוד: מקור כ(process) סטציונרי וארגודי. שאנון בחר מדד יחיד (עד כדי קבוע) העומד בדרישות רציפות, מונוטוניות ואדיטיביות מותנית. <span class="math notranslate nohighlight">\(H\)</span> גדל כשאי-הוודאות גדלה ושווה 0 כשאירוע ודאי.</p>
+</details>
 <p>בפרק הזה האחרון של הקורס אני הולך לעקוב אחרי שני מאמרים <a class="footnote-reference brackets" href="#shannon1948" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#shannon1949" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> שכתב Shannon בשנות ה-40 שבגדול פתחו את התחום של תורת האינפורמציה והוכיחו כמה משפטים מאוד גלובאלים ומאוד שימושיים.</p>
 <section id="id4">
 <h2>מה זה ביט?<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
-<p>אנחנו שחיים בעולם דיגיטלי כבר רגילים לשמוע על ביטים בכל מקום. חלקכם אולי אפילו חנונים מספיק כדי לספור בבינארית. אבל המחשבה לספור בביטים הגיע מהמחשבה לספור אפשרויות או כמות בחירות שאפשר לייצג. לדוגמא כדי לייצג את התוצאה של שתי בחירות כן לא צריך 2 ביט. האמת שההגדרה הזו לא מאוד חשובה והיא יותר עיניין של קונבנציה. אבל באופן כללי היינו רוצים לומר משהו בסגנון הבא:</p>
+<p>אנחנו שחיים בעולם דיגיטלי כבר רגילים לשמוע על ביטים בכל מקום. חלקכם אולי אפילו חנונים מספיק כדי לספור בבינארית. אבל המחשבה לספור בביטים הגיע מהמחשבה לספור אפשרויות או כמות בחירות שאפשר לייצג. לדוגמא כדי לייצג את התוצאה של שתי בחירות כן לא צריך 2 ביט. האמת שההגדרה הזו לא מאוד חשובה והיא יותר עניין של קונבנציה. אבל באופן כללי היינו רוצים לומר משהו בסגנון הבא:</p>
 <p>אם יש לנו <span class="math notranslate nohighlight">\(M\)</span> בחירות אפשריות בסיכוי שווה אז אנחנו צריכים <span class="math notranslate nohighlight">\(\log_{2}M\)</span> ביטים על מנת לייצג את התוצאה.</p>
 <p>השאלה הבסיסית ששאנון ניסה לענות עליה במאמר הראשון היא כמה מידע אפשר לשלוח על גבי ערוץ תקשורת. בשביל זה צריך להגדיר כמו שצריך מה זה אומר ערוץ תקשורת.</p>
 </section>
@@ -410,7 +434,7 @@
 <p><img alt="communication_system" src="../_images/communication_system.png" /></p>
 <p>יש לנו 5 חלקים לדבר עליהם. על החלק של הרעש דיברנו מספיק בפרק הקודם.</p>
 <ol class="arabic simple">
-<li><p><strong>מקור האינפורמציה</strong> - בגדול משהו שרוצה להעביר אינפורציה כלשהי ויש לו כבר קידוד כלשהו לאינפורמציה. בין אם זה קובץ ששמור לכם על המחשב או תמונה שמיוצגת בעזרת פיקסלים. החלק החשוב הוא שהייצוג יכול להיות כל דבר.</p></li>
+<li><p><strong>מקור האינפורמציה</strong> - בגדול משהו שרוצה להעביר אינפורמציה כלשהי ויש לו כבר קידוד כלשהו לאינפורמציה. בין אם זה קובץ ששמור לכם על המחשב או תמונה שמיוצגת בעזרת פיקסלים. החלק החשוב הוא שהייצוג יכול להיות כל דבר.</p></li>
 <li><p><strong>משדר</strong> - מקודד את המידע שהמקור העביר לו בצורה כלשהי. דיברנו הרבה בקורס על מודולציות ושיטות אפנון. החלק החשוב לזכור כאן היא שהצורה שהמשדר עובד היא גנרית לחלוטין הוא מקבל את המידע ממקור האינפורמציה ומקודד אותו בצורה כלשהי. ניתן כמה דוגמאות עוד רגע.</p></li>
 <li><p><strong>מקלט</strong> - עושה את הפעולה ההפוכה מהמשדר</p></li>
 <li><p><strong>יעד</strong> - הנמען של ההודעות</p></li>
@@ -446,7 +470,7 @@
 <p>נניח שאתם רוצים לשלוח הודעת טקסט. נגיד שספר או אפילו את הסיכום הזה. כמה אינפורמציה מכיל הטקסט?</p>
 <p>נעשה לעצמנו חיים קלים ונניח שכל האותיות הן רק האותיות הרגילות (26 מהן) ובנוסף יש רווח ונקודה. בסך הכל 28 אפשרויות.</p>
 <p>אנחנו רוצים למצוא דרך “לקודד” את הטקסט שלנו לביטים ולתת מדד לכמה ביטים נצטרך על מנת לקודד את הטקסט. אם לדוגמא הייתי אומר לכם ש99% מהאותיות בטקסט הן האות “א” כנראה שיכולתם לדחוס את השמירה שלו מאוד. נתחיל ממודל נאיבי שמניח שאין תלות בין האותיות אבל לכל אחת יש שכיחות <span class="math notranslate nohighlight">\(p_{i}\)</span> שבו היא מופיעה.</p>
-<p>אם היינו רוצים לסבך את המודל היינו יכולים להניח שכל אות תלויה באות לפניה או ב-10 האותיות שלפניה או באופן כללי שיש פונקציית PDF שתלוייה ב-<span class="math notranslate nohighlight">\(n\)</span> אותיות אחורה.</p>
+<p>אם היינו רוצים לסבך את המודל היינו יכולים להניח שכל אות תלויה באות לפניה או ב-10 האותיות שלפניה או באופן כללי שיש פונקציית PDF שתלויה ב-<span class="math notranslate nohighlight">\(n\)</span> אותיות אחורה.</p>
 </div>
 <p>נשים לב שאנחנו מקיימים כאן את אותו דיון שהוביל אותנו להגדיר תכונות של אותות אקראיים ואכן זה לא מפתיע ששאנון בחר לאפיין מקור מידע כך:</p>
 <blockquote>
@@ -496,7 +520,7 @@
 <li><p>הפונקציה מקבלת ערך מקסימום ב-<span class="math notranslate nohighlight">\(p=\frac{1}{2}\)</span> והערך הוא 1. כלומר שכדי לייצג הטלת מטבע אחת הוגנת צריך ביט 1</p></li>
 <li><p>עבור <span class="math notranslate nohighlight">\(p=0,p=1\)</span> האנטרופיה היא 0 כלומר אין שום אינפורמציה בהטלה. זה הגיוני כי התוצאה ידועה מראש.</p></li>
 </ul>
-<p>אבל מה קורה עבור הערכים באמצע? מה זה אומר ש-<span class="math notranslate nohighlight">\(H\left(0.11,0.89\right)=0.5\)</span> מה זה אומר בכלל חצי ביט? אם היינו רוצים לשמור את התוצאה של הטלה בודדת היינו צריכים לפחות ביט אחד ולכן גם בתוכלת היינו צריכים ביט אחד.</p>
+<p>אבל מה קורה עבור הערכים באמצע? מה זה אומר ש-<span class="math notranslate nohighlight">\(H\left(0.11,0.89\right)=0.5\)</span> מה זה אומר בכלל חצי ביט? אם היינו רוצים לשמור את התוצאה של הטלה בודדת היינו צריכים לפחות ביט אחד ולכן גם בתוחלת היינו צריכים ביט אחד.</p>
 <p>התשובה לזה היא שמה שחשוב לנו הוא מה שקורה ברצפים ארוכים. ככל שהרצף יהיה ארוך יותר נוכל “להשתמש” יותר בזה שהסטטיסטיקה לא מאוזנת.
 לדוגמא כאן אם נסתכל על רצפים באורך 2 פתאום יהיו לנו 4 אפשרויות (נסמן את שתי תוצאות ההטלה ב-<span class="math notranslate nohighlight">\(A\)</span> ו-<span class="math notranslate nohighlight">\(B\)</span>-):</p>
 <div class="math notranslate nohighlight">
@@ -545,7 +569,7 @@
 <p>הסיכוי של כל הרצפים הוא בערך זהה ושווה לפי המשפט ל-<span class="math notranslate nohighlight">\(2^{-N\cdot H}\)</span></p>
 <p>כלומר אפשר לייצג כל רצף כזה בעזרת <span class="math notranslate nohighlight">\(N\cdot H\)</span> ביטים וככה נקודד בממוצע <span class="math notranslate nohighlight">\(H\)</span> ביטים לסימבול!</p>
 <blockquote>
-<div><p>הקידוד יותר יעיל כלל שאנחנו מקודדים רצפים ארוכים יותר ביחד</p>
+<div><p>הקידוד יותר יעיל ככל שאנחנו מקודדים רצפים ארוכים יותר ביחד</p>
 </div></blockquote>
 <blockquote>
 <div><p>אי אפשר לקודד יותר יעיל מאשר <span class="math notranslate nohighlight">\(H\)</span> ביטים לסימבול!</p>
@@ -553,7 +577,7 @@
 </section>
 <section id="id10">
 <h2>קיבול של ערוץ תקשורת<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
-<p>אבל מה כל זה עוזר לנו? נניח שיש לנו מכור אינפורמציה עם אנטרופיה <span class="math notranslate nohighlight">\(H\)</span> ויש לנו מערכת תקשורת. השאלה היא האם יש לנו יכולת לשלוח את המידע בעזרת מערכת התקשורת שלנו. אז כמובן שאפשר לשאול עבור מערכת נתונה האם היא מתאימה אבל היינו רוצים לשאול שאלה כללית יותר.</p>
+<p>אבל מה כל זה עוזר לנו? נניח שיש לנו מקור אינפורמציה עם אנטרופיה <span class="math notranslate nohighlight">\(H\)</span> ויש לנו מערכת תקשורת. השאלה היא האם יש לנו יכולת לשלוח את המידע בעזרת מערכת התקשורת שלנו. אז כמובן שאפשר לשאול עבור מערכת נתונה האם היא מתאימה אבל היינו רוצים לשאול שאלה כללית יותר.</p>
 <p><strong>בהינתן רוחב פס נתון ו-SNR נתון מה הוא קיבול הערוץ המקסימלי שניתן להגיע אליו?</strong></p>
 <p>נסמן את רוחב הפס שלנו ב-<span class="math notranslate nohighlight">\(\Delta f\)</span> וה-SNR יהיה <span class="math notranslate nohighlight">\(SNR=\frac{\left\langle P_{sig}\right\rangle }{\left\langle P_{n}\right\rangle }\)</span>.</p>
 <p>רוחב הפס שלנו יהיה מוגדר בהרצים ולמען הנוחות נניח שהאות הוא סביב תדר 0 ומודדים את רוחב הסרט של התדרים החיוביים בלבד. כלומר התדר המקסימלי הוא <span class="math notranslate nohighlight">\(f_{max}=\Delta f\)</span>.</p>
@@ -561,14 +585,14 @@
 <p>איך בכלל ניגשים לזה? יש אינסוף אפשרויות לאותות שונים. ואיך בכלל ממדלים אות שהוא גם חסום בזמן כלומר באורך <span class="math notranslate nohighlight">\(T\)</span> אבל גם חסום ברוחב הסרט <span class="math notranslate nohighlight">\(\Delta f\)</span>. אין דבר כזה בכלל</p>
 <section id="id11">
 <h3>מרחב האותות - הגבלת רוחב הסרט<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
-<p><strong>המפתח לבעיה הזו הוא מפשט הדגימה</strong>. אם יש לנו אות חסום ברוחב סרט <span class="math notranslate nohighlight">\(\Delta f\)</span> ניתן לייצג אותו על ידי דגימות במרווחים של <span class="math notranslate nohighlight">\(\Delta t=\frac{1}{f_{s}}\le\frac{1}{2f_{max}}=\frac{1}{2\Delta f}\)</span></p>
+<p><strong>המפתח לבעיה הזו הוא משפט הדגימה</strong>. אם יש לנו אות חסום ברוחב סרט <span class="math notranslate nohighlight">\(\Delta f\)</span> ניתן לייצג אותו על ידי דגימות במרווחים של <span class="math notranslate nohighlight">\(\Delta t=\frac{1}{f_{s}}\le\frac{1}{2f_{max}}=\frac{1}{2\Delta f}\)</span></p>
 <p>נשים לב שבגלל שאנחנו סופרים את רוחב הסרט מתדר 0 אנחנו מסתכלים על דגימות ממשיות על מנת לייצג את הסיגנל.</p>
 <p>נגדיר הודעות באורך <span class="math notranslate nohighlight">\(T\)</span> כהודעות שהדגימות שלהן הן בטווח זמן <span class="math notranslate nohighlight">\(T\)</span>. כמה דגימות יהיו לנו?</p>
 <div class="math notranslate nohighlight">
 \[N_{samples}=\frac{T}{\Delta t}=2T\Delta f\]</div>
 <p>זה אומר שכל הודעה חוקית (ללא קשר להאם אפשר להפריד אותן או לא) היא וקטור <span class="math notranslate nohighlight">\(2T\Delta f\)</span> מימדי. אשר מייצג את הסיגנל:</p>
 <div class="math notranslate nohighlight">
-\[s\left(t\right)=\sum_{n=1}^{2T\Delta f}x_{n}sinc\left(f_{s}\left(t-\Delta t\cdot n\right)\right)=\sum_{n=1}^{2T\Delta f}x_{n}sinc\left(2\Delta f\cdot t-\cdot n\right)\]</div>
+\[s\left(t\right)=\sum_{n=1}^{2T\Delta f}x_{n}sinc\left(f_{s}\left(t-\Delta t\cdot n\right)\right)=\sum_{n=1}^{2T\Delta f}x_{n}sinc\left(2\Delta f\cdot t-n\right)\]</div>
 <p>עד כאן השתמשנו ברוחב הפס של הסיגנל כדי להגדיר את “מרחב האותות” האפשריים. עכשיו צריך להתחיל להשתמש ב-SNR.</p>
 </section>
 <section id="id12">
@@ -576,23 +600,23 @@
 <p>נניח לרגע שאנחנו מגבילים את עצמנו לאותות שעוצמת השידור הנדרשת עבורם קטנה מאשר <span class="math notranslate nohighlight">\(\left\langle P_{sig}\right\rangle \)</span>. איזה אותות במרחב האותות מייצגים לנו את זה?</p>
 <p>נשתמש באורתוגונליות של ה-<span class="math notranslate nohighlight">\(sinc\)</span> השונים על מנת לחשב את האנרגיה שלנו:</p>
 <div class="math notranslate nohighlight">
-\[E=\intop_{-\infty}^{\infty}s\left(t\right)^{2}dt=\intop_{-\infty}^{\infty}\left(\sum_{n=1}^{2T\Delta f}x_{n}sinc\left(2\Delta f\cdot t-\cdot n\right)\right)^{2}dt=\]</div>
+\[E=\intop_{-\infty}^{\infty}s\left(t\right)^{2}dt=\intop_{-\infty}^{\infty}\left(\sum_{n=1}^{2T\Delta f}x_{n}sinc\left(2\Delta f\cdot t-n\right)\right)^{2}dt=\]</div>
 <div class="math notranslate nohighlight">
-\[=\intop_{-\infty}^{\infty}\sum_{n=1}^{2T\Delta f}\sum_{m=1}^{2T\Delta f}\left(x_{n}sinc\left(2\Delta f\cdot t-\cdot n\right)\right)\left(x_{m}sinc\left(2\Delta f\cdot t-\cdot m\right)\right)dt=\]</div>
+\[=\intop_{-\infty}^{\infty}\sum_{n=1}^{2T\Delta f}\sum_{m=1}^{2T\Delta f}\left(x_{n}sinc\left(2\Delta f\cdot t-n\right)\right)\left(x_{m}sinc\left(2\Delta f\cdot t-m\right)\right)dt=\]</div>
 <div class="math notranslate nohighlight">
-\[=\sum_{n=1}^{2T\Delta f}\sum_{m=1}^{2T\Delta f}x_{n}x_{m}\intop_{-\infty}^{\infty}\left(sinc\left(2\Delta f\cdot t-\cdot n\right)\right)\left(sinc\left(2\Delta f\cdot t-\cdot m\right)\right)dt=\]</div>
+\[=\sum_{n=1}^{2T\Delta f}\sum_{m=1}^{2T\Delta f}x_{n}x_{m}\intop_{-\infty}^{\infty}\left(sinc\left(2\Delta f\cdot t-n\right)\right)\left(sinc\left(2\Delta f\cdot t-m\right)\right)dt=\]</div>
 <div class="math notranslate nohighlight">
 \[=\sum_{n=1}^{2T\Delta f}\sum_{m=1}^{2T\Delta f}\delta_{mn}\frac{x_{n}x_{m}}{2\Delta f}=\frac{1}{2\Delta f}\sum_{n=1}^{2T\Delta f}x_{n}^{2}\]</div>
 <p>כלומר שעבור הספק ממוצע <span class="math notranslate nohighlight">\(\left\langle P_{sig}\right\rangle =\frac{E}{T}\)</span> נקבל  שהאותות חייבים לקיים:</p>
 <div class="math notranslate nohighlight">
 \[2T\Delta f\left\langle P_{sig}\right\rangle =\sum_{n=1}^{2T\Delta f}x_{n}^{2}\]</div>
 <p>ולכן אם אנחנו מגדירים הספק מקסימלי אנחנו מגבילים את מרחב הסיגנלים שלנו לכדור (<span class="math notranslate nohighlight">\(2T\Delta f\)</span> מימדי).</p>
-<p>על מנת לעבוד בקורדינטות נוחות ושכמות המימדים לא תשנה לא נו את המספרים נגדיר קורדינטות חדשות לכל סיגנל:</p>
+<p>על מנת לעבוד בקורדינטות נוחות ושכמות המימדים לא תשנה לנו את המספרים נגדיר קורדינטות חדשות לכל סיגנל:</p>
 <div class="math notranslate nohighlight">
 \[y_{n}\equiv\frac{x_{n}}{\sqrt{2T\Delta f}}\]</div>
 <p>עבורן אנחנו בתוך כדור ברדיוס:</p>
 <div class="math notranslate nohighlight">
-\[R=\sum_{n=1}^{2T\Delta f}y_{n}^{2}=\left\langle P_{sig}\right\rangle \]</div>
+\[R=\sqrt{\sum_{n=1}^{2T\Delta f}y_{n}^{2}}=\sqrt{\left\langle P_{sig}\right\rangle}\]</div>
 <p>ומה עם הרעש? אז לכל נקודה של סיגנל כזה נוסף רעש. אנחנו נניח רעש גאוסייני והאמת שזאת ההנחה הכי מחמירה שאפשר לקחת. נראה בהמשך איך מכלילים לרעשים עם PSD אחר.</p>
 <p>גם הרעש הוא חסום ברוחב הפס ואם הוא לא אז ניתן להעביר אותו בפילטר כך שכן יהיה. ולכן גם הוא מיוצג על ידי מספר זהה של דגימות. ובאופן כללי הוא פשוט מרעיש לנו את המספרים <span class="math notranslate nohighlight">\(x_{n}\)</span>.</p>
 <p>אם נסמן את הספק הרעש ב-<span class="math notranslate nohighlight">\(\left\langle P_{noise}\right\rangle \)</span> ונשאל איך מתפלג תוספת הרעש לאחת הקורדינטות כלומר <span class="math notranslate nohighlight">\(\xi_{n}\)</span>.
@@ -601,9 +625,9 @@
 \[\sigma^{2}=\left\langle P_{noise}\right\rangle \]</div>
 <p>ולכן:</p>
 <div class="math notranslate nohighlight">
-\[\mathbb{P}\left(\xi_{1},...\xi_{2T\Delta f}\right)=\prod_{n=1}^{2T\Delta f}\frac{1}{\sqrt{2\pi\cdot2T\Delta f\left\langle P_{noise}\right\rangle }}e^{-\frac{\xi_{n}^{2}}{2T\Delta f\left\langle P_{noise}\right\rangle }}=\]</div>
+\[\mathbb{P}\left(\xi_{1},...\xi_{2T\Delta f}\right)=\prod_{n=1}^{2T\Delta f}\frac{1}{\sqrt{2\pi\left\langle P_{noise}\right\rangle }}e^{-\frac{\xi_{n}^{2}}{2\left\langle P_{noise}\right\rangle }}=\]</div>
 <div class="math notranslate nohighlight">
-\[=\frac{1}{\left(2\pi\cdot2T\Delta f\left\langle P_{noise}\right\rangle \right)^{T\Delta f}}e^{-\frac{1}{2T\Delta f\left\langle P_{noise}\right\rangle }\sum_{n=1}^{2T\Delta f}\xi_{n}^{2}}\]</div>
+\[=\frac{1}{\left(2\pi\left\langle P_{noise}\right\rangle \right)^{T\Delta f}}e^{-\frac{1}{2\left\langle P_{noise}\right\rangle }\sum_{n=1}^{2T\Delta f}\xi_{n}^{2}}\]</div>
 <p>אוקי איך התפלגות כזו נראית? וספציפית אנחנו לא מאוד מעוניינים בכיוון. כלומר אנחנו רוצים לדעת איך נראית ההתפלגות של גודל הרעש. וספציפית לראות איך זה נראה מבחינת הספק.</p>
 <div class="math notranslate nohighlight">
 \[\mathbb{P}\left(\sum_{n=1}^{2T\Delta f}\xi_{n}^{2}=r^{2}\right)=?\]</div>
@@ -613,12 +637,12 @@
 <p>זה אומר שכל סיגנל שלנו מיוצג על ידי:</p>
 <div class="math notranslate nohighlight">
 \[s_{n}=y_{n}+\zeta_{n}\]</div>
-<p>נשים לב שכל אחד מהשמתנים <span class="math notranslate nohighlight">\(\xi_{n}\)</span> מתפלג גאוסיינית עם ממוצע 0 אבל הריבוע שלהם כבר מתפלג אחרת. נרצה לדעת מה הממוצע וסטיית התקן שלו.</p>
+<p>נשים לב שכל אחד מהמשתנים <span class="math notranslate nohighlight">\(\xi_{n}\)</span> מתפלג גאוסיינית עם ממוצע 0 אבל הריבוע שלהם כבר מתפלג אחרת. נרצה לדעת מה הממוצע וסטיית התקן שלו.</p>
 <div class="math notranslate nohighlight">
 \[\mathbb{E}\left[\sum_{n=1}^{2T\Delta f}\zeta_{n}^{2}\right]=\mathbb{E}\left[\frac{1}{2T\Delta f}\sum_{n=1}^{2T\Delta f}\xi_{n}^{2}\right]=\frac{1}{2T\Delta f}\sum_{n=1}^{2T\Delta f}\mathbb{E}\left[\xi_{n}^{2}\right]=\frac{1}{2T\Delta f}\sum_{n=1}^{2T\Delta f}\mathbb{V}\left[\xi_{n}\right]=\left\langle P_{noise}\right\rangle \]</div>
 <div class="math notranslate nohighlight">
-\[\mathbb{V}\left[\sum_{n=1}^{2T\Delta f}\zeta_{n}^{2}\right]=\mathbb{V}\left[\frac{1}{2T\Delta f}\sum_{n=1}^{2T\Delta f}\zeta_{n}^{2}\right]=\left(\frac{1}{2T\Delta f}\right)^{2}\mathbb{V}\left[\sum_{n=1}^{2T\Delta f}\xi_{n}^{2}\right]=\frac{\mathbb{V}\left[\xi_{n}^{2}\right]}{2\Delta fT}\]</div>
-<p>זה אומר שהמרחק שהרעש <span class="math notranslate nohighlight">\(\vec{\zeta}\)</span> ירחיק אותנו מהאות המקורי <span class="math notranslate nohighlight">\(\vec{y}\)</span> מתפלג גאוסיינית (על פי משפט הגבול המרכזי). עם תוכלת <span class="math notranslate nohighlight">\(\left\langle P_{noise}\right\rangle \)</span> וסטיית תקן <span class="math notranslate nohighlight">\(\sqrt{\frac{\mathbb{V}\left[\xi_{n}^{2}\right]}{2\Delta fT}}\)</span> או במילים אחרות ככול שיש יותר דגימות כלומר <span class="math notranslate nohighlight">\(2\Delta fT\)</span> גדול יותר גודל הסטייה נהיה פחות ופחות משתנה ושואף להיות פשוט ערך מסויים. זה אומר בגדול שהודעות הן כמו “כדורי ביליארד” כלומר סביב כל נקודה של אות אפשרי יש כדור קשיר של אפשרויות שהרעש מזיז אותו אליהן. כל מה שנשאר כדי לענות על השאלה כמה בין כמה הודעות ניתן להבחין הוא לשאול כמה כדורים נכנסים בכדור עם רדיוס גדול יותר.</p>
+\[\mathbb{V}\left[\sum_{n=1}^{2T\Delta f}\zeta_{n}^{2}\right]=\mathbb{V}\left[\frac{1}{2T\Delta f}\sum_{n=1}^{2T\Delta f}\xi_{n}^{2}\right]=\left(\frac{1}{2T\Delta f}\right)^{2}\mathbb{V}\left[\sum_{n=1}^{2T\Delta f}\xi_{n}^{2}\right]=\frac{\mathbb{V}\left[\xi_{n}^{2}\right]}{2\Delta fT}\]</div>
+<p>זה אומר שהמרחק שהרעש <span class="math notranslate nohighlight">\(\vec{\zeta}\)</span> ירחיק אותנו מהאות המקורי <span class="math notranslate nohighlight">\(\vec{y}\)</span> מתפלג גאוסיינית (על פי משפט הגבול המרכזי). עם תוחלת <span class="math notranslate nohighlight">\(\left\langle P_{noise}\right\rangle \)</span> וסטיית תקן <span class="math notranslate nohighlight">\(\sqrt{\frac{\mathbb{V}\left[\xi_{n}^{2}\right]}{2\Delta fT}}\)</span> או במילים אחרות ככל שיש יותר דגימות כלומר <span class="math notranslate nohighlight">\(2\Delta fT\)</span> גדול יותר גודל הסטייה נהיה פחות ופחות משתנה ושואף להיות פשוט ערך מסויים. זה אומר בגדול שהודעות הן כמו “כדורי ביליארד” כלומר סביב כל נקודה של אות אפשרי יש כדור קשיח של אפשרויות שהרעש מזיז אותו אליהן. כל מה שנשאר כדי לענות על השאלה כמה בין כמה הודעות ניתן להבחין הוא לשאול כמה כדורים נכנסים בכדור עם רדיוס גדול יותר.</p>
 <p>מרכזי הכדורים שלנו צריכים לשבת בכדור עם רדיוס <span class="math notranslate nohighlight">\(\sqrt{\left\langle P_{noise}\right\rangle }\)</span>  כלומר אנחנו צריכים לשאול כמה כדורים ברדיוס <span class="math notranslate nohighlight">\(\sqrt{\left\langle P_{noise}\right\rangle }\)</span> נכנסים בכדור עם רדיוס <span class="math notranslate nohighlight">\(\sqrt{\left\langle P_{sig}\right\rangle +\left\langle P_{noise}\right\rangle }\)</span>. תשובה נאיבית שהאמת שהיא מדוייקת בגבול של מספר מימדים עולה היא פשוט לעשות חלוקת נפחים. לכדור ברדיוס <span class="math notranslate nohighlight">\(r\)</span> יש נפח פרופורציונלי ל-<span class="math notranslate nohighlight">\(r^{dims}\)</span> ולכן:</p>
 <div class="math notranslate nohighlight">
 \[N\left(T\right)=\frac{V_{r=\sqrt{\left\langle P_{sig}\right\rangle +\left\langle P_{noise}\right\rangle }}}{V_{r=\sqrt{\left\langle P_{noise}\right\rangle }}}=\left(\frac{\sqrt{\left\langle P_{sig}\right\rangle +\left\langle P_{noise}\right\rangle }}{\sqrt{\left\langle P_{noise}\right\rangle }}\right)^{2\Delta fT}\]</div>
@@ -682,6 +706,15 @@
         <p class="prev-next-title">מבוא ל-DFT</p>
       </div>
     </a>
+    <a class="right-next"
+       href="../temp.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">דמו: דגימה ו-Aliasing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -689,8 +722,7 @@
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -758,8 +790,8 @@ By Yoav Palti
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

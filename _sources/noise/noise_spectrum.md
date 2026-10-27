@@ -1,5 +1,18 @@
 # רעש במרחב התדר
 
+<details>
+<summary>אמ;לק</summary>
+
+ה-PSD, צפיפות ההספק הספקטרלית, מתאר איך הספק הרעש מתחלק בין התדרים. עבור רעש סטציונרי במובן הרחב הוא קשור לפונקציית האוטוקורלציה:
+
+$$\tilde{S}_{xx}\left(\omega\right)=\mathcal{F}\left[R_{x}\left(\tau\right)\right]$$
+
+* רעש לבן הוא בעל PSD קבוע; זה לא מחייב התפלגות גאוסיינית.
+* מסנן משנה את ה-PSD לפי גודל ההגבר שלו בריבוע.
+* רעשים בלתי מתואמים ובעלי ממוצע 0 מתחברים בהספק. מיצוע של $N$ מדידות עם רעשים בלתי תלויים מקטין את סטיית התקן של הרעש בפקטור $\sqrt{N}$.
+
+</details>
+
 ראינו כבר עד עכשיו שאותות יותר נוח לנתח במרחב התדר. בעיקר כשיש לנו
 מערכת לינארית שהאות עובר דרכה.
 
@@ -23,7 +36,7 @@ $$\tilde{X}\left(\omega\right)=\tilde{S}\left(\omega\right)+\tilde{N}\left(\omeg
 נשים לב שהאוטוקורלציה של האות מאוד מזכירה לנו קונבולוציה
 רק שלא הופכים את אחת הפונקציות:
 
-$$R_{x}\left(\tau\right)=\intop_{-\infty}^{\infty}x\left(t\right)x^{\ast}\left(t+\tau\right)=\intop_{-\infty}^{\infty}x\left(t\right)x^{\ast}\left(\tau-\left(-t\right)\right)dt=x\left(t\right)\ast x\left(-t\right)$$
+$$R_{x}\left(\tau\right)=\intop_{-\infty}^{\infty}x\left(t\right)x^{\ast}\left(t+\tau\right)dt=\intop_{-\infty}^{\infty}x\left(t\right)x^{\ast}\left(\tau-\left(-t\right)\right)dt=x\left(t\right)\ast x\left(-t\right)$$
 $$\tilde{S}_{xx}\left(\omega\right)=\mathcal{F}\left[R_{x}\left(\tau\right)\right]=\mathcal{F}\left[x\left(t\right)\ast x\left(-t\right)\right]=\sqrt{2\pi}\tilde{X}\left(\omega\right)\cdot\tilde{X}^{\ast}\left(\omega\right)=\sqrt{2\pi}\left|\tilde{X}\left(\omega\right)\right|^{2}$$
 
 ### PSD
@@ -32,7 +45,7 @@ $$\tilde{S}_{xx}\left(\omega\right)=\mathcal{F}\left[R_{x}\left(\tau\right)\righ
 הוא הולך לומר לנו איך האנרגיה של האות האקראי שלנו מתחלקת בין
 תדרים שונים
 
-אפשר לבדוק יחידות ולראות שה-PSD נמדד ב-$\frac{W}{Hz}$ כלומר הספק לפורסת תדר
+אפשר לבדוק יחידות ולראות שה-PSD נמדד ב-$\frac{W}{Hz}$ כלומר הספק לפרוסת תדר
 ולכן זה נקרא **צפיפות הספק ספקטרלית**
 
 בהמשך נעשה את החיבור לפורייה של הריאליזציה $\tilde{X}\left(\omega\right)$
@@ -46,10 +59,10 @@ $$\tilde{S}_{xx}\left(\omega\right)=\mathcal{F}\left[R_{x}\left(\tau\right)\righ
 $$R_{x}\left(\tau\right)=\sigma^{2}\delta\left(\tau\right)$$
 $$\mu_{x}=0$$
 
-יש כאן נקודה עדינה. אם האוטוקורלציה היא אינסוף ב$\tau=0$ איך נראה המשתנה המקרי?
+יש כאן נקודה עדינה. אם האוטוקורלציה היא אינסוף ב-$\tau=0$ איך נראה המשתנה המקרי?
 אני לא אכנס לזה כאן. מוזמנים לקרוא את
-[הבלוג הזה לדוגמא ואת הספר שהוא מפנה אליו](https://https://danshiebler.com/2020-01-09-white-noise/)
-בכל מקרה נמשיך עם זה ש שהאוטוקורלציה שלנו מוגדרת ואנחנו לא מפחדים!
+[הבלוג הזה לדוגמא ואת הספר שהוא מפנה אליו](https://danshiebler.com/2020-01-09-white-noise/)
+בכל מקרה נמשיך עם זה שהאוטוקורלציה שלנו מוגדרת ואנחנו לא מפחדים!
 
 איך יראה ה-PSD $\tilde{S}_{xx}\left(\omega\right)$?
 
@@ -66,7 +79,7 @@ $$\tilde{S}_{xx}\left(\omega\right)=\frac{\sigma^{2}}{\sqrt{2\pi}}$$
 שלא הנחנו כלום על ה-PDF של הרעש בכל זמן ומה שהיה חשוב כדי שהוא יהיה לבן
 זה שהוא יהיה חסר קורלציה.
 
-יכולים להיות רעשים לבנים כל התפלגות שאתם יכולים לחשוב עליה
+יכולים להיות רעשים לבנים עם כל התפלגות שאתם יכולים לחשוב עליה
 
 ```
 
@@ -98,10 +111,10 @@ $$\tilde{S}_{xx}\left(\omega\right)=\frac{\sigma^{2}}{\sqrt{2\pi}}$$
 
 נעשה קצת סדר בדברים:
 * הגודל $\tilde{S}_{xx}\left(\omega\right)$ הוא לא משתנה מקרי. זה בגלל שהפונקציה $R_{x}\left(\tau\right)$ היא פשוט פונקציה רגילה וידועה
-* לאומת זאת הגודל $\tilde{X}\left(\omega\right)$ הוא כן משתנה מקרי ותלוי בריאליזציה של האות האקראי שלנו
+* לעומת זאת הגודל $\tilde{X}\left(\omega\right)$ הוא כן משתנה מקרי ותלוי בריאליזציה של האות האקראי שלנו
 
 זה אומר שמה שרשמנו נכון עבור אותות לא אקראיים. כדי לקשר בין השניים נצטרך לומר משהו
-על המתשנה האקראי $\tilde{X}\left(\omega\right)$.
+על המשתנה האקראי $\tilde{X}\left(\omega\right)$.
 
 כאן מגיע המשפט הכי חשוב בניתוח ספקטרי של אותות אקראיים:
 
@@ -116,14 +129,14 @@ $$x_{T}\left(t\right)=Rect\left(\frac{t}{T}\right)\cdot x\left(t\right)$$
 
 אז:
 
-$$\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\right]\right|^{2}\right]=\tilde{S}_{xx}\left(\omega\right)$$
+$$\lim_{T\rightarrow\infty}\frac{\sqrt{2\pi}}{T}\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\right]\left(-\omega\right)\right|^{2}\right]=\tilde{S}_{xx}\left(\omega\right)$$
 
 ```
 
-נפרק את המשפט לאט לאט. בצד ימים יש לנו את הפונקציה $\tilde{S}_{xx}\left(\omega\right)$
+נפרק את המשפט לאט לאט. בצד ימין יש לנו את הפונקציה $\tilde{S}_{xx}\left(\omega\right)$
 שאותה אנחנו מכירים והיא לא אות אקראי.
 בצד שמאל יש לנו את הגודל $\left|\mathcal{F}\left[x_{T}\left(t\right)\right]\right|^{2}$
-שהוא כן משתנה מקרי. אנחנו ניקח את התוחלת שלו $\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\right]\right|^{2}\right]$
+שהוא כן משתנה מקרי. אנחנו ניקח את התוחלת שלו $\frac{\sqrt{2\pi}}{T}\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\right]\left(-\omega\right)\right|^{2}\right]$
 זאת פונקציה של $\omega,T$ ואם ניקח את הגבול של $T\rightarrow\infty$
 אז הצדדים שווים.
 
@@ -145,14 +158,14 @@ $$\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\r
 מה קורה לאות אקראי אם אנחנו מעבירים אותו דרך מסנן?
 היינו רוצים לדעת איך זה משפיע על ה-PSD. האות המסונן יהיה $y\left(t\right)=\underset{\text{יארקא}-\text{תוא}}{\underbrace{x\left(t\right)}}\ast\underset{\text{ןנסמ}}{\underbrace{h\left(t\right)}}$
 
-אנחנו רוצעם לחשב את:
+אנחנו רוצים לחשב את:
 
 $$\mathcal{F}\left[\mathbb{E}\left[\left(x\ast h\right)\left(t\right),\left(x\ast h\right)\left(0\right)\right]\right]=?$$
 
 אוקי זה מסובך. אבל כאן מגיע משפט וינר חינצ'ין לעזרתנו!
 
-$$\tilde{S}_{yy}\left(\omega\right)=\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\ast h\left(t\right)\right]\right|^{2}\right]=\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\left[\sqrt{2\pi}\tilde{X}_{T}\left(\omega\right)\cdot\tilde{H}\left(\omega\right)\right]\right|^{2}\right]$$
-$$=2\pi\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\left[\tilde{X}_{T}\left(\omega\right)\right]\right|^{2}\right]\cdot\left|\tilde{H}\left(\omega\right)\right|^{2}=2\pi\tilde{S}_{xx}\left(\omega\right)\cdot\left|\tilde{H}\left(\omega\right)\right|^{2}$$
+$$\tilde{S}_{yy}\left(\omega\right)=\lim_{T\rightarrow\infty}\frac{\sqrt{2\pi}}{T}\mathbb{E}\left[\left|\mathcal{F}\left[x_{T}\left(t\right)\ast h\left(t\right)\right]\left(-\omega\right)\right|^{2}\right]=\lim_{T\rightarrow\infty}\frac{\sqrt{2\pi}}{T}\mathbb{E}\left[\left|\left[\sqrt{2\pi}\tilde{X}_{T}\left(-\omega\right)\cdot\tilde{H}\left(-\omega\right)\right]\right|^{2}\right]$$
+$$=2\pi\lim_{T\rightarrow\infty}\frac{\sqrt{2\pi}}{T}\mathbb{E}\left[\left|\tilde{X}_{T}\left(-\omega\right)\right|^{2}\right]\cdot\left|\tilde{H}\left(-\omega\right)\right|^{2}=2\pi\tilde{S}_{xx}\left(\omega\right)\cdot\left|\tilde{H}\left(-\omega\right)\right|^{2}$$
 
 קיבלנו תוצאה חשובה!
 
@@ -161,7 +174,7 @@ $$=2\pi\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\left[\tilde{X}_{T}\left(\
 
 נקבל כי ה-PSD של האות המסוננת הוא פשוט המכפלה של ה-PSD של האות המקורית וערך המוחלט של התמסורת בריבוע
 
- $$\tilde{S}_{yy}\left(\omega\right)=2\pi\tilde{S}_{xx}\left(\omega\right)\cdot\left|\tilde{H}\left(\omega\right)\right|^{2}$$
+ $$\tilde{S}_{yy}\left(\omega\right)=2\pi\tilde{S}_{xx}\left(\omega\right)\cdot\left|\tilde{H}\left(-\omega\right)\right|^{2}$$
 ```
 
 ```{warning}
@@ -174,7 +187,7 @@ $$=2\pi\lim_{T\rightarrow\infty}\mathbb{E}\left[\left|\left[\tilde{X}_{T}\left(\
 כל אחד כפול מספר אחר. אם ניקח קונבולוציה עם חלון (מיצוע לאורך זמן) אפילו נקבל
 ממש ממוצע.
 
-מה קורה כשממצאים הרבה משתנים שמתפלגים אחיד? התוצאה שואפת להתפלגות גאוסיינית!
+מה קורה כשממצעים הרבה משתנים שמתפלגים אחיד? התוצאה שואפת להתפלגות גאוסיינית!
 
 > מקרה חריג הוא המקרה בו ההתפלגות היא גאוסיין. במקרה כזה כל סינון לינארי משאיר את ההתפלגות גאוסיינית
 ```
@@ -208,8 +221,8 @@ $$\sigma_{x+y}=\sqrt{\sigma_{x}^{2}+\sigma_{y}^{2}}$$
 
 $$\sigma_{s}=\sqrt{\sum_{i=1}^{N}\sigma_{i}^{2}}$$
 
-מה יקרה אם נשעה N מדידות שונות לאותו האות ונמצע אותן?
+מה יקרה אם נעשה N מדידות שונות לאותו האות ונמצע אותן?
 האמפליטודה של חיבור הרעשים תהיה רק $\sqrt{N}$ חזקה יותר
-לאומת האמפליטודה של האות שתגדל ב-$N$. ולכן בממוצע האות ישאר
+לעומת האמפליטודה של האות שתגדל ב-$N$. ולכן בממוצע האות ישאר
 כמו שהוא אבל הרעש יחלש (באמפליטודה) ב$\frac{1}{\sqrt{N}}$
 

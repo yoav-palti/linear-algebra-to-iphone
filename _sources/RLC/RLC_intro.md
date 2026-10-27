@@ -1,5 +1,52 @@
 # מעגלי RLC
 
+<details>
+  <summary>אמ;לק</summary>
+
+במעגל RLC מתקיים כי:
+
+$$V_{in}(t)=RI(t)+L\frac{dI}{dt}+\frac{1}{C}\int_{-\infty}^{t}I(t')dt'$$
+
+ולכן במרחב התדר:
+
+$$\tilde{H}(\omega)=\frac{R}{R+i\omega L+\frac{1}{i\omega C}}$$
+
+* למעגל יש **תדר רזוננס** שבו המתח והזרם באותה פאזה:
+
+$$\omega_{res}=\frac{1}{\sqrt{LC}}$$
+
+* ברזוננס העכבה היא ממשית והזרם מקסימלי.  
+* עבור תדרים רחוקים מהרזוננס נקבל:
+  * בתחום נמוך → מעגל גזירה (HPF)
+  * בתחום גבוה → מעגל אינטגרציה (LPF)
+
+**רוחב הסרט** (ב-3 dB) מתקבל כאשר $|\tilde{H}(\omega_{\pm})|=\frac{1}{\sqrt{2}}$  
+ומתקיים:
+
+$$\Delta\omega=\frac{R}{L}$$
+
+**מקדם האיכות (Q-factor):**
+
+$$Q=\frac{\omega_{0}}{\Delta\omega}=\frac{1}{R}\sqrt{\frac{L}{C}}$$
+
+* Q גבוה → פס צר (פילטר רדיו)  
+* Q נמוך → פס רחב (רמקולים, מערכות שיכוך)
+
+**תגובה להלם:**
+
+$$h(t)=A\,\frac{d}{dt}\!\left[\theta(t)e^{-\frac{t}{\tau}}\sin(\omega_{D}t)\right]$$
+
+כאשר:
+
+$$\tau=\frac{2L}{R},\quad \omega_{D}=\sqrt{\frac{1}{LC}-\frac{R^{2}}{4L^{2}}}$$
+
+**אינטואיציה:**  
+התגובה היא סינוס דועך; ככל ש-R קטן יותר, הדעיכה איטית יותר וה-Q גבוה יותר.  
+מספר תנודות לפני דעיכה הוא $\pi\frac{\tau}{T}\approx Q$.
+
+</details>
+
+
 ### בניית פילטר רדיו
 המטרה עכשיו היא להצליח לתכנן מסנן אנלוגי לקליטה של גלגלץ
 
@@ -27,8 +74,13 @@ $$\omega_{res}=\frac{1}{\sqrt{LC}}$$
 
 נראה את זה בגרף
 
-<iframe src="https://www.geogebra.org/material/iframe/id/fsmc5gwz" width="100%" style="border: 1px solid #ccc; aspect-ratio: 2 / 1" frameborder=0></iframe>
-<a href="https://www.geogebra.org/material/iframe/id/fsmc5gwz" target="_blank">לפתיחה בחלון נפרד</a>
+```{raw} html
+:file: ../LTI/interactives/runtime.html
+```
+
+```{raw} html
+:file: interactives/rlc-filter.html
+```
 
 נסתכל על קצת גבולות של פונקציית התמסורת:
 * $\tilde{H}\left(0\right)=0$
@@ -56,11 +108,11 @@ $$\Delta\omega\approx\frac{R}{L}$$
 $$L=\frac{1}{C\cdot\omega_{res}^{2}}=3\cdot10^{-9}=3nH\Rightarrow R=L\cdot\Delta\omega=1.9m\Omega$$
 
 ### הקבלה לאוסילטור הרמוני
-מעגל RLC טורי מזכיר אוסילטור הרמוני ולא סתם. הוא נראה מה ההקבלה:
+מעגל RLC טורי מזכיר אוסילטור הרמוני ולא סתם. בואו נראה מה ההקבלה:
 
 |                   מעגל RLC                   |                     אוסילטור הרמוני                    |
 |:--------------------------------------------:|:------------------------------------------------------:|
-| $F\left(t\right)=kx+\gamma\dot{x}+m\ddot{x}$ | $V_{in}\left(t\right)=\frac{1}{C}q+R\dot{q}+L\ddot{q}$ |
+| $V_{in}\left(t\right)=\frac{1}{C}q+R\dot{q}+L\ddot{q}$ | $F\left(t\right)=kx+\gamma\dot{x}+m\ddot{x}$ |
 |            $V_{in}\left(t\right)$            |                    $F\left(t\right)$                   |
 |               $q\left(t\right)$              |                    $x\left(t\right)$                   |
 |               $I\left(t\right)$              |                 $\dot{x}\left(t\right)$                |
@@ -81,7 +133,7 @@ $$Q=\frac{\omega_{0}}{\Delta\omega}$$
 $$Q=\frac{100\cdot10^{6}}{100\cdot10^{3}}=1000$$
 
 נשים לב שערך ה-Q חייב להתאים לצורך:
-* במקלט רדיו כדי שיהיה לנו $Q\approx10^{3}$
+* במקלט רדיו כדאי שיהיה לנו $Q\approx10^{3}$
 * אם אנחנו רוצים מערכת רחבת סרט אנחנו חייבים לקבל  $Q<1$
   * למשל ברמקול אנחנו רוצים $\omega_{0}=2\pi\cdot\underset{10KHz}{\underbrace{10^{4}}},\Delta\omega=2\pi\cdot\underset{20KHz}{\underbrace{20\cdot10^{3}}}$ ולכן נקבל כי $Q=\frac{1}{2}$
 
@@ -117,7 +169,7 @@ $$\frac{AL\omega_{D}}{\sqrt{2\pi}}=R\Rightarrow\boxed{A=\frac{2\sqrt{2\pi}}{\tau
 $$\left|\mathcal{F}\left[\theta\left(t\right)e^{-\frac{t}{\tau}}\right]\right|^{2}=\left|\frac{1}{\frac{1}{\tau}+i\omega}\right|^{2}=\frac{1}{\frac{1}{\tau^{2}}+\omega^{2}}$$
 
 כלומר היא יורדת לחצי גובה עבור: $\omega_{\pm}=\frac{1}{\tau}\Rightarrow\Delta\omega\approx2\frac{1}{\tau}=\frac{R}{L}$
-יבלנו בדרך נוספת את העבודה שהרוחב הוא שאנחנו מצפים. 
+קיבלנו בדרך נוספת את העובדה שהרוחב הוא מה שאנחנו מצפים.
 
 בנוסף אם יש שיכוך קטן נקבל כי הפונקצייה מתנדנדת בתדר $\omega_{D}\approx\omega_{0}=\frac{1}{\sqrt{LC}}$ולכן נקבל כי:
 
